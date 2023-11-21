@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Buy;
 use DB;
-
+use PDF;
 
 class BuyController extends Controller
 {
@@ -118,5 +118,15 @@ class BuyController extends Controller
         $data->save();
 
         return redirect('buy-index')->with('message', "ซื้อสำเร็จ");
+    }
+
+    public function exportPDF()
+    {
+         $data = DB::table('buys')->get();
+        $pdf = PDF::loadView('buy.exportPDF',['data' =>  $data]);
+        $pdf->setPaper('a4');
+        return $pdf->download('exportPDF.pdf');
+
+      /*   return view('storage_location.exportPDF',['data' => $data]); */
     }
 }

@@ -87,6 +87,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('buy-edit/{id}', [BuyController::class, 'edit'])->name('buy-edit');
     Route::get('buy-destroy/{id}', [BuyController::class, 'destroy'])->name('buy-destroy');
     Route::get('buy-status/{id}', [BuyController::class, 'statusBuy'])->name('buy-status');
+    Route::get('buy-export/pdf', [BuyController::class, 'exportPDF'])->name('buy-export/pdf');
 });
 
 //  หัวหน้าวัสดุ  is_headAdmin

@@ -60,7 +60,7 @@
                                             {{--  <h3>ปิดใช้งาน</h3> --}}
                                             @foreach ($data->where('status', 'off')->sortByDesc('created_at') as $da)
                                                 <tr>
-                                                    <th scope="row">{{ $j++ }}</th>
+                                                    <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->building_name }}</td>
                                                     <td>{{ $da->floor }}</td>
                                                     <td>{{ $da->room_name }}</td>

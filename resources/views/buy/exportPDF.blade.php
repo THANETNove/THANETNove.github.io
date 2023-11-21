@@ -1,23 +1,41 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-    <!-- Content -->
+<head>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>รายงานข้อมูลสถานที่</title>
+    <meta http-equiv="Content-Language" content="th" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @include('layouts.fonts_DPF')
+
+</head>
+
+<body>
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
             <div class="col-12 mb-4 order-0">
                 <div class="card">
                     <div class="d-flex align-items-end row">
                         <div class="col-12">
+                            @php
+                                $i = 1;
+                                $j = 1;
+                                $count = $data->count();
+                                $count0 = $data->where('status', '0')->count();
+                                $count1 = $data->where('status', '1')->count();
+                                $count2 = $data->where('status', '2')->count();
 
+                            @endphp
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">ข้อมูลการจัดซื้อ</h1>
-                                 <a href="{{ url('buy-export/pdf') }}"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลวัสดุ</a>
-                                @if (session('message'))
-                                    <p class="message-text text-center mt-4"> {{ session('message') }}</p>
-                                @endif
-
+                                <h1 class="card-title text-primary ">สถานที่จัดเก็บ</h1>
+                                <p>รายงานข้อมูลสถานที่จัดเก็บ</p>
+                                <p class="mt--16">จำนวนทั้งหมด {{ $count }} รายการ</p>
+                                <p class="mt--16">จำนวนการสั่งซื้อ {{ $count0 }} รายการ</p>
+                                <p class="mt--16">จำนวนการซื้อสำเร็จ {{ $count1 }} รายการ</p>
+                                <p class="mt--16">จำนวนการยกเลิกการซื้อ {{ $count2 }} รายการ</p>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
@@ -31,14 +49,11 @@
                                                 <th>ราคา รวม</th>
                                                 <th>รายละเอียด</th>
                                                 <th>สถานะ</th>
-                                                <th>Actions</th>
+
+
 
                                             </tr>
                                         </thead>
-                                        @php
-                                            $i = 1;
-
-                                        @endphp
                                         <tbody class="table-border-bottom-0">
                                             @foreach ($data->where('status', '=', '0') as $da)
                                                 <tr>
@@ -54,33 +69,10 @@
                                                         <span class="badge bg-label-info me-1">รอการซื้อ</span>
 
                                                     </td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button type="button"
-                                                                class="btn p-0 dropdown-toggle hide-arrow"
-                                                                data-bs-toggle="dropdown">
-                                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu">
 
-                                                                <a class="dropdown-item"
-                                                                    href="{{ url('buy-edit', $da->id) }}"><i
-                                                                        class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                                @if (Auth::user()->status == '2')
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('buy-destroy', $da->id) }}"><i
-                                                                            class="bx bx-trash me-1"></i> Delete</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('buy-status', $da->id) }}">
-                                                                        <i class='bx bx-up-arrow-circle'></i>
-                                                                        ซื้อเเล้ว</a>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    </td>
                                                 </tr>
                                             @endforeach
-
+                                            <br>
                                             @foreach ($data->where('status', '1') as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
@@ -97,7 +89,7 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
-
+                                            <br>
                                             @foreach ($data->where('status', '2') as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
@@ -117,11 +109,7 @@
 
                                         </tbody>
                                     </table>
-                                    {{--  <div class="mt-5">
-                                        {!! $data->links() !!}
-                                    </div> --}}
                                 </div>
-
                             </div>
                         </div>
 
@@ -131,5 +119,6 @@
         </div>
     </div>
 
-    <!-- / Layout wrapper -->
-@endsection
+</body>
+
+</html>
