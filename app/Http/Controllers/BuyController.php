@@ -45,6 +45,7 @@ class BuyController extends Controller
         $data->type = $request['type'];
         $data->buy_name = $request['buy_name'];
         $data->quantity = $request['quantity'];
+        $data->counting_unit = $request['counting_unit'];
         $data->price_per_piece = $request['price_per_piece'];
         $data->total_price = $request['total_price'];
         $data->details = $request['details'];
@@ -67,7 +68,10 @@ class BuyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $buy =  Buy::find($id);
+
+        return view('buy.edit',['buy' => $buy  ]);
     }
 
     /**
@@ -75,7 +79,18 @@ class BuyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $data =  Buy::find($id);
+        $data->type = $request['type'];
+        $data->buy_name = $request['buy_name'];
+        $data->quantity = $request['quantity'];
+        $data->counting_unit = $request['counting_unit'];
+        $data->price_per_piece = $request['price_per_piece'];
+        $data->total_price = $request['total_price'];
+        $data->details = $request['details'];
+        $data->save();
+
+        return redirect('buy-index')->with('message', "บันทึกสำเร็จ");
     }
 
     /**
@@ -83,6 +98,18 @@ class BuyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data =  Buy::find($id);
+        $data->status = "2";
+        $data->save();
+
+        return redirect('buy-index')->with('message', "ยกเลิกสำเร็จ");
+    }
+    public function statusBuy(string $id)
+    {
+        $data =  Buy::find($id);
+        $data->status = "1";
+        $data->save();
+
+        return redirect('buy-index')->with('message', "ซื้อสำเร็จ");
     }
 }

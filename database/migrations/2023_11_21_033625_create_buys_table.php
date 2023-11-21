@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('type')->nullable()->comment('ประเภท');
             $table->string('buy_name')->nullable()->comment('ชื่อ');
             $table->string('quantity')->nullable()->comment('จำนวน');
+            $table->string('counting_unit')->nullable()->comment('หน่วยนับ');
             $table->string('price_per_piece')->nullable()->comment('ราคาหน่วย');
             $table->string('total_price')->nullable()->comment('ราคารวม');
             $table->text('details')->nullable()->comment('รายละเอียด');

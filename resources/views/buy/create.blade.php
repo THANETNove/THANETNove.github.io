@@ -53,6 +53,19 @@
 
                                 </div>
                                 <div class="mb-3 col-md-6">
+                                    <label for="counting_unit" class="form-label">หน่วยนับ</label>
+                                    <input id="counting_unit" type="text"
+                                        class="form-control @error('counting_unit') is-invalid @enderror"
+                                        name="counting_unit" placeholder="หน่วยนับ" required autocomplete="counting_unit">
+
+                                    @error('counting_unit')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+                                <div class="mb-3 col-md-6">
                                     <label for="price_per_piece" class="form-label">ราคาต่อ (ชิ้น,หน่วย,อื่นๆ)</label>
                                     <input id="price_per_piece" type="number"
                                         class="form-control @error('price_per_piece') is-invalid @enderror"

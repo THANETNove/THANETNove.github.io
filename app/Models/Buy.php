@@ -13,6 +13,7 @@ class Buy extends Model
         'type', // กลุ่ม/ประเภท
         'buy_name', // ชื่อ
         'quantity', // จำนวน
+        'counting_unit',//หน่วนับ
         'price_per_piece',//ราคาชิ้น
         'total_price',//ราคารวม
         'details',//รายละเอียด
