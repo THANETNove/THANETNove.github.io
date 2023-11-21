@@ -144,12 +144,12 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <a href="{{ url('durable-articles-index') }}" class="menu-link">
+                        <a href="{{ url('buy-index') }}" class="menu-link">
                             <div data-i18n="Account">การจัดซื้อ</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="{{ url('durable-articles-create') }}" class="menu-link">
+                        <a href="{{ url('buy-create') }}" class="menu-link">
                             <div data-i18n="Notifications">ลงทะเบียนการจัดซื้อ</div>
                         </a>
                     </li>

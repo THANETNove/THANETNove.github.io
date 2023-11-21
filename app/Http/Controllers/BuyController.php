@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Models\Buy;
+use DB;
+
 
 class BuyController extends Controller
 {
@@ -11,7 +15,9 @@ class BuyController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::table('buys')->orderBy('id', 'DESC')
+        ->paginate(100);
+        return view('buy.index',['data' => $data]);
     }
 
     /**
@@ -19,7 +25,7 @@ class BuyController extends Controller
      */
     public function create()
     {
-        //
+        return view('buy.create');
     }
 
     /**
@@ -27,7 +33,25 @@ class BuyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'type' => ['required', 'string', 'max:255'],
+        ]);
+
+
+        $random = "buy-" . Str::random(10);
+
+        $data = new Buy;
+        $data->code_buy = $random;
+        $data->type = $request['type'];
+        $data->buy_name = $request['buy_name'];
+        $data->quantity = $request['quantity'];
+        $data->price_per_piece = $request['price_per_piece'];
+        $data->total_price = $request['total_price'];
+        $data->details = $request['details'];
+        $data->status = "0";
+        $data->save();
+
+        return redirect('buy-index')->with('message', "บันทึกสำเร็จ");
     }
 
     /**

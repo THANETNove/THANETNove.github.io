@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('buys', function (Blueprint $table) {
             $table->id();
+            $table->string('code_buy')->nullable()->comment('รหัสซื้อ');
+            $table->string('type')->nullable()->comment('ประเภท');
+            $table->string('buy_name')->nullable()->comment('ชื่อ');
+            $table->string('quantity')->nullable()->comment('จำนวน');
+            $table->string('price_per_piece')->nullable()->comment('ราคาหน่วย');
+            $table->string('total_price')->nullable()->comment('ราคารวม');
+            $table->text('details')->nullable()->comment('รายละเอียด');
+            $table->string('status')->nullable()->comment('สถานะ 0 = ขอซื้อ 1 =ซื้อเเล้ว  2 ยกการซื้อ');
             $table->timestamps();
         });
     }

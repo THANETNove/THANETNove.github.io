@@ -6,6 +6,7 @@ use App\Http\Controllers\StorageLocationController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\DurableArticlesController;
+use App\Http\Controllers\BuyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,6 +79,10 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('durable-articles-index', [DurableArticlesController::class, 'index'])->name('durable-articles-index');
     Route::get('durable-articles-edit/{id}', [DurableArticlesController::class, 'edit'])->name('durable-articles-edit');
     Route::put('durable-articles-update/{id}', [DurableArticlesController::class, 'update'])->name('durable-articles-update');
+
+    Route::get('buy-index', [BuyController::class, 'index'])->name('buy-index');
+    Route::get('buy-create', [BuyController::class, 'create'])->name('buy-create');
+    Route::post('buy-store', [BuyController::class, 'store'])->name('buy-store');
 });
 
 //  หัวหน้าวัสดุ  is_headAdmin

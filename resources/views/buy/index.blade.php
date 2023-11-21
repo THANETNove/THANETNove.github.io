@@ -11,7 +11,7 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">ข้อมูลการจัดซื้อ (ครุภัณฑ์/วัสดุ)</h1>
+                                <h1 class="card-title text-primary ">ข้อมูลการจัดซื้อ</h1>
                                 {{--  <a href="{{ url('personnel-export/pdf') }}"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลวัสดุ</a> --}}
                                 @if (session('message'))
@@ -23,13 +23,12 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
-                                                <th>รหัส</th>
+                                                <th>ประเภท</th>
                                                 <th>ชื่อ</th>
-                                                <th>จำนวนวัสดุ</th>
-                                                <th>จำนวนวัสดุ เเพค/โหล</th>
-                                                <th>จำนวนนับวัสดุ</th>
-                                                <th>สิ้นเปลือง</th>
-                                                <th>ที่จัดเก็บ</th>
+                                                <th>จำนวน</th>
+                                                <th>ราคา ต่อชิ้น</th>
+                                                <th>ราคา รวม</th>
+                                                <th>สถานะ</th>
                                                 <th>Actions</th>
 
                                             </tr>
@@ -38,44 +37,56 @@
                                             $i = 1;
                                         @endphp
                                         <tbody class="table-border-bottom-0">
-                                            @foreach ($data->groupBy('group_class') as $groupedData)
-                                                @foreach ($groupedData->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
-                                                    <tr>
-                                                        <th scope="row">{{ $i++ }}</th>
-                                                        <td>{{ $da->group_class }}-{{ $da->type_durableArticles }}-{{ $da->description }}
-                                                        </td>
-                                                        <td>{{ $da->material_name }}</td>
-                                                        <td>{{ $da->material_number }}</td>
-                                                        <td>{{ $da->material_number_pack_dozen }}</td>
-                                                        <td>{{ $da->name_material_count }}</td>
-                                                        <td>{{ $da->wasteful_number }}</td>
-                                                        <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
-                                                            {{ $da->room_name }}</td>
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <button type="button"
-                                                                    class="btn p-0 dropdown-toggle hide-arrow"
-                                                                    data-bs-toggle="dropdown">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('material-edit', $da->id) }}"><i
-                                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
+                                            @foreach ($data->where('status', '0')->sortByDesc('created_at') as $da)
+                                                <tr>
+                                                    <th scope="row">{{ $i++ }}</th>
+                                                    <td>{{ $da->type }}</td>
+                                                    <td>{{ $da->buy_name }}</td>
+                                                    <td>{{ $da->quantity }}</td>
+                                                    <td>{{ $da->price_per_piece }}</td>
+                                                    <td>{{ $da->total_price }}</td>
+                                                    <td>{{ $da->details }}</td>
+                                                    <td>
+                                                        <span class="badge bg-label-info me-1">รอการซื้อ</span>
 
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                    </td>
+                                                </tr>
                                             @endforeach
+                                            @foreach ($data->where('status', '1')->sortByDesc('created_at') as $da)
+                                                <tr>
+                                                    <th scope="row">{{ $i++ }}</th>
+                                                    <td>{{ $da->type }}</td>
+                                                    <td>{{ $da->buy_name }}</td>
+                                                    <td>{{ $da->quantity }}</td>
+                                                    <td>{{ $da->price_per_piece }}</td>
+                                                    <td>{{ $da->total_price }}</td>
+                                                    <td>{{ $da->details }}</td>
+                                                    <td>
+                                                        <span class="badge bg-label-success me-1">ซื้อเเล้ว</span>
 
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            @foreach ($data->where('status', '2')->sortByDesc('created_at') as $da)
+                                                <tr>
+                                                    <th scope="row">{{ $i++ }}</th>
+                                                    <td>{{ $da->type }}</td>
+                                                    <td>{{ $da->buy_name }}</td>
+                                                    <td>{{ $da->quantity }}</td>
+                                                    <td>{{ $da->price_per_piece }}</td>
+                                                    <td>{{ $da->total_price }}</td>
+                                                    <td>{{ $da->details }}</td>
+                                                    <td>
+                                                        <span class="badge bg-label-warning me-1">ยกเลิกซื้อ</span>
 
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
-                                    <div class="mt-5">
+                                    {{--  <div class="mt-5">
                                         {!! $data->links() !!}
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                             </div>

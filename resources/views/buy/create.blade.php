@@ -7,119 +7,82 @@
 
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title text-primary ">ระบบลงทะเบียนวัสดุ</h1>
-                        <form method="POST" action="{{ route('material-store') }}">
+                        <h1 class="card-title text-primary ">ระบบลงทะเบียนการจัดซื้อ</h1>
+                        <form method="POST" action="{{ route('buy-store') }}">
                             @csrf
                             <div class="row">
+
                                 <div class="mb-3 col-md-6">
-                                    <label for="group_class" class="form-label">กลุ่ม/ประเภท</label>
-                                    <input id="group_class" type="number"
-                                        class="form-control @error('group_class') is-invalid @enderror" name="group_class"
-                                        required placeholder="กลุ่ม/ประเภท" autocomplete="group_class">
-
-                                    @error('group_class')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="type_durableArticles" class="form-label">ชนิด</label>
-                                    <input id="type_durableArticles" type="number"
-                                        class="form-control @error('type_durableArticles') is-invalid @enderror"
-                                        name="type_durableArticles" required placeholder="ชนิด"
-                                        autocomplete="type_durableArticles">
-
-                                    @error('type_durableArticles')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="description" class="form-label">รายละเอียด</label>
-                                    <input id="description" type="number"
-                                        class="form-control @error('description') is-invalid @enderror" name="description"
-                                        required placeholder="รายละเอียด" autocomplete="description">
-
-                                    @error('description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="material_name" class="form-label">ชื่อวัสดุ</label>
-                                    <input id="material_name" type="text"
-                                        class="form-control @error('material_name') is-invalid @enderror"
-                                        name="material_name" required placeholder="ชื่อวัสดุ" autocomplete="material_name">
-
-                                    @error('material_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="material_number" class="form-label">จำนวนวัสดุ ชิ้น</label>
-                                    <input id="material_number" type="number"
-                                        class="form-control @error('material_number') is-invalid @enderror"
-                                        name="material_number" placeholder="จำนวนวัสดุ ชิ้น" autocomplete="material_number">
-
-                                    @error('material_number')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="material_number_pack_dozen" class="form-label">จำนวนวัสดุ
-                                        เเพค/โหล</label>
-                                    <input id="material_number_pack_dozen" type="number"
-                                        class="form-control @error('material_number_pack_dozen') is-invalid @enderror"
-                                        name="material_number_pack_dozen" placeholder="จำนวนวัสดุ เเพค/โหล"
-                                        autocomplete="material_number_pack_dozen">
-
-                                    @error('material_number')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="name_material_count" class="form-label">ชื่อเรียกจำนวนนับวัสดุ (เช่น อัน
-                                        ห่อ
-                                        อื่น ๆ
-                                        )</label>
-                                    <input id="name_material_count" type="text"
-                                        class="form-control @error('name_material_count') is-invalid @enderror"
-                                        name="name_material_count" required placeholder="ชื่อเรียกจำนวนนับวัสดุ"
-                                        autocomplete="name_material_count">
-
-                                    @error('name_material_count')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="code_material_storage" class="form-label">ที่เก็บวัสดุ</label>
-                                    <select class="form-select" aria-label="Default select example"
-                                        name="code_material_storage" required>
-                                        <option selected disabled>ที่เก็บวัสดุ</option>
-                                        @foreach ($data as $lo)
-                                            <option value="{{ $lo->code_storage }}">{{ $lo->building_name }}
-                                                {{ $lo->floor }} {{ $lo->room_name }}</option>
-                                        @endforeach
-
+                                    <label for="description" class="form-label">ประเภทการซื้อ</label>
+                                    <select class="form-select  @error('type') is-invalid @enderror" name="type"
+                                        aria-label="Default select example" required>
+                                        <option selected disabled>ประเภทการซื้อ</option>
+                                        <option value="ครุภัณฑ์">ครุภัณฑ์</option>
+                                        <option value="วัสดุ">วัสดุ</option>
                                     </select>
+                                    @error('type')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="buy_name" class="form-label">ชื่อวัสดุ</label>
+                                    <input id="buy_name" type="text"
+                                        class="form-control @error('buy_name') is-invalid @enderror" name="buy_name"
+                                        required placeholder="ชื่อวัสดุ" autocomplete="buy_name">
+
+                                    @error('buy_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="quantity" class="form-label">จำนวน</label>
+                                    <input id="quantity" type="number"
+                                        class="form-control @error('quantity') is-invalid @enderror" name="quantity"
+                                        placeholder="จำนวน" autocomplete="quantity">
+
+                                    @error('quantity')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="price_per_piece" class="form-label">ราคาต่อ (ชิ้น,หน่วย,อื่นๆ)</label>
+                                    <input id="price_per_piece" type="number"
+                                        class="form-control @error('price_per_piece') is-invalid @enderror"
+                                        name="price_per_piece" placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" required
+                                        autocomplete="price_per_piece">
+
+                                    @error('price_per_piece')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="total_price" class="form-label">ราคารวม</label>
+                                    <input id="total_price" type="number"
+                                        class="form-control @error('total_price') is-invalid @enderror" name="total_price"
+                                        required placeholder="ชื่อเรียกจำนวนนับวัสดุ" autocomplete="total_price">
+
+                                    @error('total_price')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="total_price" class="form-label">รายละเอียด</label>
+                                    <textarea class="form-control" name="details" id="exampleFormControlTextarea1" rows="3"></textarea>
+
                                 </div>
 
 
