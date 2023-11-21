@@ -72,3 +72,58 @@ $(document).ready(function () {
         }
     });
 });
+
+/// ดึง URL ปัจจุบันหลังจาก /
+const setActiveClass = (mainItemId, subItemId) => {
+    const menuItem = document.getElementById(mainItemId);
+    menuItem.classList.add("active", "open");
+    const subItem = document.getElementById(subItemId);
+    subItem.classList.add("active");
+};
+
+const targetUrls = window.location.pathname.split("/")[1];
+
+// สมัครสมาชิก
+if (
+    targetUrls === "personnel-index" ||
+    targetUrls === "personnel-edit" ||
+    targetUrls === "personnel-show"
+) {
+    setActiveClass("personnel", "personnel-index");
+}
+if (targetUrls === "personnel-create") {
+    setActiveClass("personnel", "personnel-create");
+}
+// สถานที่จัดเก็บ
+if (targetUrls === "storage-index" || targetUrls === "storage-edit") {
+    setActiveClass("storage", "storage-index");
+}
+if (targetUrls === "storage-create") {
+    setActiveClass("storage", "storage-create");
+}
+// ระบบวัสดุ
+if (targetUrls === "material-index" || targetUrls === "material-edit") {
+    setActiveClass("material", "material-index");
+}
+if (targetUrls === "material-create") {
+    setActiveClass("material", "material-create");
+}
+
+// ข้อมูลครุภัณฑ์
+if (
+    targetUrls === "durable-articles-index" ||
+    targetUrls === "durable-articles-edit"
+) {
+    setActiveClass("durable-articles", "durable-articles-index");
+}
+if (targetUrls === "durable-articles-create") {
+    setActiveClass("durable-articles", "durable-articles-create");
+}
+// ระบบจัดซื้อ
+if (targetUrls === "buy-index" || targetUrls === "buy-edit") {
+    setActiveClass("buy", "buy-index");
+}
+if (targetUrls === "buy-create") {
+    setActiveClass("buy", "buy-create");
+}
+console.log("targetUrls", targetUrls);

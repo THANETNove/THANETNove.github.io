@@ -64,91 +64,91 @@
             <span class="menu-header-text">Pages</span>
         </li>
         @if (Auth::user()->status > 0)
-            <li class="menu-item">
+            <li class="menu-item" id="personnel">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     {{--  <i class="menu-icon tf-icons bx bx-dock-top"></i> --}}
                     <i class='menu-icon tf-icons bx bx-user'></i>
                     <div data-i18n="Account Settings">ระบบบุคลากร </div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item">
+                    <li class="menu-item" id="personnel-index">
                         <a href="{{ url('personnel-index') }}" class="menu-link">
                             <div data-i18n="Account">ดูบุคลากร</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="personnel-create">
                         <a href="{{ url('personnel-create') }}" class="menu-link">
                             <div data-i18n="Notifications">เพิ่มบุคลากร</div>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="menu-item">
+            <li class="menu-item" id="storage">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-buildings'></i>
                     <div data-i18n="Account Settings">สถานที่จัดเก็บ</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item">
+                    <li class="menu-item" id="storage-index">
                         <a href="{{ url('storage-index') }}" class="menu-link">
                             <div data-i18n="Account">ดูสถานที่</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="storage-create">
                         <a href="{{ url('storage-create') }}" class="menu-link">
                             <div data-i18n="Notifications">เพิ่มสถานที่</div>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="menu-item">
+            <li class="menu-item" id="material">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-add-to-queue'></i>
                     <div data-i18n="Account Settings">ระบบลงทะเบียนวัสดุ</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item">
+                    <li class="menu-item" id="material-index">
                         <a href="{{ url('material-index') }}" class="menu-link">
                             <div data-i18n="Account">วัสดุ</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="material-create">
                         <a href="{{ url('material-create') }}" class="menu-link">
                             <div data-i18n="Notifications">ลงทะเบียนวัสดุ</div>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="menu-item">
+            <li class="menu-item" id="durable-articles">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bx-add-to-queue'></i>
                     <div data-i18n="Account Settings">ระบบลงทะเบียนครุภัณฑ์</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item">
+                    <li class="menu-item" id="durable-articles-index">
                         <a href="{{ url('durable-articles-index') }}" class="menu-link">
                             <div data-i18n="Account">ครุภัณฑ์</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="durable-articles-create">
                         <a href="{{ url('durable-articles-create') }}" class="menu-link">
                             <div data-i18n="Notifications">ลงทะเบียนครุภัณฑ์</div>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="menu-item">
+            <li class="menu-item" id="buy">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-cart-add'></i>
                     <div data-i18n="Account Settings">ระบบการจัดซื้อ</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item">
+                    <li class="menu-item" id="buy-index">
                         <a href="{{ url('buy-index') }}" class="menu-link">
                             <div data-i18n="Account">การจัดซื้อ</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item" id="buy-create">
                         <a href="{{ url('buy-create') }}" class="menu-link">
                             <div data-i18n="Notifications">ลงทะเบียนการจัดซื้อ</div>
                         </a>
