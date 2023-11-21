@@ -81,6 +81,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::put('durable-articles-update/{id}', [DurableArticlesController::class, 'update'])->name('durable-articles-update');
 
     Route::get('buy-index', [BuyController::class, 'index'])->name('buy-index');
+    Route::post('buy-index', [BuyController::class, 'index'])->name('buy-index');
     Route::get('buy-create', [BuyController::class, 'create'])->name('buy-create');
     Route::post('buy-store', [BuyController::class, 'store'])->name('buy-store');
     Route::get('buy-edit/{id}', [BuyController::class, 'edit'])->name('buy-edit');

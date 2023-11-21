@@ -10,7 +10,7 @@ class Buy extends Model
     use HasFactory;
     protected $fillable = [
         'code_buy',//รหัสครุภัณฑ์
-        'type', // กลุ่ม/ประเภท
+        'typeBuy', // กลุ่ม/ประเภท
         'buy_name', // ชื่อ
         'quantity', // จำนวน
         'counting_unit',//หน่วนับ

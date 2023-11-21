@@ -13,10 +13,17 @@ class BuyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = DB::table('buys')->orderBy('id', 'DESC')
-        ->paginate(100);
+        $search =  $request['search'];
+        $data = DB::table('buys');
+
+        if($search) {
+            $data->orWhere('typeBuy', 'LIKE', "%$search%")
+            ->orWhere('buy_name', 'LIKE', "%$search%");
+        }
+        $data = $data->orderBy('id', 'DESC')->paginate(100);
+
         return view('buy.index',['data' => $data]);
     }
 
@@ -42,7 +49,7 @@ class BuyController extends Controller
 
         $data = new Buy;
         $data->code_buy = $random;
-        $data->type = $request['type'];
+        $data->typeBuy = $request['typeBuy'];
         $data->buy_name = $request['buy_name'];
         $data->quantity = $request['quantity'];
         $data->counting_unit = $request['counting_unit'];
@@ -81,7 +88,7 @@ class BuyController extends Controller
     {
 
         $data =  Buy::find($id);
-        $data->type = $request['type'];
+        $data->typeBuy = $request['typeBuy'];
         $data->buy_name = $request['buy_name'];
         $data->quantity = $request['quantity'];
         $data->counting_unit = $request['counting_unit'];

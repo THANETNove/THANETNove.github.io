@@ -37,12 +37,14 @@
                                         </thead>
                                         @php
                                             $i = 1;
+
                                         @endphp
                                         <tbody class="table-border-bottom-0">
-                                            @foreach ($data->where('status', '0')->sortByDesc('created_at') as $da)
+
+                                            @foreach ($data->where('status', '=', '0') as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->type }}</td>
+                                                    <td>{{ $da->typeBuy }}</td>
                                                     <td>{{ $da->buy_name }}</td>
                                                     <td>{{ $da->quantity }}</td>
                                                     <td>{{ $da->counting_unit }}</td>
@@ -79,10 +81,11 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                            @foreach ($data->where('status', '1')->sortByDesc('created_at') as $da)
+
+                                            @foreach ($data->where('status', '1') as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->type }}</td>
+                                                    <td>{{ $da->typeBuy }}</td>
                                                     <td>{{ $da->buy_name }}</td>
                                                     <td>{{ $da->quantity }}</td>
                                                     <td>{{ $da->counting_unit }}</td>
@@ -95,10 +98,11 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                            @foreach ($data->where('status', '2')->sortByDesc('created_at') as $da)
+
+                                            @foreach ($data->where('status', '2') as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->type }}</td>
+                                                    <td>{{ $da->typeBuy }}</td>
                                                     <td>{{ $da->buy_name }}</td>
                                                     <td>{{ $da->quantity }}</td>
                                                     <td>{{ $da->counting_unit }}</td>
@@ -111,6 +115,7 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
+
                                         </tbody>
                                     </table>
                                     {{--  <div class="mt-5">
