@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('description')->nullable()->comment('รายละเอียด');
             $table->string('material_name')->nullable()->comment('ชื่อ');
             $table->string('material_number')->nullable()->comment('จำนวนวัสดุชิ้น');
+            $table->string('remaining_amount')->nullable()->comment('จำนวนเหลือ');
             $table->string('material_number_pack_dozen')->nullable()->comment('จำนวนวัสดุ เเพค/โหล');
             $table->string('name_material_count')->nullable()->comment('ชื่อเรียกจำนวนนับวัสดุ');
             $table->string('code_material_storage')->nullable()->comment('รหัสที่เก็บวัสดุ');
-            $table->string('wasteful_number')->nullable()->comment('จำนวนสิ้นเปลือง');
             $table->string('status')->nullable()->comment('สถานะ on/ off');
             $table->timestamps();
         });

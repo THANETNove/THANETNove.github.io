@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('description')->nullable()->comment('รายละเอียด');
             $table->string('durableArticles_name')->nullable()->comment('ชื่อ');
             $table->string('durableArticles_number')->nullable()->comment('จำนวนครุภัณฑ์');
+            $table->string('remaining_amount')->nullable()->comment('จำนวนเหลือ');
             $table->string('name_durableArticles_count')->nullable()->comment('ชื่อเรียกจำนวนนับครุภัณฑ์');
             $table->string('code_material_storage')->nullable()->comment('รหัสที่เก็บครุภัณฑ์');
             $table->string('damaged_number')->nullable()->comment('จำนวนชำรุด');

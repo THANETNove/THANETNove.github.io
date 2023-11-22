@@ -15,9 +15,9 @@ class Material extends Model
         'description', // รายละเอียด
         'material_name',//ชื่อ
         'material_number',//จำนวนวัสดุชิ้น
+        'remaining_amount',//จำนวนเหลือ
         'material_number_pack_dozen', //จำนวนวัสดุ เเพค/โหลด
         'name_material_count',//ชื่อเรียกจำนวนนับวัสดุ
-        'code_material_storage',//รหัสที่เก็บวัสดุ
         'wasteful_number', //สิ้นเปลือง
         'status', //สถานะ on/ off
     ];

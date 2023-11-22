@@ -26,6 +26,7 @@
                                                 <th>รหัส</th>
                                                 <th>ชื่อ</th>
                                                 <th>จำนวน</th>
+                                                <th>จำนวนที่เหลือ</th>
                                                 <th>จำนวนนับ</th>
                                                 <th>ชำรุด</th>
                                                 <th>แทงจำหน่าย</th>
@@ -47,6 +48,7 @@
                                                         </td>
                                                         <td>{{ $da->durableArticles_name }}</td>
                                                         <td>{{ $da->durableArticles_number }}</td>
+                                                        <td>{{ $da->remaining_amount }}</td>
                                                         <td>{{ $da->name_durableArticles_count }}</td>
                                                         <td>{{ $da->damaged_number }}</td>
                                                         <td>{{ $da->bet_on_distribution_number }}</td>

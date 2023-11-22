@@ -86,6 +86,7 @@ class DurableArticlesController extends Controller
         $data->description = $request['description'];
         $data->durableArticles_name = $request['durableArticles_name'];
         $data->durableArticles_number = $request['durableArticles_number'];
+        $data->remaining_amount = $request['durableArticles_number'];
         $data->name_durableArticles_count = $request['name_durableArticles_count'];
         $data->code_material_storage = $request['code_material_storage'];
         $data->damaged_number = 0;

@@ -15,6 +15,7 @@ class DurableArticles extends Model
         'description', // รายละเอียด
         'durableArticles_name',//ชื่อ
         'durableArticles_number',//จำนวนครุภัณฑ์
+        'remaining_amount',
         'name_durableArticles_count',//ชื่อเรียกจำนวนนับครุภัณฑ์
         'code_material_storage',//รหัสที่เก็บครุภัณฑ์
         'damaged_number',//ชำรุด
