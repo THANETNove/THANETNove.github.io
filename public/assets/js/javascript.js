@@ -126,4 +126,14 @@ if (targetUrls === "buy-index" || targetUrls === "buy-edit") {
 if (targetUrls === "buy-create") {
     setActiveClass("buy", "buy-create");
 }
+// ระบบจัดซื้อ
+if (
+    targetUrls === "material-requisition-index" ||
+    targetUrls === "material-requisition-edit"
+) {
+    setActiveClass("material-requisition", "material-requisition-index");
+}
+if (targetUrls === "material-requisition-create") {
+    setActiveClass("material-requisition", "material-requisition-create");
+}
 console.log("targetUrls", targetUrls);

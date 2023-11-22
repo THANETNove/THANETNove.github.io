@@ -70,7 +70,7 @@
 
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="material_number" class="form-label">จำนวนวัสดุชิ้น</label>
+                                    <label for="material_number" class="form-label">จำนวนวัสดุชิ้นต่อเเพค/โหล</label>
                                     <input id="material_number" type="number"
                                         class="form-control @error('material_number') is-invalid @enderror"
                                         name="material_number" value="{{ $mate['material_number'] }}" required

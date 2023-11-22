@@ -7,6 +7,7 @@ use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\DurableArticlesController;
 use App\Http\Controllers\BuyController;
+use App\Http\Controllers\MaterialRequisitionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,9 @@ Route::put('update-password/{id}', [HomeController::class, 'update'])->name('upd
 
 Route::get('districts/{id}', [AddressController::class, 'districts'])->name('districts');
 Route::get('subdistrict/{id}', [AddressController::class, 'subdistricts'])->name('subdistrict');
+
+Route::get('material-requisition-index', [MaterialRequisitionController::class, 'index'])->name('material-requisition-index');
+Route::get('material-requisition-create', [MaterialRequisitionController::class, 'create'])->name('material-requisition-create');
 
 
 // is_drawer ผู้เบิก
