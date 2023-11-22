@@ -7,48 +7,13 @@
 
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title text-primary ">สมัครสมาชิก</h1>
+                        <h1 class="card-title text-primary ">เบิกวัสดุอุปกรณ์</h1>
                         <form method="POST" action="{{ route('personnel-store') }}">
                             @csrf
                             <div class="row">
-                                <div class="mb-3 col-md-6">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required placeholder="Enter your email"
-                                        autocomplete="email">
 
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                </div>
-                                <div class="mb-3 col-md-6  form-password-toggle">
-                                    <label class="form-label" for="password">Password</label>
-                                    <div class="input-group input-group-merge">
-                                        <input type="password" id="password"
-                                            class="form-control @error('password') is-invalid @enderror" name="password"
-                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                            required autocomplete="new-password" aria-describedby="password" />
-                                        <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="password">Confirm Password</label>
-                                    <div class="input-group input-group-merge">
-                                        <input id="password-confirm" type="password" class="form-control"
-                                            name="password_confirmation" required autocomplete="new-password">
-                                    </div>
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">คำนำหน้า</label>
+                                    <label for="prefix" class="form-label">รหัสวัสดุ</label>
                                     <input type="text" class="form-control @error('prefix') is-invalid @enderror"
                                         id="prefix" name="prefix" placeholder="คำนำหน้า" required />
                                     @error('prefix')
@@ -59,7 +24,7 @@
                                 </div>
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">รหัสพนักงาน</label>
+                                    <label for="prefix" class="form-label">ชื่อวัสดุ</label>
                                     <input type="text" class="form-control @error('employee_id') is-invalid @enderror"
                                         id="employee_id" name="employee_id" placeholder="รหัสพนักงาน" required />
                                     @error('employee_id')
@@ -69,7 +34,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="first_name" class="form-label">ชื่อ</label>
+                                    <label for="first_name" class="form-label">จำนวนที่มี</label>
                                     <input type="text" class="form-control @error('first_name') is-invalid @enderror"
                                         id="first_name" name="first_name" placeholder="ชื่อ" required />
                                     @error('first_name')
@@ -79,7 +44,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="first_name" class="form-label">นามสกุล</label>
+                                    <label for="first_name" class="form-label">จำนวนเบิก</label>
                                     <input type="text" class="form-control @error('last_name') is-invalid @enderror"
                                         id="last_name" name="last_name" placeholder="นามสกุล" required />
                                     @error('last_name')
@@ -88,19 +53,8 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="phone_number" class="form-label">เบอร์โทร</label>
-                                    <input type="text" class="form-control @error('phone_number') is-invalid @enderror"
-                                        id="phone_number" name="phone_number" placeholder="เบอร์โทร" required />
-                                    @error('phone_number')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3 ">
-                                    @include('layouts.address')
-                                </div>
+
+
 
                             </div>
                             <div class="mt-2">

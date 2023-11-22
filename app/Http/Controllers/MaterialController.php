@@ -80,7 +80,7 @@ class MaterialController extends Controller
         $data->description = $request['description'];
         $data->material_name = $request['material_name'];
         $data->material_number = $request['material_number'];
-        $data->material_number_pack_dozen = $request['material_number_pack_dozen'];
+        /* $data->material_number_pack_dozen = $request['material_number_pack_dozen']; */
         $data->name_material_count = $request['name_material_count'];
         $data->code_material_storage = $request['code_material_storage'];
         $data->wasteful_number = 0;
@@ -122,7 +122,7 @@ class MaterialController extends Controller
         $data->description = $request['description'];
         $data->material_name = $request['material_name'];
         $data->material_number = $request['material_number'];
-        $data->material_number_pack_dozen = $request['material_number_pack_dozen'];
+       /*  $data->material_number_pack_dozen = $request['material_number_pack_dozen']; */
         $data->name_material_count = $request['name_material_count'];
         $data->code_material_storage = $request['code_material_storage'];
         $data->save();

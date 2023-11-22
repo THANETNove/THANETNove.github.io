@@ -25,8 +25,8 @@
                                                 <th>ลำดับ</th>
                                                 <th>รหัส</th>
                                                 <th>ชื่อ</th>
-                                                <th>จำนวนวัสดุ ชิ้นต่อเเพค/โหล</th>
-                                                <th>จำนวนวัสดุ เเพค/โหล</th>
+                                                <th>จำนวนวัสดุ (จ่อหน่วยนับ)</th>
+                                                {{-- <th>จำนวนวัสดุ เเพค/โหล</th> --}}
                                                 <th>จำนวนนับวัสดุ</th>
                                                 <th>สิ้นเปลือง</th>
                                                 <th>ที่จัดเก็บ</th>
@@ -46,7 +46,7 @@
                                                         </td>
                                                         <td>{{ $da->material_name }}</td>
                                                         <td>{{ $da->material_number }}</td>
-                                                        <td>{{ $da->material_number_pack_dozen }}</td>
+                                                        {{--  <td>{{ $da->material_number_pack_dozen }}</td> --}}
                                                         <td>{{ $da->name_material_count }}</td>
                                                         <td>{{ $da->wasteful_number }}</td>
                                                         <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;

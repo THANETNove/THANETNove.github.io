@@ -70,7 +70,7 @@
 
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="material_number" class="form-label">จำนวนวัสดุชิ้นต่อเเพค/โหล</label>
+                                    <label for="material_number" class="form-label">จำนวนวัสดุชิ้น</label>
                                     <input id="material_number" type="number"
                                         class="form-control @error('material_number') is-invalid @enderror"
                                         name="material_number" value="{{ $mate['material_number'] }}" required
@@ -83,7 +83,7 @@
                                     @enderror
 
                                 </div>
-                                <div class="mb-3 col-md-6">
+                                {{--          <div class="mb-3 col-md-6">
                                     <label for="material_number_pack_dozen" class="form-label">จำนวนวัสดุ
                                         เเพค/โหล</label>
                                     <input id="material_number_pack_dozen" type="number"
@@ -98,7 +98,7 @@
                                         </span>
                                     @enderror
 
-                                </div>
+                                </div> --}}
                                 <div class="mb-3 col-md-6">
                                     <label for="name_material_count" class="form-label">ชื่อเรียกจำนวนนับวัสดุ (เช่น อัน ตัว
                                         อื่น ๆ
