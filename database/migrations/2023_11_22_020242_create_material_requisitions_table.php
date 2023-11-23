@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('material_requisitions', function (Blueprint $table) {
             $table->id();
+            $table->string('id_user')->nullable()->comment('user');
+            $table->string('code_requisition')->nullable()->comment('รหัสวัสดุ');
+            $table->string('material_name')->nullable()->comment('ชื่อ');
+            $table->string('amount_withdraw')->nullable()->comment('จำนวนที่ต้องเบิก');
+            $table->string('name_material_count')->nullable()->comment('ชื่อเรียกจำนวนนับวัสดุ');
+            $table->string('status')->nullable()->comment('สถานะ on/ off');
             $table->timestamps();
         });
     }
@@ -24,4 +30,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('material_requisitions');
     }
+
 };

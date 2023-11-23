@@ -73,6 +73,51 @@ $(document).ready(function () {
     });
 });
 
+// คลิก แขวง/อำเภอ  หา  "เขต/ตำบล
+$("#code-requisition").change(function () {
+    var selectedRequisition = $(this).val();
+
+    if (selectedRequisition !== "0") {
+        $.ajax({
+            url: "selected-requisition/" + selectedRequisition,
+            type: "GET",
+            success: function (res) {
+                // อัปเดตตัวเลือก "เขต/ตำบล"
+                $.each(res, function (index, data) {
+                    document.getElementById("remaining-amount").value =
+                        data.remaining_amount;
+                    document.getElementById("name-material-count").value =
+                        data.name_material_count;
+                    document.getElementById("material-name").value =
+                        data.material_name;
+                    document.getElementById("material-id").value = data.id;
+
+                    var remainingAmountInput =
+                        document.getElementById("amount_withdraw");
+
+                    if (remainingAmountInput && !isNaN(data.remaining_amount)) {
+                        remainingAmountInput.setAttribute(
+                            "max",
+                            data.remaining_amount
+                        );
+                    }
+
+                    if (data.remaining_amount == 0) {
+                        document.getElementById("out-stock").textContent =
+                            " วัสดุหมดเเล้ว ไม่สามารถเบิกได้";
+                    } else {
+                        document.getElementById("out-stock").textContent = "";
+                    }
+                    console.log("data", data.remaining_amount);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            },
+        });
+    }
+});
+
 /// ดึง URL ปัจจุบันหลังจาก /
 const setActiveClass = (mainItemId, subItemId) => {
     const menuItem = document.getElementById(mainItemId);

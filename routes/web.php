@@ -37,6 +37,8 @@ Route::get('subdistrict/{id}', [AddressController::class, 'subdistricts'])->name
 
 Route::get('material-requisition-index', [MaterialRequisitionController::class, 'index'])->name('material-requisition-index');
 Route::get('material-requisition-create', [MaterialRequisitionController::class, 'create'])->name('material-requisition-create');
+Route::get('selected-requisition/{id}', [MaterialRequisitionController::class, 'dataSelect'])->name('selected-requisition');
+Route::post('material-requisition-store', [MaterialRequisitionController::class, 'store'])->name('material-requisition-store');
 
 
 // is_drawer ผู้เบิก
