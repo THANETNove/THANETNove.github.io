@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <!-- Logo -->
                         <p class="text-center">
-                            <img src="{{ URL::asset('/assets/img/icons/unicons/loggo-rmutk.png') }}" alt
+                            <img src="{{ URL::asset('/assets/img/icons/unicons/logo.png') }}" alt
                                 class="mx-auto w-px-100 h-auto rounded-circle" />
                         </p>
                         <p class="app-brand-text demo text-body fw-bolder text-center">เข้าสูระบบ</p>

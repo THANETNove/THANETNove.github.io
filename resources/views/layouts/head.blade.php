@@ -4,7 +4,7 @@
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<link rel="shortcut icon" href="{{ URL::asset('/assets/img/icons/unicons/loggo-rmutk.png') }}">
+<link rel="shortcut icon" href="{{ URL::asset('/assets/img/icons/unicons/logo.png') }}">
 
 <title>DPME-Stystem</title>
 

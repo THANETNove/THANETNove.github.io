@@ -23,11 +23,14 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
-                                                <th>รหัสพนักงาน</th>
-                                                <th>ชื่อ นามสกุล</th>
-                                                <th>เบอร์โทร</th>
-                                                <th>สถานะพนักงาน</th>
-                                                <th>สถานะ</th>
+                                                <th>รหัสวัสดุ</th>
+                                                <th>ชื่อวัสดุ</th>
+                                                <th>จำนวนที่เบิก</th>
+                                                <th>ชื่อเรียกหน่วยนับ </th>
+                                                @if (Auth::user()->status != '0')
+                                                    <th>ชื่อ นามสกุล ผู้เบิก </th>
+                                                @endif
+
                                                 <th>Actions</th>
 
                                             </tr>
@@ -36,14 +39,17 @@
                                             $i = 1;
                                         @endphp
                                         <tbody class="table-border-bottom-0">
-                                            @foreach ($data->where('status', '2')->sortByDesc('created_at') as $da)
+                                            @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->employee_id }}</td>
-                                                    <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}</td>
-                                                    <td>{{ $da->phone_number }}</td>
-                                                    <td>หัวหน้าวัสดุ</td>
-
+                                                    <td>{{ $da->code_requisition }}</td>
+                                                    <td>{{ $da->material_name }}</td>
+                                                    <td>{{ $da->amount_withdraw }}</td>
+                                                    <td>{{ $da->name_material_count }}</td>
+                                                    @if (Auth::user()->status != '0')
+                                                        <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
+                                                        </td>
+                                                    @endif
                                                     {{--   @if (Auth::user()->status == '2')
                                                         <td>
                                                             <div class="dropdown">
