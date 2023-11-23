@@ -14,19 +14,23 @@
                                 <p style="color: red" id="out-stock"></p>
                                 <div class="mb-3 col-md-6">
 
-                                    <label for="prefix" class="form-label">วัสดุ</label>
-                                    <select class="form-select" aria-label="Default select example" name="code_requisition"
-                                        id="code-requisition">
-                                        <option selected disabled>เลือก</option>
-                                        @foreach ($data as $da)
-                                            <option
-                                                value="{{ $da->group_class }}-{{ $da->type_durableArticles }}-{{ $da->description }}">
-                                                {{ $da->group_class }}-{{ $da->type_durableArticles }}-{{ $da->description }}
-                                                &nbsp;{{ $da->material_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <label for="prefix" class="form-label">รหัสวัสดุ</label>
+                                    <input type="text" class="form-control" id="code_requisition" name="material_name"
+                                        placeholder="รหัสวัสดุ" required />
+                                    <div id="popup" style="display: none;" class="mt-2">
+                                        <!-- Content of the popup goes here -->
+                                    </div>
                                 </div>
+
+                                <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
+                                    <label for="prefix" class="form-label">ชื่อ</label>
+                                    <input type="text" class="form-control" id="material-name" name="material_name"
+                                        placeholder="ชื่อ" required />
+                                    <div id="popup-name" style="display: none;" class="mt-2">
+                                        <!-- Content of the popup goes here -->
+                                    </div>
+                                </div>
+
 
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">วัสดุที่เหลือ</label>
@@ -39,12 +43,6 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
-
-                                <div class="mb-3 col-md-6" style="display:none">
-                                    <label for="prefix" class="form-label">ชื่อ</label>
-                                    <input type="text" class="form-control" id="material-name" name="material_name"
-                                        placeholder="ชื่อ" required readonly />
                                 </div>
 
                                 <div class="mb-3 col-md-6" style="display:none">

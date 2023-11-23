@@ -73,17 +73,23 @@ $(document).ready(function () {
     });
 });
 
-// คลิก แขวง/อำเภอ  หา  "เขต/ตำบล
-$("#code-requisition").change(function () {
-    var selectedRequisition = $(this).val();
+// หา วัสดุ
 
-    if (selectedRequisition !== "0") {
+$("#code_requisition").on("input", function () {
+    var selectedRequisition = $(this).val();
+    console.log("selectedRequisition", selectedRequisition);
+
+    if (selectedRequisition.trim() !== "") {
         $.ajax({
             url: "selected-requisition/" + selectedRequisition,
             type: "GET",
             success: function (res) {
-                // อัปเดตตัวเลือก "เขต/ตำบล"
-                $.each(res, function (index, data) {
+                console.log("res", res);
+
+                if (res.length > 0) {
+                    var data = res[0]; // Assuming you're interested in the first result
+
+                    displayPopupWithData(res);
                     document.getElementById("remaining-amount").value =
                         data.remaining_amount;
                     document.getElementById("name-material-count").value =
@@ -104,19 +110,71 @@ $("#code-requisition").change(function () {
 
                     if (data.remaining_amount == 0) {
                         document.getElementById("out-stock").textContent =
-                            " วัสดุหมดเเล้ว ไม่สามารถเบิกได้";
+                            " วัสดุหมดแล้ว ไม่สามารถเบิกได้";
                     } else {
                         document.getElementById("out-stock").textContent = "";
                     }
                     console.log("data", data.remaining_amount);
-                });
+                }
             },
             error: function (xhr, status, error) {
                 console.error(error);
             },
         });
+    } else {
+        document.getElementById("material-name").value = null;
+        hidePopup();
     }
 });
+
+function displayPopupWithData(data) {
+    console.log("data", data);
+    var popupContent = "<ul>";
+    var popupContentName = "<ul>";
+    // Assuming data is an array of objects with some property like 'name'
+    if (data && data) {
+        // Check if 'data.name' is defined before using it
+        if (data.length == 1) {
+            hidePopup();
+            document.getElementById("material-name").value =
+                data["0"].material_name;
+            document.getElementById(
+                "code_requisition"
+            ).value = `${data["0"].group_class}-${data["0"].type_durableArticles}-${data["0"].description}`;
+        } else {
+            data.forEach(function (item) {
+                popupContent +=
+                    "<li>" +
+                    item.group_class +
+                    "-" +
+                    item.type_durableArticles +
+                    "-" +
+                    item.description +
+                    "</li>";
+                popupContentName += "<li>" + item.material_name + "</li>";
+            });
+        }
+    } else {
+        popupContent += "<li>Data not available</li>";
+        popupContentName += "<li>Data not available</li>";
+    }
+
+    popupContent += "</ul>";
+    popupContentName += "</ul>";
+
+    var popup = document.getElementById("popup");
+    popup.innerHTML = popupContent;
+    popup.style.display = "block";
+
+    var popupName = document.getElementById("popup-name");
+    popupName.innerHTML = popupContentName;
+    popupName.style.display = "block";
+}
+
+function hidePopup() {
+    var popup = document.getElementById("popup");
+    popup.style.display = "none";
+}
 
 /// ดึง URL ปัจจุบันหลังจาก /
 const setActiveClass = (mainItemId, subItemId) => {

@@ -38,14 +38,33 @@ class MaterialRequisitionController extends Controller
     public function dataSelect($id)
     {
 
-        $data = DB::table('materials');
+       $data = DB::table('materials');
         $data = $data->where(function ($query) use ($id) {
 
             $components = explode('-', $id);
 
-                $query->where('group_class', 'LIKE', "%$components[0]%")
-                    ->where('type_durableArticles', 'LIKE', "%$components[1]%")
-                    ->where('description', 'LIKE', "%$components[2]%");
+            $components = explode('-', $id);
+                if (count($components) == 3) {
+                    // Full value like "7115-005-0003"
+
+                    $query->where('group_class', 'LIKE', "%$components[0]%")
+                        ->where('type_durableArticles', 'LIKE', "%$components[1]%")
+                        ->where('description', 'LIKE', "%$components[2]%")
+                        ->orWhere('material_name', 'LIKE', "%$id%");
+                } elseif (count($components) == 2) {
+                    // Partial value like "715" or "005"
+                    $query->where('group_class', 'LIKE', "%$components[0]%")
+                        ->where('type_durableArticles', 'LIKE', "%$components[1]%")
+                        ->orWhere('description', 'LIKE', "%$id%")
+                        ->orWhere('material_name', 'LIKE', "%$id%");
+
+                } elseif (count($components) == 1) {
+                    // Partial value like "715" or "005"
+                    $query->where('group_class', 'LIKE', "%$id%")
+                        ->orWhere('type_durableArticles', 'LIKE', "%$id%")
+                        ->orWhere('description', 'LIKE', "%$id%")
+                        ->orWhere('material_name', 'LIKE', "%$id%");
+                }
             });
             $data = $data->get();
 
