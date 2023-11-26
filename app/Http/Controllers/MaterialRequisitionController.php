@@ -78,6 +78,8 @@ class MaterialRequisitionController extends Controller
     public function store(Request $request)
     {
 
+
+
         MaterialRequisition::create([
             'id_user' => Auth::user()->id,
             'code_requisition' => $request['code_requisition'],

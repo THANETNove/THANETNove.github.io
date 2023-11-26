@@ -15,7 +15,7 @@
                                 <div class="mb-3 col-md-6">
 
                                     <label for="prefix" class="form-label">รหัสวัสดุ</label>
-                                    <input type="text" class="form-control" id="code_requisition" name="material_name"
+                                    <input type="text" class="form-control" id="code_requisition" name="code_requisition"
                                         placeholder="รหัสวัสดุ" required />
                                     <div id="popup" style="display: none;" class="mt-2">
                                         <!-- Content of the popup goes here -->
