@@ -247,7 +247,7 @@ if (targetUrls === "buy-index" || targetUrls === "buy-edit") {
 if (targetUrls === "buy-create") {
     setActiveClass("buy", "buy-create");
 }
-// ระบบจัดซื้อ
+// ระบบเบิกวัสดุ
 if (
     targetUrls === "material-requisition-index" ||
     targetUrls === "material-requisition-edit"
@@ -256,5 +256,21 @@ if (
 }
 if (targetUrls === "material-requisition-create") {
     setActiveClass("material-requisition", "material-requisition-create");
+}
+//ครุภัณฑ์
+if (
+    targetUrls === "durable-articles-requisition-index" ||
+    targetUrls === "durable-articles-requisition-edit"
+) {
+    setActiveClass(
+        "durable-articles-requisition",
+        "durable-articles-requisition-index"
+    );
+}
+if (targetUrls === "durable-articles-requisition-create") {
+    setActiveClass(
+        "durable-articles-requisition",
+        "durable-articles-requisition-create"
+    );
 }
 console.log("targetUrls", targetUrls);

@@ -8,6 +8,7 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\DurableArticlesController;
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\MaterialRequisitionController;
+use App\Http\Controllers\DurableArticlesRequisitionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,10 @@ Route::get('material-requisition-edit/{id}', [MaterialRequisitionController::cla
 Route::put('material-requisition-update/{id}', [MaterialRequisitionController::class, 'update'])->name('material-requisition-update');
 Route::get('material-requisition-destroy/{id}', [MaterialRequisitionController::class, 'destroy'])->name('material-requisition-destroy');
 Route::get('material-requisition-export/pdf', [MaterialRequisitionController::class, 'exportPDF'])->name('material-requisition-export/pdf');
+
+Route::get('durable-articles-requisition-index', [DurableArticlesRequisitionController::class, 'index'])->name('durable-articles-requisition-index');
+
+Route::get('durable-articles-requisition-create', [DurableArticlesRequisitionController::class, 'create'])->name('durable-articles-requisition-create');
 
 
 // is_drawer ผู้เบิก

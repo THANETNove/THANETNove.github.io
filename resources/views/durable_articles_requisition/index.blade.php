@@ -11,9 +11,9 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">เบิกวัสดุอุปกรณ์</h1>
+                                <h1 class="card-title text-primary ">เบิกครุภัณฑ์</h1>
                                 <a href="{{ url('material-requisition-export/pdf') }}"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกวัสดุอุปกรณ์</a>
+                                    class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกครุภัณฑ์</a>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif
@@ -39,7 +39,7 @@
                                             $i = 1;
                                         @endphp
                                         <tbody class="table-border-bottom-0">
-                                            @foreach ($data as $da)
+                                            {{--   @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->code_requisition }}</td>
@@ -80,14 +80,14 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            @endforeach --}}
 
 
                                         </tbody>
                                     </table>
-                                    <div class="mt-5">
+                                    {{--  <div class="mt-5">
                                         {!! $data->links() !!}
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                             </div>
