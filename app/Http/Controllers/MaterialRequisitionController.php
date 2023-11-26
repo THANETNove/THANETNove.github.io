@@ -82,6 +82,7 @@ class MaterialRequisitionController extends Controller
 
         MaterialRequisition::create([
             'id_user' => Auth::user()->id,
+            'material_id' => $request['material_id'],
             'code_requisition' => $request['code_requisition'],
             'material_name' => $request['material_name'],
             'amount_withdraw' => $request['amount_withdraw'],
@@ -117,7 +118,13 @@ class MaterialRequisitionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data =     DB::table('material_requisitions')
+        ->where('id', $id)
+        ->join('users', 'material_requisitions.id_user', '=', 'users.id')
+        ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name')
+        ->orderBy('id','DESC')->paginate(100);
+        dd( $data);
+        return view('material_requisition.edit',['data' => $data]);
     }
 
     /**

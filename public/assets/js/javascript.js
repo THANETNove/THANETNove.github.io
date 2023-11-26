@@ -136,6 +136,7 @@ function displayPopupWithData(data) {
         // Check if 'data.name' is defined before using it
         if (data.length == 1) {
             hidePopup();
+            document.getElementById("material_id").value = data["0"].id;
             document.getElementById("material-name").value =
                 data["0"].material_name;
             document.getElementById(
@@ -178,6 +179,7 @@ function displayPopupWithData(data) {
 $("#btn-danger").click(function () {
     document.getElementById("code_requisition").value = "";
     document.getElementById("material-name").value = "";
+    document.getElementById("material_id").value = "";
     var popupBtn = document.getElementById("btn-danger");
     popupBtn.style.display = "none";
     // Add your additional click event handling logic

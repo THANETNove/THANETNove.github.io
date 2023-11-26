@@ -10,6 +10,7 @@ class MaterialRequisition extends Model
     use HasFactory;
     protected $fillable = [
         'id_user',//user
+        'material_id',
         'code_requisition', //รหัสครุภัณฑ์
         'material_name', //ชื่อ
         'amount_withdraw',// ที่ต้องเบิก

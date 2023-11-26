@@ -14,12 +14,6 @@
                                 <p style="color: red" id="out-stock"></p>
                                 <div class="mb-3 col-md-6">
 
-                                    <label for="prefix" class="form-label">id วัสดุ</label>
-                                    <input type="text" class="form-control" id="material_id" name="material_id"
-                                        placeholder="รหัสวัสดุ" required />
-
-                                </div>
-                                <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รหัสวัสดุ</label>
                                     <input type="text" class="form-control" id="code_requisition" name="code_requisition"
                                         placeholder="รหัสวัสดุ" required />

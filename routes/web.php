@@ -39,6 +39,7 @@ Route::get('material-requisition-index', [MaterialRequisitionController::class, 
 Route::get('material-requisition-create', [MaterialRequisitionController::class, 'create'])->name('material-requisition-create');
 Route::get('selected-requisition/{id}', [MaterialRequisitionController::class, 'dataSelect'])->name('selected-requisition');
 Route::post('material-requisition-store', [MaterialRequisitionController::class, 'store'])->name('material-requisition-store');
+Route::get('material-requisition-edit/{id}', [MaterialRequisitionController::class, 'edit'])->name('material-requisition-edit');
 
 
 // is_drawer ผู้เบิก
