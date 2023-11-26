@@ -36,10 +36,14 @@ Route::get('districts/{id}', [AddressController::class, 'districts'])->name('dis
 Route::get('subdistrict/{id}', [AddressController::class, 'subdistricts'])->name('subdistrict');
 
 Route::get('material-requisition-index', [MaterialRequisitionController::class, 'index'])->name('material-requisition-index');
+Route::post('material-requisition-index', [MaterialRequisitionController::class, 'index'])->name('material-requisition-index');
 Route::get('material-requisition-create', [MaterialRequisitionController::class, 'create'])->name('material-requisition-create');
 Route::get('selected-requisition/{id}', [MaterialRequisitionController::class, 'dataSelect'])->name('selected-requisition');
 Route::post('material-requisition-store', [MaterialRequisitionController::class, 'store'])->name('material-requisition-store');
 Route::get('material-requisition-edit/{id}', [MaterialRequisitionController::class, 'edit'])->name('material-requisition-edit');
+Route::put('material-requisition-update/{id}', [MaterialRequisitionController::class, 'update'])->name('material-requisition-update');
+Route::get('material-requisition-destroy/{id}', [MaterialRequisitionController::class, 'destroy'])->name('material-requisition-destroy');
+Route::get('material-requisition-export/pdf', [MaterialRequisitionController::class, 'exportPDF'])->name('material-requisition-export/pdf');
 
 
 // is_drawer ผู้เบิก

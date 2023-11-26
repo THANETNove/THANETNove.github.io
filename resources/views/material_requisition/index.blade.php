@@ -12,7 +12,7 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">เบิกวัสดุอุปกรณ์</h1>
-                                <a href="{{ url('personnel-export/pdf') }}"
+                                <a href="{{ url('material-requisition-export/pdf') }}"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกวัสดุอุปกรณ์</a>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
@@ -30,7 +30,7 @@
                                                 @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                 @endif
-
+                                                <th>สถานะ </th>
                                                 <th>Actions</th>
 
                                             </tr>
@@ -51,6 +51,14 @@
                                                         </td>
                                                     @endif
                                                     <td>
+                                                        @if ($da->status == 'on')
+                                                            <span class="badge bg-label-success me-1">เบิกวัสดุ</span>
+                                                        @else
+                                                            <span class="badge bg-label-warning me-1">ยกเลิกเบิกวัสดุ</span>
+                                                        @endif
+                                                    </td>
+
+                                                    <td>
                                                         <div class="dropdown">
                                                             <button type="button"
                                                                 class="btn p-0 dropdown-toggle hide-arrow"
@@ -64,8 +72,8 @@
                                                                         class="bx bx-edit-alt me-1"></i> Edit</a>
                                                                 @if (Auth::user()->status != '1')
                                                                     <a class="dropdown-item"
-                                                                        href="{{ url('personnel-destroy', $da->id) }}"><i
-                                                                            class="bx bx-trash me-1"></i> Delete</a>
+                                                                        href="{{ url('material-requisition-destroy', $da->id) }}"><i
+                                                                            class="bx bx-trash me-1"></i> ยกเลิก</a>
                                                                 @endif
 
                                                             </div>
