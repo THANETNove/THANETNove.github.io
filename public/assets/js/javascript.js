@@ -169,11 +169,27 @@ function displayPopupWithData(data) {
     var popupName = document.getElementById("popup-name");
     popupName.innerHTML = popupContentName;
     popupName.style.display = "block";
+
+    var popupBtn = document.getElementById("btn-danger");
+    popupBtn.innerHTML = "ลบ";
+    popupBtn.style.display = "block";
 }
+
+$("#btn-danger").click(function () {
+    document.getElementById("code_requisition").value = "";
+    document.getElementById("material-name").value = "";
+    var popupBtn = document.getElementById("btn-danger");
+    popupBtn.style.display = "none";
+    // Add your additional click event handling logic
+});
 
 function hidePopup() {
     var popup = document.getElementById("popup");
     popup.style.display = "none";
+    var popupName = document.getElementById("popup-name");
+    popupName.style.display = "none";
+    var popupBtn = document.getElementById("btn-danger");
+    popupBtn.style.display = "none";
 }
 
 /// ดึง URL ปัจจุบันหลังจาก /

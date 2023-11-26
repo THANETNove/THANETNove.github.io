@@ -20,6 +20,8 @@
                                     <div id="popup" style="display: none;" class="mt-2">
                                         <!-- Content of the popup goes here -->
                                     </div>
+                                    <button type="button" id="btn-danger" class="btn btn-danger mt-3"
+                                        style="display: none;"></button>
                                 </div>
 
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
