@@ -12,7 +12,7 @@
                             @csrf
                             <div class="row">
                                 <p style="color: red" id="out-stock"></p>
-                                <div class="mb-3 col-md-6" {{-- style="display: none;" --}}>
+                                <div class="mb-3 col-md-6" style="display: none;">
                                     <label for="prefix" class="form-label">id ครุภัณฑ์</label>
                                     <input type="text" class="form-control" id="durable_articles_id"
                                         name="durable_articles_id" placeholder="รหัสวัสดุ" required />
