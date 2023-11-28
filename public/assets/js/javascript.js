@@ -98,16 +98,6 @@ $("#code_requisition").on("input", function () {
                         data.material_name;
                     document.getElementById("material-id").value = data.id;
 
-                    var remainingAmountInput =
-                        document.getElementById("amount_withdraw");
-
-                    if (remainingAmountInput && !isNaN(data.remaining_amount)) {
-                        remainingAmountInput.setAttribute(
-                            "max",
-                            data.remaining_amount
-                        );
-                    }
-
                     if (data.remaining_amount == 0) {
                         document.getElementById("out-stock").textContent =
                             " วัสดุหมดแล้ว ไม่สามารถเบิกได้";
@@ -139,6 +129,15 @@ function displayPopupWithData(data) {
             document.getElementById("material_id").value = data["0"].id;
             document.getElementById("material-name").value =
                 data["0"].material_name;
+            var remainingAmountInput =
+                document.getElementById("amount_withdraw");
+
+            if (remainingAmountInput && !isNaN(data["0"].remaining_amount)) {
+                remainingAmountInput.setAttribute(
+                    "max",
+                    data[0].remaining_amount
+                );
+            }
             document.getElementById(
                 "code_requisition"
             ).value = `${data["0"].group_class}-${data["0"].type_durableArticles}-${data["0"].description}`;
