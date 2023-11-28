@@ -179,6 +179,8 @@ $("#btn-danger").click(function () {
     document.getElementById("code_requisition").value = "";
     document.getElementById("material-name").value = "";
     document.getElementById("material_id").value = "";
+    document.getElementById("remaining-amount").value = "";
+    document.getElementById("name-material-count").value = "";
     var popupBtn = document.getElementById("btn-danger");
     popupBtn.style.display = "none";
     // Add your additional click event handling logic
@@ -191,6 +193,129 @@ function hidePopup() {
     popupName.style.display = "none";
     var popupBtn = document.getElementById("btn-danger");
     popupBtn.style.display = "none";
+}
+
+// หา ครุภัณฑ์
+
+$("#code_durable_articles").on("input", function () {
+    var selectedRequisition = $(this).val();
+    console.log("selectedRequisition", selectedRequisition);
+
+    if (selectedRequisition.trim() !== "") {
+        $.ajax({
+            url: "selected-durable-requisition/" + selectedRequisition,
+            type: "GET",
+            success: function (res) {
+                console.log("res", res);
+
+                if (res.length > 0) {
+                    var data = res[0]; // Assuming you're interested in the first result
+
+                    displayPopupWithDataDurable(res);
+                    /*   document.getElementById("remaining-amount").value =
+                        data.remaining_amount;
+                    document.getElementById("name-material-count").value =
+                        data.name_material_count;
+                    document.getElementById("material-name").value =
+                        data.material_name;
+                    document.getElementById("material-id").value = data.id; */
+
+                    if (data.remaining_amount == 0) {
+                        document.getElementById("out-stock").textContent =
+                            " วัสดุหมดแล้ว ไม่สามารถเบิกได้";
+                    } else {
+                        document.getElementById("out-stock").textContent = "";
+                    }
+                    console.log("data", data.remaining_amount);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            },
+        });
+    } else {
+        document.getElementById("material-name").value = null;
+        hidePopup();
+    }
+});
+
+function displayPopupWithDataDurable(data) {
+    console.log("data", data);
+    var popupContent = "<ul>";
+    var popupContentName = "<ul>";
+    // Assuming data is an array of objects with some property like 'name'
+    if (data && data) {
+        // Check if 'data.name' is defined before using it
+        if (data.length == 1) {
+            hidePopupDurable();
+            document.getElementById("durable_articles_id").value = data["0"].id;
+            document.getElementById("durable_articles-name").value =
+                data["0"].durableArticles_name;
+            document.getElementById("remaining-amount").value =
+                data["0"].remaining_amount;
+            var remainingAmountInput =
+                document.getElementById("amount_withdraw");
+
+            if (remainingAmountInput && !isNaN(data["0"].remaining_amount)) {
+                remainingAmountInput.setAttribute(
+                    "max",
+                    data[0].remaining_amount
+                );
+            }
+            document.getElementById(
+                "code_durable_articles"
+            ).value = `${data["0"].group_class}-${data["0"].type_durableArticles}-${data["0"].description}`;
+        } else {
+            data.forEach(function (item) {
+                popupContent +=
+                    "<li>" +
+                    item.group_class +
+                    "-" +
+                    item.type_durableArticles +
+                    "-" +
+                    item.description +
+                    "</li>";
+                popupContentName +=
+                    "<li>" + item.durableArticles_name + "</li>";
+            });
+        }
+    } else {
+        popupContent += "<li>Data not available</li>";
+        popupContentName += "<li>Data not available</li>";
+    }
+
+    popupContent += "</ul>";
+    popupContentName += "</ul>";
+
+    var popup = document.getElementById("popup-code");
+    popup.innerHTML = popupContent;
+    popup.style.display = "block";
+
+    var popupName = document.getElementById("popup-durable");
+    popupName.innerHTML = popupContentName;
+    popupName.style.display = "block";
+
+    var popupBtn = document.getElementById("btn-danger-durable");
+    popupBtn.innerHTML = "ลบ";
+    popupBtn.style.display = "block";
+}
+
+$("#btn-danger-durable").click(function () {
+    document.getElementById("durable_articles_id").value = "";
+    document.getElementById("durable_articles-name").value = "";
+    document.getElementById("code_durable_articles").value = "";
+    var popupBtn = document.getElementById("btn-danger-durable");
+    popupBtn.style.display = "none";
+    // Add your additional click event handling logic
+});
+
+function hidePopupDurable() {
+    var popup = document.getElementById("popup-code");
+    popup.style.display = "none";
+    var popupName = document.getElementById("popup-durable");
+    popupName.style.display = "none";
+    /*  var popupBtn = document.getElementById("btn-danger");
+    popupBtn.style.display = "none"; */
 }
 
 /// ดึง URL ปัจจุบันหลังจาก /
