@@ -56,7 +56,7 @@
                                     <label for="prefix" class="form-label">จำนวนที่ต้องการเบิก</label>
                                     <input type="number"
                                         class="form-control @error('amount_withdraw') is-invalid @enderror"
-                                        id="amount_withdraw_d" name="amount_withdraw" placeholder="จำนวนที่ต้องการเบิก"
+                                        id="amount_withdraw" name="amount_withdraw" placeholder="จำนวนที่ต้องการเบิก"
                                         min="1" required />
                                     @error('amount_withdraw')
                                         <span class="invalid-feedback" role="alert">

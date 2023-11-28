@@ -210,16 +210,7 @@ $("#code_durable_articles").on("input", function () {
 
                 if (res.length > 0) {
                     var data = res[0]; // Assuming you're interested in the first result
-
                     displayPopupWithDataDurable(res);
-                    /*   document.getElementById("remaining-amount").value =
-                        data.remaining_amount;
-                    document.getElementById("name-material-count").value =
-                        data.name_material_count;
-                    document.getElementById("material-name").value =
-                        data.material_name;
-                    document.getElementById("material-id").value = data.id; */
-
                     if (data.remaining_amount == 0) {
                         document.getElementById("out-stock").textContent =
                             " วัสดุหมดแล้ว ไม่สามารถเบิกได้";
@@ -253,6 +244,8 @@ function displayPopupWithDataDurable(data) {
                 data["0"].durableArticles_name;
             document.getElementById("remaining-amount").value =
                 data["0"].remaining_amount;
+            document.getElementById("name-durable_articles-count").value =
+                data["0"].name_durableArticles_count;
             var remainingAmountInput =
                 document.getElementById("amount_withdraw");
 
@@ -304,6 +297,8 @@ $("#btn-danger-durable").click(function () {
     document.getElementById("durable_articles_id").value = "";
     document.getElementById("durable_articles-name").value = "";
     document.getElementById("code_durable_articles").value = "";
+    document.getElementById("remaining-amount").value = "";
+    document.getElementById("name-durable_articles-count").value = "";
     var popupBtn = document.getElementById("btn-danger-durable");
     popupBtn.style.display = "none";
     // Add your additional click event handling logic
