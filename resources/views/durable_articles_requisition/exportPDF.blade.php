@@ -40,26 +40,34 @@
                             @php
                                 $i = 1;
                                 $j = 1;
-                                $countOn = $data->where('status', 'on')->count();
-                                $countOff = $data->where('status', 'off')->count();
+                                $count = $data->count();
+                                $countApprovalWait = $data
+                                    ->where('statusApproval', '0')
+                                    ->where('status', 'on')
+                                    ->count();
+                                $countApproval = $data->where('statusApproval', '1')->count();
+                                $countNotApproval = $data->where('statusApproval', '2')->count();
 
                             @endphp
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">เบิกวัสดุอุปกรณ์</h1>
-                                <p>รายงานข้อมูลการเบิกวัสดุอุปกรณ์</p>
-                                <p class="mt--16">จำนวนเบิกวัสดุ {{ $countOn }}</p>
-                                <p class="mt--16">จำนวนยกเลิกเบิกวัสดุ {{ $countOff }}</p>
+                                <h1 class="card-title text-primary ">เบิกครุภัณฑ์</h1>
+                                <p>รายงานข้อมูลการเบิกครุภัณฑ์</p>
+                                <p class="mt--16">จำนวนเบิกครุภัณฑ์ {{ $count }}</p>
+                                <p class="mt--16">จำนวนอนุมัติเบิกครุภัณฑ์ {{ $countApproval }}</p>
+                                <p class="mt--16">จำนวนไม่อนุมัติเบิกครุภัณฑ์ {{ $countNotApproval }}</p>
+                                <p class="mt--16">จำนวนรอเบิกครุภัณฑ์ {{ $countApprovalWait }}</p>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
                                             <th>ลำดับ</th>
-                                            <th>รหัสวัสดุ</th>
-                                            <th>ชื่อวัสดุ</th>
+                                            <th>รหัสครุภัณฑ์</th>
+                                            <th>ชื่อครุภัณฑ์</th>
                                             <th>จำนวนที่เบิก</th>
                                             <th>หน่วยนับ </th>
                                             @if (Auth::user()->status != '0')
                                                 <th>ชื่อ นามสกุล ผู้เบิก </th>
                                             @endif
+                                            <th>การอนุมัติ </th>
                                             <th>สถานะ </th>
 
                                         </thead>
@@ -67,10 +75,10 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->code_requisition }}</td>
-                                                    <td>{{ $da->material_name }}</td>
+                                                    <td>{{ $da->code_durable_articles }}</td>
+                                                    <td>{{ $da->durable_articles_name }}</td>
                                                     <td>{{ $da->amount_withdraw }}</td>
-                                                    <td>{{ $da->name_material_count }}</td>
+                                                    <td>{{ $da->name_durable_articles_count }}</td>
                                                     @if (Auth::user()->status != '0')
                                                         <td>{{ $da->prefix }} {{ $da->first_name }}
                                                             {{ $da->last_name }}
@@ -78,10 +86,25 @@
                                                     @endif
                                                     <td>
                                                         @if ($da->status == 'on')
-                                                            <span class="badge bg-label-success me-1">เบิกวัสดุ</span>
+                                                            @if ($da->statusApproval == '0')
+                                                                <span
+                                                                    class="badge bg-label-info me-1">รอการอนุมัติ</span>
+                                                            @elseif ($da->statusApproval == '1')
+                                                                <span class="badge bg-label-success me-1">อนุมัติ</span>
+                                                            @else
+                                                                <span
+                                                                    class="badge bg-label-warning me-1">ไม่อนุมัติ</span>
+                                                            @endif
+                                                        @endif
+
+                                                    </td>
+                                                    <td>
+                                                        @if ($da->status == 'on')
+                                                            <span
+                                                                class="badge bg-label-success me-1">เบิกครุภัณฑ์</span>
                                                         @else
                                                             <span
-                                                                class="badge bg-label-warning me-1">ยกเลิกเบิกวัสดุ</span>
+                                                                class="badge bg-label-warning me-1">ยกเลิกเบิกครุภัณฑ์</span>
                                                         @endif
                                                     </td>
 
@@ -92,13 +115,11 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

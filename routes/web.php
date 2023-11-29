@@ -58,6 +58,7 @@ Route::get('approval-update', [DurableArticlesRequisitionController::class, 'app
 Route::get('approved/{id}', [DurableArticlesRequisitionController::class, 'approved'])->name('approved');
 Route::post('not-approved', [DurableArticlesRequisitionController::class, 'notApproved'])->name('not-approved');
 Route::get('durable-articles-requisition-show/{id}', [DurableArticlesRequisitionController::class, 'show'])->name('durable-articles-requisition-show');
+Route::get('durable-articles-requisition-export/pdf', [DurableArticlesRequisitionController::class, 'exportPDF'])->name('durable-articles-requisition-export/pdf');
 
 
 // is_drawer ผู้เบิก

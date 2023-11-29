@@ -10,6 +10,23 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     @include('layouts.fonts_DPF')
+    <style>
+        .table td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+            vertical-align: middle !important;
+        }
+
+        .badge {
+            font-size: 0.8rem;
+        }
+    </style>
 
 </head>
 
@@ -49,9 +66,6 @@
                                                 <th>ราคา รวม</th>
                                                 <th>รายละเอียด</th>
                                                 <th>สถานะ</th>
-
-
-
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
@@ -72,7 +86,6 @@
 
                                                 </tr>
                                             @endforeach
-                                            <br>
                                             @foreach ($data->where('status', '1') as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
@@ -89,7 +102,6 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                            <br>
                                             @foreach ($data->where('status', '2') as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>

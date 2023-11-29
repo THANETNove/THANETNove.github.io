@@ -231,5 +231,26 @@ class DurableArticlesRequisitionController extends Controller
     }
 
 
+    public function exportPDF(Request $request)
+    {
+
+        $data = DB::table('durable_articles_requisitions')
+        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name');
+           if (Auth::user()->status == "0") {
+               $data =  $data->where('id_user', Auth::user()->id);
+           }
+
+
+           $pdf = PDF::loadView('durable_articles_requisition.exportPDF',['data' =>  $data->get()]);
+           $pdf->setPaper('a4');
+           return $pdf->download('exportPDF.pdf');
+
+
+    }
+
+
+
+
 
 }
