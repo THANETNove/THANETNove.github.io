@@ -87,14 +87,15 @@
 
                                                     <td>
                                                         @if ($da->status == 'on')
-                                                            <span class="badge bg-label-success me-1">เบิกวัสดุ</span>
+                                                            <span class="badge bg-label-success me-1">เบิกครุภัณฑ์</span>
                                                         @else
-                                                            <span class="badge bg-label-warning me-1">ยกเลิกเบิกวัสดุ</span>
+                                                            <span
+                                                                class="badge bg-label-warning me-1">ยกเลิกเบิกครุภัณฑ์</span>
                                                         @endif
                                                     </td>
 
                                                     <td>
-                                                        @if ($da->statusApproval == '0')
+                                                        @if ($da->statusApproval == '0' && $da->status == 'on')
                                                             <div class="dropdown">
                                                                 <button type="button"
                                                                     class="btn p-0 dropdown-toggle hide-arrow"

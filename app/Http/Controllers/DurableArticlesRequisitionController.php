@@ -161,6 +161,9 @@ class DurableArticlesRequisitionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DurableArticlesRequisition::where('id', $id)->update([
+            'status' =>  "off",
+        ]);
+        return redirect('durable-articles-requisition-index')->with('message', "ยกเลิกสำเร็จ");
     }
 }
