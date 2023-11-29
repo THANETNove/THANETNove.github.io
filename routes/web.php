@@ -55,6 +55,8 @@ Route::get('durable-articles-requisition-edit/{id}', [DurableArticlesRequisition
 Route::put('durable-articles-requisition-update/{id}', [DurableArticlesRequisitionController::class, 'update'])->name('durable-articles-requisition-update');
 Route::get('durable-articles-requisition-destroy/{id}', [DurableArticlesRequisitionController::class, 'destroy'])->name('durable-articles-requisition-destroy');
 Route::get('approval-update', [DurableArticlesRequisitionController::class, 'approvalUpdate'])->name('approval-update');
+Route::get('approved/{id}', [DurableArticlesRequisitionController::class, 'approved'])->name('approved');
+Route::post('not-approved', [DurableArticlesRequisitionController::class, 'notApproved'])->name('not-approved');
 
 
 // is_drawer ผู้เบิก

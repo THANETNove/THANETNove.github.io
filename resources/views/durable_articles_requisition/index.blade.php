@@ -25,7 +25,7 @@
                                                 <th>รหัสวัสดุ</th>
                                                 <th>ชื่อวัสดุ</th>
                                                 <th>จำนวนที่เบิก</th>
-                                                <th>ชื่อเรียกหน่วยนับ </th>
+                                                <th>หน่วยนับ </th>
 
                                                 @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
@@ -76,13 +76,16 @@
 
                                                     </td>
                                                     <td>
-                                                        @if ($da->statusApproval == '0')
-                                                            <span class="badge bg-label-info me-1">รอการอนุมัติ</span>
-                                                        @elseif ($da->statusApproval == '0')
-                                                            <span class="badge bg-label-success me-1">อนุมัติ</span>
-                                                        @else
-                                                            <span class="badge bg-label-warning me-1">ไม่อนุมัติ</span>
+                                                        @if ($da->status == 'on')
+                                                            @if ($da->statusApproval == '0')
+                                                                <span class="badge bg-label-info me-1">รอการอนุมัติ</span>
+                                                            @elseif ($da->statusApproval == '0')
+                                                                <span class="badge bg-label-success me-1">อนุมัติ</span>
+                                                            @else
+                                                                <span class="badge bg-label-warning me-1">ไม่อนุมัติ</span>
+                                                            @endif
                                                         @endif
+
                                                     </td>
 
                                                     <td>
