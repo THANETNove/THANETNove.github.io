@@ -123,7 +123,13 @@ class DurableArticlesRequisitionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data =   DB::table('durable_articles_requisitions')
+        ->where('durable_articles_requisitions.id', $id)
+        ->join('durable_articles', 'material_requisitions.durable_articles_id', '=', 'durable_articles.id')
+        ->select('durable_articles_requisitions.*', 'durable_articles.remaining_amount')
+        ->get();
+
+        return view('durable_articles_requisition.edit',['data' =>$data]);
     }
 
     /**

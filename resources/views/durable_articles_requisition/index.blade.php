@@ -63,8 +63,8 @@
                                                     @endphp
                                                     <td>{{ $newDate }}
                                                         @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
-                                                            <span class="badge bg-label-primary me-1">เหลือเวลา
-                                                                {{ $daysRemaining + 1 }} วัน</span>
+                                                            <span
+                                                                class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
                                                         @else
                                                             @if ($daysRemaining > 0)
                                                                 <span class="badge bg-label-primary me-1">เหลือเวลา
@@ -94,25 +94,27 @@
                                                     </td>
 
                                                     <td>
-                                                        <div class="dropdown">
-                                                            <button type="button"
-                                                                class="btn p-0 dropdown-toggle hide-arrow"
-                                                                data-bs-toggle="dropdown">
-                                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu">
+                                                        @if ($da->statusApproval == '0')
+                                                            <div class="dropdown">
+                                                                <button type="button"
+                                                                    class="btn p-0 dropdown-toggle hide-arrow"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
 
-                                                                <a class="dropdown-item"
-                                                                    href="{{ url('material-requisition-edit', $da->id) }}"><i
-                                                                        class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                                @if (Auth::user()->status != '1')
                                                                     <a class="dropdown-item"
-                                                                        href="{{ url('material-requisition-destroy', $da->id) }}"><i
-                                                                            class="bx bx-trash me-1"></i> ยกเลิก</a>
-                                                                @endif
+                                                                        href="{{ url('durable-articles-requisition-edit', $da->id) }}"><i
+                                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                    @if (Auth::user()->status != '1')
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ url('durable-articles-requisition-destroy', $da->id) }}"><i
+                                                                                class="bx bx-trash me-1"></i> ยกเลิก</a>
+                                                                    @endif
 
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

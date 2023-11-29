@@ -51,6 +51,7 @@ Route::get('durable-articles-requisition-index', [DurableArticlesRequisitionCont
 Route::get('durable-articles-requisition-create', [DurableArticlesRequisitionController::class, 'create'])->name('durable-articles-requisition-create');
 Route::post('durable-articles-requisition-store', [DurableArticlesRequisitionController::class, 'store'])->name('durable-articles-requisition-store');
 Route::get('selected-durable-requisition/{id}', [DurableArticlesRequisitionController::class, 'durableRequisition'])->name('selected-durable-requisition');
+Route::get('durable-articles-requisition-edit/{id}', [DurableArticlesRequisitionController::class, 'edit'])->name('durable-articles-requisition-edit');
 
 
 // is_drawer ผู้เบิก
