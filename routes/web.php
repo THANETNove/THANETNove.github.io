@@ -47,7 +47,7 @@ Route::get('material-requisition-destroy/{id}', [MaterialRequisitionController::
 Route::get('material-requisition-export/pdf', [MaterialRequisitionController::class, 'exportPDF'])->name('material-requisition-export/pdf');
 
 Route::get('durable-articles-requisition-index', [DurableArticlesRequisitionController::class, 'index'])->name('durable-articles-requisition-index');
-
+Route::post('durable-articles-requisition-index', [DurableArticlesRequisitionController::class, 'index'])->name('durable-articles-requisition-index');
 Route::get('durable-articles-requisition-create', [DurableArticlesRequisitionController::class, 'create'])->name('durable-articles-requisition-create');
 Route::post('durable-articles-requisition-store', [DurableArticlesRequisitionController::class, 'store'])->name('durable-articles-requisition-store');
 Route::get('selected-durable-requisition/{id}', [DurableArticlesRequisitionController::class, 'durableRequisition'])->name('selected-durable-requisition');

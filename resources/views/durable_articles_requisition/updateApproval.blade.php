@@ -10,9 +10,7 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">อนุมัติครุภัณฑ</h1>
-                                <a href="{{ url('material-requisition-export/pdf') }}"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายงานการอนุมัติครุภัณฑ</a>
+                                <h1 class="card-title text-primary ">อนุมัติครุภัณฑ์</h1>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif

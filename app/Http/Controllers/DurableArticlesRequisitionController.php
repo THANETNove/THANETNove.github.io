@@ -19,16 +19,35 @@ class DurableArticlesRequisitionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = DB::table('durable_articles_requisitions');
-        if (Auth::user()->status == "0") {
+         $search =  $request['search'];
+        $data = DB::table('durable_articles_requisitions') ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name');
+
+
+       if ($search) {
+        $data =  $data
+            ->where('code_durable_articles', 'LIKE', "%$search%")
+            ->orWhere('durable_articles_name', 'LIKE', "%$search%")
+            ->orWhere(function ($query) use ($search) {
+                // Split the full name into prefix, first name, and last name
+                $fullNameComponents = explode(' ', $search);
+                // Check each component separately
+                foreach ($fullNameComponents as $component) {
+                    $query->orWhere('prefix', 'LIKE', "%$component%")
+                        ->orWhere('first_name', 'LIKE', "%$component%")
+                        ->orWhere('last_name', 'LIKE', "%$component%");
+                }
+            });
+        }
+
+       if (Auth::user()->status == "0") {
             $data = $data->where('durable_articles_requisitions.id_user', Auth::user()->id);
         }
-        $data = $data
-        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
-        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name')
-        ->orderBy('durable_articles_requisitions.id','DESC')->paginate(100);
+
+
+       $data = $data->orderBy('durable_articles_requisitions.id','DESC')->paginate(100);
 
         return view("durable_articles_requisition.index",['data' => $data]);
     }
@@ -201,6 +220,7 @@ class DurableArticlesRequisitionController extends Controller
         return redirect('approval-update')->with('message', "ไม่อนุมัติสำเร็จ");
 
     }
+
 
 
 }

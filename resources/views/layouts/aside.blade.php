@@ -46,14 +46,9 @@
                         <div data-i18n="Account Settings">อนุมัติครุภัณฑ์</div>
                     </a>
                     <ul class="menu-sub">
-                        <li class="menu-item" id="approval-index">
-                            <a href="{{ url('approval-index') }}" class="menu-link">
-                                <div data-i18n="Account">ครุภัณฑ์</div>
-                            </a>
-                        </li>
                         <li class="menu-item" id="approval-update">
                             <a href="{{ url('approval-update') }}" class="menu-link">
-                                <div data-i18n="Notifications">อนุมัติ</div>
+                                <div data-i18n="Notifications">อนุมัติครุภัณฑ์</div>
                             </a>
                         </li>
                     </ul>

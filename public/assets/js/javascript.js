@@ -393,9 +393,7 @@ if (targetUrls === "durable-articles-requisition-create") {
     );
 }
 //อนุมัติ
-if (targetUrls === "approval-index") {
-    setActiveClass("approval", "approval-index");
-}
+
 if (targetUrls === "approval-update") {
     setActiveClass("approval", "approval-update");
 }
