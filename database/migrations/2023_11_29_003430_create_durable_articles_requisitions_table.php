@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('amount_withdraw')->nullable()->comment('จำนวนที่เบิก');
             $table->string('name_durable_articles_count')->nullable()->comment('ชื่อเรียก');
             $table->string('statusApproval')->nullable()->comment('สถานะการอนุมัติ');
+            $table->string('commentApproval')->nullable()->comment('รายละเอียด');
             $table->string('status')->nullable()->comment('สถานะ on/ off');
             $table->timestamps();
         });
