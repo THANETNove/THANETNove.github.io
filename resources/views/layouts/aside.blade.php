@@ -2,7 +2,7 @@
     <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
             <span class="app-brand-logo demo">
-                <img src="{{ URL::asset('/assets/img/icons/unicons/loggo-rmutk.png') }}" alt
+                <img src="{{ URL::asset('/assets/img/icons/unicons/logo.png') }}" alt
                     class="w-px-50 h-auto rounded-circle" />
             </span>
             <span class="app-brand-text demo menu-text fw-bolder ms-2">DPME</span>
