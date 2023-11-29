@@ -125,9 +125,10 @@ class DurableArticlesRequisitionController extends Controller
     {
         $data =   DB::table('durable_articles_requisitions')
         ->where('durable_articles_requisitions.id', $id)
-        ->join('durable_articles', 'material_requisitions.durable_articles_id', '=', 'durable_articles.id')
+        ->join('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.id')
         ->select('durable_articles_requisitions.*', 'durable_articles.remaining_amount')
         ->get();
+
 
         return view('durable_articles_requisition.edit',['data' =>$data]);
     }
@@ -137,7 +138,22 @@ class DurableArticlesRequisitionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+
+        $data = DurableArticlesRequisition::find($id);
+
+        $amount = $data["amount_withdraw"] +  $request["remaining_amount"];
+        $amount_wit =  $amount - $request["amount_withdraw"];
+
+        DurableArticles::where('id', $data['durable_articles_id'])->update([
+            'remaining_amount' =>  $amount_wit,
+        ]);
+
+        DurableArticlesRequisition::where('id', $id)->update([
+            'amount_withdraw' =>  $request["amount_withdraw"],
+        ]);
+
+        return redirect('durable-articles-requisition-index')->with('message', "บันทึกสำเร็จ");
     }
 
     /**
