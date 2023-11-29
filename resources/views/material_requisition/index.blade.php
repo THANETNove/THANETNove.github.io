@@ -59,25 +59,27 @@
                                                     </td>
 
                                                     <td>
-                                                        <div class="dropdown">
-                                                            <button type="button"
-                                                                class="btn p-0 dropdown-toggle hide-arrow"
-                                                                data-bs-toggle="dropdown">
-                                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu">
+                                                        @if ($da->status == 'on')
+                                                            <div class="dropdown">
+                                                                <button type="button"
+                                                                    class="btn p-0 dropdown-toggle hide-arrow"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
 
-                                                                <a class="dropdown-item"
-                                                                    href="{{ url('material-requisition-edit', $da->id) }}"><i
-                                                                        class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                                @if (Auth::user()->status != '1')
                                                                     <a class="dropdown-item"
-                                                                        href="{{ url('material-requisition-destroy', $da->id) }}"><i
-                                                                            class="bx bx-trash me-1"></i> ยกเลิก</a>
-                                                                @endif
+                                                                        href="{{ url('material-requisition-edit', $da->id) }}"><i
+                                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                    @if (Auth::user()->status != '1')
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ url('material-requisition-destroy', $da->id) }}"><i
+                                                                                class="bx bx-trash me-1"></i> ยกเลิก</a>
+                                                                    @endif
 
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
