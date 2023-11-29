@@ -166,4 +166,15 @@ class DurableArticlesRequisitionController extends Controller
         ]);
         return redirect('durable-articles-requisition-index')->with('message', "ยกเลิกสำเร็จ");
     }
+    public function approvalUpdate()
+    {
+        $data = DB::table('durable_articles_requisitions')
+        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name')
+        ->orderBy('durable_articles_requisitions.id','DESC')->paginate(100);
+
+        return view("durable_articles_requisition.updateApproval",['data' => $data]);
+    }
+
+
 }

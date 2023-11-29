@@ -38,6 +38,27 @@
                     </li>
                 </ul>
             </li>
+
+            @if (Auth::user()->status == 2)
+                <li class="menu-item" id="approval">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class='menu-icon tf-icons bx bxs-select-multiple'></i>
+                        <div data-i18n="Account Settings">อนุมัติครุภัณฑ์</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item" id="approval-index">
+                            <a href="{{ url('approval-index') }}" class="menu-link">
+                                <div data-i18n="Account">ครุภัณฑ์</div>
+                            </a>
+                        </li>
+                        <li class="menu-item" id="approval-update">
+                            <a href="{{ url('approval-update') }}" class="menu-link">
+                                <div data-i18n="Notifications">อนุมัติ</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
             <li class="menu-item" id="storage">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-buildings'></i>

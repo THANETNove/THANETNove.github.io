@@ -10,7 +10,7 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">เบิกครุภัณฑ์</h1>
+                                <h1 class="card-title text-primary ">เบิกครุภัณฑ์ Admin</h1>
                                 <a href="{{ url('material-requisition-export/pdf') }}"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกครุภัณฑ์</a>
                                 @if (session('message'))
