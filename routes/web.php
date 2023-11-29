@@ -49,7 +49,7 @@ Route::get('material-requisition-export/pdf', [MaterialRequisitionController::cl
 Route::get('durable-articles-requisition-index', [DurableArticlesRequisitionController::class, 'index'])->name('durable-articles-requisition-index');
 
 Route::get('durable-articles-requisition-create', [DurableArticlesRequisitionController::class, 'create'])->name('durable-articles-requisition-create');
-Route::get('durable-articles-requisition-store', [DurableArticlesRequisitionController::class, 'store'])->name('durable-articles-requisition-store');
+Route::post('durable-articles-requisition-store', [DurableArticlesRequisitionController::class, 'store'])->name('durable-articles-requisition-store');
 Route::get('selected-durable-requisition/{id}', [DurableArticlesRequisitionController::class, 'durableRequisition'])->name('selected-durable-requisition');
 
 

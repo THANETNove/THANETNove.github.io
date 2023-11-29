@@ -2,7 +2,6 @@
 
 @section('content')
     <!-- Content -->
-
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
             <div class="col-12 mb-4 order-0">
@@ -27,9 +26,12 @@
                                                 <th>ชื่อวัสดุ</th>
                                                 <th>จำนวนที่เบิก</th>
                                                 <th>ชื่อเรียกหน่วยนับ </th>
+
                                                 @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                 @endif
+                                                <th>ระยะประกัน </th>
+                                                <th>การอนุมัติ </th>
                                                 <th>สถานะ </th>
                                                 <th>Actions</th>
 
@@ -39,17 +41,50 @@
                                             $i = 1;
                                         @endphp
                                         <tbody class="table-border-bottom-0">
-                                            {{--   @foreach ($data as $da)
+                                            @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->code_requisition }}</td>
-                                                    <td>{{ $da->material_name }}</td>
+                                                    <td>{{ $da->code_durable_articles }}</td>
+                                                    <td>{{ $da->durable_articles_name }}</td>
                                                     <td>{{ $da->amount_withdraw }}</td>
-                                                    <td>{{ $da->name_material_count }}</td>
+                                                    <td>{{ $da->name_durable_articles_count }}</td>
                                                     @if (Auth::user()->status != '0')
                                                         <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
                                                         </td>
                                                     @endif
+                                                    @php
+                                                        $originalDate = $da->created_at;
+                                                        $newDate = (new DateTime($originalDate))->modify('+7 days')->format('d/m/Y');
+                                                        $newDate2 = (new DateTime($originalDate))->modify('+7 days');
+                                                        $targetDate = $newDate2;
+                                                        $now = new DateTime();
+
+                                                        $daysRemaining = $now > $targetDate ? 0 : $now->diff($targetDate)->format('%a') + 1;
+                                                    @endphp
+                                                    <td>{{ $newDate }}
+                                                        @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
+                                                            <span class="badge bg-label-primary me-1">เหลือเวลา
+                                                                {{ $daysRemaining + 1 }} วัน</span>
+                                                        @else
+                                                            @if ($daysRemaining > 0)
+                                                                <span class="badge bg-label-primary me-1">เหลือเวลา
+                                                                    {{ $daysRemaining }} วัน</span>
+                                                            @else
+                                                                <span class="badge bg-label-warning me-1">หมดประกัน</span>
+                                                            @endif
+                                                        @endif
+
+                                                    </td>
+                                                    <td>
+                                                        @if ($da->statusApproval == '0')
+                                                            <span class="badge bg-label-info me-1">รอการอนุมัติ</span>
+                                                        @elseif ($da->statusApproval == '0')
+                                                            <span class="badge bg-label-success me-1">อนุมัติ</span>
+                                                        @else
+                                                            <span class="badge bg-label-warning me-1">ไม่อนุมัติ</span>
+                                                        @endif
+                                                    </td>
+
                                                     <td>
                                                         @if ($da->status == 'on')
                                                             <span class="badge bg-label-success me-1">เบิกวัสดุ</span>
@@ -80,7 +115,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            @endforeach --}}
+                                            @endforeach
 
 
                                         </tbody>

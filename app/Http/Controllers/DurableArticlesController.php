@@ -9,6 +9,11 @@ use App\Models\DurableArticles;
 
 class DurableArticlesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */

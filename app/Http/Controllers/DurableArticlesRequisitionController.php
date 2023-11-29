@@ -3,16 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\DurableArticlesRequisition;
+use App\Models\DurableArticles;
 use DB;
+use Auth;
+use PDF;
 
 class DurableArticlesRequisitionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("durable_articles_requisition.index");
+        $data = DB::table('durable_articles_requisitions');
+        if (Auth::user()->status == "0") {
+            $data = $data->where('durable_articles_requisitions.id_user', Auth::user()->id);
+        }
+        $data = $data
+        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name')
+        ->orderBy('durable_articles_requisitions.id','DESC')->paginate(100);
+
+        return view("durable_articles_requisition.index",['data' => $data]);
     }
 
     /**
@@ -65,7 +83,31 @@ class DurableArticlesRequisitionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $data = new DurableArticlesRequisition;
+        $data->id_user = Auth::user()->id;
+        $data->durable_articles_id = $request['durable_articles_id'];
+        $data->code_durable_articles = $request['code_durable_articles'];
+        $data->durable_articles_name = $request['durable_articles_name'];
+        $data->amount_withdraw = $request['amount_withdraw'];
+        $data->name_durable_articles_count = $request['name_durable_articles_count'];
+        $data->statusApproval = "0";
+        $data->status = "on";
+        $data->save();
+
+
+
+        $withdraw =  $request['amount_withdraw'];
+        $remaining = $request['remaining_amount'];
+
+      $amount =  $remaining - $withdraw;
+
+      DurableArticles::where('id', $request['durable_articles_id'])->update([
+            'remaining_amount' =>  $amount,
+        ]);
+
+        return redirect('durable-articles-requisition-index')->with('message', "บันทึกสำเร็จ");
     }
 
     /**

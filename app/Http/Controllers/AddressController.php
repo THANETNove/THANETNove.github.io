@@ -6,6 +6,7 @@ use DB;
 
 class AddressController extends Controller
 {
+   
 
     public function districts(string $id)
     {
