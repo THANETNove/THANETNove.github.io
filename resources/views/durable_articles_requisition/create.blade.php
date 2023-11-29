@@ -15,7 +15,7 @@
                                 <div class="mb-3 col-md-6" style="display: none;">
                                     <label for="prefix" class="form-label">id ครุภัณฑ์</label>
                                     <input type="text" class="form-control" id="durable_articles_id"
-                                        name="durable_articles_id" placeholder="รหัสวัสดุ" required />
+                                        name="durable_articles_id" placeholder="รหัสครุภัณฑ์" required />
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รหัสครุภัณฑ์</label>
@@ -42,8 +42,8 @@
                                     <label for="prefix" class="form-label">ครุภัณฑ์ที่เหลือ</label>
                                     <input type="text"
                                         class="form-control  @error('remaining_amount') is-invalid @enderror"
-                                        id="remaining-amount" name="remaining_amount" placeholder="วัสดุที่เหลือ" required
-                                        readonly />
+                                        id="remaining-amount" name="remaining_amount" placeholder="ครุภัณฑ์ที่เหลือ"
+                                        required readonly />
                                     @error('remaining_amount')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -65,21 +65,18 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="name_durable_articles_count" class="form-label">ชื่อเรียกจำนวนนับวัสดุ
+                                    <label for="name_durable_articles_count" class="form-label">ชื่อเรียกจำนวนนับครุภัณฑ์
                                     </label>
                                     <input type="text"
                                         class="form-control @error('name_durable_articles_count') is-invalid @enderror"
                                         id="name-durable_articles-count" name="name_durable_articles_count"
-                                        placeholder="ชื่อเรียกจำนวนนับวัสดุ" required readonly />
+                                        placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์" required readonly />
                                     @error('name_durable_articles_count')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-
-
-
                             </div>
                             <div class="mt-2">
                                 <button type="submit" class="btn btn-primary me-2">บักทึก</button>

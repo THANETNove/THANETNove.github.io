@@ -379,7 +379,8 @@ if (targetUrls === "material-requisition-create") {
 //ครุภัณฑ์
 if (
     targetUrls === "durable-articles-requisition-index" ||
-    targetUrls === "durable-articles-requisition-edit"
+    targetUrls === "durable-articles-requisition-edit" ||
+    "durable-articles-requisition-show"
 ) {
     setActiveClass(
         "durable-articles-requisition",

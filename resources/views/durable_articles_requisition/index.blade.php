@@ -79,7 +79,7 @@
                                                         @if ($da->status == 'on')
                                                             @if ($da->statusApproval == '0')
                                                                 <span class="badge bg-label-info me-1">รอการอนุมัติ</span>
-                                                            @elseif ($da->statusApproval == '0')
+                                                            @elseif ($da->statusApproval == '1')
                                                                 <span class="badge bg-label-success me-1">อนุมัติ</span>
                                                             @else
                                                                 <span class="badge bg-label-warning me-1">ไม่อนุมัติ</span>
@@ -98,15 +98,18 @@
                                                     </td>
 
                                                     <td>
-                                                        @if ($da->statusApproval == '0' && $da->status == 'on')
-                                                            <div class="dropdown">
-                                                                <button type="button"
-                                                                    class="btn p-0 dropdown-toggle hide-arrow"
-                                                                    data-bs-toggle="dropdown">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu">
 
+                                                        <div class="dropdown">
+                                                            <button type="button"
+                                                                class="btn p-0 dropdown-toggle hide-arrow"
+                                                                data-bs-toggle="dropdown">
+                                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item"
+                                                                    href="{{ url('durable-articles-requisition-show', $da->id) }}"><i
+                                                                        class='bx bxs-show'></i> View</a>
+                                                                @if ($da->statusApproval == '0' && $da->status == 'on')
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('durable-articles-requisition-edit', $da->id) }}"><i
                                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
@@ -115,10 +118,10 @@
                                                                             href="{{ url('durable-articles-requisition-destroy', $da->id) }}"><i
                                                                                 class="bx bx-trash me-1"></i> ยกเลิก</a>
                                                                     @endif
-
-                                                                </div>
+                                                                @endif
                                                             </div>
-                                                        @endif
+                                                        </div>
+
                                                     </td>
                                                 </tr>
                                             @endforeach

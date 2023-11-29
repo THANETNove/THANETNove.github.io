@@ -38,7 +38,7 @@
                                     <input type="text"
                                         class="form-control  @error('remaining_amount') is-invalid @enderror"
                                         id="remaining-amount" name="remaining_amount" value={{ $data[0]->remaining_amount }}
-                                        placeholder="วัสดุที่เหลือ" required readonly />
+                                        placeholder="ครุภัณฑ์ที่เหลือ" required readonly />
                                     @error('remaining_amount')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -61,13 +61,13 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="name_durable_articles_count" class="form-label">ชื่อเรียกจำนวนนับวัสดุ
+                                    <label for="name_durable_articles_count" class="form-label">ชื่อเรียกจำนวนนับครุภัณฑ์
                                     </label>
                                     <input type="text"
                                         class="form-control @error('name_durable_articles_count') is-invalid @enderror"
                                         id="name-durable_articles-count" name="name_durable_articles_count"
                                         value={{ $data[0]->name_durable_articles_count }}
-                                        placeholder="ชื่อเรียกจำนวนนับวัสดุ" required readonly />
+                                        placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์" required readonly />
                                     @error('name_durable_articles_count')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

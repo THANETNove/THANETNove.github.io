@@ -22,7 +22,7 @@ class DurableArticlesRequisitionController extends Controller
     public function index(Request $request)
     {
          $search =  $request['search'];
-        $data = DB::table('durable_articles_requisitions') ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        $data = DB::table('durable_articles_requisitions')->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
         ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name');
 
 
@@ -134,7 +134,16 @@ class DurableArticlesRequisitionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data =   DB::table('durable_articles_requisitions')
+
+        ->where('durable_articles_requisitions.id', $id)
+        ->join('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.id')
+        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name')
+        ->get();
+
+
+        return view('durable_articles_requisition.show',['data' =>$data]);
     }
 
     /**
