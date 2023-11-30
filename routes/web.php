@@ -9,6 +9,7 @@ use App\Http\Controllers\DurableArticlesController;
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\MaterialRequisitionController;
 use App\Http\Controllers\DurableArticlesRequisitionController;
+use App\Http\Controllers\DurableArticlesDamagedController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +61,10 @@ Route::post('not-approved', [DurableArticlesRequisitionController::class, 'notAp
 Route::get('durable-articles-requisition-show/{id}', [DurableArticlesRequisitionController::class, 'show'])->name('durable-articles-requisition-show');
 Route::get('durable-articles-requisition-export/pdf', [DurableArticlesRequisitionController::class, 'exportPDF'])->name('durable-articles-requisition-export/pdf');
 
+//ระบบอุปกรณ์ชำรุด
+Route::get('durable-articles-damaged-index', [DurableArticlesDamagedController::class, 'index'])->name('durable-articles-damaged-index');
+Route::get('durable-articles-damaged-create', [DurableArticlesDamagedController::class, 'create'])->name('durable-articles-damaged-create');
+Route::post('durable-articles-requisition-store', [DurableArticlesRequisitionController::class, 'store'])->name('durable-articles-requisition-store');
 
 // is_drawer ผู้เบิก
 /* Route::group(['middleware' => ['is_drawer']], function () {

@@ -21,7 +21,7 @@ class DurableArticlesRequisitionController extends Controller
      */
     public function index(Request $request)
     {
-         $search =  $request['search'];
+        $search =  $request['search'];
         $data = DB::table('durable_articles_requisitions')->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
         ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name');
 
