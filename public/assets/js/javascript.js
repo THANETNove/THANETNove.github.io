@@ -380,7 +380,7 @@ if (targetUrls === "material-requisition-create") {
 if (
     targetUrls === "durable-articles-requisition-index" ||
     targetUrls === "durable-articles-requisition-edit" ||
-    "durable-articles-requisition-show"
+    targetUrls === "durable-articles-requisition-show"
 ) {
     setActiveClass(
         "durable-articles-requisition",
