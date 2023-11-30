@@ -46,12 +46,13 @@ class DurableArticlesDamagedController extends Controller
         $damaged =  $request['amount_damaged'];
         $remaining = $request['remaining_amount'];
 
-      $amount =  $remaining - $damaged;
+        $amount =  $remaining - $damaged;
 
-      DurableArticles::where('id', $request['durable_articles_id'])->update([
+
+        DurableArticles::where('id', $request['durable_articles_id'])->update([
             'remaining_amount' =>  $amount,
         ]);
 
-        return redirect('durable-articles-requisition-index')->with('message', "บันทึกสำเร็จ");
+        return redirect('durable-articles-damaged-index')->with('message', "บันทึกสำเร็จ");
     }
 }

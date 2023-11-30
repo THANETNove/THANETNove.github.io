@@ -239,8 +239,8 @@ function displayPopupWithDataDurable(data) {
         // Check if 'data.name' is defined before using it
         if (data.length == 1) {
             hidePopupDurable();
-            document.getElementsByClassName("durable_articles_id").value = data["0"].id;
-            document.getElementsByClassName(".durable_articles-name").value =
+            document.getElementById("durable_articles_id").value = data["0"].id;
+            document.getElementById("durable_articles-name").value =
                 data["0"].durableArticles_name;
             document.getElementById("remaining-amount").value =
                 data["0"].remaining_amount;

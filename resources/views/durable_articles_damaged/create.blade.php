@@ -8,7 +8,7 @@
                 <div class="card ">
                     <div class="card-body">
                         <h1 class="card-title text-primary ">แจ้งอุปกรณ์ชำรุด</h1>
-                        <form method="POST" action="{{ route('durable-articles-requisition-store') }}">
+                        <form method="POST" action="{{ route('durable-articles-damaged-store') }}">
                             @csrf
                             <div class="row">
                                 <p style="color: red" id="out-stock"></p>
@@ -30,7 +30,7 @@
 
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
                                     <label for="prefix" class="form-label">ชื่อ</label>
-                                    <input type="text" class="form-control durable_articles-name" id="durable_articles_name"
+                                    <input type="text" class="form-control durable_articles-name" id="durable_articles-name"
                                         name="durable_articles_name" placeholder="ชื่อ" required />
                                     <div id="popup-durable" style="display: none;" class="mt-2">
                                         <!-- Content of the popup goes here -->
@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">ครุภัณฑ์ที่ชำรุด</label>
+                                    <label for="prefix" class="form-label">ครุภัณฑ์ที่เหลือ</label>
                                     <input type="text"
                                         class="form-control  @error('remaining_amount') is-invalid @enderror"
                                         id="remaining-amount" name="remaining_amount" placeholder="ครุภัณฑ์ที่เหลือ"
@@ -53,10 +53,10 @@
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">จำนวนที่ชำรุด</label>
                                     <input type="number"
-                                        class="form-control @error('amount_withdraw') is-invalid @enderror"
-                                        id="amount_withdraw" name="amount_withdraw" placeholder="จำนวนที่ชำรุด"
+                                        class="form-control @error('amount_damaged') is-invalid @enderror"
+                                        id="amount_withdraw" name="amount_damaged" placeholder="จำนวนที่ชำรุด"
                                         min="1" required />
-                                    @error('amount_withdraw')
+                                    @error('amount_damaged')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

@@ -64,7 +64,7 @@ Route::get('durable-articles-requisition-export/pdf', [DurableArticlesRequisitio
 //ระบบอุปกรณ์ชำรุด
 Route::get('durable-articles-damaged-index', [DurableArticlesDamagedController::class, 'index'])->name('durable-articles-damaged-index');
 Route::get('durable-articles-damaged-create', [DurableArticlesDamagedController::class, 'create'])->name('durable-articles-damaged-create');
-Route::post('durable-articles-requisition-store', [DurableArticlesRequisitionController::class, 'store'])->name('durable-articles-requisition-store');
+Route::post('durable-articles-damaged-store', [DurableArticlesDamagedController::class, 'store'])->name('durable-articles-damaged-store');
 
 // is_drawer ผู้เบิก
 /* Route::group(['middleware' => ['is_drawer']], function () {
