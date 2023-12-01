@@ -168,17 +168,17 @@
         <li class="menu-item" id="durable-articles-damaged">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class='menu-icon tf-icons bx bxs-baby-carriage'></i>
-                <div data-i18n="Authentications">ระบบแจ้งอุปกรณ์ชำรุด</div>
+                <div data-i18n="Authentications">ระบบแจ้งครุภัณฑ์ชำรุด</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item" id="durable-articles-damaged-index">
                     <a href="{{ url('durable-articles-damaged-index') }}" class="menu-link">
-                        <div data-i18n="Basic">อุปกรณ์ชำรุด</div>
+                        <div data-i18n="Basic">ครุภัณฑ์ที่ชำรุด</div>
                     </a>
                 </li>
                 <li class="menu-item" id="durable-articles-damaged-create">
                     <a href="{{ url('durable-articles-damaged-create') }}" class="menu-link">
-                        <div data-i18n="Basic">ลงทะเบียนอุปกรณ์ชำรุด</div>
+                        <div data-i18n="Basic">ลงทะเบียนครุภัณฑ์ชำรุด</div>
                     </a>
                 </li>
             </ul>

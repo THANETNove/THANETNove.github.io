@@ -63,8 +63,12 @@ Route::get('durable-articles-requisition-export/pdf', [DurableArticlesRequisitio
 
 //ระบบอุปกรณ์ชำรุด
 Route::get('durable-articles-damaged-index', [DurableArticlesDamagedController::class, 'index'])->name('durable-articles-damaged-index');
+Route::post('durable-articles-damaged-index', [DurableArticlesDamagedController::class, 'index'])->name('durable-articles-damaged-index');
 Route::get('durable-articles-damaged-create', [DurableArticlesDamagedController::class, 'create'])->name('durable-articles-damaged-create');
 Route::post('durable-articles-damaged-store', [DurableArticlesDamagedController::class, 'store'])->name('durable-articles-damaged-store');
+Route::get('durable-articles-damaged-edit/{id}', [DurableArticlesDamagedController::class, 'edit'])->name('durable-articles-damaged-edit');
+Route::put('durable-articles-damaged-update/{id}', [DurableArticlesDamagedController::class, 'update'])->name('durable-articles-damaged-update');
+Route::get('durable-articles-damaged-destroy/{id}', [DurableArticlesDamagedController::class, 'destroy'])->name('durable-articles-damaged-destroy');
 
 // is_drawer ผู้เบิก
 /* Route::group(['middleware' => ['is_drawer']], function () {

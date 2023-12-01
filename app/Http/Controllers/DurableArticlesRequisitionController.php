@@ -25,7 +25,6 @@ class DurableArticlesRequisitionController extends Controller
         $data = DB::table('durable_articles_requisitions')->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
         ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name');
 
-
        if ($search) {
         $data =  $data
             ->where('code_durable_articles', 'LIKE', "%$search%")
@@ -190,11 +189,17 @@ class DurableArticlesRequisitionController extends Controller
      */
     public function destroy(string $id)
     {
+        $data_requisition = DurableArticlesRequisition::find($id);
+        $data = DurableArticles::find($data_requisition->durable_articles_id);
+        DurableArticles::where('id', $data_requisition->durable_articles_id)->update([
+            'remaining_amount' =>  $data->remaining_amount + $data_requisition->amount_withdraw,
+        ]);
         DurableArticlesRequisition::where('id', $id)->update([
             'status' =>  "off",
         ]);
         return redirect('durable-articles-requisition-index')->with('message', "ยกเลิกสำเร็จ");
     }
+    
     public function approvalUpdate()
     {
         $data = DB::table('durable_articles_requisitions')

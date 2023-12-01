@@ -11,12 +11,44 @@ use PDF;
 
 class DurableArticlesDamagedController extends Controller
 {
-        /**
-    * Show the form for creating a new resource.
-    */
-    public function index()
+    public function __construct()
     {
-        return view("durable_articles_damaged.index");
+        $this->middleware('auth');
+    }
+
+    /**
+    * Display a listing of the resource.
+    */
+    public function index(Request $request)
+    {
+        $search =  $request['search'];
+
+        $data = DB::table('durable_articles_damageds')->join('users', 'durable_articles_damageds.id_user', '=', 'users.id')
+        ->select('durable_articles_damageds.*', 'users.prefix', 'users.first_name','users.last_name');
+
+       if ($search) {
+        $data =  $data
+            ->where('code_durable_articles', 'LIKE', "%$search%")
+            ->orWhere('durable_articles_name', 'LIKE', "%$search%")
+            ->orWhere(function ($query) use ($search) {
+                // Split the full name into prefix, first name, and last name
+                $fullNameComponents = explode(' ', $search);
+                // Check each component separately
+                foreach ($fullNameComponents as $component) {
+                    $query->orWhere('prefix', 'LIKE', "%$component%")
+                        ->orWhere('first_name', 'LIKE', "%$component%")
+                        ->orWhere('last_name', 'LIKE', "%$component%");
+                }
+            });
+        }
+
+        if (Auth::user()->status == "0") {
+            $data = $data->where('durable_articles_damageds.id_user', Auth::user()->id);
+        }
+
+        $data = $data->orderBy('durable_articles_damageds.id','DESC')->paginate(100);
+
+        return view("durable_articles_damaged.index",['data' => $data]);
     }
 
     /**
@@ -47,12 +79,72 @@ class DurableArticlesDamagedController extends Controller
         $remaining = $request['remaining_amount'];
 
         $amount =  $remaining - $damaged;
-
+        $amount_damaged = DurableArticles::find($request['durable_articles_id']);
+        
+        
 
         DurableArticles::where('id', $request['durable_articles_id'])->update([
             'remaining_amount' =>  $amount,
+            'damaged_number' => $amount_damaged->damaged_number + $damaged,
+        ]);
+        
+
+        return redirect('durable-articles-damaged-index')->with('message', "บันทึกสำเร็จ");
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $data =   DB::table('durable_articles_damageds')
+
+        ->where('durable_articles_damageds.id', $id)
+        ->join('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.id')
+        ->select('durable_articles_damageds.*', 'durable_articles.remaining_amount')
+        ->get();
+
+
+        return view('durable_articles_damaged.edit',['data' =>$data]);
+    }
+    
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+
+        $data = DurableArticlesDamaged::find($id);
+
+        $amount = $data["amount_damaged"] +  $request["remaining_amount"];
+        $amount_wit =  $amount - $request["amount_damaged"];
+
+        DurableArticles::where('id', $data['durable_articles_id'])->update([
+            'remaining_amount' =>  $amount_wit,
+        ]);
+
+        DurableArticlesDamaged::where('id', $id)->update([
+            'amount_damaged' =>  $request["amount_damaged"],
         ]);
 
         return redirect('durable-articles-damaged-index')->with('message', "บันทึกสำเร็จ");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $data_damaged = DurableArticlesDamaged::find($id);
+        $data = DurableArticles::find($data_damaged->durable_articles_id);
+        DurableArticles::where('id', $data_damaged->durable_articles_id)->update([
+            'remaining_amount' =>  $data->remaining_amount + $data_damaged->amount_damaged,
+            'damaged_number' => $data->damaged_number - $data_damaged->amount_damaged,
+        ]);
+        DurableArticlesDamaged::where('id', $id)->update([
+            'status' =>  "off",
+        ]);
+
+        return redirect('durable-articles-damaged-index')->with('message', "ยกเลิกสำเร็จ");
     }
 }

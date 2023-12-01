@@ -1,6 +1,6 @@
 @php
     $currentURL = basename($_SERVER['REQUEST_URI']);
-    $searchPaths = ['storage-index', 'personnel-index', 'durable-articles-index', 'material-index', 'buy-index', 'material-requisition-index', 'durable-articles-requisition-index', 'durable-articles-requisition-index'];
+    $searchPaths = ['storage-index', 'personnel-index', 'durable-articles-index', 'material-index', 'buy-index', 'material-requisition-index', 'durable-articles-requisition-index', 'durable-articles-requisition-index', 'durable-articles-damaged-index'];
     $pathSearch = in_array($currentURL, $searchPaths) ? $currentURL : null;
 @endphp
 
