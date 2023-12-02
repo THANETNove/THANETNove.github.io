@@ -7,8 +7,8 @@
 
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title text-primary ">ลงทะเบียนครุภัณฑ์ชำรุด</h1>
-                        <form method="POST" action="{{ route('durable-articles-damaged-store') }}">
+                        <h1 class="card-title text-primary ">ลงทะเบียนซ่อมครุภัณฑ์</h1>
+                        <form method="POST" action="{{ route('durable-articles-repair-store') }}">
                             @csrf
                             <div class="row">
                                 <p style="color: red" id="out-stock"></p>
@@ -51,12 +51,12 @@
                                 </div>
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">จำนวนที่ชำรุด</label>
+                                    <label for="prefix" class="form-label">จำนวนที่ซ่อม</label>
                                     <input type="number"
-                                        class="form-control @error('amount_damaged') is-invalid @enderror"
-                                        id="amount_withdraw" name="amount_damaged" placeholder="จำนวนที่ชำรุด"
+                                        class="form-control @error('amount_repair') is-invalid @enderror"
+                                        id="amount_withdraw" name="amount_repair" placeholder="จำนวนที่ชำรุด"
                                         min="1" required />
-                                    @error('amount_damaged')
+                                    @error('amount_repair')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -76,9 +76,9 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">รายละเอียดการชำรุด</label>
-                                    <input type="text" class="form-control" id="damaged_detail"
-                                        name="damaged_detail" placeholder="รายละเอียดการชำรุด" required />
+                                    <label for="prefix" class="form-label">รายละเอียดการซ่อม</label>
+                                    <input type="text" class="form-control" id="repair_detail"
+                                        name="repair_detail" placeholder="รายละเอียดการชำรุด" required />
                                 </div>
                             </div>
                             <div class="mt-2">

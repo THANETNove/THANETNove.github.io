@@ -165,10 +165,11 @@
                 </li>
             </ul>
         </li>
+    
         <li class="menu-item" id="durable-articles-damaged">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class='menu-icon tf-icons bx bxs-baby-carriage'></i>
-                <div data-i18n="Authentications">ระบบแจ้งครุภัณฑ์ชำรุด</div>
+                <div data-i18n="Authentications">ระบบครุภัณฑ์ชำรุด</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item" id="durable-articles-damaged-index">
@@ -176,12 +177,36 @@
                         <div data-i18n="Basic">ครุภัณฑ์ที่ชำรุด</div>
                     </a>
                 </li>
-                <li class="menu-item" id="durable-articles-damaged-create">
-                    <a href="{{ url('durable-articles-damaged-create') }}" class="menu-link">
-                        <div data-i18n="Basic">ลงทะเบียนครุภัณฑ์ชำรุด</div>
-                    </a>
-                </li>
+                @if (Auth::user()->status > 0)
+                    <li class="menu-item" id="durable-articles-damaged-create">
+                        <a href="{{ url('durable-articles-damaged-create') }}" class="menu-link">
+                            <div data-i18n="Basic">ลงทะเบียนครุภัณฑ์ชำรุด</div>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </li>
+
+        <li class="menu-item" id="durable-articles-repair">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class='menu-icon tf-icons bx bxs-baby-carriage'></i>
+                <div data-i18n="Authentications">ระบบการซ่อมครุภัณฑ์</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item" id="durable-articles-repair-index">
+                    <a href="{{ url('durable-articles-repair-index') }}" class="menu-link">
+                        <div data-i18n="Basic">การซ่อมครุภัณฑ์</div>
+                    </a>
+                </li>
+                @if (Auth::user()->status > 0)
+                    <li class="menu-item" id="durable-articles-repair-create">
+                        <a href="{{ url('durable-articles-repair-create') }}" class="menu-link">
+                            <div data-i18n="Basic">ลงทะเบียนซ่อมครุภัณฑ์</div>
+                        </a>
+                    </li>
+                @endif
+            </ul>
+        </li>
+        
     </ul>
 </aside>

@@ -60,6 +60,7 @@
                                                             data-bs-toggle="dropdown">
                                                             <i class="bx bx-dots-vertical-rounded"></i>
                                                         </button>
+                                                        @if ($da->status == 'on')
                                                         <div class="dropdown-menu">
                                                             @if (Auth::user()->status > '0')
                                                             <a class="dropdown-item"
@@ -72,6 +73,7 @@
                                                                 @endif
                                                             @endif
                                                         </div>
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>
