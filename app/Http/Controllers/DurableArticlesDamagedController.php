@@ -80,14 +80,14 @@ class DurableArticlesDamagedController extends Controller
 
         $amount =  $remaining - $damaged;
         $amount_damaged = DurableArticles::find($request['durable_articles_id']);
-        
-        
+
+
 
         DurableArticles::where('id', $request['durable_articles_id'])->update([
             'remaining_amount' =>  $amount,
             'damaged_number' => $amount_damaged->damaged_number + $damaged,
         ]);
-        
+
 
         return redirect('durable-articles-damaged-index')->with('message', "บันทึกสำเร็จ");
     }
@@ -107,25 +107,35 @@ class DurableArticlesDamagedController extends Controller
 
         return view('durable_articles_damaged.edit',['data' =>$data]);
     }
-    
+
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
 
+
+
         $data = DurableArticlesDamaged::find($id);
 
-        $amount = $data["amount_damaged"] +  $request["remaining_amount"];
-        $amount_wit =  $amount - $request["amount_damaged"];
 
-        DurableArticles::where('id', $data['durable_articles_id'])->update([
-            'remaining_amount' =>  $amount_wit,
-        ]);
+            if ($data["amount_damaged"] !=  $request["remaining_amount"]) {
+                $amount = $data["amount_damaged"] +  $request["remaining_amount"];
+                $amount_wit =  $amount - $request["amount_damaged"];
 
-        DurableArticlesDamaged::where('id', $id)->update([
-            'amount_damaged' =>  $request["amount_damaged"],
-        ]);
+                DurableArticles::where('id', $id)->update([
+                    'remaining_amount' =>  $amount_wit
+                ]);
+
+            }
+
+            DurableArticlesDamaged::where('id', $id)->update([
+                'amount_damaged' =>   $request["amount_damaged"],
+                'damaged_detail' =>   $request["damaged_detail"],
+            ]);
+
+
+
 
         return redirect('durable-articles-damaged-index')->with('message', "บันทึกสำเร็จ");
     }

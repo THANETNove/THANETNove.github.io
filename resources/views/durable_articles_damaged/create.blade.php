@@ -30,8 +30,9 @@
 
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
                                     <label for="prefix" class="form-label">ชื่อ</label>
-                                    <input type="text" class="form-control durable_articles-name" id="durable_articles-name"
-                                        name="durable_articles_name" placeholder="ชื่อ" required />
+                                    <input type="text" class="form-control durable_articles-name"
+                                        id="durable_articles-name" name="durable_articles_name" placeholder="ชื่อ"
+                                        required />
                                     <div id="popup-durable" style="display: none;" class="mt-2">
                                         <!-- Content of the popup goes here -->
                                     </div>
@@ -52,8 +53,7 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">จำนวนที่ชำรุด</label>
-                                    <input type="number"
-                                        class="form-control @error('amount_damaged') is-invalid @enderror"
+                                    <input type="number" class="form-control @error('amount_damaged') is-invalid @enderror"
                                         id="amount_withdraw" name="amount_damaged" placeholder="จำนวนที่ชำรุด"
                                         min="1" required />
                                     @error('amount_damaged')
@@ -77,8 +77,10 @@
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รายละเอียดการชำรุด</label>
-                                    <input type="text" class="form-control" id="damaged_detail"
-                                        name="damaged_detail" placeholder="รายละเอียดการชำรุด" required />
+                                    <textarea class="form-control" name="damaged_detail" placeholder="รายละเอียดการชำรุด" id="exampleFormControlTextarea1"
+                                        rows="3"></textarea>
+                                    {{--  <input type="text" class="form-control" id="damaged_detail"
+                                        name="damaged_detail" placeholder="รายละเอียดการชำรุด" required /> --}}
                                 </div>
                             </div>
                             <div class="mt-2">

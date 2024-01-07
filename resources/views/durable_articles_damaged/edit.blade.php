@@ -22,8 +22,8 @@
 
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
                                     <label for="prefix" class="form-label">ชื่อ</label>
-                                    <input type="text" class="form-control durable_articles-name" id="durable_articles-name"
-                                        name="durable_articles_name" placeholder="ชื่อ"
+                                    <input type="text" class="form-control durable_articles-name"
+                                        id="durable_articles-name" name="durable_articles_name" placeholder="ชื่อ"
                                         value={{ $data[0]->durable_articles_name }} required readonly />
                                     <div id="popup-durable" style="display: none;" class="mt-2">
                                         <!-- Content of the popup goes here -->
@@ -45,10 +45,10 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">จำนวนที่ชำรุด</label>
-                                    <input type="number"
-                                        class="form-control @error('amount_damaged') is-invalid @enderror"
+                                    <input type="number" class="form-control @error('amount_damaged') is-invalid @enderror"
                                         id="amount_withdraw" name="amount_damaged" placeholder="จำนวนที่ชำรุด"
-                                        value="{{ $data[0]->amount_damaged }}" min="1" max="{{ $data[0]->remaining_amount }}" required />
+                                        value="{{ $data[0]->amount_damaged }}" min="1"
+                                        max="{{ $data[0]->remaining_amount }}" required />
                                     @error('amount_damaged')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -73,9 +73,11 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รายละเอียดการชำรุด</label>
-                                    <input type="text" class="form-control" id="damaged_detail"
-                                        name="damaged_detail" placeholder="รายละเอียดการชำรุด" 
-                                        value={{ $data[0]->damaged_detail }} required />
+                                    {{-- <input type="text" class="form-control" id="damaged_detail"
+                                        name="damaged_detail" placeholder="รายละเอียดการชำรุด"
+                                        value={{ $data[0]->damaged_detail }} required /> --}}
+                                    <textarea class="form-control" name="damaged_detail" placeholder="รายละเอียดการชำรุด" id="exampleFormControlTextarea1"
+                                        rows="3">{{ $data[0]->damaged_detail }}</textarea>
                                 </div>
                             </div>
                             <div class="mt-2">
