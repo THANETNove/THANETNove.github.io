@@ -26,6 +26,7 @@
                                                 <th>รหัสพนักงาน</th>
                                                 <th>ชื่อ นามสกุล</th>
                                                 <th>เบอร์โทร</th>
+                                                <th>เเผนก</th>
                                                 <th>สถานะพนักงาน</th>
                                                 <th>สถานะ</th>
                                                 @if (Auth::user()->status == '2')
@@ -43,6 +44,7 @@
                                                     <td>{{ $da->employee_id }}</td>
                                                     <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}</td>
                                                     <td>{{ $da->phone_number }}</td>
+                                                    <td>{{ $da->department_name }}</td>
                                                     <td>หัวหน้าวัสดุ</td>
                                                     <td>
                                                         @if ($da->statusEmployee == 'on')
@@ -94,6 +96,7 @@
                                                     <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
                                                     </td>
                                                     <td>{{ $da->phone_number }}</td>
+                                                    <td>{{ $da->department_name }}</td>
                                                     <td>เจ้าหน้าที่วัสดุ</td>
                                                     <td>
                                                         @if ($da->statusEmployee == 'on')
@@ -145,6 +148,7 @@
                                                     <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
                                                     </td>
                                                     <td>{{ $da->phone_number }}</td>
+                                                    <td>{{ $da->department_name }}</td>
                                                     <td>ผู้เบิก</td>
                                                     <td>
                                                         @if ($da->statusEmployee == 'on')

@@ -25,6 +25,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'phone_number',
+        'department_id',
         'address',
         'provinces',
         'districts',

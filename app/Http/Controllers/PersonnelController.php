@@ -32,7 +32,8 @@ class PersonnelController extends Controller
         }
 
 
-        $data = DB::table('users');
+        $data = DB::table('users')->leftJoin('departments', 'users.department_id', '=', 'departments.id')->select('users.*', 'departments.department_name');
+
         if ($search) {
             $data = $data->where(function ($query) use ($search, $statusEmployee) {
                 $query->where('employee_id', 'LIKE', "%$search%")
@@ -60,7 +61,8 @@ class PersonnelController extends Controller
      */
     public function create()
     {
-        return view('personnel.create');
+        $data = DB::table('departments')->where('status', '=', "on") ->orderBy('id', 'DESC')->get();
+        return view('personnel.create',["data" => $data]);
     }
 
     /**
@@ -76,6 +78,7 @@ class PersonnelController extends Controller
         ]);
 
 
+
          User::create([
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
@@ -84,6 +87,7 @@ class PersonnelController extends Controller
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'phone_number' => $request['phone_number'],
+            'department_id' => $request['department_id'],
             'address' => $request['address'],
             'provinces' => $request['provinces'],
             'districts' => $request['districts'],
@@ -102,7 +106,9 @@ class PersonnelController extends Controller
      */
     public function show(string $id)
     {
-        $data =  User::find($id);
+        $data = User::leftJoin('departments', 'users.department_id', '=', 'departments.id')
+        ->select('users.*', 'departments.department_name')
+        ->find($id);
         return view('personnel.show',['data' => $data]);
     }
 
@@ -112,7 +118,8 @@ class PersonnelController extends Controller
     public function edit(string $id)
     {
         $data =  User::find($id);
-        return view('personnel.edit',['data' => $data]);
+        $depart = DB::table('departments')->where('status', '=', "on") ->orderBy('id', 'DESC')->get();
+        return view('personnel.edit',['data' => $data,'depart' => $depart]);
     }
 
     /**
@@ -141,6 +148,7 @@ class PersonnelController extends Controller
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'phone_number' => $request['phone_number'],
+            'department_id' => $request['department_id'],
             'address' => $request['address'],
             'provinces' => $request['provinces'],
             'districts' => $request['districts'],

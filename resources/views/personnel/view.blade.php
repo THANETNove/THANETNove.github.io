@@ -40,6 +40,20 @@
         @enderror
     </div>
 
+
+    <div class="mb-3 col-md-12">
+        <label for="phone_number" class="form-label">เเผนก</label>
+        <select class="form-select" name="department_id" aria-label="Default select example">
+
+
+            @if ($data['department_name'])
+                <option selected>เเผนก {{ $data['department_name'] }}</option>
+            @else
+                <option selected>ไม่มีเเผนก</option>
+            @endif
+        </select>
+    </div>
+
     @php
         $dataProvinces = DB::table('provinces')->get();
         $dataDistricts = DB::table('districts')->get();

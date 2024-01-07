@@ -98,6 +98,17 @@
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="mb-3 col-md-12">
+                                    <label for="phone_number" class="form-label">เเผนก</label>
+                                    <select class="form-select" name="department_id" aria-label="Default select example">
+                                        <option selected disabled>เลือกเเผนก</option>
+                                        @foreach ($data as $da)
+                                            <option value="{{ $da->id }}">เเผนก {{ $da->department_name }}</option>
+                                        @endforeach
+
+
+                                    </select>
+                                </div>
                                 <div class="mb-3 ">
                                     @include('layouts.address')
                                 </div>
