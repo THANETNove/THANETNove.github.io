@@ -19,6 +19,25 @@
 
 
         @if (Auth::user()->status > 0)
+            <li class="menu-item" id="department">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class='menu-icon tf-icons bx bxs-widget'></i>
+                    <div data-i18n="Account Settings">เเผนก</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="department-index">
+                        <a href="{{ url('department-index') }}" class="menu-link">
+                            <div data-i18n="Account">เเผนก</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="department-create">
+                        <a href="{{ url('department-create') }}" class="menu-link">
+                            <div data-i18n="Notifications">เพิ่มเเผนก</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="menu-item" id="personnel">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     {{--  <i class="menu-icon tf-icons bx bx-dock-top"></i> --}}
@@ -38,6 +57,7 @@
                     </li>
                 </ul>
             </li>
+
 
             @if (Auth::user()->status == 2)
                 <li class="menu-item" id="approval">
@@ -72,6 +92,7 @@
                     </li>
                 </ul>
             </li>
+
             <li class="menu-item" id="material">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-add-to-queue'></i>
@@ -165,7 +186,7 @@
                 </li>
             </ul>
         </li>
-    
+
         <li class="menu-item" id="durable-articles-damaged">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class='menu-icon tf-icons bx bxs-baby-carriage'></i>
@@ -207,6 +228,6 @@
                 @endif
             </ul>
         </li>
-        
+
     </ul>
 </aside>

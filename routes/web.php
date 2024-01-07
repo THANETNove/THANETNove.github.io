@@ -10,6 +10,7 @@ use App\Http\Controllers\BuyController;
 use App\Http\Controllers\MaterialRequisitionController;
 use App\Http\Controllers\DurableArticlesRequisitionController;
 use App\Http\Controllers\DurableArticlesDamagedController;
+use App\Http\Controllers\DepartmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -126,6 +127,13 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('buy-destroy/{id}', [BuyController::class, 'destroy'])->name('buy-destroy');
     Route::get('buy-status/{id}', [BuyController::class, 'statusBuy'])->name('buy-status');
     Route::get('buy-export/pdf', [BuyController::class, 'exportPDF'])->name('buy-export/pdf');
+
+    Route::get('department-index', [DepartmentController::class, 'index'])->name('department-index');
+    Route::get('department-create', [DepartmentController::class, 'create'])->name('department-create');
+    Route::post('department-store', [DepartmentController::class, 'store'])->name('department-store');
+    Route::get('department-edit/{id}', [DepartmentController::class, 'edit'])->name('department-edit');
+    Route::put('department-update/{id}', [DepartmentController::class, 'update'])->name('department-update');
+    Route::get('department-destroy/{id}', [DepartmentController::class, 'destroy'])->name('department-destroy');
 });
 
 //  หัวหน้าวัสดุ  is_headAdmin
