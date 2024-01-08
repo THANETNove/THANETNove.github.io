@@ -93,6 +93,25 @@
                 </ul>
             </li>
 
+            <li class="menu-item" id="category">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class='menu-icon tf-icons bx bxs-grid-alt'></i>
+                    <div data-i18n="Account Settings">หมวดหมู่วัสดุเเละครุภัณฑ์</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="category-index">
+                        <a href="{{ url('category-index') }}" class="menu-link">
+                            <div data-i18n="Account">วัสดุเเละครุภัณฑ์</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="category-create">
+                        <a href="{{ url('category-create') }}" class="menu-link">
+                            <div data-i18n="Notifications">ลงทะเบียนsหมวดวัสดุเเละครุภัณฑ์</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="menu-item" id="material">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-add-to-queue'></i>
@@ -132,17 +151,17 @@
             <li class="menu-item" id="buy">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-cart-add'></i>
-                    <div data-i18n="Account Settings">ระบบการจัดซื้อ</div>
+                    <div data-i18n="Account Settings">ระบบการรับเข้า</div>
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item" id="buy-index">
                         <a href="{{ url('buy-index') }}" class="menu-link">
-                            <div data-i18n="Account">การจัดซื้อ</div>
+                            <div data-i18n="Account">รับเข้า</div>
                         </a>
                     </li>
                     <li class="menu-item" id="buy-create">
                         <a href="{{ url('buy-create') }}" class="menu-link">
-                            <div data-i18n="Notifications">ลงทะเบียนการจัดซื้อ</div>
+                            <div data-i18n="Notifications">ลงทะเบียนรับเข้า</div>
                         </a>
                     </li>
                 </ul>

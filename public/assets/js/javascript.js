@@ -323,6 +323,14 @@ const setActiveClass = (mainItemId, subItemId) => {
 
 const targetUrls = window.location.pathname.split("/")[1];
 
+// เเผนก
+if (targetUrls === "department-index" || targetUrls === "department-edit") {
+    setActiveClass("department", "department-index");
+}
+if (targetUrls === "department-create") {
+    setActiveClass("department", "department-create");
+}
+
 // สมัครสมาชิก
 if (
     targetUrls === "personnel-index" ||
@@ -365,6 +373,13 @@ if (targetUrls === "buy-index" || targetUrls === "buy-edit") {
 }
 if (targetUrls === "buy-create") {
     setActiveClass("buy", "buy-create");
+}
+// หมวดหมู่วัสดุเเละครุภัณฑ์
+if (targetUrls === "category-index" || targetUrls === "category-edit") {
+    setActiveClass("category", "category-index");
+}
+if (targetUrls === "category-create") {
+    setActiveClass("category", "category-create");
 }
 // ระบบเบิกวัสดุ
 if (

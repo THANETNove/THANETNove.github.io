@@ -11,6 +11,7 @@ use App\Http\Controllers\MaterialRequisitionController;
 use App\Http\Controllers\DurableArticlesRequisitionController;
 use App\Http\Controllers\DurableArticlesDamagedController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -134,6 +135,14 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('department-edit/{id}', [DepartmentController::class, 'edit'])->name('department-edit');
     Route::put('department-update/{id}', [DepartmentController::class, 'update'])->name('department-update');
     Route::get('department-destroy/{id}', [DepartmentController::class, 'destroy'])->name('department-destroy');
+
+
+    Route::get('category-index', [CategoryController::class, 'index'])->name('category-index');
+    Route::post('category-index', [CategoryController::class, 'index'])->name('category-index');
+    Route::get('category-create', [CategoryController::class, 'create'])->name('category-create');
+    Route::post('category-store', [CategoryController::class, 'store'])->name('category-store');
+    Route::get('category-edit/{id}', [CategoryController::class, 'edit'])->name('category-edit');
+    Route::put('category-update/{id}', [CategoryController::class, 'update'])->name('category-update');
 });
 
 //  หัวหน้าวัสดุ  is_headAdmin
