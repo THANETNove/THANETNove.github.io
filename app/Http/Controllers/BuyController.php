@@ -41,6 +41,40 @@ class BuyController extends Controller
         return view('buy.create');
     }
 
+
+    public function categories($id)
+    {
+        $data = DB::table('categories')
+        ->where('category_id', '=', $id)
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return response()->json($data);
+    }
+
+    public function materials($id)
+    {
+
+        $data = DB::table('materials')
+        ->where('group_id', '=', $id)
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return response()->json($data);
+    }
+
+
+    public function durable_articles($id)
+    {
+  
+        $data = DB::table('durable_articles')
+        ->where('group_id', '=', $id)
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return response()->json($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

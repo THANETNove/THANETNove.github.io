@@ -128,6 +128,8 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('buy-destroy/{id}', [BuyController::class, 'destroy'])->name('buy-destroy');
     Route::get('buy-status/{id}', [BuyController::class, 'statusBuy'])->name('buy-status');
     Route::get('buy-export/pdf', [BuyController::class, 'exportPDF'])->name('buy-export/pdf');
+    Route::get('get-categories/{id}', [BuyController::class, 'categories'])->name('get-categories');
+    Route::get('get-materials/{id}', [BuyController::class, 'materials'])->name('get-materials');
 
     Route::get('department-index', [DepartmentController::class, 'index'])->name('department-index');
     Route::get('department-create', [DepartmentController::class, 'create'])->name('department-create');

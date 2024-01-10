@@ -441,3 +441,109 @@ function myFunction(selectedValue) {
 
     // ทำต่อไปตามความต้องการ
 }
+
+function getCategories(selectedValue) {
+    if (selectedValue == 1) {
+        document.getElementById("id-group").innerText = "id วัสดุ";
+        $("#group_id").empty();
+        $.ajax({
+            url: "get-categories/" + selectedValue,
+            type: "GET",
+            success: function (res) {
+                var groupSelect = $("#group_id");
+                groupSelect.empty();
+                groupSelect.append(
+                    $("<option>", {
+                        value: "",
+                        text: "เลือกหมวดหมู่",
+                        selected: true,
+                        disabled: true, // or use .prop('selected', true)
+                    })
+                );
+                $.each(res, function (index, data) {
+                    groupSelect.append(
+                        $("<option>", {
+                            value: data.id,
+                            text: data.category_name,
+                        })
+                    );
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            },
+        });
+    } else {
+        document.getElementById("id-group").innerText = "id ครุภัณฑ์";
+        $("#group_id").empty();
+        $.ajax({
+            url: "get-categories/" + selectedValue,
+            type: "GET",
+            success: function (res) {
+                var groupSelect = $("#group_id");
+
+                // Clear existing options (optional, depending on your use case)
+                groupSelect.empty();
+
+                // Loop through each element in the 'res' array
+                groupSelect.append(
+                    $("<option>", {
+                        value: "",
+                        text: "เลือกหมวดหมู่",
+                        selected: true,
+                        disabled: true, // or use .prop('selected', true)
+                    })
+                );
+
+                $.each(res, function (index, data) {
+                    groupSelect.append(
+                        $("<option>", {
+                            value: data.id,
+                            text: data.category_name,
+                        })
+                    );
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            },
+        });
+    }
+}
+
+function getGroup(selectedValue) {
+    console.log("selectedValue", selectedValue);
+
+    $.ajax({
+        url: "get-categories/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            var groupSelect = $("#group_id");
+
+            // Clear existing options (optional, depending on your use case)
+            groupSelect.empty();
+
+            // Loop through each element in the 'res' array
+            groupSelect.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกหมวดหมู่",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupSelect.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.category_name,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+}
