@@ -26,31 +26,8 @@ class DurableArticlesController extends Controller
         ->select('durable_articles.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
         if ($search) {
             $data = $data->where(function ($query) use ($search) {
-                $components = explode('-', $search);
-
-                if (count($components) == 3) {
-                    // Full value like "7115-005-0003"
-                    $query->where('group_class', 'LIKE', "%$components[0]%")
-                        ->where('type_durableArticles', 'LIKE', "%$components[1]%")
-                        ->where('description', 'LIKE', "%$components[2]%")
-                        ->orWhere('durableArticles_name', 'LIKE', "%$search%")
-                        ->orWhere('name_durableArticles_count', 'LIKE', "%$search%");
-                } elseif (count($components) == 2) {
-                    // Partial value like "715" or "005"
-                    $query->where('group_class', 'LIKE', "%$components[0]%")
-                        ->where('type_durableArticles', 'LIKE', "%$components[1]%")
-                        ->orWhere('description', 'LIKE', "%$search%")
-                        ->orWhere('durableArticles_name', 'LIKE', "%$search%")
-                        ->orWhere('name_durableArticles_count', 'LIKE', "%$search%");
-
-                } elseif (count($components) == 1) {
-                    // Partial value like "715" or "005"
-                    $query->where('group_class', 'LIKE', "%$search%")
-                        ->orWhere('type_durableArticles', 'LIKE', "%$search%")
-                        ->orWhere('description', 'LIKE', "%$search%")
-                        ->orWhere('durableArticles_name', 'LIKE', "%$search%")
-                        ->orWhere('name_durableArticles_count', 'LIKE', "%$search%");
-                }
+                $query->where('category_name', 'LIKE', "%$search%")
+                ->orWhere('durableArticles_name', 'LIKE', "%$search%");
                 // Add additional conditions for other cases if needed
             })
             ->orderBy('durable_articles.id', 'DESC')
