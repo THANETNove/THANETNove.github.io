@@ -69,10 +69,17 @@ class MaterialController extends Controller
     public function store(Request $request)
     {
 
-        $random = "mate-" . Str::random(10);
+       /*  $random = "mate-" . mt_rand(1000000000, 9999999999); */
+
+       $counter = 1000000000; // Initial counter value
+
+       $random = "mate-" . $counter;
+       $latestId = DB::table('materials')->max('id');
+       $counterId = "mate-" . $counter + $latestId;
+
 
         $data = new Material;
-        $data->code_material = $random;
+        $data->code_material = $latestId ? $counterId = "mate-" .$counter + $latestId :$random  ;        ;
         /* $data->group_class = $request['group_class'];
         $data->type_durableArticles = $request['type_durableArticles'];
         $data->description = $request['description']; */
