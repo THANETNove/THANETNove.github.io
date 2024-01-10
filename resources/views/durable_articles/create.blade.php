@@ -52,10 +52,10 @@
                                 </div>
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="material_name" class="form-label">หมวดหมู่วัสดุ</label>
+                                    <label for="material_name" class="form-label">หมวดหมู่ครุภัณฑ์</label>
 
                                     <select class="form-select" name="group_id" aria-label="Default select example">
-                                        <option selected disabled>หมวดหมู่วัสดุ</option>
+                                        <option selected disabled>หมวดหมู่ครุภัณฑ์</option>
                                         @foreach ($group as $gro)
                                             <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
                                         @endforeach

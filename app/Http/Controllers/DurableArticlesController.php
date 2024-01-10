@@ -53,7 +53,7 @@ class DurableArticlesController extends Controller
     {
         $data = DB::table('storage_locations')->where('status','on')->get();
         $group = DB::table('categories')
-        ->where('category_id', '=', 1)->orderBy('id', 'DESC')->get();
+        ->where('category_id', '=', 2)->orderBy('id', 'DESC')->get();
         return view('durable_articles.create',['data' => $data,'group' => $group]);
     }
 
@@ -62,7 +62,7 @@ class DurableArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        $random = "mate-" . Str::random(10);
+        $random = "dura-" . Str::random(10);
 
 
         $data = new DurableArticles;
@@ -103,7 +103,7 @@ class DurableArticlesController extends Controller
         $dueArt =  DurableArticles::find($id);
         $data = DB::table('storage_locations')->where('status','on')->get();
         $group = DB::table('categories')
-        ->where('category_id', '=', 1)->orderBy('id', 'DESC')->get();
+        ->where('category_id', '=', 2)->orderBy('id', 'DESC')->get();
         return view('durable_articles.edit',['dueArt' => $dueArt ,'data' =>   $data,'group' => $group ]);
     }
 

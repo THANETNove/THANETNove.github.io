@@ -18,7 +18,7 @@
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif
                                 <div class="group-category">
-                                    {{--  <form class="user" id="myForm" method="POST"
+                                    <form class="user" id="myForm" method="POST"
                                         action="{{ route('category-index') }}" enctype="multipart/form-data">
                                         @csrf
                                         <select class="form-select" onchange="myFunction(this.value)" name="search"
@@ -30,7 +30,7 @@
                                             <option value="2" @if ($id_search == 2) selected @endif>
                                                 หมวดหมู่ครุภัณฑ์</option>
                                         </select>
-                                    </form> --}}
+                                    </form>
 
                                 </div>
 

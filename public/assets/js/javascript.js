@@ -442,7 +442,11 @@ function myFunction(selectedValue) {
     // ทำต่อไปตามความต้องการ
 }
 
+var globalRes; // สร้างตัวแปร global เพื่อเก็บค่า res
+var globalResType; // สร้างตัวแปร global เพื่อเก็บค่า res
+
 function getCategories(selectedValue) {
+    globalResType = selectedValue;
     if (selectedValue == 1) {
         document.getElementById("id-group").innerText = "id วัสดุ";
         $("#group_id").empty();
@@ -512,13 +516,12 @@ function getCategories(selectedValue) {
 }
 
 function getGroup(selectedValue) {
-    console.log("selectedValue", selectedValue);
-
     $.ajax({
-        url: "get-categories/" + selectedValue,
+        url: "get-categoriesData/" + selectedValue,
         type: "GET",
         success: function (res) {
-            var groupSelect = $("#group_id");
+            globalRes = res;
+            var groupSelect = $("#buy_name");
 
             // Clear existing options (optional, depending on your use case)
             groupSelect.empty();
@@ -527,7 +530,10 @@ function getGroup(selectedValue) {
             groupSelect.append(
                 $("<option>", {
                     value: "",
-                    text: "เลือกหมวดหมู่",
+                    text:
+                        globalResType == 1
+                            ? "เลือกชื่อวัสดุ"
+                            : "เลือกชื่อครุภัณฑ์",
                     selected: true,
                     disabled: true, // or use .prop('selected', true)
                 })
@@ -537,7 +543,10 @@ function getGroup(selectedValue) {
                 groupSelect.append(
                     $("<option>", {
                         value: data.id,
-                        text: data.category_name,
+                        text:
+                            globalResType == 1
+                                ? data.material_name
+                                : data.durableArticles_name,
                     })
                 );
             });
@@ -547,3 +556,37 @@ function getGroup(selectedValue) {
         },
     });
 }
+
+$("#buy_name").on("change", function () {
+    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+
+    // ใช้ globalRes ที่เก็บค่า res จาก getGroup
+    var foundItem = globalRes.find(function (item) {
+        return item.id == selectedValue;
+    });
+
+    console.log("foundItem", foundItem);
+    if (foundItem) {
+        console.log("globalResType", globalResType);
+        $("#categories_id").val(
+            globalResType == 1
+                ? foundItem.code_material
+                : foundItem.group_class +
+                      "-" +
+                      foundItem.type_durableArticles +
+                      "-" +
+                      foundItem.description
+        );
+        $("#quantity").val(
+            globalResType == 1
+                ? foundItem.material_number
+                : foundItem.durableArticles_number
+        );
+        $("#counting_unit").val(
+            globalResType == 1
+                ? foundItem.name_material_count
+                : foundItem.name_durableArticles_count
+        );
+    
+    }
+});

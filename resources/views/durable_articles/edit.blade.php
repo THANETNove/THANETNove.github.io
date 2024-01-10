@@ -57,12 +57,12 @@
 
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="material_name" class="form-label">หมวดหมู่วัสดุ</label>
+                                    <label for="material_name" class="form-label">หมวดหมู่ครุภัณฑ์</label>
                                     {{--  <input id="material_name" type="text"
                                         class="form-control @error('material_name') is-invalid @enderror"
                                         name="group_id" required placeholder="ชื่อวัสดุ" autocomplete="material_name"> --}}
                                     <select class="form-select" name="group_id" aria-label="Default select example">
-                                        <option selected disabled>หมวดหมู่วัสดุ</option>
+                                        <option selected disabled>หมวดหมู่ครุภัณฑ์</option>
                                         @foreach ($group as $gro)
                                             @if ($dueArt['group_id'] == $gro->id)
                                                 <option value="{{ $gro->id }}" selected>{{ $gro->category_name }}

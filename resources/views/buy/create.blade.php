@@ -29,10 +29,26 @@
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="categories_id" class="form-label">หมวดหมู่</label>
-                                    <select class="form-select"  onchange="getGroup(this.value)" name="group_id" id="group_id"
-                                        aria-label="Default select example">
+                                    <select class="form-select" onchange="getGroup(this.value)" name="group_id"
+                                        id="group_id" aria-label="Default select example">
                                         <option selected>เลือกหมวดหมู่</option>
                                     </select>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="buy_name" class="form-label">ชื่อวัสดุ</label>
+                                    {{--  <input id="buy_name" type="text"
+                                        class="form-control @error('buy_name') is-invalid @enderror" name="buy_name"
+                                        required placeholder="ชื่อวัสดุ" autocomplete="buy_name" readonly> --}}
+                                    <select class="form-select"  name="buy_name"
+                                        id="buy_name" aria-label="Default select example">
+                                        <option selected>เลือกชื่อวัสดุ</option>
+                                    </select>
+                                    @error('buy_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="categories_id" class="form-label" id="id-group">id</label>
@@ -48,19 +64,7 @@
                                     @enderror
 
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="buy_name" class="form-label">ชื่อวัสดุ</label>
-                                    <input id="buy_name" type="text"
-                                        class="form-control @error('buy_name') is-invalid @enderror" name="buy_name"
-                                        required placeholder="ชื่อวัสดุ" autocomplete="buy_name" readonly>
 
-                                    @error('buy_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="quantity" class="form-label">จำนวน</label>
                                     <input id="quantity" type="number"

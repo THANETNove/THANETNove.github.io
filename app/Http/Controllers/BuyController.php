@@ -52,28 +52,32 @@ class BuyController extends Controller
         return response()->json($data);
     }
 
-    public function materials($id)
+    public function categoriesData($id)
     {
 
-        $data = DB::table('materials')
-        ->where('group_id', '=', $id)
+        $cate = DB::table('categories')
+        ->where('id', '=', $id)
         ->orderBy('id', 'ASC')
         ->get();
+
+        if ($cate[0]->category_id == 1) {
+            $data = DB::table('materials')
+            ->where('group_id', '=', $id)
+            ->orderBy('id', 'ASC')
+            ->get();
+        }else{
+            $data = DB::table('durable_articles')
+            ->where('group_id', '=', $id)
+            ->orderBy('id', 'ASC')
+            ->get();
+        }
+
 
         return response()->json($data);
     }
 
 
-    public function durable_articles($id)
-    {
-  
-        $data = DB::table('durable_articles')
-        ->where('group_id', '=', $id)
-        ->orderBy('id', 'ASC')
-        ->get();
 
-        return response()->json($data);
-    }
 
     /**
      * Store a newly created resource in storage.
