@@ -18,7 +18,7 @@
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif
                                 <div class="group-category">
-                                    <form class="user" id="myForm" method="POST"
+                                    {{--  <form class="user" id="myForm" method="POST"
                                         action="{{ route('category-index') }}" enctype="multipart/form-data">
                                         @csrf
                                         <select class="form-select" onchange="myFunction(this.value)" name="search"
@@ -30,7 +30,7 @@
                                             <option value="2" @if ($id_search == 2) selected @endif>
                                                 หมวดหมู่ครุภัณฑ์</option>
                                         </select>
-                                    </form>
+                                    </form> --}}
 
                                 </div>
 
@@ -99,17 +99,6 @@
             </div>
         </div>
     </div>
-    <script>
-        function myFunction(selectedValue) {
-            // ทำอะไรก็ตามที่คุณต้องการเมื่อมีการเปลี่ยนแปลงค่าใน <select>
-            // เช่น เรียกใช้ AJAX เพื่อโหลดข้อมูลเพิ่มเติม, ส่งค่าไปที่ฟอร์ม, หรืออื่น ๆ
-
-            document.getElementById('myForm').submit();
-
-
-            // ทำต่อไปตามความต้องการ
-        }
-    </script>
 
     <!-- / Layout wrapper -->
 @endsection

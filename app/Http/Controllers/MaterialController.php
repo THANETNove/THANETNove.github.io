@@ -20,35 +20,21 @@ class MaterialController extends Controller
      */
     public function index(Request $request)
     {
+        $group = DB::table('categories')
+        ->where('category_id', '=', 1)->orderBy('id', 'DESC')->get();
+
+
         $search =  $request['search'];
+
         $data = DB::table('materials')->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
         ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
         ->select('materials.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
 
         if ($search) {
+
             $data = $data->where(function ($query) use ($search) {
-                $components = explode('-', $search);
-
-                if (count($components) == 3) {
-                    // Full value like "7115-005-0003"
-                    $query->where('group_class', 'LIKE', "%$components[0]%")
-                        ->where('type_durableArticles', 'LIKE', "%$components[1]%")
-                        ->where('description', 'LIKE', "%$components[2]%")
-                        ->orWhere('material_name', 'LIKE', "%$search%");
-                } elseif (count($components) == 2) {
-                    // Partial value like "715" or "005"
-                    $query->where('group_class', 'LIKE', "%$components[0]%")
-                        ->where('type_durableArticles', 'LIKE', "%$components[1]%")
-                        ->orWhere('description', 'LIKE', "%$search%")
-                        ->orWhere('material_name', 'LIKE', "%$search%");
-
-                } elseif (count($components) == 1) {
-                    // Partial value like "715" or "005"
-                    $query->where('group_class', 'LIKE', "%$search%")
-                        ->orWhere('type_durableArticles', 'LIKE', "%$search%")
-                        ->orWhere('description', 'LIKE', "%$search%")
-                        ->orWhere('material_name', 'LIKE', "%$search%");
-                }
+                $query->where('category_name', 'LIKE', "%$search%")
+                ->orWhere('material_name', 'LIKE', "%$search%");
                 // Add additional conditions for other cases if needed
             })
             ->orderBy('materials.id', 'DESC')
@@ -56,10 +42,12 @@ class MaterialController extends Controller
 
 
         }else{
+
             $data = $data
             ->orderBy('materials.id','DESC')->paginate(100);
+
         }
-        return view('material.index',['data' => $data ]);
+        return view('material.index',['data' => $data,'group' => $group ]);
     }
 
     /**

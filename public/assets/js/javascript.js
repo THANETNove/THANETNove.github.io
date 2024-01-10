@@ -432,3 +432,12 @@ if (targetUrls === "approval-update") {
     setActiveClass("approval", "approval-update");
 }
 console.log("targetUrls", targetUrls);
+
+function myFunction(selectedValue) {
+    // ทำอะไรก็ตามที่คุณต้องการเมื่อมีการเปลี่ยนแปลงค่าใน <select>
+    // เช่น เรียกใช้ AJAX เพื่อโหลดข้อมูลเพิ่มเติม, ส่งค่าไปที่ฟอร์ม, หรืออื่น ๆ
+
+    document.getElementById("myForm").submit();
+
+    // ทำต่อไปตามความต้องการ
+}
