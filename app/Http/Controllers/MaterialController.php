@@ -21,7 +21,9 @@ class MaterialController extends Controller
     public function index(Request $request)
     {
         $search =  $request['search'];
-        $data = DB::table('materials')->join('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage');
+        $data = DB::table('materials')->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
+        ->select('materials.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
 
         if ($search) {
             $data = $data->where(function ($query) use ($search) {
@@ -65,8 +67,12 @@ class MaterialController extends Controller
      */
     public function create()
     {
+        $group = DB::table('categories')
+        ->where('category_id', '=', 1)->orderBy('id', 'DESC')->get();
+
+
         $data = DB::table('storage_locations')->where('status','on')->get();
-        return view('material.create',['data' => $data]);
+        return view('material.create',['data' => $data,'group' => $group]);
     }
 
     /**
@@ -79,10 +85,11 @@ class MaterialController extends Controller
 
         $data = new Material;
         $data->code_material = $random;
-        $data->group_class = $request['group_class'];
+        /* $data->group_class = $request['group_class'];
         $data->type_durableArticles = $request['type_durableArticles'];
-        $data->description = $request['description'];
+        $data->description = $request['description']; */
         $data->material_name = $request['material_name'];
+        $data->group_id = $request['group_id'];
         $data->material_number = $request['material_number'];
         $data->remaining_amount = $request['material_number'];
         /* $data->material_number_pack_dozen = $request['material_number_pack_dozen']; */
@@ -112,7 +119,9 @@ class MaterialController extends Controller
 
         $mate =  Material::find($id);
         $data = DB::table('storage_locations')->where('status','on')->get();
-        return view('material.edit',['mate' => $mate ,'data' =>   $data ]);
+        $group = DB::table('categories')
+        ->where('category_id', '=', 1)->orderBy('id', 'DESC')->get();
+        return view('material.edit',['mate' => $mate ,'data' =>   $data,'group'=> $group ]);
     }
 
     /**
@@ -121,10 +130,11 @@ class MaterialController extends Controller
     public function update(Request $request, string $id)
     {
         $data =  Material::find($id);
-        $data->group_class = $request['group_class'];
+        /* $data->group_class = $request['group_class'];
         $data->type_durableArticles = $request['type_durableArticles'];
-        $data->description = $request['description'];
+        $data->description = $request['description']; */
         $data->material_name = $request['material_name'];
+        $data->group_id = $request['group_id'];
         $data->material_number = $request['material_number'];
        /*  $data->material_number_pack_dozen = $request['material_number_pack_dozen']; */
         $data->name_material_count = $request['name_material_count'];

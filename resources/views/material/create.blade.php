@@ -11,7 +11,7 @@
                         <form method="POST" action="{{ route('material-store') }}">
                             @csrf
                             <div class="row">
-                                <div class="mb-3 col-md-6">
+                                {{--  <div class="mb-3 col-md-6">
                                     <label for="group_class" class="form-label">กลุ่ม/ประเภท</label>
                                     <input id="group_class" type="number"
                                         class="form-control @error('group_class') is-invalid @enderror" name="group_class"
@@ -50,6 +50,25 @@
                                         </span>
                                     @enderror
 
+                                </div> --}}
+                                <div class="mb-3 col-md-6">
+                                    <label for="material_name" class="form-label">หมวดหมู่วัสดุ</label>
+                                    {{--  <input id="material_name" type="text"
+                                        class="form-control @error('material_name') is-invalid @enderror"
+                                        name="group_id" required placeholder="ชื่อวัสดุ" autocomplete="material_name"> --}}
+                                    <select class="form-select" name="group_id" aria-label="Default select example">
+                                        <option selected disabled>หมวดหมู่วัสดุ</option>
+                                        @foreach ($group as $gro)
+                                            <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
+                                        @endforeach
+
+                                    </select>
+                                    @error('group_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="material_name" class="form-label">ชื่อวัสดุ</label>
@@ -66,9 +85,10 @@
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="material_number" class="form-label">จำนวนวัสดุ (ต่อหน่วยนับ)</label>
-                                    <input id="material_number" type="number"
+                                    <input id="material_number" type="number" value="0"
                                         class="form-control @error('material_number') is-invalid @enderror"
-                                        name="material_number" placeholder="จำนวนวัสดุ ชิ้น" autocomplete="material_number">
+                                        name="material_number" placeholder="จำนวนวัสดุ ชิ้น" autocomplete="material_number"
+                                        disabled>
 
                                     @error('material_number')
                                         <span class="invalid-feedback" role="alert">

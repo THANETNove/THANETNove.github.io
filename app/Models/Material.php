@@ -14,6 +14,7 @@ class Material extends Model
         'type_durableArticles', // ชนิด
         'description', // รายละเอียด
         'material_name',//ชื่อ
+        'group_id',
         'material_number',//จำนวนวัสดุชิ้น
         'remaining_amount',//จำนวนเหลือ
         'material_number_pack_dozen', //จำนวนวัสดุ เเพค/โหลด

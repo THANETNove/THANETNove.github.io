@@ -24,6 +24,7 @@
                                             <tr>
                                                 <th>ลำดับ</th>
                                                 <th>รหัส</th>
+                                                <th>ประเภทวัสดุ</th>
                                                 <th>ชื่อ</th>
                                                 <th>จำนวนวัสดุ (จ่อหน่วยนับ)</th>
                                                 {{-- <th>จำนวนวัสดุ เเพค/โหล</th> --}}
@@ -31,6 +32,7 @@
                                                 <th>จำนวนนับวัสดุ</th>
 
                                                 <th>ที่จัดเก็บ</th>
+                                                <th>date</th>
                                                 <th>Actions</th>
 
                                             </tr>
@@ -43,8 +45,9 @@
                                                 @foreach ($groupedData->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
                                                     <tr>
                                                         <th scope="row">{{ $i++ }}</th>
-                                                        <td>{{ $da->group_class }}-{{ $da->type_durableArticles }}-{{ $da->description }}
+                                                        <td>{{ $da->code_material }}
                                                         </td>
+                                                        <td>{{ $da->category_name }}</td>
                                                         <td>{{ $da->material_name }}</td>
                                                         <td>{{ $da->material_number }}</td>
                                                         {{--  <td>{{ $da->material_number_pack_dozen }}</td> --}}
@@ -52,6 +55,8 @@
                                                         <td>{{ $da->name_material_count }}</td>
                                                         <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
                                                             {{ $da->room_name }}</td>
+                                                        <td>{{ (new Carbon\Carbon($da->created_at))->format('d-m-Y') }}
+                                                        </td>
                                                         <td>
                                                             <div class="dropdown">
                                                                 <button type="button"
