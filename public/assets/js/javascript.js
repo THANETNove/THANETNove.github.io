@@ -564,10 +564,7 @@ $("#buy_name").on("change", function () {
     var foundItem = globalRes.find(function (item) {
         return item.id == selectedValue;
     });
-
-    console.log("foundItem", foundItem);
     if (foundItem) {
-        console.log("globalResType", globalResType);
         $("#categories_id").val(
             globalResType == 1
                 ? foundItem.code_material
@@ -587,6 +584,5 @@ $("#buy_name").on("change", function () {
                 ? foundItem.name_material_count
                 : foundItem.name_durableArticles_count
         );
-    
     }
 });
