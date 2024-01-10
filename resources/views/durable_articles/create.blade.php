@@ -49,6 +49,23 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+
+                                <div class="mb-3 col-md-6">
+                                    <label for="material_name" class="form-label">หมวดหมู่วัสดุ</label>
+
+                                    <select class="form-select" name="group_id" aria-label="Default select example">
+                                        <option selected disabled>หมวดหมู่วัสดุ</option>
+                                        @foreach ($group as $gro)
+                                            <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
+                                        @endforeach
+
+                                    </select>
+                                    @error('group_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
 
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -70,7 +87,7 @@
                                     <input id="durableArticles_number" type="number"
                                         class="form-control @error('durableArticles_number') is-invalid @enderror"
                                         name="durableArticles_number" required placeholder="จำนวนครุภัณฑ์"
-                                        autocomplete="durableArticles_number">
+                                        autocomplete="durableArticles_number" value="0" readonly>
 
                                     @error('durableArticles_number')
                                         <span class="invalid-feedback" role="alert">

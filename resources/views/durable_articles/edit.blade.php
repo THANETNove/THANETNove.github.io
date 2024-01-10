@@ -57,6 +57,30 @@
 
                                 </div>
                                 <div class="mb-3 col-md-6">
+                                    <label for="material_name" class="form-label">หมวดหมู่วัสดุ</label>
+                                    {{--  <input id="material_name" type="text"
+                                        class="form-control @error('material_name') is-invalid @enderror"
+                                        name="group_id" required placeholder="ชื่อวัสดุ" autocomplete="material_name"> --}}
+                                    <select class="form-select" name="group_id" aria-label="Default select example">
+                                        <option selected disabled>หมวดหมู่วัสดุ</option>
+                                        @foreach ($group as $gro)
+                                            @if ($dueArt['group_id'] == $gro->id)
+                                                <option value="{{ $gro->id }}" selected>{{ $gro->category_name }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
+                                            @endif
+                                        @endforeach
+
+                                    </select>
+                                    @error('group_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+                                <div class="mb-3 col-md-6">
                                     <label for="durableArticles_name" class="form-label">ชื่อครุภัณฑ์</label>
                                     <input id="durableArticles_name" type="text"
                                         class="form-control @error('durableArticles_name') is-invalid @enderror"

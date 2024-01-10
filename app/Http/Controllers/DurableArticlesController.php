@@ -21,7 +21,9 @@ class DurableArticlesController extends Controller
     {
 
         $search =  $request['search']; // ตัวเลขชุดเเรก 7115 คือ group_class 005 คือ  type_durableArticles 0003 คือ description
-        $data = DB::table('durable_articles')->join('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage');
+        $data = DB::table('durable_articles')->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'durable_articles.group_id', '=', 'categories.id')
+        ->select('durable_articles.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
         if ($search) {
             $data = $data->where(function ($query) use ($search) {
                 $components = explode('-', $search);
@@ -73,7 +75,9 @@ class DurableArticlesController extends Controller
     public function create()
     {
         $data = DB::table('storage_locations')->where('status','on')->get();
-        return view('durable_articles.create',['data' => $data]);
+        $group = DB::table('categories')
+        ->where('category_id', '=', 1)->orderBy('id', 'DESC')->get();
+        return view('durable_articles.create',['data' => $data,'group' => $group]);
     }
 
     /**
@@ -89,6 +93,7 @@ class DurableArticlesController extends Controller
         $data->group_class = $request['group_class'];
         $data->type_durableArticles = $request['type_durableArticles'];
         $data->description = $request['description'];
+        $data->group_id = $request['group_id'];
         $data->durableArticles_name = $request['durableArticles_name'];
         $data->durableArticles_number = $request['durableArticles_number'];
         $data->remaining_amount = $request['durableArticles_number'];
@@ -120,7 +125,9 @@ class DurableArticlesController extends Controller
     {
         $dueArt =  DurableArticles::find($id);
         $data = DB::table('storage_locations')->where('status','on')->get();
-        return view('durable_articles.edit',['dueArt' => $dueArt ,'data' =>   $data ]);
+        $group = DB::table('categories')
+        ->where('category_id', '=', 1)->orderBy('id', 'DESC')->get();
+        return view('durable_articles.edit',['dueArt' => $dueArt ,'data' =>   $data,'group' => $group ]);
     }
 
     /**
@@ -132,6 +139,7 @@ class DurableArticlesController extends Controller
         $data->group_class = $request['group_class'];
         $data->type_durableArticles = $request['type_durableArticles'];
         $data->description = $request['description'];
+        $data->group_id = $request['group_id'];
         $data->durableArticles_name = $request['durableArticles_name'];
         $data->durableArticles_number = $request['durableArticles_number'];
         $data->name_durableArticles_count = $request['name_durableArticles_count'];

@@ -24,6 +24,7 @@
                                             <tr>
                                                 <th>ลำดับ</th>
                                                 <th>รหัส</th>
+                                                <th>ประเภทครุภัณฑ์</th>
                                                 <th>ชื่อ</th>
                                                 <th>จำนวน</th>
                                                 <th>จำนวนที่เหลือ</th>
@@ -46,6 +47,7 @@
                                                         <th scope="row">{{ $i++ }}</th>
                                                         <td>{{ $da->group_class }}-{{ $da->type_durableArticles }}-{{ $da->description }}
                                                         </td>
+                                                        <td>{{ $da->category_name }}</td>
                                                         <td>{{ $da->durableArticles_name }}</td>
                                                         <td>{{ $da->durableArticles_number }}</td>
                                                         <td>{{ $da->remaining_amount }}</td>

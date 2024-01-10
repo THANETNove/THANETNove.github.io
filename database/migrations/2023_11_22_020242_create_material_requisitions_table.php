@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_user')->nullable()->comment('user');
             $table->string('material_id')->nullable()->comment('material_id');
+            $table->string('group_id')->nullable()->comment('ประเภทวัสดุ');
             $table->string('code_requisition')->nullable()->comment('รหัสวัสดุ');
             $table->string('material_name')->nullable()->comment('ชื่อ');
             $table->string('amount_withdraw')->nullable()->comment('จำนวนที่ต้องเบิก');

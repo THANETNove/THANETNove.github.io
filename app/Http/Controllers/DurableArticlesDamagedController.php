@@ -23,6 +23,7 @@ class DurableArticlesDamagedController extends Controller
     {
         $search =  $request['search'];
 
+
         $data = DB::table('durable_articles_damageds')->join('users', 'durable_articles_damageds.id_user', '=', 'users.id')
         ->select('durable_articles_damageds.*', 'users.prefix', 'users.first_name','users.last_name');
 
@@ -56,6 +57,7 @@ class DurableArticlesDamagedController extends Controller
     */
     public function create()
     {
+
         return view("durable_articles_damaged.create");
     }
 
