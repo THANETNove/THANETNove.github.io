@@ -27,25 +27,13 @@ class MaterialRequisitionController extends Controller
         ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
        ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
          ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
-        ->leftJoin('categories', 'material_requisitions.material_name', '=', 'categories.id')
+        ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
         ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
         'materials.material_name as name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
        if ($search) {
         $data
-        ->where('code_requisition', 'LIKE', "%$search%")
-        ->where('code_requisition', 'LIKE', "%$search%")
-        ->orWhere('material_name', 'LIKE', "%$search%")
-        ->orWhere(function ($query) use ($search) {
-            // Split the full name into prefix, first name, and last name
-            $fullNameComponents = explode(' ', $search);
-
-            // Check each component separately
-            foreach ($fullNameComponents as $component) {
-                $query->orWhere('prefix', 'LIKE', "%$component%")
-                    ->orWhere('first_name', 'LIKE', "%$component%")
-                    ->orWhere('last_name', 'LIKE', "%$component%");
-            }
-        });
+        ->where('category_name', 'LIKE', "%$search%")
+        ->orWhere('materials.material_name', 'LIKE', "%$search%");
        }
        if (Auth::user()->status == 0) {
         $data = $data->where('id_user', Auth::user()->id);
