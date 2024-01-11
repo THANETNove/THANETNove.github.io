@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Buy;
+use App\Models\Material;
+use App\Models\DurableArticles;
 use DB;
 use PDF;
 
@@ -89,17 +91,49 @@ class BuyController extends Controller
         ]);
 
 
-        $random = "buy-" . Str::random(10);
+
+        if ($request['type'] == 1) {
+            $mate = DB::table('materials')
+            ->where("code_material",'=',$request['categories_id'])
+            ->orderBy('id', 'ASC')
+            ->get();
+
+            $number = $request['quantity'] + $mate[0]->material_number;
+
+            $mat =  Material::find($mate[0]->id);
+            $mat->material_number =  $number;
+            $mat->save();
+
+
+        }else{
+
+            $parts = explode('-', $request['categories_id']);
+
+            $dura = DB::table('durable_articles')
+            ->where("group_class",'=',  $parts[0])
+            ->where("type_durableArticles",'=', $parts[1])
+            ->where("description",'=', $parts[2])
+            ->orderBy('id', 'ASC')
+            ->get();
+
+            $number = $request['quantity'] + $dura[0]->durableArticles_number;
+            $dur =  DurableArticles::find($dura[0]->id);
+            $dur->durableArticles_number =  $number;
+            $dur->save();
+        }
+
 
         $data = new Buy;
-        $data->code_buy = $random;
-        $data->typeBuy = $request['typeBuy'];
+        $data->typeBuy = $request['type'];
+        $data->group_id = $request['group_id'];
         $data->buy_name = $request['buy_name'];
-        $data->quantity = $request['quantity'];
+        $data->code_buy = $request['categories_id'];
+        $data->quantity =  $request['quantity'];
         $data->counting_unit = $request['counting_unit'];
         $data->price_per_piece = $request['price_per_piece'];
         $data->total_price = $request['total_price'];
         $data->details = $request['details'];
+        $data->date_enter = $request['date_enter'];
         $data->status = "0";
         $data->save();
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('buys', function (Blueprint $table) {
             $table->id();
             $table->string('code_buy')->nullable()->comment('รหัสซื้อ');
-            $table->string('typeBuy')->nullable()->comment('ประเภท');
+            $table->string('group_id')->nullable()->comment('id ประเภทหมวดหมู่');            $table->string('typeBuy')->nullable()->comment('ประเภท');
             $table->string('buy_name')->nullable()->comment('ชื่อ');
             $table->string('quantity')->nullable()->comment('จำนวน');
             $table->string('counting_unit')->nullable()->comment('หน่วยนับ');
@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('total_price')->nullable()->comment('ราคารวม');
             $table->text('details')->nullable()->comment('รายละเอียด');
             $table->string('status')->nullable()->comment('สถานะ 0 = ขอซื้อ 1 =ซื้อเเล้ว  2 ยกการซื้อ');
+            $table->string('date_enter')->nullable()->comment('วันรับเข้า');
             $table->timestamps();
         });
     }

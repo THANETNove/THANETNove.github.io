@@ -574,15 +574,58 @@ $("#buy_name").on("change", function () {
                       "-" +
                       foundItem.description
         );
-        $("#quantity").val(
-            globalResType == 1
-                ? foundItem.material_number
-                : foundItem.durableArticles_number
-        );
         $("#counting_unit").val(
             globalResType == 1
                 ? foundItem.name_material_count
                 : foundItem.name_durableArticles_count
         );
     }
+});
+
+$(".date").datepicker({
+    dateFormat: "dd-mm-yy",
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "c-100:c+10", // ปีปัจจุบัน - 100 ถึง ปีปัจจุบัน + 10
+    dayNames: [
+        "อาทิตย์",
+        "จันทร์",
+        "อังคาร",
+        "พุธ",
+        "พฤหัสบดี",
+        "ศุกร์",
+        "เสาร์",
+    ],
+    dayNamesMin: ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."],
+    monthNames: [
+        "มกราคม",
+        "กุมภาพันธ์",
+        "มีนาคม",
+        "เมษายน",
+        "พฤษภาคม",
+        "มิถุนายน",
+        "กรกฎาคม",
+        "สิงหาคม",
+        "กันยายน",
+        "ตุลาคม",
+        "พฤศจิกายน",
+        "ธันวาคม",
+    ],
+    monthNamesShort: [
+        "ม.ค.",
+        "ก.พ.",
+        "มี.ค.",
+        "เม.ย.",
+        "พ.ค.",
+        "มิ.ย.",
+        "ก.ค.",
+        "ส.ค.",
+        "ก.ย.",
+        "ต.ค.",
+        "พ.ย.",
+        "ธ.ค.",
+    ],
+    onSelect: function (dateText, inst) {
+        // คำสั่งที่จะทำเมื่อเลือกวันที่
+    },
 });

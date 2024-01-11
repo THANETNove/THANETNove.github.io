@@ -10,6 +10,7 @@ class Buy extends Model
     use HasFactory;
     protected $fillable = [
         'code_buy',//รหัสครุภัณฑ์
+        'group_id',//รหัสครุภัณฑ์
         'typeBuy', // กลุ่ม/ประเภท
         'buy_name', // ชื่อ
         'quantity', // จำนวน
@@ -18,5 +19,6 @@ class Buy extends Model
         'total_price',//ราคารวม
         'details',//รายละเอียด
         'status', //สถานะ on/ off
+        'date_enter', //สถานะ on/ off
     ];
 }
