@@ -12,7 +12,7 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">ข้อมูลการจัดซื้อ</h1>
-                                 <a href="{{ url('buy-export/pdf') }}"
+                                <a href="{{ url('buy-export/pdf') }}"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลวัสดุ</a>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
@@ -40,80 +40,54 @@
 
                                         @endphp
                                         <tbody class="table-border-bottom-0">
-                                            @foreach ($data->where('status', '=', '0') as $da)
+                                            @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->typeBuy }}</td>
-                                                    <td>{{ $da->buy_name }}</td>
-                                                    <td>{{ $da->quantity }}</td>
+                                                    <td>{{ $da->category_name }}</td>
+                                                    <td>
+                                                        @if ($da->typeBuy == 1)
+                                                            {{ $da->material_name }}
+                                                        @else
+                                                            {{ $da->durableArticles_name }}
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ number_format($da->quantity) }}</td>
                                                     <td>{{ $da->counting_unit }}</td>
-                                                    <td>{{ $da->price_per_piece }}</td>
-                                                    <td>{{ $da->total_price }}</td>
+                                                    <td>{{ number_format($da->price_per_piece) }} </td>
+                                                    <td>{{ number_format($da->total_price) }}</td>
                                                     <td>{{ $da->details }}</td>
                                                     <td>
-                                                        <span class="badge bg-label-info me-1">รอการซื้อ</span>
-
+                                                        @if ($da->status == 0)
+                                                            <span class="badge bg-label-info me-1">เพิ่มรายการ</span>
+                                                        @else
+                                                            <span class="badge bg-label-warning me-1">ยกเลิกรายการ</span>
+                                                        @endif
                                                     </td>
                                                     <td>
-                                                        <div class="dropdown">
-                                                            <button type="button"
-                                                                class="btn p-0 dropdown-toggle hide-arrow"
-                                                                data-bs-toggle="dropdown">
-                                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu">
-
-                                                                <a class="dropdown-item"
-                                                                    href="{{ url('buy-edit', $da->id) }}"><i
-                                                                        class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                                @if (Auth::user()->status == '2')
+                                                        @if ($da->status == 0)
+                                                            <div class="dropdown">
+                                                                <button type="button"
+                                                                    class="btn p-0 dropdown-toggle hide-arrow"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
                                                                     <a class="dropdown-item"
-                                                                        href="{{ url('buy-destroy', $da->id) }}"><i
-                                                                            class="bx bx-trash me-1"></i> Delete</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('buy-status', $da->id) }}">
-                                                                        <i class='bx bx-up-arrow-circle'></i>
-                                                                        ซื้อเเล้ว</a>
-                                                                @endif
+                                                                        href="{{ url('buy-edit', $da->id) }}"><i
+                                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                    @if (Auth::user()->status == '2')
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ url('buy-destroy', $da->id) }}"><i
+                                                                                class="bx bx-trash me-1"></i> Delete</a>
+                                                                    @endif
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
 
-                                            @foreach ($data->where('status', '1') as $da)
-                                                <tr>
-                                                    <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->typeBuy }}</td>
-                                                    <td>{{ $da->buy_name }}</td>
-                                                    <td>{{ $da->quantity }}</td>
-                                                    <td>{{ $da->counting_unit }}</td>
-                                                    <td>{{ $da->price_per_piece }}</td>
-                                                    <td>{{ $da->total_price }}</td>
-                                                    <td>{{ $da->details }}</td>
-                                                    <td>
-                                                        <span class="badge bg-label-success me-1">ซื้อเเล้ว</span>
 
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
-                                            @foreach ($data->where('status', '2') as $da)
-                                                <tr>
-                                                    <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->typeBuy }}</td>
-                                                    <td>{{ $da->buy_name }}</td>
-                                                    <td>{{ $da->quantity }}</td>
-                                                    <td>{{ $da->counting_unit }}</td>
-                                                    <td>{{ $da->price_per_piece }}</td>
-                                                    <td>{{ $da->total_price }}</td>
-                                                    <td>{{ $da->details }}</td>
-                                                    <td>
-                                                        <span class="badge bg-label-warning me-1">ยกเลิกซื้อ</span>
-
-                                                    </td>
-                                                </tr>
-                                            @endforeach
 
                                         </tbody>
                                     </table>

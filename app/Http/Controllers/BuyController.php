@@ -24,11 +24,17 @@ class BuyController extends Controller
     public function index(Request $request)
     {
         $search =  $request['search'];
-        $data = DB::table('buys');
+        $data = DB::table('buys')
+        ->leftJoin('categories', 'buys.group_id', '=', 'categories.id')
+        ->leftJoin('materials', 'buys.buy_name', '=', 'materials.id')
+        ->leftJoin('durable_articles', 'buys.buy_name', '=', 'durable_articles.id')
+        ->select('buys.*', 'categories.category_name' , 'materials.material_name',
+         'durable_articles.durableArticles_name');
 
         if($search) {
-            $data->orWhere('typeBuy', 'LIKE', "%$search%")
-            ->orWhere('buy_name', 'LIKE', "%$search%");
+            $data->orWhere('category_name', 'LIKE', "%$search%")
+            ->orWhere('material_name', 'LIKE', "%$search%")
+            ->orWhere('durableArticles_name', 'LIKE', "%$search%");
         }
         $data = $data->orderBy('id', 'DESC')->paginate(100);
 
@@ -154,7 +160,18 @@ class BuyController extends Controller
     public function edit(string $id)
     {
 
-        $buy =  Buy::find($id);
+
+
+        /* $buy =  Buy::find($id); */
+        $buy = DB::table('buys')
+        ->leftJoin('categories', 'buys.group_id', '=', 'categories.id')
+        ->leftJoin('materials', 'buys.buy_name', '=', 'materials.id')
+        ->leftJoin('durable_articles', 'buys.buy_name', '=', 'durable_articles.id')
+        ->select('buys.*', 'categories.category_name' , 'materials.material_name',
+         'durable_articles.durableArticles_name')
+         ->orWhere('buys.id',  $id)
+         ->get();
+
 
         return view('buy.edit',['buy' => $buy  ]);
     }
@@ -166,8 +183,38 @@ class BuyController extends Controller
     {
 
         $data =  Buy::find($id);
-        $data->typeBuy = $request['typeBuy'];
-        $data->buy_name = $request['buy_name'];
+
+        if ($data->typeBuy == 1) {
+            $mate = DB::table('materials')
+            ->where("code_material",'=', $data->code_buy)
+            ->orderBy('id', 'ASC')
+            ->get();
+
+
+           $number =  ($mate[0]->material_number -  $data->quantity)  + $request['quantity'];
+            $mat =  Material::find($mate[0]->id);
+            $mat->material_number =  $number;
+            $mat->save();
+
+
+        }else{
+
+            $parts = explode('-',  $data->code_buy);
+
+            $dura = DB::table('durable_articles')
+            ->where("group_class",'=',  $parts[0])
+            ->where("type_durableArticles",'=', $parts[1])
+            ->where("description",'=', $parts[2])
+            ->orderBy('id', 'ASC')
+            ->get();
+
+            $number = ($dura[0]->durableArticles_number -  $data->quantity) + $request['quantity'] ;
+            $dur =  DurableArticles::find($dura[0]->id);
+            $dur->durableArticles_number =  $number;
+            $dur->save();
+        }
+
+
         $data->quantity = $request['quantity'];
         $data->counting_unit = $request['counting_unit'];
         $data->price_per_piece = $request['price_per_piece'];
@@ -206,5 +253,6 @@ class BuyController extends Controller
         return $pdf->download('exportPDF.pdf');
 
       /*   return view('storage_location.exportPDF',['data' => $data]); */
-    }
+
+   }
 }
