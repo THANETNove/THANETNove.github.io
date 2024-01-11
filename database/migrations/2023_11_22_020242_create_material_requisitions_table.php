@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('material_requisitions', function (Blueprint $table) {
             $table->id();
             $table->string('id_user')->nullable()->comment('user');
+            $table->string('id_group')->nullable()->comment('id_group');
             $table->string('material_id')->nullable()->comment('material_id');
             $table->string('group_id')->nullable()->comment('ประเภทวัสดุ');
             $table->string('code_requisition')->nullable()->comment('รหัสวัสดุ');

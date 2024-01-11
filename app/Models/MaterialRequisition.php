@@ -10,6 +10,7 @@ class MaterialRequisition extends Model
     use HasFactory;
     protected $fillable = [
         'id_user',//user
+        'id_group',
         'material_id',
         'code_requisition', //รหัสครุภัณฑ์
         'material_name', //ชื่อ

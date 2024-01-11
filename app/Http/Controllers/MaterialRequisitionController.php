@@ -24,10 +24,15 @@ class MaterialRequisitionController extends Controller
     {
         $search =  $request['search'];
         $data = DB::table('material_requisitions')
-        ->join('users', 'material_requisitions.id_user', '=', 'users.id')
-        ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name');
+        ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
+       ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
+         ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'material_requisitions.material_name', '=', 'categories.id')
+        ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
+        'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
        if ($search) {
         $data
+        ->where('code_requisition', 'LIKE', "%$search%")
         ->where('code_requisition', 'LIKE', "%$search%")
         ->orWhere('material_name', 'LIKE', "%$search%")
         ->orWhere(function ($query) use ($search) {
@@ -42,7 +47,9 @@ class MaterialRequisitionController extends Controller
             }
         });
        }
-
+       if (Auth::user()->status == 0) {
+        $data = $data->where('id_user', Auth::user()->id);
+       }
        $data = $data->orderBy('material_requisitions.id','DESC')->paginate(100);
 
         return view('material_requisition.index',['data' =>$data]);
@@ -84,7 +91,7 @@ class MaterialRequisitionController extends Controller
 
         MaterialRequisition::create([
             'id_user' => Auth::user()->id,
-            'material_id' => $request['material_id'],
+            'id_group' => $request['id_group'],
             'code_requisition' => $request['code_requisition'],
             'material_name' => $request['material_name'],
             'amount_withdraw' => $request['amount_withdraw'],
@@ -98,7 +105,7 @@ class MaterialRequisitionController extends Controller
 
       $amount =  $remaining - $withdraw;
 
-      Material::where('id', $request['material_id'])->update([
+      Material::where('id', $request['material_name'])->update([
             'remaining_amount' =>  $amount,
         ]);
 

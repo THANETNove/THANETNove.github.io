@@ -30,6 +30,7 @@
                                                 @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                 @endif
+                                                <th>ที่เก็บ </th>
                                                 <th>สถานะ </th>
                                                 <th>Actions</th>
 
@@ -43,13 +44,15 @@
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->code_requisition }}</td>
-                                                    <td>{{ $da->material_name }}</td>
+                                                    <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->amount_withdraw }}</td>
                                                     <td>{{ $da->name_material_count }}</td>
                                                     @if (Auth::user()->status != '0')
                                                         <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
                                                         </td>
                                                     @endif
+                                                    <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
+                                                        {{ $da->room_name }}</td>
                                                     <td>
                                                         @if ($da->status == 'on')
                                                             <span class="badge bg-label-success me-1">เบิกวัสดุ</span>

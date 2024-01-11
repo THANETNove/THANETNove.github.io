@@ -725,19 +725,8 @@ $("#material-name").on("change", function () {
             var popup = document.getElementById("submit");
             popup.style.display = "block";
         }
-        /*  $("#categories_id").val(
-            globalResType == 1
-                ? foundItem.code_material
-                : foundItem.group_class +
-                      "-" +
-                      foundItem.type_durableArticles +
-                      "-" +
-                      foundItem.description
-        );
-        $("#counting_unit").val(
-            globalResType == 1
-                ? foundItem.name_material_count
-                : foundItem.name_durableArticles_count
-        ); */
+        $("#code_requisition").val(foundItem.code_material);
+        $("#remaining-amount").val(foundItem.remaining_amount);
+        $("#name-material-count").val(foundItem.name_material_count);
     }
 });
