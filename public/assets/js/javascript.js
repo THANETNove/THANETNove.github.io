@@ -75,7 +75,7 @@ $(document).ready(function () {
 
 // หา วัสดุ
 
-$("#code_requisition").on("input", function () {
+/* $("#code_requisition").on("input", function () {
     var selectedRequisition = $(this).val();
     console.log("selectedRequisition", selectedRequisition);
 
@@ -115,7 +115,7 @@ $("#code_requisition").on("input", function () {
         document.getElementById("material-name").value = null;
         hidePopup();
     }
-});
+}); */
 
 function displayPopupWithData(data) {
     console.log("data", data);
@@ -197,7 +197,7 @@ function hidePopup() {
 
 // หา ครุภัณฑ์
 
-$("#code_durable_articles").on("input", function () {
+/* $("#code_durable_articles").on("input", function () {
     var selectedRequisition = $(this).val();
     console.log("selectedRequisition", selectedRequisition);
 
@@ -228,7 +228,7 @@ $("#code_durable_articles").on("input", function () {
         document.getElementById("material-name").value = null;
         hidePopup();
     }
-});
+}); */
 
 function displayPopupWithDataDurable(data) {
     console.log("data", data);
@@ -628,4 +628,116 @@ $(".date").datepicker({
     onSelect: function (dateText, inst) {
         // คำสั่งที่จะทำเมื่อเลือกวันที่
     },
+});
+
+//วัสดุ
+
+var materialRes;
+function groupMaterial(selectedValue) {
+    $.ajax({
+        url: "get-material/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            materialRes = res;
+            console.log("res", res);
+            var groupName = $("#material-name");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกวัสดุ",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.material_name,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+}
+
+//เลือกชื่อวัสดุ
+function selectMaterialId(selectedValue) {
+    $.ajax({
+        url: "get-materialId/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            console.log("res", res);
+            var groupName = $("#material-name");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกวัสดุ",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.material_name,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+}
+
+$("#material-name").on("change", function () {
+    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+
+    // ใช้ globalRes ที่เก็บค่า res จาก getGroup
+    var foundItem = materialRes.find(function (item) {
+        return item.id == selectedValue;
+    });
+    if (foundItem) {
+        if (foundItem.remaining_amount == 0) {
+            document.getElementById("out-stock").textContent =
+                " วัสดุหมดแล้ว ไม่สามารถเบิกได้";
+            var popup = document.getElementById("submit");
+            popup.style.display = "none";
+        } else {
+            document.getElementById("out-stock").textContent = "";
+            var popup = document.getElementById("submit");
+            popup.style.display = "block";
+        }
+        /*  $("#categories_id").val(
+            globalResType == 1
+                ? foundItem.code_material
+                : foundItem.group_class +
+                      "-" +
+                      foundItem.type_durableArticles +
+                      "-" +
+                      foundItem.description
+        );
+        $("#counting_unit").val(
+            globalResType == 1
+                ? foundItem.name_material_count
+                : foundItem.name_durableArticles_count
+        ); */
+    }
 });

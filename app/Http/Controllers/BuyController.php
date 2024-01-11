@@ -105,9 +105,11 @@ class BuyController extends Controller
             ->get();
 
             $number = $request['quantity'] + $mate[0]->material_number;
+            $amount = $request['quantity'] + $mate[0]->remaining_amount;
 
             $mat =  Material::find($mate[0]->id);
             $mat->material_number =  $number;
+            $mat->remaining_amount =  $amount;
             $mat->save();
 
 
@@ -123,8 +125,10 @@ class BuyController extends Controller
             ->get();
 
             $number = $request['quantity'] + $dura[0]->durableArticles_number;
+            $amount = $request['quantity'] + $mate[0]->remaining_amount;
             $dur =  DurableArticles::find($dura[0]->id);
             $dur->durableArticles_number =  $number;
+            $dur->remaining_amount =  $amount;
             $dur->save();
         }
 
@@ -192,8 +196,10 @@ class BuyController extends Controller
 
 
            $number =  ($mate[0]->material_number -  $data->quantity)  + $request['quantity'];
+           $amount =  ($mate[0]->remaining_amount -  $data->quantity)  + $request['quantity'];
             $mat =  Material::find($mate[0]->id);
             $mat->material_number =  $number;
+            $mat->remaining_amount =  $amount;
             $mat->save();
 
 
@@ -209,8 +215,10 @@ class BuyController extends Controller
             ->get();
 
             $number = ($dura[0]->durableArticles_number -  $data->quantity) + $request['quantity'] ;
+            $amount = ($dura[0]->remaining_amount -  $data->quantity) + $request['quantity'] ;
             $dur =  DurableArticles::find($dura[0]->id);
             $dur->durableArticles_number =  $number;
+            $mat->remaining_amount =  $amount;
             $dur->save();
         }
 
@@ -240,8 +248,10 @@ class BuyController extends Controller
             ->get();
 
            $number =  ($mate[0]->material_number -  $data->quantity);
+           $amount =  ($mate[0]->remaining_amount -  $data->quantity);
             $mat =  Material::find($mate[0]->id);
             $mat->material_number =  $number;
+            $mat->remaining_amount =  $amount;
             $mat->save();
 
 

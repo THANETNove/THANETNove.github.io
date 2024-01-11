@@ -4,7 +4,6 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row ">
             <div class="col-12 mb-4 order-0">
-
                 <div class="card ">
                     <div class="card-body">
                         <h1 class="card-title text-primary ">เบิกวัสดุอุปกรณ์</h1>
@@ -18,6 +17,30 @@
                                         placeholder="รหัสวัสดุ" required />
                                 </div>
                                 <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">หมวดหมู่</label>
+
+                                    <select class="form-select" onchange="groupMaterial(this.value)" id="id-group"
+                                        name="id_group" aria-label="Default select example">
+                                        <option selected disabled>เลือกหมวดหมู่</option>
+                                        @foreach ($group as $gro)
+                                            <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
+                                        @endforeach
+
+
+                                    </select>
+
+                                </div>
+                                <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
+                                    <label for="prefix" class="form-label">ชื่อ</label>
+                                    <select class="form-select" name="material_name" id="material-name"
+                                        aria-label="Default select example">
+                                        <option selected disabled>เลือกวัสดุ</option>
+
+                                    </select>
+                                </div>
+
+
+                                <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รหัสวัสดุ</label>
                                     <input type="text" class="form-control" id="code_requisition" name="code_requisition"
                                         placeholder="รหัสวัสดุ" required />
@@ -28,14 +51,7 @@
                                         style="display: none;"></button>
                                 </div>
 
-                                <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
-                                    <label for="prefix" class="form-label">ชื่อ</label>
-                                    <input type="text" class="form-control" id="material-name" name="material_name"
-                                        placeholder="ชื่อ" required />
-                                    <div id="popup-name" style="display: none;" class="mt-2">
-                                        <!-- Content of the popup goes here -->
-                                    </div>
-                                </div>
+
 
 
                                 <div class="mb-3 col-md-6">
@@ -81,7 +97,7 @@
 
                             </div>
                             <div class="mt-2">
-                                <button type="submit" class="btn btn-primary me-2">บักทึก</button>
+                                <button type="submit" id="submit" class="btn btn-primary me-2">บักทึก</button>
                             </div>
                         </form>
                     </div>

@@ -55,48 +55,24 @@ class MaterialRequisitionController extends Controller
     public function create()
     {
         $data = DB::table('materials')->get();
+        $group = DB::table('categories')
+        ->where('category_id', '=', 1)->orderBy('id', 'ASC')->get();
 
 
-        return view('material_requisition.create',['data' =>$data ]);
+        return view('material_requisition.create',['data' =>$data ,'group' => $group]);
     }
 
 
-    public function dataSelect($id)
+    public function groupMaterial($id)
     {
 
-       $data = DB::table('materials');
-        $data = $data->where(function ($query) use ($id) {
-
-            $components = explode('-', $id);
-
-            $components = explode('-', $id);
-                if (count($components) == 3) {
-                    // Full value like "7115-005-0003"
-
-                    $query->where('group_class', 'LIKE', "%$components[0]%")
-                        ->where('type_durableArticles', 'LIKE', "%$components[1]%")
-                        ->where('description', 'LIKE', "%$components[2]%")
-                        ->orWhere('material_name', 'LIKE', "%$id%");
-                } elseif (count($components) == 2) {
-                    // Partial value like "715" or "005"
-                    $query->where('group_class', 'LIKE', "%$components[0]%")
-                        ->where('type_durableArticles', 'LIKE', "%$components[1]%")
-                        ->orWhere('description', 'LIKE', "%$id%")
-                        ->orWhere('material_name', 'LIKE', "%$id%");
-
-                } elseif (count($components) == 1) {
-                    // Partial value like "715" or "005"
-                    $query->where('group_class', 'LIKE', "%$id%")
-                        ->orWhere('type_durableArticles', 'LIKE', "%$id%")
-                        ->orWhere('description', 'LIKE', "%$id%")
-                        ->orWhere('material_name', 'LIKE', "%$id%");
-                }
-            });
-            $data = $data->get();
-
+       $data = DB::table('materials')->where('group_id',$id)->get();
 
         return response()->json($data);
     }
+
+
+
 
     /**
      * Store a newly created resource in storage.
