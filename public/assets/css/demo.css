@@ -162,3 +162,7 @@
     display: flex;
     float: right;
 }
+
+.table-border-bottom-0 th {
+    text-align: left !important;
+}

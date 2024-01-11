@@ -11,18 +11,6 @@
 
     @include('layouts.fonts_DPF')
     <style>
-        .table td {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .table th,
-        .table td {
-            text-align: center;
-            vertical-align: middle !important;
-        }
-
         .badge {
             font-size: 0.8rem;
         }
@@ -51,18 +39,17 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>ลำดับ</th>
-                                                <th>ประเภท</th>
-                                                <th>ชื่อ</th>
-                                                <th>จำนวน</th>
-                                                <th>หน่วยนับ</th>
-                                                <th>ราคา ต่อชิ้น</th>
-                                                <th>ราคา รวม</th>
-                                                <th>รายละเอียด</th>
-                                                <th>สถานะ</th>
+                                                <th scope="col">ลำดับ</th>
+                                                <th scope="col">ประเภท</th>
+                                                <th scope="col">ชื่อประเภท</th>
+                                                <th scope="col">ชื่อ</th>
+                                                <th scope="col">จำนวน</th>
+                                                <th scope="col">ราคา</th>
+                                                <th scope="col">ราคารวม</th>
+
                                             </tr>
                                         </thead>
-                                        <tbody class="table-border-bottom-0">
+                                        <tbody>
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
@@ -81,18 +68,13 @@
                                                             {{ $da->durableArticles_name }}
                                                         @endif
                                                     </td>
-                                                    <td>{{ $da->quantity }}</td>
-                                                    <td>{{ $da->counting_unit }}</td>
-                                                    <td>{{ $da->price_per_piece }}</td>
-                                                    <td>{{ $da->total_price }}</td>
-                                                    <td>{{ $da->details }}</td>
-                                                    <td>
-                                                        <span class="badge bg-label-info me-1">รอการซื้อ</span>
-                                                    </td>
+                                                    <td>{{ number_format($da->quantity) }} &nbsp;
+                                                        {{ $da->counting_unit }}</td>
+
+                                                    <td>{{ number_format($da->price_per_piece) }}</td>
+                                                    <td>{{ number_format($da->total_price) }}</td>
                                                 </tr>
                                             @endforeach
-
-
                                         </tbody>
                                     </table>
                                 </div>
