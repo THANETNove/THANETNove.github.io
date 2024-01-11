@@ -23,6 +23,7 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
+                                                <th>หมวดวัสดุ</th>
                                                 <th>รหัสวัสดุ</th>
                                                 <th>ชื่อวัสดุ</th>
                                                 <th>จำนวนที่เบิก</th>
@@ -43,8 +44,9 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->code_requisition }}</td>
                                                     <td>{{ $da->category_name }}</td>
+                                                    <td>{{ $da->code_requisition }}</td>
+                                                    <td>{{ $da->name }}</td>
                                                     <td>{{ $da->amount_withdraw }}</td>
                                                     <td>{{ $da->name_material_count }}</td>
                                                     @if (Auth::user()->status != '0')

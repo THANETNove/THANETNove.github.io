@@ -29,7 +29,7 @@ class MaterialRequisitionController extends Controller
          ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
         ->leftJoin('categories', 'material_requisitions.material_name', '=', 'categories.id')
         ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
-        'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+        'materials.material_name as name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
        if ($search) {
         $data
         ->where('code_requisition', 'LIKE', "%$search%")
@@ -131,8 +131,7 @@ class MaterialRequisitionController extends Controller
         ->where('material_requisitions.id', $id)
         ->join('materials', 'material_requisitions.material_name', '=', 'materials.id')
         ->leftJoin('categories', 'material_requisitions.material_name', '=', 'categories.id')
-
-        ->select('material_requisitions.*', 'materials.remaining_amount','categories.category_name')
+        ->select('material_requisitions.*', 'materials.remaining_amount' ,'materials.material_name as name','categories.category_name')
         ->get();
 
 
@@ -147,11 +146,11 @@ class MaterialRequisitionController extends Controller
     {
         $data = MaterialRequisition::find($id);
 
-        $amount = $data["amount_withdraw"] +  $request["remaining_amount"];
-        $amount_wit =  $amount - $request["amount_withdraw"];
+        $amount = ($data["amount_withdraw"] +  $request["remaining_amount"])- $request["amount_withdraw"];
 
-        Material::where('id', $data['material_id'])->update([
-            'remaining_amount' =>  $amount_wit,
+
+        Material::where('id', $request['id_name'])->update([
+            'remaining_amount' =>  $amount,
         ]);
 
         MaterialRequisition::where('id', $id)->update([
@@ -167,7 +166,7 @@ class MaterialRequisitionController extends Controller
     public function destroy(string $id)
     {
         $matReq= MaterialRequisition::find($id);
-        $mat = Material::find($matReq["material_id"]);
+        $mat = Material::find($matReq["material_name"]);
 
         $amount = $matReq["amount_withdraw"] +  $mat["remaining_amount"];
 

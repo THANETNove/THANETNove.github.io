@@ -14,17 +14,29 @@
                             @method('PUT')
                             <div class="row">
                                 <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">หมวดหมู่วัสดุ</label>
+                                    <input type="text" class="form-control" id="group" name="group"
+                                        value="{{ $data[0]->category_name }}" placeholder="รหัสวัสดุ" required readonly />
+                                </div>
+                                <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รหัสวัสดุ</label>
                                     <input type="text" class="form-control" id="code_requisition" name="code_requisition"
                                         value="{{ $data[0]->code_requisition }}" placeholder="รหัสวัสดุ" required
                                         readonly />
                                 </div>
 
+
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
                                     <label for="prefix" class="form-label">ชื่อ</label>
                                     <input type="text" class="form-control" id="material-name"
-                                        value="{{ $data[0]->material_name }}" name="material_name" placeholder="ชื่อ"
-                                        required readonly />
+                                        value="{{ $data[0]->name }}" name="material_name" placeholder="ชื่อ" required
+                                        readonly />
+                                </div>
+                                <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
+                                    <label for="prefix" class="form-label">ชื่อ</label>
+                                    <input type="text" class="form-control" id="material-name"
+                                        value="{{ $data[0]->material_name }}" name="id_name" placeholder="ชื่อ" required
+                                        readonly />
                                 </div>
 
                                 <div class="mb-3 col-md-6">
