@@ -282,12 +282,25 @@ class BuyController extends Controller
     {
 
 
-         $data = DB::table('buys')->get();
+        $data = DB::table('buys')->leftJoin('categories', 'buys.group_id', '=', 'categories.id')
+        ->leftJoin('materials', 'buys.buy_name', '=', 'materials.id')
+        ->leftJoin('durable_articles', 'buys.buy_name', '=', 'durable_articles.id')
+        ->select('buys.*', 'categories.category_name' , 'materials.material_name',
+         'durable_articles.durableArticles_name')->where("buys.status",'=',  0)->get();
+
         $pdf = PDF::loadView('buy.exportPDF',['data' =>  $data]);
         $pdf->setPaper('a4');
-        return $pdf->download('exportPDF.pdf');
 
-      /*   return view('storage_location.exportPDF',['data' => $data]); */
+            // สร้าง URL สำหรับแสดง PDF ใน Browser
+
+
+            // ส่ง JavaScript เพื่อเปิด PDF ในแท็บใหม่
+
+
+       return $pdf->stream('exportPDF.pdf');
+ /*        return $pdf->download('exportPDF.pdf'); */
+
+       /*  return view('storage_location.exportPDF',['data' => $data]); */
 
    }
 }

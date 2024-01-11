@@ -41,18 +41,12 @@
                                 $i = 1;
                                 $j = 1;
                                 $count = $data->count();
-                                $count0 = $data->where('status', '0')->count();
-                                $count1 = $data->where('status', '1')->count();
-                                $count2 = $data->where('status', '2')->count();
 
                             @endphp
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">สถานที่จัดเก็บ</h1>
-                                <p>รายงานข้อมูลสถานที่จัดเก็บ</p>
+                                <h1 class="card-title text-primary ">รายการเข้า</h1>
+                                <p>รายงานการเข้า</p>
                                 <p class="mt--16">จำนวนทั้งหมด {{ $count }} รายการ</p>
-                                <p class="mt--16">จำนวนการสั่งซื้อ {{ $count0 }} รายการ</p>
-                                <p class="mt--16">จำนวนการซื้อสำเร็จ {{ $count1 }} รายการ</p>
-                                <p class="mt--16">จำนวนการยกเลิกการซื้อ {{ $count2 }} รายการ</p>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
@@ -69,11 +63,24 @@
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
-                                            @foreach ($data->where('status', '=', '0') as $da)
+                                            @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->typeBuy }}</td>
-                                                    <td>{{ $da->buy_name }}</td>
+                                                    <td>
+                                                        @if ($da->typeBuy == 1)
+                                                            ประเภทวัสดุ
+                                                        @else
+                                                            ประเภทครุภัณฑ์
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $da->category_name }}</td>
+                                                    <td>
+                                                        @if ($da->typeBuy == 1)
+                                                            {{ $da->material_name }}
+                                                        @else
+                                                            {{ $da->durableArticles_name }}
+                                                        @endif
+                                                    </td>
                                                     <td>{{ $da->quantity }}</td>
                                                     <td>{{ $da->counting_unit }}</td>
                                                     <td>{{ $da->price_per_piece }}</td>
@@ -81,43 +88,10 @@
                                                     <td>{{ $da->details }}</td>
                                                     <td>
                                                         <span class="badge bg-label-info me-1">รอการซื้อ</span>
-
-                                                    </td>
-
-                                                </tr>
-                                            @endforeach
-                                            @foreach ($data->where('status', '1') as $da)
-                                                <tr>
-                                                    <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->typeBuy }}</td>
-                                                    <td>{{ $da->buy_name }}</td>
-                                                    <td>{{ $da->quantity }}</td>
-                                                    <td>{{ $da->counting_unit }}</td>
-                                                    <td>{{ $da->price_per_piece }}</td>
-                                                    <td>{{ $da->total_price }}</td>
-                                                    <td>{{ $da->details }}</td>
-                                                    <td>
-                                                        <span class="badge bg-label-success me-1">ซื้อเเล้ว</span>
-
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                            @foreach ($data->where('status', '2') as $da)
-                                                <tr>
-                                                    <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->typeBuy }}</td>
-                                                    <td>{{ $da->buy_name }}</td>
-                                                    <td>{{ $da->quantity }}</td>
-                                                    <td>{{ $da->counting_unit }}</td>
-                                                    <td>{{ $da->price_per_piece }}</td>
-                                                    <td>{{ $da->total_price }}</td>
-                                                    <td>{{ $da->details }}</td>
-                                                    <td>
-                                                        <span class="badge bg-label-warning me-1">ยกเลิกซื้อ</span>
 
-                                                    </td>
-                                                </tr>
-                                            @endforeach
 
                                         </tbody>
                                     </table>

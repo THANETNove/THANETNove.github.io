@@ -11,8 +11,8 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">ข้อมูลการจัดซื้อ</h1>
-                                <a href="{{ url('buy-export/pdf') }}"
+                                <h1 class="card-title text-primary ">ข้อมูลการรับเข้า</h1>
+                                <a href="{{ url('buy-export/pdf') }}" target="_blank"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลวัสดุ</a>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
@@ -24,6 +24,7 @@
                                             <tr>
                                                 <th>ลำดับ</th>
                                                 <th>ประเภท</th>
+                                                <th>ชื่อประเภท</th>
                                                 <th>ชื่อ</th>
                                                 <th>จำนวน</th>
                                                 <th>หน่วยนับ</th>
@@ -31,6 +32,8 @@
                                                 <th>ราคา รวม</th>
                                                 <th>รายละเอียด</th>
                                                 <th>สถานะ</th>
+                                                <th>วันรับเข้า</th>
+                                                <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
 
                                             </tr>
@@ -43,6 +46,13 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
+                                                    <td>
+                                                        @if ($da->typeBuy == 1)
+                                                            ประเภทวัสดุ
+                                                        @else
+                                                            ประเภทครุภัณฑ์
+                                                        @endif
+                                                    </td>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>
                                                         @if ($da->typeBuy == 1)
@@ -63,6 +73,10 @@
                                                             <span class="badge bg-label-warning me-1">ยกเลิกรายการ</span>
                                                         @endif
                                                     </td>
+                                                    <td>{{ $da->date_enter }}</td>
+
+                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+
                                                     <td>
                                                         @if ($da->status == 0)
                                                             <div class="dropdown">

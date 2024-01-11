@@ -84,6 +84,9 @@ Route::post('/storage-store', [StorageLocationController::class, 'store'])->name
 
 // เจ้าหน้าที่วัสดุ หรือ หัวหน้าวัสดุ is_admin is_headAdmin
 Route::group(['middleware' => ['is_admin']], function () {
+
+
+
     Route::get('storage-index', [StorageLocationController::class, 'index'])->name('storage-index');
     Route::post('storage-index', [StorageLocationController::class, 'index'])->name('storage-index');
     Route::get('storage-create', [StorageLocationController::class, 'create'])->name('storage-create');
