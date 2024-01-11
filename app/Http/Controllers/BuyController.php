@@ -230,7 +230,40 @@ class BuyController extends Controller
      */
     public function destroy(string $id)
     {
+
         $data =  Buy::find($id);
+
+        if ($data->typeBuy == 1) {
+            $mate = DB::table('materials')
+            ->where("code_material",'=', $data->code_buy)
+            ->orderBy('id', 'ASC')
+            ->get();
+
+           $number =  ($mate[0]->material_number -  $data->quantity);
+            $mat =  Material::find($mate[0]->id);
+            $mat->material_number =  $number;
+            $mat->save();
+
+
+        }else{
+
+            $parts = explode('-',  $data->code_buy);
+
+            $dura = DB::table('durable_articles')
+            ->where("group_class",'=',  $parts[0])
+            ->where("type_durableArticles",'=', $parts[1])
+            ->where("description",'=', $parts[2])
+            ->orderBy('id', 'ASC')
+            ->get();
+
+            $number = ($dura[0]->durableArticles_number -  $data->quantity);
+            $dur =  DurableArticles::find($dura[0]->id);
+            $dur->durableArticles_number =  $number;
+            $dur->save();
+        }
+
+
+
         $data->status = "2";
         $data->save();
 
@@ -247,6 +280,8 @@ class BuyController extends Controller
 
     public function exportPDF()
     {
+
+
          $data = DB::table('buys')->get();
         $pdf = PDF::loadView('buy.exportPDF',['data' =>  $data]);
         $pdf->setPaper('a4');
