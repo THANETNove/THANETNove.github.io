@@ -725,6 +725,9 @@ $("#material-name").on("change", function () {
             var popup = document.getElementById("submit");
             popup.style.display = "block";
         }
+        document
+            .getElementById("amount_withdraw")
+            .setAttribute("max", foundItem.remaining_amount);
         $("#code_requisition").val(foundItem.code_material);
         $("#remaining-amount").val(foundItem.remaining_amount);
         $("#name-material-count").val(foundItem.name_material_count);
