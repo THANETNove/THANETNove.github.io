@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
+use Auth;
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -26,7 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if (Auth::user()->status == 0) {
+
+            return redirect('material-requisition-index');
+        }else{
+            return redirect('buy-index');
+        }
+
     }
 
     public function myProfile($id)

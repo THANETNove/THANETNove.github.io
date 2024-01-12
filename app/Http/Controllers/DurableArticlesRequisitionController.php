@@ -22,23 +22,18 @@ class DurableArticlesRequisitionController extends Controller
     public function index(Request $request)
     {
         $search =  $request['search'];
-        $data = DB::table('durable_articles_requisitions')->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
-        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name');
+        $data = DB::table('durable_articles_requisitions')
+        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.id')
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
+    'durable_articles.durableArticles_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
 
        if ($search) {
         $data =  $data
-            ->where('code_durable_articles', 'LIKE', "%$search%")
-            ->orWhere('durable_articles_name', 'LIKE', "%$search%")
-            ->orWhere(function ($query) use ($search) {
-                // Split the full name into prefix, first name, and last name
-                $fullNameComponents = explode(' ', $search);
-                // Check each component separately
-                foreach ($fullNameComponents as $component) {
-                    $query->orWhere('prefix', 'LIKE', "%$component%")
-                        ->orWhere('first_name', 'LIKE', "%$component%")
-                        ->orWhere('last_name', 'LIKE', "%$component%");
-                }
-            });
+            ->where('category_name', 'LIKE', "%$search%")
+            ->orWhere('durableArticles_name', 'LIKE', "%$search%");
         }
 
        if (Auth::user()->status == "0") {
@@ -56,42 +51,15 @@ class DurableArticlesRequisitionController extends Controller
      */
     public function create()
     {
-        return view("durable_articles_requisition.create");
+        $group = DB::table('categories')
+        ->where('category_id', '=', 2)->orderBy('id', 'ASC')->get();
+        return view("durable_articles_requisition.create",['group' =>  $group]);
     }
 
     public function durableRequisition($id) {
 
 
-        $data = DB::table('durable_articles');
-        $data = $data->where(function ($query) use ($id) {
-
-            $components = explode('-', $id);
-
-            $components = explode('-', $id);
-                if (count($components) == 3) {
-                    // Full value like "7115-005-0003"
-
-                    $query->where('group_class', 'LIKE', "%$components[0]%")
-                        ->where('type_durableArticles', 'LIKE', "%$components[1]%")
-                        ->where('description', 'LIKE', "%$components[2]%")
-                        ->orWhere('durableArticles_name', 'LIKE', "%$id%");
-                } elseif (count($components) == 2) {
-                    // Partial value like "715" or "005"
-                    $query->where('group_class', 'LIKE', "%$components[0]%")
-                        ->where('type_durableArticles', 'LIKE', "%$components[1]%")
-                        ->orWhere('description', 'LIKE', "%$id%")
-                        ->orWhere('durableArticles_name', 'LIKE', "%$id%");
-
-                } elseif (count($components) == 1) {
-                    // Partial value like "715" or "005"
-                    $query->where('group_class', 'LIKE', "%$id%")
-                        ->orWhere('type_durableArticles', 'LIKE', "%$id%")
-                        ->orWhere('description', 'LIKE', "%$id%")
-                        ->orWhere('durableArticles_name', 'LIKE', "%$id%");
-                }
-            });
-            $data = $data->get();
-
+        $data = DB::table('durable_articles')->where('group_id',$id)->get();
 
         return response()->json($data);
     }
@@ -102,10 +70,9 @@ class DurableArticlesRequisitionController extends Controller
     public function store(Request $request)
     {
 
-
         $data = new DurableArticlesRequisition;
         $data->id_user = Auth::user()->id;
-        $data->durable_articles_id = $request['durable_articles_id'];
+        $data->group_id = $request['group_id'];
         $data->code_durable_articles = $request['code_durable_articles'];
         $data->durable_articles_name = $request['durable_articles_name'];
         $data->amount_withdraw = $request['amount_withdraw'];
@@ -121,7 +88,7 @@ class DurableArticlesRequisitionController extends Controller
 
       $amount =  $remaining - $withdraw;
 
-      DurableArticles::where('id', $request['durable_articles_id'])->update([
+      DurableArticles::where('id', $request['durable_articles_name'])->update([
             'remaining_amount' =>  $amount,
         ]);
 
@@ -133,13 +100,22 @@ class DurableArticlesRequisitionController extends Controller
      */
     public function show(string $id)
     {
-        $data =   DB::table('durable_articles_requisitions')
+        /* $data =   DB::table('durable_articles_requisitions')
 
         ->where('durable_articles_requisitions.id', $id)
         ->join('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.id')
         ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
         ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name')
-        ->get();
+        ->get(); */
+
+        $data = DB::table('durable_articles_requisitions')
+        ->where('durable_articles_requisitions.id', $id)
+        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.id')
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
+    'durable_articles.durableArticles_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
 
 
         return view('durable_articles_requisition.show',['data' =>$data]);
@@ -199,7 +175,7 @@ class DurableArticlesRequisitionController extends Controller
         ]);
         return redirect('durable-articles-requisition-index')->with('message', "ยกเลิกสำเร็จ");
     }
-    
+
     public function approvalUpdate()
     {
         $data = DB::table('durable_articles_requisitions')

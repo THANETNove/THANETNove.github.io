@@ -670,43 +670,6 @@ function groupMaterial(selectedValue) {
     });
 }
 
-//เลือกชื่อวัสดุ
-function selectMaterialId(selectedValue) {
-    $.ajax({
-        url: "get-materialId/" + selectedValue,
-        type: "GET",
-        success: function (res) {
-            console.log("res", res);
-            var groupName = $("#material-name");
-
-            // Clear existing options (optional, depending on your use case)
-            groupName.empty();
-
-            // Loop through each element in the 'res' array
-            groupName.append(
-                $("<option>", {
-                    value: "",
-                    text: "เลือกวัสดุ",
-                    selected: true,
-                    disabled: true, // or use .prop('selected', true)
-                })
-            );
-
-            $.each(res, function (index, data) {
-                groupName.append(
-                    $("<option>", {
-                        value: data.id,
-                        text: data.material_name,
-                    })
-                );
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error(error);
-        },
-    });
-}
-
 $("#material-name").on("change", function () {
     var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
 
@@ -731,5 +694,81 @@ $("#material-name").on("change", function () {
         $("#code_requisition").val(foundItem.code_material);
         $("#remaining-amount").val(foundItem.remaining_amount);
         $("#name-material-count").val(foundItem.name_material_count);
+    }
+});
+
+//ครุภัณฑ์
+
+var durableArticlesRes;
+function groupDurableArticles(selectedValue) {
+    $.ajax({
+        url: "get-articlesRes/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            durableArticlesRes = res;
+            console.log("res", res);
+            var groupName = $("#durable_articles_name");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกวัสดุ",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.durableArticles_name,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+}
+
+$("#durable_articles_name").on("change", function () {
+    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+
+    // ใช้ globalRes ที่เก็บค่า res จาก getGroup
+    var foundItem = durableArticlesRes.find(function (item) {
+        return item.id == selectedValue;
+    });
+    if (foundItem) {
+        if (foundItem.remaining_amount == 0) {
+            document.getElementById("out-stock").textContent =
+                " วัสดุหมดแล้ว ไม่สามารถเบิกได้";
+            var popup = document.getElementById("submit");
+            popup.style.display = "none";
+        } else {
+            document.getElementById("out-stock").textContent = "";
+            var popup = document.getElementById("submit");
+            popup.style.display = "block";
+        }
+        console.log("foundItem", foundItem);
+        document
+            .getElementById("amount_withdraw")
+            .setAttribute("max", foundItem.remaining_amount);
+        $("#code_durable_articles").val(
+            foundItem.group_class +
+                "-" +
+                foundItem.type_durableArticles +
+                "-" +
+                foundItem.description
+        );
+        $("#remaining-amount").val(foundItem.remaining_amount);
+        $("#name-durable_articles-count").val(
+            foundItem.name_durableArticles_count
+        );
     }
 });

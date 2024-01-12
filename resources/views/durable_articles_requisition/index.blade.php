@@ -31,8 +31,10 @@
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                 @endif
                                                 <th>ระยะประกัน </th>
+                                                <th>วันที่เบิก </th>
                                                 <th>การอนุมัติ </th>
                                                 <th>สถานะ </th>
+                                                <th>ที่เก็บ </th>
                                                 <th>Actions</th>
 
                                             </tr>
@@ -44,8 +46,9 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
+                                                    <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->code_durable_articles }}</td>
-                                                    <td>{{ $da->durable_articles_name }}</td>
+                                                    <td>{{ $da->durableArticles_name }}</td>
                                                     <td>{{ $da->amount_withdraw }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
                                                     @if (Auth::user()->status != '0')
@@ -75,6 +78,7 @@
                                                         @endif
 
                                                     </td>
+                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                     <td>
                                                         @if ($da->status == 'on')
                                                             @if ($da->statusApproval == '0')
@@ -96,6 +100,8 @@
                                                                 class="badge bg-label-warning me-1">ยกเลิกเบิกครุภัณฑ์</span>
                                                         @endif
                                                     </td>
+                                                    <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
+                                                        {{ $da->room_name }}</td>
 
                                                     <td>
 
