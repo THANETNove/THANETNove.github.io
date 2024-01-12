@@ -11,20 +11,26 @@
 
                         <div class="row">
                             <p style="color: red" id="out-stock"></p>
-
                             <div class="mb-3 col-md-6">
+
+                                <label for="prefix" class="form-label">หมวดหมู่ครุภัณฑ์ </label>
+                                <input type="text" class="form-control" id="code_durable_articles"
+                                    name="code_durable_articles" placeholder="รหัสครุภัณฑ์"
+                                    value="{{ $data[0]->category_name }}" required />
+                            </div>
+                            <div class="mb-3 col-md-6">
+
                                 <label for="prefix" class="form-label">รหัสครุภัณฑ์ </label>
                                 <input type="text" class="form-control" id="code_durable_articles"
                                     name="code_durable_articles" placeholder="รหัสครุภัณฑ์"
                                     value="{{ $data[0]->code_durable_articles }}" required />
-
                             </div>
 
                             <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
                                 <label for="prefix" class="form-label">ชื่อ</label>
                                 <input type="text" class="form-control" id="durable_articles-name"
                                     name="durable_articles_name" placeholder="ชื่อ"
-                                    value={{ $data[0]->durable_articles_name }} required />
+                                    value={{ $data[0]->durableArticles_name }} required />
                                 <div id="popup-durable" style="display: none;" class="mt-2">
                                     <!-- Content of the popup goes here -->
                                 </div>
@@ -47,6 +53,7 @@
                                     placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์" required />
 
                             </div>
+
                             @if (Auth::user()->status > 0)
                                 <div class="mb-3 col-md-6">
                                     <label for="name_durable_articles_count" class="form-label">ชื่อ นามสกุล ผู้เบิก
@@ -61,6 +68,11 @@
 
                                 </div>
                             @endif
+                            <div class="mb-12 col-md-12 mb-4">
+                                <label for="name_durable_articles_count" class="form-label">ที่เก็บ
+                                </label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $data[0]->building_name }} &nbsp;{{ $data[0]->floor }} &nbsp;{{ $data[0]->room_name }}</textarea>
+                            </div>
                             <div class="mb-3 col-md-6">
                                 <label for="name_durable_articles_count" class="form-label">ระยะประกัน
                                 </label>

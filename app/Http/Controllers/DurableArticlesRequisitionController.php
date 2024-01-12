@@ -115,7 +115,8 @@ class DurableArticlesRequisitionController extends Controller
         ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.id')
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
-    'durable_articles.durableArticles_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+    'durable_articles.durableArticles_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+    ->get();
 
 
         return view('durable_articles_requisition.show',['data' =>$data]);
@@ -126,12 +127,21 @@ class DurableArticlesRequisitionController extends Controller
      */
     public function edit(string $id)
     {
-        $data =   DB::table('durable_articles_requisitions')
+       /*  $data =   DB::table('durable_articles_requisitions')
 
         ->where('durable_articles_requisitions.id', $id)
         ->join('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.id')
         ->select('durable_articles_requisitions.*', 'durable_articles.remaining_amount')
-        ->get();
+        ->get(); */
+        $data = DB::table('durable_articles_requisitions')
+        ->where('durable_articles_requisitions.id', $id)
+        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.id')
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
+    'durable_articles.durableArticles_name','durable_articles.remaining_amount','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+    ->get();
 
 
         return view('durable_articles_requisition.edit',['data' =>$data]);
@@ -149,7 +159,7 @@ class DurableArticlesRequisitionController extends Controller
         $amount = $data["amount_withdraw"] +  $request["remaining_amount"];
         $amount_wit =  $amount - $request["amount_withdraw"];
 
-        DurableArticles::where('id', $data['durable_articles_id'])->update([
+        DurableArticles::where('id', $data['durable_articles_name'])->update([
             'remaining_amount' =>  $amount_wit,
         ]);
 
@@ -166,8 +176,10 @@ class DurableArticlesRequisitionController extends Controller
     public function destroy(string $id)
     {
         $data_requisition = DurableArticlesRequisition::find($id);
-        $data = DurableArticles::find($data_requisition->durable_articles_id);
-        DurableArticles::where('id', $data_requisition->durable_articles_id)->update([
+        $data = DurableArticles::find($data_requisition->durable_articles_name);
+
+
+        DurableArticles::where('id', $data_requisition->durable_articles_name)->update([
             'remaining_amount' =>  $data->remaining_amount + $data_requisition->amount_withdraw,
         ]);
         DurableArticlesRequisition::where('id', $id)->update([
