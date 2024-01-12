@@ -36,18 +36,9 @@ class DurableArticlesDamagedController extends Controller
 
        if ($search) {
         $data =  $data
-            ->where('code_durable_articles', 'LIKE', "%$search%")
-            ->orWhere('durable_articles_name', 'LIKE', "%$search%")
-            ->orWhere(function ($query) use ($search) {
-                // Split the full name into prefix, first name, and last name
-                $fullNameComponents = explode(' ', $search);
-                // Check each component separately
-                foreach ($fullNameComponents as $component) {
-                    $query->orWhere('prefix', 'LIKE', "%$component%")
-                        ->orWhere('first_name', 'LIKE', "%$component%")
-                        ->orWhere('last_name', 'LIKE', "%$component%");
-                }
-            });
+            ->where('category_name', 'LIKE', "%$search%")
+            ->orWhere('durableArticles_name', 'LIKE', "%$search%");
+
         }
 
         if (Auth::user()->status == "0") {
