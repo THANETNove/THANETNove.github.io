@@ -208,7 +208,7 @@
 
         <li class="menu-item" id="durable-articles-damaged">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class='menu-icon tf-icons bx bxs-baby-carriage'></i>
+                <i class='menu-icon tf-icons bx bxs-layer-plus'></i>
                 <div data-i18n="Authentications">ระบบครุภัณฑ์ชำรุด</div>
             </a>
             <ul class="menu-sub">
@@ -229,7 +229,7 @@
 
         <li class="menu-item" id="durable-articles-repair">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class='menu-icon tf-icons bx bxs-baby-carriage'></i>
+                <i class='menu-icon tf-icons bx bxs-wrench'></i>
                 <div data-i18n="Authentications">ระบบการซ่อมครุภัณฑ์</div>
             </a>
             <ul class="menu-sub">

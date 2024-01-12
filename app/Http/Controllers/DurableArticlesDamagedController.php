@@ -74,7 +74,7 @@ class DurableArticlesDamagedController extends Controller
         $data->amount_damaged = $request['amount_damaged'];
         $data->name_durable_articles_count = $request['name_durable_articles_count'];
         $data->damaged_detail = $request['damaged_detail'];
-        $data->status = "on";
+        $data->status = "0";
         $data->save();
 
 
@@ -157,7 +157,7 @@ class DurableArticlesDamagedController extends Controller
             'damaged_number' => $data->damaged_number - $data_damaged->amount_damaged,
         ]);
         DurableArticlesDamaged::where('id', $id)->update([
-            'status' =>  "off",
+            'status' =>  "1",
         ]);
 
         return redirect('durable-articles-damaged-index')->with('message', "ยกเลิกสำเร็จ");

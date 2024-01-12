@@ -26,7 +26,19 @@ class DurableArticlesRepairController extends Controller
 
     public function create()
     {
-        return view("durable_articles_repair.create");
+
+        $group = DB::table('categories')
+        ->where('category_id', '=', 2)
+        ->where('durable_articles_damageds.status', '=', 0)
+        ->rightJoin('durable_articles_damageds', 'categories.id', '=', 'durable_articles_damageds.group_id')
+        ->groupBy('group_id')
+        ->orderBy('categories.id', 'ASC')
+        ->select('categories.*')
+        ->get();
+
+
+
+        return view("durable_articles_repair.create",['group' => $group]);
     }
 
     public function store(Request $request)

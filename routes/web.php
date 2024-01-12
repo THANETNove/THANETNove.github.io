@@ -12,6 +12,7 @@ use App\Http\Controllers\DurableArticlesRequisitionController;
 use App\Http\Controllers\DurableArticlesDamagedController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DurableArticlesRepairController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,17 +66,6 @@ Route::get('durable-articles-requisition-show/{id}', [DurableArticlesRequisition
 Route::get('durable-articles-requisition-export/pdf', [DurableArticlesRequisitionController::class, 'exportPDF'])->name('durable-articles-requisition-export/pdf');
 Route::get('get-articlesRes/{id}', [DurableArticlesRequisitionController::class, 'durableRequisition'])->name('get-articlesRes');
 
-//ระบบครุภัณฑ์ชำรุด
-Route::get('durable-articles-damaged-index', [DurableArticlesDamagedController::class, 'index'])->name('durable-articles-damaged-index');
-Route::post('durable-articles-damaged-index', [DurableArticlesDamagedController::class, 'index'])->name('durable-articles-damaged-index');
-Route::get('durable-articles-damaged-create', [DurableArticlesDamagedController::class, 'create'])->name('durable-articles-damaged-create');
-Route::post('durable-articles-damaged-store', [DurableArticlesDamagedController::class, 'store'])->name('durable-articles-damaged-store');
-Route::get('durable-articles-damaged-edit/{id}', [DurableArticlesDamagedController::class, 'edit'])->name('durable-articles-damaged-edit');
-Route::put('durable-articles-damaged-update/{id}', [DurableArticlesDamagedController::class, 'update'])->name('durable-articles-damaged-update');
-Route::get('durable-articles-damaged-destroy/{id}', [DurableArticlesDamagedController::class, 'destroy'])->name('durable-articles-damaged-destroy');
-
-//ระบบการซ่อมครุภัณฑ์
-Route::get('durable-articles-repair-create', [DurableArticlesRepairController::class, 'create'])->name('durable-articles-repair-create');
 
 // is_drawer ผู้เบิก
 /* Route::group(['middleware' => ['is_drawer']], function () {
@@ -151,6 +141,22 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('category-store', [CategoryController::class, 'store'])->name('category-store');
     Route::get('category-edit/{id}', [CategoryController::class, 'edit'])->name('category-edit');
     Route::put('category-update/{id}', [CategoryController::class, 'update'])->name('category-update');
+
+
+    //ระบบครุภัณฑ์ชำรุด
+    Route::get('durable-articles-damaged-index', [DurableArticlesDamagedController::class, 'index'])->name('durable-articles-damaged-index');
+    Route::post('durable-articles-damaged-index', [DurableArticlesDamagedController::class, 'index'])->name('durable-articles-damaged-index');
+    Route::get('durable-articles-damaged-create', [DurableArticlesDamagedController::class, 'create'])->name('durable-articles-damaged-create');
+    Route::post('durable-articles-damaged-store', [DurableArticlesDamagedController::class, 'store'])->name('durable-articles-damaged-store');
+    Route::get('durable-articles-damaged-edit/{id}', [DurableArticlesDamagedController::class, 'edit'])->name('durable-articles-damaged-edit');
+    Route::put('durable-articles-damaged-update/{id}', [DurableArticlesDamagedController::class, 'update'])->name('durable-articles-damaged-update');
+    Route::get('durable-articles-damaged-destroy/{id}', [DurableArticlesDamagedController::class, 'destroy'])->name('durable-articles-damaged-destroy');
+
+    //ระบบการซ่อมครุภัณฑ์
+    Route::get('durable-articles-repair-index', [DurableArticlesRepairController::class, 'index'])->name('durable-articles-repair-index');
+    Route::get('durable-articles-repair-create', [DurableArticlesRepairController::class, 'create'])->name('durable-articles-repair-create');
+    Route::post('durable-articles-repair-store', [DurableArticlesRepairController::class, 'store'])->name('durable-articles-repair-store');
+
 });
 
 //  หัวหน้าวัสดุ  is_headAdmin

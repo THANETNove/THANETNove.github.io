@@ -27,6 +27,7 @@
                                                 @endif --}}
                                                 <th>สถานะ </th>
                                                 <th>รายละเอียด</th>
+                                                <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -47,13 +48,16 @@
                                                         </td>
                                                     @endif --}}
                                                     <td>
-                                                        @if ($da->status == 'on')
+                                                        @if ($da->status == '0')
                                                             <span class="badge bg-label-success me-1">ชำรุด</span>
-                                                        @else
+                                                        @elseif ($da->status == '1')
                                                             <span class="badge bg-label-warning me-1">ยกเลิก</span>
+                                                        @else
+                                                            <span class="badge bg-label-primary me-1">ซ่อมเสร็จเเล้ว</span>
                                                         @endif
                                                     </td>
                                                     <td>{{ $da->damaged_detail }}</td>
+                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                     <td>
                                                         <div class="dropdown">
                                                             <button type="button"

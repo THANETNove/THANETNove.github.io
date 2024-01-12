@@ -10,7 +10,7 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">ครุภัณฑ์ที่ชำรุด</h1>
+                                <h1 class="card-title text-primary ">ครุภัณฑ์ที่ซ่อม</h1>
 
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
@@ -20,10 +20,11 @@
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>รหัสครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
-                                                <th>จำนวนที่ชำรุด</th>
+                                                <th>จำนวนที่ซ่อม</th>
                                                 <th>หน่วยนับ</th>
                                                 <th>สถานะ </th>
                                                 <th>รายละเอียด</th>
+                                                <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
