@@ -84,7 +84,7 @@ class DurableArticlesDamagedController extends Controller
         $data->name_durable_articles_count = $request['name_durable_articles_count'];
         $data->damaged_detail = $request['damaged_detail'];
         $data->status = "on";
-       /*  $data->save(); */
+        $data->save();
 
 
 
@@ -138,7 +138,7 @@ class DurableArticlesDamagedController extends Controller
                 $amount = ($data["amount_damaged"] +  $dataArt["remaining_amount"]) - $request["amount_damaged"];
                 DurableArticles::where('id', $data->durable_articles_name)->update([
                     'remaining_amount' =>  $amount,
-                    'damaged_number' =>  $request["amount_damaged"],
+                    'damaged_number' =>  ($dataArt->damaged_number - $data->amount_damaged) +  $request["amount_damaged"],
 
                 ]);
             }
@@ -160,8 +160,8 @@ class DurableArticlesDamagedController extends Controller
     public function destroy(string $id)
     {
         $data_damaged = DurableArticlesDamaged::find($id);
-        $data = DurableArticles::find($data_damaged->durable_articles_id);
-        DurableArticles::where('id', $data_damaged->durable_articles_id)->update([
+        $data = DurableArticles::find($data_damaged->durable_articles_name);
+        DurableArticles::where('id', $data_damaged->durable_articles_name)->update([
             'remaining_amount' =>  $data->remaining_amount + $data_damaged->amount_damaged,
             'damaged_number' => $data->damaged_number - $data_damaged->amount_damaged,
         ]);
