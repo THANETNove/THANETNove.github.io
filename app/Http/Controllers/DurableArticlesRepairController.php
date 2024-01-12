@@ -19,6 +19,11 @@ class DurableArticlesRepairController extends Controller
     /**
     * Show the form for creating a new resource.
     */
+    public function index()
+    {
+        return view("durable_articles_repair.index");
+    }
+
     public function create()
     {
         return view("durable_articles_repair.create");
@@ -45,14 +50,14 @@ class DurableArticlesRepairController extends Controller
 
         $amount =  $remaining - $repair;
         $amount_repair = DurableArticles::find($request['durable_articles_id']);
-        
-        
+
+
 
         DurableArticles::where('id', $request['durable_articles_id'])->update([
             'remaining_amount' =>  $amount,
             'repair_number' => $amount_repair->repair_number + $repair,
         ]);
-        
+
 
         return redirect('durable-articles-repair-index')->with('message', "บันทึกสำเร็จ");
     }

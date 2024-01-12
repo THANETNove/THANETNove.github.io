@@ -22,9 +22,9 @@
                                                 <th>ชื่อครุภัณฑ์</th>
                                                 <th>จำนวนที่ชำรุด</th>
                                                 <th>หน่วยนับ</th>
-                                                @if (Auth::user()->status != '0')
+                                                {{--  @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้แจ้ง </th>
-                                                @endif
+                                                @endif --}}
                                                 <th>สถานะ </th>
                                                 <th>รายละเอียด</th>
                                                 <th>Actions</th>
@@ -42,10 +42,10 @@
                                                     <td>{{ $da->durableArticles_name }}</td>
                                                     <td>{{ $da->amount_damaged }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
-                                                    @if (Auth::user()->status != '0')
+                                                    {{--  @if (Auth::user()->status != '0')
                                                         <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
                                                         </td>
-                                                    @endif
+                                                    @endif --}}
                                                     <td>
                                                         @if ($da->status == 'on')
                                                             <span class="badge bg-label-success me-1">ชำรุด</span>
