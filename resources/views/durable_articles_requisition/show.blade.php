@@ -67,8 +67,18 @@
                                         value="{{ $name }}" placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์" required />
 
                                 </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="name_durable_articles_count" class="form-label">เเผนก
+                                    </label>
+
+                                    <input type="text"
+                                        class="form-control @error('name_durable_articles_count') is-invalid @enderror"
+                                        id="name-durable_articles-count" name="name_durable_articles_count"
+                                        value="{{ $data[0]->department_name }}" required />
+
+                                </div>
                             @endif
-                            <div class="mb-12 col-md-12 mb-4">
+                            <div class="mb-3 col-md-6">
                                 <label for="name_durable_articles_count" class="form-label">ที่เก็บ
                                 </label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $data[0]->building_name }} &nbsp;{{ $data[0]->floor }} &nbsp;{{ $data[0]->room_name }}</textarea>
