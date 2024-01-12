@@ -12,34 +12,41 @@
                             @csrf
                             <div class="row">
                                 <p style="color: red" id="out-stock"></p>
-                                <div class="mb-3 col-md-6" style="display: none;">
-                                    <label for="prefix" class="form-label">id ครุภัณฑ์</label>
-                                    <input type="text" class="form-control durable_articles_id" id="durable_articles_id"
-                                        name="durable_articles_id" placeholder="รหัสครุภัณฑ์" required />
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">รหัสครุภัณฑ์</label>
-                                    <input type="text" class="form-control" id="code_durable_articles"
-                                        name="code_durable_articles" placeholder="รหัสครุภัณฑ์" required />
-                                    <div id="popup-code" style="display: none;" class="mt-2">
-                                        <!-- Content of the popup goes here -->
-                                    </div>
-                                    <button type="button" id="btn-danger-durable" class="btn btn-danger mt-3"
-                                        style="display: none;"></button>
-                                </div>
 
+                                <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">หมวดหมู่ครุภัณฑ์</label>
+
+                                    <select class="form-select" onchange="groupDurableArticlesDamaged(this.value)"
+                                        id="id-group" name="group_id" aria-label="Default select example">
+                                        <option selected disabled>เลือกหมวดหมู่</option>
+                                        @foreach ($group as $gro)
+                                            <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
+                                        @endforeach
+
+
+                                    </select>
+                                </div>
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
                                     <label for="prefix" class="form-label">ชื่อ</label>
-                                    <input type="text" class="form-control durable_articles-name"
-                                        id="durable_articles-name" name="durable_articles_name" placeholder="ชื่อ"
-                                        required />
-                                    <div id="popup-durable" style="display: none;" class="mt-2">
-                                        <!-- Content of the popup goes here -->
-                                    </div>
+                                    <select class="form-select" name="durable_articles_name"
+                                        id="durable_articles_damaged_name" aria-label="Default select example">
+                                        <option selected disabled>เลือกวัสดุ</option>
+
+                                    </select>
                                 </div>
 
+
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">ครุภัณฑ์ที่เหลือ</label>
+                                    <label for="prefix" class="form-label">รหัสครุภัณฑ์</label>
+                                    <input type="text" class="form-control" id="code_durable_damaged_articles"
+                                        name="code_durable_articles" placeholder="รหัสครุภัณฑ์" required />
+
+                                </div>
+
+
+
+                                <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">ครุภัณฑ์ทั้งหมด</label>
                                     <input type="text"
                                         class="form-control  @error('remaining_amount') is-invalid @enderror"
                                         id="remaining-amount" name="remaining_amount" placeholder="ครุภัณฑ์ที่เหลือ"
@@ -84,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="mt-2">
-                                <button type="submit" class="btn btn-primary me-2">บักทึก</button>
+                                <button type="submit" id="submit" class="btn btn-primary me-2">บักทึก</button>
                             </div>
                         </form>
                     </div>

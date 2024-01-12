@@ -24,8 +24,15 @@ class DurableArticlesDamagedController extends Controller
         $search =  $request['search'];
 
 
-        $data = DB::table('durable_articles_damageds')->join('users', 'durable_articles_damageds.id_user', '=', 'users.id')
-        ->select('durable_articles_damageds.*', 'users.prefix', 'users.first_name','users.last_name');
+        $data = DB::table('durable_articles_damageds')
+        ->join('users', 'durable_articles_damageds.id_user', '=', 'users.id')
+        ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('categories', 'durable_articles_damageds.group_id', '=', 'categories.id')
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->select('durable_articles_damageds.*', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
+    'durable_articles.durableArticles_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+      /*   ->select('durable_articles_damageds.*', 'users.prefix', 'users.first_name','users.last_name'); */
 
        if ($search) {
         $data =  $data
@@ -58,7 +65,10 @@ class DurableArticlesDamagedController extends Controller
     public function create()
     {
 
-        return view("durable_articles_damaged.create");
+        $group = DB::table('categories')
+        ->where('category_id', '=', 2)->orderBy('id', 'ASC')->get();
+
+        return view("durable_articles_damaged.create",['group' =>$group]);
     }
 
     public function store(Request $request)
@@ -66,6 +76,7 @@ class DurableArticlesDamagedController extends Controller
 
         $data = new DurableArticlesDamaged;
         $data->id_user = Auth::user()->id;
+        $data->group_id = $request['group_id'];
         $data->durable_articles_id = $request['durable_articles_id'];
         $data->code_durable_articles = $request['code_durable_articles'];
         $data->durable_articles_name = $request['durable_articles_name'];
@@ -81,12 +92,12 @@ class DurableArticlesDamagedController extends Controller
         $remaining = $request['remaining_amount'];
 
         $amount =  $remaining - $damaged;
-        $amount_damaged = DurableArticles::find($request['durable_articles_id']);
+        $amount_damaged = DurableArticles::find($request['durable_articles_name']);
 
 
 
-        DurableArticles::where('id', $request['durable_articles_id'])->update([
-            'remaining_amount' =>  $amount,
+        DurableArticles::where('id', $request['durable_articles_name'])->update([
+            'remaining_amount' =>  $amount + $amount_damaged->remaining_amount,
             'damaged_number' => $amount_damaged->damaged_number + $damaged,
         ]);
 
@@ -102,9 +113,12 @@ class DurableArticlesDamagedController extends Controller
         $data =   DB::table('durable_articles_damageds')
 
         ->where('durable_articles_damageds.id', $id)
-        ->join('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.id')
-        ->select('durable_articles_damageds.*', 'durable_articles.remaining_amount')
-        ->get();
+        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('categories', 'durable_articles_damageds.group_id', '=', 'categories.id')
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->select('durable_articles_damageds.*','durable_articles.durableArticles_name',
+        'durable_articles.remaining_amount','durable_articles.durableArticles_number','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+    ->get();
 
 
         return view('durable_articles_damaged.edit',['data' =>$data]);
@@ -119,16 +133,16 @@ class DurableArticlesDamagedController extends Controller
 
 
         $data = DurableArticlesDamaged::find($id);
+        $dataArt = DurableArticles::find($data->durable_articles_name);
 
 
             if ($data["amount_damaged"] !=  $request["remaining_amount"]) {
-                $amount = $data["amount_damaged"] +  $request["remaining_amount"];
-                $amount_wit =  $amount - $request["amount_damaged"];
+                $amount = ($data["amount_damaged"] +  $dataArt["remaining_amount"]) - $request["amount_damaged"];
+                DurableArticles::where('id', $data->durable_articles_name)->update([
+                    'remaining_amount' =>  $amount,
+                    'damaged_number' =>  $request["amount_damaged"],
 
-                DurableArticles::where('id', $id)->update([
-                    'remaining_amount' =>  $amount_wit
                 ]);
-
             }
 
             DurableArticlesDamaged::where('id', $id)->update([

@@ -14,6 +14,12 @@
                             <div class="row">
                                 <p style="color: red" id="out-stock"></p>
                                 <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">หมวดหมู่ครุภัณฑ์</label>
+                                    <input type="text" class="form-control" id="group_id" name="group_id"
+                                        placeholder="รหัสครุภัณฑ์" value="{{ $data[0]->category_name }}" required
+                                        readonly />
+                                </div>
+                                <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รหัสครุภัณฑ์</label>
                                     <input type="text" class="form-control" id="code_durable_articles"
                                         name="code_durable_articles" placeholder="รหัสครุภัณฑ์"
@@ -24,19 +30,19 @@
                                     <label for="prefix" class="form-label">ชื่อ</label>
                                     <input type="text" class="form-control durable_articles-name"
                                         id="durable_articles-name" name="durable_articles_name" placeholder="ชื่อ"
-                                        value={{ $data[0]->durable_articles_name }} required readonly />
+                                        value={{ $data[0]->durableArticles_name }} required readonly />
                                     <div id="popup-durable" style="display: none;" class="mt-2">
                                         <!-- Content of the popup goes here -->
                                     </div>
                                 </div>
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">ครุภัณฑ์ที่เหลือ</label>
+                                    <label for="prefix" class="form-label">ครุภัณฑ์ทั้งหมด</label>
                                     <input type="text"
-                                        class="form-control  @error('remaining_amount') is-invalid @enderror"
-                                        id="remaining-amount" name="remaining_amount" placeholder="ครุภัณฑ์ที่เหลือ"
-                                        value={{ $data[0]->remaining_amount }} required readonly />
-                                    @error('remaining_amount')
+                                        class="form-control  @error('durableArticles_number') is-invalid @enderror"
+                                        id="remaining-amount" name="durableArticles_number" placeholder="ครุภัณฑ์ที่เหลือ"
+                                        value={{ $data[0]->durableArticles_number }} required readonly />
+                                    @error('durableArticles_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
