@@ -84,7 +84,7 @@ class DurableArticlesDamagedController extends Controller
         $data->name_durable_articles_count = $request['name_durable_articles_count'];
         $data->damaged_detail = $request['damaged_detail'];
         $data->status = "on";
-        $data->save();
+       /*  $data->save(); */
 
 
 
@@ -94,10 +94,8 @@ class DurableArticlesDamagedController extends Controller
         $amount =  $remaining - $damaged;
         $amount_damaged = DurableArticles::find($request['durable_articles_name']);
 
-
-
         DurableArticles::where('id', $request['durable_articles_name'])->update([
-            'remaining_amount' =>  $amount + $amount_damaged->remaining_amount,
+            'remaining_amount' =>   $amount_damaged->remaining_amount -  $damaged,
             'damaged_number' => $amount_damaged->damaged_number + $damaged,
         ]);
 
