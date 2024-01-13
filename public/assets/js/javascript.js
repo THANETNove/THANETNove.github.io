@@ -426,6 +426,16 @@ if (targetUrls === "durable-articles-damaged-create") {
         "durable-articles-damaged-create"
     );
 }
+//ครุภัณฑ์ซ่อม
+if (
+    targetUrls === "durable-articles-repair-index" ||
+    targetUrls === "durable-articles-repair-edit"
+) {
+    setActiveClass("durable-articles-repair", "durable-articles-repair-index");
+}
+if (targetUrls === "durable-articles-repair-create") {
+    setActiveClass("durable-articles-repair", "durable-articles-repair-create");
+}
 
 //อนุมัติ
 if (targetUrls === "approval-update") {
@@ -879,7 +889,7 @@ function groupDurableArticlesRepair(selectedValue) {
             $.each(res, function (index, data) {
                 groupName.append(
                     $("<option>", {
-                        value: data.id,
+                        value: data.durable_articles_name,
                         text: data.durableArticles_name,
                     })
                 );
@@ -896,7 +906,7 @@ $("#durable_articles_repair_name").on("change", function () {
 
     // ใช้ globalRes ที่เก็บค่า res จาก getGroup
     var foundItem = durableArticlesRepairRes.find(function (item) {
-        return item.id == selectedValue;
+        return item.durable_articles_name == selectedValue;
     });
     console.log("foundItem", foundItem);
     if (foundItem) {
