@@ -77,7 +77,7 @@
                                                                         href="{{ url('material-requisition-edit', $da->id) }}"><i
                                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
                                                                     @if (Auth::user()->status != '1')
-                                                                        <a class="dropdown-item"
+                                                                        <a class="dropdown-item alert-destroy"
                                                                             href="{{ url('material-requisition-destroy', $da->id) }}"><i
                                                                                 class="bx bx-trash me-1"></i> ยกเลิก</a>
                                                                     @endif

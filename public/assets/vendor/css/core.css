@@ -4242,7 +4242,7 @@ fieldset:disabled .btn {
 }
 
 .table-responsive {
-    min-height: 350px;
+    min-height: 80vh;
 }
 
 

@@ -71,7 +71,7 @@
                                                                             href="{{ url('durable-articles-damaged-edit', $da->id) }}"><i
                                                                                 class="bx bx-edit-alt me-1"></i> Edit</a>
                                                                         @if (Auth::user()->status == '2')
-                                                                            <a class="dropdown-item"
+                                                                            <a class="dropdown-item alert-destroy"
                                                                                 href="{{ url('durable-articles-damaged-destroy', $da->id) }}"><i
                                                                                     class="bx bx-trash me-1"></i> ยกเลิก</a>
                                                                         @endif

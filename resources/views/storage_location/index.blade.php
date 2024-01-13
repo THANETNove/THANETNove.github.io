@@ -55,7 +55,7 @@
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('storage-edit', $da->id) }}"><i
                                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                                    <a class="dropdown-item"
+                                                                    <a class="dropdown-item alert-destroy"
                                                                         href="{{ url('storage-destroy', $da->id) }}"><i
                                                                             class="bx bx-trash me-1"></i> Delete</a>
                                                                 </div>
@@ -83,7 +83,7 @@
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item"
+                                                                    <a class="dropdown-item alert-destroy"
                                                                         href="{{ url('storage-update-status', $da->id) }}">
                                                                         <i class='bx bx-up-arrow-circle'></i> update
                                                                         status</a>

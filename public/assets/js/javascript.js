@@ -933,4 +933,21 @@ $("#durable_articles_repair_name").on("change", function () {
     }
 });
 
-//
+//alert-destroy
+$(".alert-destroy").click(function () {
+    var url = $(this).attr("href");
+    confirmDestroy(url);
+    return false; // ป้องกันการทำงานของลิงก์ตามปกติ
+});
+
+function confirmDestroy(url) {
+    var userConfirmed = window.confirm("คุณต้องการทำตามนี้หรือไม่?");
+
+    if (userConfirmed) {
+        // ผู้ใช้กด "ตกลง"
+        window.location.href = url; // ทำการ redirect ไปยัง URL
+    } else {
+        // ผู้ใช้กด "ยกเลิก"
+        console.log("ผู้ใช้กดยกเลิก");
+    }
+}

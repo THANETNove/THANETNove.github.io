@@ -71,12 +71,12 @@
                                                                             href="{{ url('personnel-edit', $da->id) }}"><i
                                                                                 class="bx bx-edit-alt me-1"></i> Edit</a>
                                                                         @if (Auth::user()->id != $da->id)
-                                                                            <a class="dropdown-item"
+                                                                            <a class="dropdown-item alert-destroy"
                                                                                 href="{{ url('personnel-destroy', $da->id) }}"><i
                                                                                     class="bx bx-trash me-1"></i> Delete</a>
                                                                         @endif
                                                                     @else
-                                                                        <a class="dropdown-item"
+                                                                        <a class="dropdown-item alert-destroy"
                                                                             href="{{ url('personnel-update-status', $da->id) }}">
                                                                             <i class='bx bx-up-arrow-circle'></i> update
                                                                             status</a>

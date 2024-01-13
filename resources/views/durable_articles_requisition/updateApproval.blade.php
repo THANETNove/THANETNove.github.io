@@ -71,7 +71,7 @@
 
                                                     </td>
                                                     <td>
-                                                        <a href="{{ url('approved', $da->id) }}">
+                                                        <a href="{{ url('approved', $da->id) }}" class="alert-destroy">
                                                             <button type="button" class="btn btn-info">อนุมัติ</button>
                                                         </a>
 
@@ -130,7 +130,7 @@
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         Close
                     </button>
-                    <button type="submit" class="btn btn-primary">บันทึก</button>
+                    <button type="submit" class="btn btn-primary alert-destroy">บันทึก</button>
                 </div>
                 </form>
             </div>
