@@ -4241,6 +4241,11 @@ fieldset:disabled .btn {
     padding: 1.5rem 1.5rem;
 }
 
+.table-responsive {
+    min-height: 350px;
+}
+
+
 .card-title {
     margin-bottom: 0.875rem;
 }

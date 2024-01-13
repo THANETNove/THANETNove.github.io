@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('durable_articles_repairs', function (Blueprint $table) {
             $table->id();
             $table->string('id_user')->nullable()->comment('id user');
+            $table->string('group_id')->nullable()->comment('group_id');
             $table->string('durable_articles_id')->nullable()->comment('รหัสครุภัณฑ์');
             $table->string('code_durable_articles')->nullable()->comment('กลุ่ม/ประเภท type');
             $table->string('durable_articles_name')->nullable()->comment('ชื่อ');

@@ -33,6 +33,7 @@
                                                 <th>แทงจำหน่าย</th>
                                                 <th>ซ่อม</th>
                                                 <th>ที่จัดเก็บ</th>
+                                                <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
 
                                             </tr>
@@ -57,6 +58,7 @@
                                                         <td>{{ $da->repair_number }}</td>
                                                         <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
                                                             {{ $da->room_name }}</td>
+                                                        <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                         <td>
                                                             <div class="dropdown">
                                                                 <button type="button"

@@ -52,20 +52,19 @@
                                                             <span class="badge bg-label-success me-1">ชำรุด</span>
                                                         @elseif ($da->status == '1')
                                                             <span class="badge bg-label-warning me-1">ยกเลิก</span>
-                                                        @else
-                                                            <span class="badge bg-label-primary me-1">ซ่อมเสร็จเเล้ว</span>
                                                         @endif
                                                     </td>
                                                     <td>{{ $da->damaged_detail }}</td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button type="button"
-                                                                class="btn p-0 dropdown-toggle hide-arrow"
-                                                                data-bs-toggle="dropdown">
-                                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                                            </button>
-                                                            @if ($da->status == 'on')
+                                                    @if ($da->status == '0')
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button type="button"
+                                                                    class="btn p-0 dropdown-toggle hide-arrow"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+
                                                                 <div class="dropdown-menu">
                                                                     @if (Auth::user()->status > '0')
                                                                         <a class="dropdown-item"
@@ -78,9 +77,10 @@
                                                                         @endif
                                                                     @endif
                                                                 </div>
-                                                            @endif
-                                                        </div>
-                                                    </td>
+
+                                                            </div>
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                             @endforeach
                                         </tbody>

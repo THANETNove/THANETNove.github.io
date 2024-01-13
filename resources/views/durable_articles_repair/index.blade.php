@@ -31,57 +31,59 @@
                                         @php
                                             $i = 1;
                                         @endphp
-                                        {{--   <tbody class="table-border-bottom-0">
+                                        <tbody class="table-border-bottom-0">
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->code_durable_articles }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->amount_damaged }}</td>
+                                                    <td>{{ $da->amount_repair }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
-                                                    @if (Auth::user()->status != '0')
-                                                        <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
-                                                        </td>
-                                                    @endif
+
                                                     <td>
-                                                        @if ($da->status == 'on')
-                                                            <span class="badge bg-label-success me-1">ชำรุด</span>
-                                                        @else
+                                                        @if ($da->status == '0')
+                                                            <span class="badge bg-label-success me-1">ซ่อม</span>
+                                                        @elseif ($da->status == '1')
                                                             <span class="badge bg-label-warning me-1">ยกเลิก</span>
+                                                        @else
+                                                            <span class="badge bg-label-warning me-1">ซ่อมสำเร็จ</span>
                                                         @endif
                                                     </td>
-                                                    <td>{{ $da->damaged_detail }}</td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button type="button"
-                                                                class="btn p-0 dropdown-toggle hide-arrow"
-                                                                data-bs-toggle="dropdown">
-                                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                                            </button>
-                                                            @if ($da->status == 'on')
+                                                    <td>{{ $da->repair_detail }}</td>
+                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+                                                    @if ($da->status == '0')
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button type="button"
+                                                                    class="btn p-0 dropdown-toggle hide-arrow"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
                                                                 <div class="dropdown-menu">
-                                                                    @if (Auth::user()->status > '0')
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ url('durable-articles-damaged-edit', $da->id) }}"><i
+                                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                    @if (Auth::user()->status == '2')
                                                                         <a class="dropdown-item"
-                                                                            href="{{ url('durable-articles-damaged-edit', $da->id) }}"><i
-                                                                                class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                                        @if (Auth::user()->status == '2')
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ url('durable-articles-damaged-destroy', $da->id) }}"><i
-                                                                                    class="bx bx-trash me-1"></i> ยกเลิก</a>
-                                                                        @endif
+                                                                            href="{{ url('durable-articles-damaged-destroy', $da->id) }}"><i
+                                                                                class="bx bx-trash me-1"></i> ยกเลิก</a>
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ url('durable-articles-damaged-destroy', $da->id) }}">
+                                                                            <i class='bx bxs-check-circle'></i>
+                                                                            ซ่อมสำเร็จ</a>
                                                                     @endif
                                                                 </div>
-                                                            @endif
-                                                        </div>
-                                                    </td>
+                                                            </div>
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                             @endforeach
-                                        </tbody> --}}
+                                        </tbody>
                                     </table>
-                                    {{-- <div class="mt-5">
+                                    <div class="mt-5">
                                         {!! $data->links() !!}
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
 

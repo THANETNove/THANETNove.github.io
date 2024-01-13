@@ -850,3 +850,77 @@ $("#durable_articles_damaged_name").on("change", function () {
         );
     }
 });
+
+//ระบบซ่อม groupDurableArticlesRepair
+
+var durableArticlesRepairRes;
+function groupDurableArticlesRepair(selectedValue) {
+    $.ajax({
+        url: "get-articlesRepair/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            durableArticlesRepairRes = res;
+            console.log("res", res);
+            var groupName = $("#durable_articles_repair_name");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกวัสดุ",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.durableArticles_name,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+}
+
+$("#durable_articles_repair_name").on("change", function () {
+    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+
+    // ใช้ globalRes ที่เก็บค่า res จาก getGroup
+    var foundItem = durableArticlesRepairRes.find(function (item) {
+        return item.id == selectedValue;
+    });
+    console.log("foundItem", foundItem);
+    if (foundItem) {
+        console.log("5555");
+        /*       if (foundItem.remaining_amount == 0) {
+            document.getElementById("out-stock").textContent =
+                " วัสดุหมดแล้ว ไม่สามารถเบิกได้";
+            var popup = document.getElementById("submit");
+            popup.style.display = "none";
+        } else {
+            document.getElementById("out-stock").textContent = "";
+            var popup = document.getElementById("submit");
+            popup.style.display = "block";
+        } */
+
+        document
+            .getElementById("amount_withdraw")
+            .setAttribute("max", foundItem.durableArticles_number);
+        $("#code_durable_articles").val(foundItem.code_durable_articles);
+        $("#amount_withdraw").val(foundItem.amount_damaged);
+        $("#name-durable_articles-count").val(
+            foundItem.name_durable_articles_count
+        );
+    }
+});
+
+//
