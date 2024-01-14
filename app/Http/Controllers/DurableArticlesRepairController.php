@@ -112,4 +112,30 @@ class DurableArticlesRepairController extends Controller
 
         return redirect('durable-articles-repair-index')->with('message', "บันทึกสำเร็จ");
     }
+
+    public function edit(string $id)
+    {
+
+    $data = DB::table('durable_articles_repairs')
+    ->leftJoin('durable_articles', 'durable_articles_repairs.durable_articles_name', '=', 'durable_articles.id')
+    ->leftJoin('categories', 'durable_articles_repairs.group_id', '=', 'categories.id')
+    ->select('durable_articles_repairs.*','durable_articles.durableArticles_name','categories.category_name')
+    ->get();
+
+    return view("durable_articles_repair.edit",['data' => $data]);
+    }
+
+    public function update(Request $request ,string $id)
+    {
+
+        $data =  DurableArticlesRepair::find($id);
+        $data->repair_detail = $request['repair_detail'];
+        $data->save();
+
+        return redirect('durable-articles-repair-index')->with('message', "บันทึกสำเร็จ");
+
+
+
+
+    }
 }

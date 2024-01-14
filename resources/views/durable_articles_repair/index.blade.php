@@ -62,7 +62,7 @@
                                                                 </button>
                                                                 <div class="dropdown-menu">
                                                                     <a class="dropdown-item"
-                                                                        href="{{ url('durable-articles-damaged-edit', $da->id) }}"><i
+                                                                        href="{{ url('get-articlesRepair-edit', $da->id) }}"><i
                                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
                                                                     @if (Auth::user()->status == '2')
                                                                         <a class="dropdown-item alert-destroy"
