@@ -47,7 +47,7 @@
                                                         @elseif ($da->status == '1')
                                                             <span class="badge bg-label-warning me-1">ยกเลิก</span>
                                                         @else
-                                                            <span class="badge bg-label-warning me-1">ซ่อมสำเร็จ</span>
+                                                            <span class="badge bg-label-primary me-1">ซ่อมสำเร็จ</span>
                                                         @endif
                                                     </td>
                                                     <td>{{ $da->repair_detail }}</td>
@@ -68,8 +68,8 @@
                                                                         <a class="dropdown-item alert-destroy"
                                                                             href="{{ url('get-articlesRepair-destroy', $da->id) }}"><i
                                                                                 class="bx bx-trash me-1"></i> ยกเลิก</a>
-                                                                        <a class="dropdown-item"
-                                                                            href="{{ url('durable-articles-damaged-destroy', $da->id) }}">
+                                                                        <a class="dropdown-item  alert-destroy"
+                                                                            href="{{ url('get-articlesRepair-updateRepair', $da->id) }}">
                                                                             <i class='bx bxs-check-circle'></i>
                                                                             ซ่อมสำเร็จ</a>
                                                                     @endif

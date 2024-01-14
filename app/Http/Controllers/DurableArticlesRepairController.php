@@ -161,4 +161,33 @@ class DurableArticlesRepairController extends Controller
         return redirect('durable-articles-repair-index')->with('message', "บันทึกสำเร็จ");
 
     }
+
+
+    public function updateRepair($id)
+    {
+
+
+        $data =  DurableArticlesRepair::find($id);
+        $dataArt =  DurableArticles::find($data->durable_articles_name);
+
+
+
+        DurableArticlesDamaged::where('id',  $data->durable_articles_id)->update([
+            'status' =>  "3",
+
+        ]);
+        DurableArticles::where('id',  $data->durable_articles_name)->update([
+            'repair_number' =>   $dataArt->repair_number - $data->amount_repair,
+            'damaged_number' =>   $dataArt->damaged_number - $data->amount_repair,
+            'remaining_amount' =>   $dataArt->remaining_amount + $data->amount_repair,
+
+        ]);
+
+        $data->status = "2";
+        $data->save();
+
+
+        return redirect('durable-articles-repair-index')->with('message', "บันทึกสำเร็จ");
+
+    }
 }
