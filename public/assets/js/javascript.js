@@ -950,6 +950,68 @@ $("#durable_articles_repair_name").on("change", function () {
         $("#durable_articles_name").val(foundItem.durable_articles_name);
     }
 });
+//ระบบเเทงจำหน่าย
+
+var betDistributionRes;
+function groupBetDistribution(selectedValue) {
+    $.ajax({
+        url: "get-bet-distribution/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            durableArticlesRepairRes = res;
+            console.log("res", res);
+            var groupName = $("#durable_articles_repair_name");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกวัสดุ",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.durableArticles_name,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+}
+
+$("#durable_articles_repair_name").on("change", function () {
+    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+
+    // ใช้ globalRes ที่เก็บค่า res จาก getGroup
+    var foundItem = betDistributionRes.find(function (item) {
+        return item.id == selectedValue;
+    });
+    console.log("foundItem", foundItem);
+
+    if (foundItem) {
+        document
+            .getElementById("amount_withdraw")
+            .setAttribute("max", foundItem.durableArticles_number);
+        $("#code_durable_articles").val(foundItem.code_durable_articles);
+        $("#amount_withdraw").val(foundItem.amount_damaged);
+        $("#name-durable_articles-count").val(
+            foundItem.name_durable_articles_count
+        );
+        $("#durable_articles_id").val(foundItem.id);
+        $("#durable_articles_name").val(foundItem.durable_articles_name);
+    }
+});
 
 //alert-destroy
 $(".alert-destroy").click(function () {

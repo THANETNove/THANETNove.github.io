@@ -89,6 +89,26 @@ class BetDistributionController extends Controller
         return view("bet_distribution.create",['group' => $group]);
     }
 
+    public function betDistribution($id)
+    {
+
+
+        $data = DB::table('durable_articles_damageds')
+        ->where('durable_articles_damageds.group_id', $id)
+        ->where('durable_articles_damageds.status', 0)
+        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('bet_distributions', function ($join) {
+            $join->on('bet_distributions.code_durable_articles', '=', 'durable_articles_damageds.code_durable_articles')
+                ->where('bet_distributions.status', '<' ,2);
+        })
+        ->select('durable_articles_damageds.*', 'durable_articles.durableArticles_name')
+        ->whereNull('bet_distributions.id') // Check if there is no corresponding record in bet_distributions
+        ->orderBy('durable_articles_damageds.id', 'ASC')
+        ->get();
+
+
+        return response()->json($data);
+    }
     /**
      * Store a newly created resource in storage.
      */

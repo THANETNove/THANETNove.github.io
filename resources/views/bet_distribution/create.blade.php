@@ -26,8 +26,8 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">หมวดหมู่ครุภัณฑ์</label>
-                                    <select class="form-select" onchange="groupDurableArticlesRepair(this.value)"
-                                        id="id-group" name="group_id" aria-label="Default select example">
+                                    <select class="form-select" onchange="groupBetDistribution(this.value)" id="id-group"
+                                        name="group_id" aria-label="Default select example">
                                         <option selected disabled>เลือกหมวดหมู่</option>
                                         @foreach ($group as $gro)
                                             <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>

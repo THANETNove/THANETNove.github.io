@@ -178,6 +178,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('bet-distribution-indexApproval', [BetDistributionController::class, 'indexApproval'])->name('bet-distribution-indexApproval');
     Route::get('approved_bet_distribution/{id}', [BetDistributionController::class, 'approvedBetDistribution'])->name('approved_bet_distribution');
     Route::post('not-approved-bet-distribution', [BetDistributionController::class, 'notApprovedBetDistribution'])->name('not-approved-bet-distribution');
+    Route::get('get-bet-distribution/{id}', [BetDistributionController::class, 'betDistribution'])->name('get-bet-distribution');
 
 });
 
