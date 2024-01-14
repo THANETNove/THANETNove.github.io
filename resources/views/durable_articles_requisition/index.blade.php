@@ -128,7 +128,7 @@
                                                                             class="bx bx-trash me-1"></i> ยกเลิก</a>
                                                                 @endif
                                                                 @if ($da->statusApproval == '1' && $da->status == '0')
-                                                                    @if (Auth::user()->status > '0')
+                                                                    @if (Auth::user()->status > '1')
                                                                         <a class="dropdown-item alert-destroy"
                                                                             href="{{ url('durable-articles-requisition-return', $da->id) }}">
 
