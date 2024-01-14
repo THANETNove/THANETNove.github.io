@@ -163,11 +163,11 @@ class DurableArticlesRepairController extends Controller
     }
 
 
-    public function updateRepair($id)
+    public function updateRepair(Request $request)
     {
 
 
-        $data =  DurableArticlesRepair::find($id);
+        $data =  DurableArticlesRepair::find($request['id']);
         $dataArt =  DurableArticles::find($data->durable_articles_name);
 
 
@@ -184,6 +184,7 @@ class DurableArticlesRepairController extends Controller
         ]);
 
         $data->status = "2";
+        $data->repair_price = $request['repair_price'];
         $data->save();
 
 

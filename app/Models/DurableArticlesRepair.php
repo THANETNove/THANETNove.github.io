@@ -16,7 +16,8 @@ class DurableArticlesRepair extends Model
         'durable_articles_name', // ชื่อ
         'amount_repair', // จำนวนที่เบิก
         'name_durable_articles_count', // ชื่อเรียกจำนวนนับครุภัณฑ์
-        'repair_detail', // รายละเอียดการชำรุด
+        'repair_detail', // รายละเอียดการซ่อม
+        'repair_price', // ราคาค่าซ่อม
         'status', //สถานะ on/ off
     ];
 }

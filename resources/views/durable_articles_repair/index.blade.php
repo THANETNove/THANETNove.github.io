@@ -24,6 +24,7 @@
                                                 <th>จำนวนที่ซ่อม</th>
                                                 <th>หน่วยนับ</th>
                                                 <th>สถานะ </th>
+                                                <th>ค่าซ่อม </th>
                                                 <th>รายละเอียด</th>
                                                 <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
@@ -39,9 +40,8 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->code_durable_articles }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->amount_repair }}</td>
+                                                    <td>{{ number_format($da->amount_repair) }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
-
                                                     <td>
                                                         @if ($da->status == '0')
                                                             <span class="badge bg-label-success me-1">ซ่อม</span>
@@ -51,6 +51,7 @@
                                                             <span class="badge bg-label-primary me-1">ซ่อมสำเร็จ</span>
                                                         @endif
                                                     </td>
+                                                    <td>{{ number_format($da->repair_price) }}</td>
                                                     <td>{{ $da->repair_detail }}</td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                     @if ($da->status == '0')
@@ -69,10 +70,17 @@
                                                                         <a class="dropdown-item alert-destroy"
                                                                             href="{{ url('get-articlesRepair-destroy', $da->id) }}"><i
                                                                                 class="bx bx-trash me-1"></i> ยกเลิก</a>
-                                                                        <a class="dropdown-item  alert-destroy"
+                                                                        {{--  <a class="dropdown-item  alert-destroy"
                                                                             href="{{ url('get-articlesRepair-updateRepair', $da->id) }}">
                                                                             <i class='bx bxs-check-circle'></i>
-                                                                            ซ่อมสำเร็จ</a>
+                                                                            ซ่อมสำเร็จ</a> --}}
+                                                                        <a class="dropdown-item updateRepair"
+                                                                            onclick="setId('{{ $da->id }}')"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#modalCenter">
+                                                                            <i class='bx bxs-check-circle'></i>
+                                                                            ซ่อมสำเร็จ
+                                                                        </a>
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -94,6 +102,51 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">ราคาค่าซ่อม</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="user" id="myForm" method="POST"
+                        action="{{ route('get-articlesRepair-updateRepair') }}">
+                        @csrf
+
+                        <input type="text" name="id" id="rejectedId" value="" style="display: none;">
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="nameWithTitle" class="form-label">ราคาค่าซ่อม</label>
+                                <div class="input-group input-group-merge">
+
+                                    <input type="number" name="repair_price" class="form-control" id="repair_price">
+
+                                    {{--      <textarea id="basic-icon-default-message" name="commentApproval" class="form-control" placeholder="หมายเหตุ"
+                                        aria-label="หมายเหตุ" aria-describedby="basic-icon-default-message2" style="height: 78px;"></textarea> --}}
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary ">บันทึก</button>
+                </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setId(id) {
+            $('#rejectedId').val(id);
+        }
+    </script>
 
     <!-- / Layout wrapper -->
 @endsection

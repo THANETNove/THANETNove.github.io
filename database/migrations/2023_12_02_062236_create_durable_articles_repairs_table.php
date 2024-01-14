@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('amount_repair')->nullable()->comment('จำนวนที่ซ่อม');
             $table->string('name_durable_articles_count')->nullable()->comment('ชื่อเรียก');
             $table->string('repair_detail')->nullable()->comment('รายละเอียดการซ่อม');
+            $table->string('repair_price')->nullable()->comment('ราคาค่าซ่อม');
             $table->string('status')->nullable()->comment('สถานะ on/ off');
             $table->timestamps();
         });
