@@ -50,9 +50,9 @@
                                                         </td>
                                                         <td>{{ $da->category_name }}</td>
                                                         <td>{{ $da->material_name }}</td>
-                                                        <td>{{ $da->material_number }}</td>
+                                                        <td>{{ number_format($da->material_number) }}</td>
                                                         {{--  <td>{{ $da->material_number_pack_dozen }}</td> --}}
-                                                        <td>{{ $da->remaining_amount }}</td>
+                                                        <td>{{ number_format($da->remaining_amount) }}</td>
                                                         <td>{{ $da->name_material_count }}</td>
                                                         <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
                                                             {{ $da->room_name }}</td>

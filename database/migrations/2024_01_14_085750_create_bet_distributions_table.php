@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('name_durable_articles_count')->nullable()->comment('ชื่อเรียก');
             $table->string('repair_detail')->nullable()->comment('รายละเอียดการซ่อม');
             $table->string('status')->nullable()->comment('สถานะ on/ off');
+            $table->string('statusApproval')->nullable()->comment('สถานะการอนุมัติ 0 = รอการอนุมัติ 1 = อนุมัติ 2 = ไม่อนุมัติ');
+            $table->string('commentApproval')->nullable()->comment('รายละเอียดการไม่อนุมัติ');
+            $table->string('salvage_price')->nullable()->comment('ราคาซาก');
             $table->timestamps();
         });
     }

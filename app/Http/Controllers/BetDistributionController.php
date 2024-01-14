@@ -40,6 +40,36 @@ class BetDistributionController extends Controller
         return view('bet_distribution.index',['data' => $data  ]);
     }
 
+
+    public function indexApproval(Request $request)
+    {
+        $search =  $request['search'];
+
+        $data = DB::table('bet_distributions')
+        ->where('bet_distributions.status', '=', "on")
+        ->where('bet_distributions.statusApproval', '=', "0")
+        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
+        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name');
+
+
+       if ($search) {
+        $data =  $data
+            ->where('category_name', 'LIKE', "%$search%")
+            ->orWhere('durableArticles_name', 'LIKE', "%$search%");
+
+        }
+
+
+
+        $data = $data->orderBy('bet_distributions.id','DESC')->paginate(100);
+
+        return view('bet_distribution.indexApproval',['data' => $data  ]);
+    }
+
+
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -73,29 +103,11 @@ class BetDistributionController extends Controller
         $data->durable_articles_name = $request['durable_articles_name'];
         $data->amount_bet_distribution = $request['amount_bet_distribution'];
         $data->name_durable_articles_count = $request['name_durable_articles_count'];
+        $data->salvage_price = $request['salvage_price'];
         $data->repair_detail = $request['repair_detail'];
         $data->status = "on";
+        $data->statusApproval = "0";
         $data->save();
-
-        $repair =  $request['amount_bet_distribution'];
-        $remaining = $request['remaining_amount'];
-
-        $amount =  $remaining - $repair;
-        $amount_repair = DurableArticles::find($request['durable_articles_name']);
-
-
-
-        DurableArticles::where('id', $request['durable_articles_name'])->update([
-            'bet_on_distribution_number' => $amount_repair->bet_on_distribution_number + $repair,
-            'durableArticles_number' => $amount_repair->durableArticles_number - $repair,
-            'damaged_number' => $amount_repair->damaged_number - $repair,
-        ]);
-
-        DurableArticlesDamaged::where('id', $request['durable_articles_id'])->update([
-            'status' => "4", // เเทงจำหน่าย
-        ]);
-
-
 
 
 
@@ -132,6 +144,7 @@ class BetDistributionController extends Controller
 
         $data =  BetDistribution::find($id);
         $data->repair_detail = $request['repair_detail'];
+        $data->salvage_price = $request['salvage_price'];
         $data->save();
         return redirect('bet-distribution-index')->with('message', "บันทึกสำเร็จ");
     }

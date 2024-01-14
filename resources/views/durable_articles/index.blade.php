@@ -50,12 +50,12 @@
                                                         </td>
                                                         <td>{{ $da->category_name }}</td>
                                                         <td>{{ $da->durableArticles_name }}</td>
-                                                        <td>{{ $da->durableArticles_number }}</td>
-                                                        <td>{{ $da->remaining_amount }}</td>
+                                                        <td>{{ number_format($da->durableArticles_number) }}</td>
+                                                        <td>{{ number_format($da->remaining_amount) }}</td>
                                                         <td>{{ $da->name_durableArticles_count }}</td>
-                                                        <td>{{ $da->damaged_number }}</td>
-                                                        <td>{{ $da->bet_on_distribution_number }}</td>
-                                                        <td>{{ $da->repair_number }}</td>
+                                                        <td>{{ number_format($da->damaged_number) }}</td>
+                                                        <td>{{ number_format($da->bet_on_distribution_number) }}</td>
+                                                        <td>{{ number_format($da->repair_number) }}</td>
                                                         <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
                                                             {{ $da->room_name }}</td>
                                                         <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>

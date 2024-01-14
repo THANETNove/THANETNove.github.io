@@ -80,6 +80,18 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
+                                    <label for="salvage_price" class="form-label">ราคาซาก
+                                    </label>
+                                    <input type="number" class="form-control @error('salvage_price') is-invalid @enderror"
+                                        id="salvage_price" name="salvage_price" placeholder="ราคาซาก" min="1"
+                                        required />
+                                    @error('salvage_price')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รายละเอียดการซ่อม</label>
                                     <textarea class="form-control" id="exampleFormControlTextarea1" name="repair_detail" rows="3"></textarea>
                                 </div>

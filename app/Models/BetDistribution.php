@@ -18,5 +18,8 @@ class BetDistribution extends Model
         'name_durable_articles_count', // ชื่อเรียกจำนวนนับครุภัณฑ์
         'repair_detail', // รายละเอียดการเเทงจำหน่าย
         'status', //สถานะ on/ off
+        'statusApproval', //สถานะ on/ off
+        'commentApproval', //สถานะ on/ off
+        'salvage_price', //สถานะ on/ off
     ];
 }

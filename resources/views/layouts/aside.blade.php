@@ -251,6 +251,13 @@
                     <div data-i18n="Authentications">ระบบการเเทงจำหน่ายครุภัณฑ์</div>
                 </a>
                 <ul class="menu-sub">
+                    @if (Auth::user()->status == 2)
+                        <li class="menu-item" id="bet-distribution-indexApproval">
+                            <a href="{{ url('bet-distribution-indexApproval') }}" class="menu-link">
+                                <div data-i18n="Basic">อนุมัติเเทงจำหน่ายครุภัณฑ์</div>
+                            </a>
+                        </li>
+                    @endif
                     <li class="menu-item" id="bet-distribution-index">
                         <a href="{{ url('bet-distribution-index') }}" class="menu-link">
                             <div data-i18n="Basic">การเเทงจำหน่ายครุภัณฑ์</div>

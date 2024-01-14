@@ -447,6 +447,9 @@ if (
 if (targetUrls === "bet-distribution-create") {
     setActiveClass("bet-distribution", "bet-distribution-create");
 }
+if (targetUrls === "bet-distribution-indexApproval") {
+    setActiveClass("bet-distribution", "bet-distribution-indexApproval");
+}
 
 //อนุมัติ
 if (targetUrls === "approval-update") {
