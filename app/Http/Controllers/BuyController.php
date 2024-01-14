@@ -52,10 +52,13 @@ class BuyController extends Controller
 
     public function categories($id)
     {
-        $data = DB::table('categories')
-        ->where('category_id', '=', $id)
-        ->orderBy('id', 'ASC')
-        ->get();
+
+
+       $data = DB::table('categories')
+       ->where('category_id', '=', $id)
+       ->orderBy('categories.id', 'ASC')
+       ->get();
+
 
         return response()->json($data);
     }
@@ -75,14 +78,14 @@ class BuyController extends Controller
             ->get();
         }else{
             $data = DB::table('durable_articles')
-            ->leftJoin('buys', 'durable_articles.id', '=', 'buys.buy_name')
             ->where('durable_articles.group_id', '=', $id)
-          /*   ->where('durable_articles.buy_name', '!=', 'buys.id') // เพิ่มเงื่อนไขนี้ */
+            ->leftJoin('buys', 'durable_articles.id', '=', 'buys.buy_name')
+            ->whereRaw('buys.buy_name IS NULL OR durable_articles.id != buys.buy_name') // เพิ่มเงื่อนไขนี้
             ->select('durable_articles.*')
             ->orderBy('durable_articles.id', 'ASC')
             ->get();
 
-            /* dd($data); */
+
         }
 
 
@@ -223,7 +226,7 @@ class BuyController extends Controller
             $amount = ($dura[0]->remaining_amount -  $data->quantity) + $request['quantity'] ;
             $dur =  DurableArticles::find($dura[0]->id);
             $dur->durableArticles_number =  $number;
-            $mat->remaining_amount =  $amount;
+            $dur->remaining_amount =  $amount;
             $dur->save();
         }
 
@@ -232,6 +235,7 @@ class BuyController extends Controller
         $data->counting_unit = $request['counting_unit'];
         $data->price_per_piece = $request['price_per_piece'];
         $data->total_price = $request['total_price'];
+        $data->date_enter = $request['date_enter'];
         $data->details = $request['details'];
         $data->save();
 

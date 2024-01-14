@@ -97,13 +97,27 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-
                                 </div>
+
+
                                 <div class="mb-3 col-md-6">
                                     <label for="total_price" class="form-label">ราคารวม</label>
                                     <input id="total_price" type="number" value="{{ $buy[0]->total_price }}"
                                         class="form-control @error('total_price') is-invalid @enderror" name="total_price"
                                         required placeholder="ชื่อเรียกจำนวนนับวัสดุ" autocomplete="total_price">
+
+                                    @error('total_price')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="total_price" class="form-label">วันรับเข้า</label>
+
+                                    <input class="date form-control" type="text" value="{{ $buy[0]->date_enter }}"
+                                        name="date_enter" placeholder="dd-mm-yyyy">
 
                                     @error('total_price')
                                         <span class="invalid-feedback" role="alert">

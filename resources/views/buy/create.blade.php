@@ -96,7 +96,7 @@
                                     <label for="price_per_piece" class="form-label">ราคาต่อ (ชิ้น,หน่วย,อื่นๆ)</label>
                                     <input id="price_per_piece" type="number"
                                         class="form-control @error('price_per_piece') is-invalid @enderror"
-                                        name="price_per_piece" placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" required
+                                        name="price_per_piece" placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" min="1" required
                                         autocomplete="price_per_piece">
 
                                     @error('price_per_piece')
@@ -110,7 +110,8 @@
                                     <label for="total_price" class="form-label">ราคารวม</label>
                                     <input id="total_price" type="number"
                                         class="form-control @error('total_price') is-invalid @enderror" name="total_price"
-                                        required placeholder="ชื่อเรียกจำนวนนับวัสดุ" autocomplete="total_price">
+                                        required placeholder="ชื่อเรียกจำนวนนับวัสดุ" min="1"
+                                        autocomplete="total_price">
 
                                     @error('total_price')
                                         <span class="invalid-feedback" role="alert">
@@ -122,7 +123,8 @@
                                 <div class="mb-3 col-md-6">
                                     <label for="total_price" class="form-label">วันรับเข้า</label>
 
-                                    <input class="date form-control" type="text" name="date_enter">
+                                    <input class="date form-control" type="text" name="date_enter"
+                                        placeholder="dd-mm-yyyy">
 
                                     @error('total_price')
                                         <span class="invalid-feedback" role="alert">
