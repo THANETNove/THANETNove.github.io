@@ -451,6 +451,12 @@ if (targetUrls === "bet-distribution-indexApproval") {
     setActiveClass("bet-distribution", "bet-distribution-indexApproval");
 }
 
+//เเทงจำหน่ายครุภัณฑ์
+
+if (targetUrls === "calculator-create") {
+    setActiveClass("calculator", "calculator-create");
+}
+
 //อนุมัติ
 if (targetUrls === "approval-update") {
     setActiveClass("approval", "approval-update");

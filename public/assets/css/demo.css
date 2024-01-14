@@ -170,3 +170,7 @@
 .updateRepair {
     cursor: pointer;
 }
+
+.mb-10 {
+    padding-bottom: 100px;
+}

@@ -271,6 +271,19 @@
 
                 </ul>
             </li>
+            <li class="menu-item  mb-10" id="calculator">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class='menu-icon tf-icons bx bxs-calculator'></i>
+                    <div data-i18n="Authentications">ระบบการคำนวณค่าเสื่อม</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="calculator-create">
+                        <a href="{{ url('calculator-create') }}" class="menu-link">
+                            <div data-i18n="Basic">คำนวณค่าเสื่อม</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         @endif
 
     </ul>
