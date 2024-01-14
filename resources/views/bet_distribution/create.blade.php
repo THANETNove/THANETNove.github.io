@@ -8,7 +8,7 @@
                 <div class="card ">
                     <div class="card-body">
                         <h1 class="card-title text-primary ">ลงทะเบียนเเทงจำหน่ายครุภัณฑ์</h1>
-                        <form method="POST" action="{{ route('durable-articles-repair-store') }}">
+                        <form method="POST" action="{{ route('bet-distribution-store') }}">
                             @csrf
                             <div class="row">
                                 <p style="color: red" id="out-stock"></p>

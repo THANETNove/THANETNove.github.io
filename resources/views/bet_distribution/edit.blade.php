@@ -8,7 +8,7 @@
                 <div class="card ">
                     <div class="card-body">
                         <h1 class="card-title text-primary ">เเก้ไขลงทะเบียนซ่อมครุภัณฑ์</h1>
-                        <form method="POST" action="{{ route('durable-articles-repair-update', $data[0]->id) }}">
+                        <form method="POST" action="{{ route('bet-distribution-update', $data[0]->id) }}">
                             @csrf
                             @method('PUT')
                             <div class="row">
@@ -51,10 +51,12 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">จำนวนที่ซ่อม</label>
-                                    <input type="number" class="form-control @error('amount_repair') is-invalid @enderror"
-                                        id="amount_withdraw" name="amount_repair" value="{{ $data[0]->amount_repair }}"
-                                        placeholder="จำนวนที่ชำรุด" min="1" required readonly />
-                                    @error('amount_repair')
+                                    <input type="number"
+                                        class="form-control @error('amount_bet_distribution') is-invalid @enderror"
+                                        id="amount_withdraw" name="amount_bet_distribution"
+                                        value="{{ $data[0]->amount_bet_distribution }}" placeholder="จำนวนที่ชำรุด"
+                                        min="1" required readonly />
+                                    @error('amount_bet_distribution')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

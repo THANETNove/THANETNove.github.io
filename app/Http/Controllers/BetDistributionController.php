@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DurableArticles;
+use App\Models\BetDistribution;
+use App\Models\DurableArticlesDamaged;
 use DB;
 use Auth;
 use PDF;
@@ -14,9 +16,28 @@ class BetDistributionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('bet_distribution.index');
+        $search =  $request['search'];
+
+        $data = DB::table('bet_distributions')
+        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
+        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name');
+
+
+       if ($search) {
+        $data =  $data
+            ->where('category_name', 'LIKE', "%$search%")
+            ->orWhere('durableArticles_name', 'LIKE', "%$search%");
+
+        }
+
+
+
+        $data = $data->orderBy('bet_distributions.id','DESC')->paginate(100);
+
+        return view('bet_distribution.index',['data' => $data  ]);
     }
 
     /**
@@ -44,21 +65,19 @@ class BetDistributionController extends Controller
     public function store(Request $request)
     {
 
-        $data = new DurableArticlesRepair;
+        $data = new BetDistribution;
         $data->id_user = Auth::user()->id;
         $data->group_id = $request['group_id'];
         $data->durable_articles_id = $request['durable_articles_id'];
         $data->code_durable_articles = $request['code_durable_articles'];
         $data->durable_articles_name = $request['durable_articles_name'];
-        $data->amount_repair = $request['amount_repair'];
+        $data->amount_bet_distribution = $request['amount_bet_distribution'];
         $data->name_durable_articles_count = $request['name_durable_articles_count'];
         $data->repair_detail = $request['repair_detail'];
-        $data->status = "0";
+        $data->status = "on";
         $data->save();
 
-
-
-        $repair =  $request['amount_repair'];
+        $repair =  $request['amount_bet_distribution'];
         $remaining = $request['remaining_amount'];
 
         $amount =  $remaining - $repair;
@@ -67,14 +86,20 @@ class BetDistributionController extends Controller
 
 
         DurableArticles::where('id', $request['durable_articles_name'])->update([
-            'repair_number' => $amount_repair->repair_number + $repair,
+            'bet_on_distribution_number' => $amount_repair->bet_on_distribution_number + $repair,
+            'durableArticles_number' => $amount_repair->durableArticles_number - $repair,
+            'damaged_number' => $amount_repair->damaged_number - $repair,
         ]);
+
         DurableArticlesDamaged::where('id', $request['durable_articles_id'])->update([
-            'status' => "3", // ส่งซ่อม
+            'status' => "4", // เเทงจำหน่าย
         ]);
 
 
-        return redirect('durable-articles-repair-index')->with('message', "บันทึกสำเร็จ");
+
+
+
+        return redirect('bet-distribution-index')->with('message', "บันทึกสำเร็จ");
     }
 
     /**
@@ -90,7 +115,13 @@ class BetDistributionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = DB::table('bet_distributions')
+        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
+        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name')
+        ->get();
+
+        return view("bet_distribution.edit",['data' => $data]);
     }
 
     /**
@@ -98,7 +129,11 @@ class BetDistributionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $data =  BetDistribution::find($id);
+        $data->repair_detail = $request['repair_detail'];
+        $data->save();
+        return redirect('bet-distribution-index')->with('message', "บันทึกสำเร็จ");
     }
 
     /**
@@ -107,5 +142,25 @@ class BetDistributionController extends Controller
     public function destroy(string $id)
     {
         //
+
+
+        $data =  BetDistribution::find($id);
+        $dataArt =  DurableArticles::find($data['durable_articles_name']);
+        $data->status = "off";
+
+        DurableArticles::where('id', $data['durable_articles_name'])->update([
+            'bet_on_distribution_number' => $dataArt->bet_on_distribution_number - $data->amount_bet_distribution,
+            'durableArticles_number' => $dataArt->durableArticles_number + $data->amount_bet_distribution,
+            'damaged_number' => $dataArt->damaged_number + $data->amount_bet_distribution,
+        ]);
+
+        DurableArticlesDamaged::where('id', $data['durable_articles_id'])->update([
+            'status' => "0", // เเทงจำหน่าย
+        ]);
+
+        $data->save();
+
+        return redirect('bet-distribution-index')->with('message', "บันทึกสำเร็จ");
+
     }
 }

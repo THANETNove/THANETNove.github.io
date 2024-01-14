@@ -21,7 +21,7 @@
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>รหัสครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
-                                                <th>จำนวนที่ซ่อม</th>
+                                                <th>จำนวนที่เเทงจำหน่าย</th>
                                                 <th>หน่วยนับ</th>
                                                 <th>สถานะ </th>
                                                 <th>รายละเอียด</th>
@@ -33,27 +33,25 @@
                                             $i = 1;
                                         @endphp
                                         <tbody class="table-border-bottom-0">
-                                            {{--   @foreach ($data as $da)
+                                            @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->code_durable_articles }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->amount_repair }}</td>
+                                                    <td>{{ $da->amount_bet_distribution }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
 
                                                     <td>
-                                                        @if ($da->status == '0')
-                                                            <span class="badge bg-label-success me-1">ซ่อม</span>
-                                                        @elseif ($da->status == '1')
-                                                            <span class="badge bg-label-warning me-1">ยกเลิก</span>
+                                                        @if ($da->status == 'on')
+                                                            <span class="badge bg-label-success me-1">เเทงจำหน่าย</span>
                                                         @else
-                                                            <span class="badge bg-label-primary me-1">ซ่อมสำเร็จ</span>
+                                                            <span class="badge bg-label-warning me-1">ยกเลิก</span>
                                                         @endif
                                                     </td>
                                                     <td>{{ $da->repair_detail }}</td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
-                                                    @if ($da->status == '0')
+                                                    @if ($da->status == 'on')
                                                         <td>
                                                             <div class="dropdown">
                                                                 <button type="button"
@@ -63,28 +61,24 @@
                                                                 </button>
                                                                 <div class="dropdown-menu">
                                                                     <a class="dropdown-item"
-                                                                        href="{{ url('get-articlesRepair-edit', $da->id) }}"><i
+                                                                        href="{{ url('bet-distribution-edit', $da->id) }}"><i
                                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
                                                                     @if (Auth::user()->status == '2')
                                                                         <a class="dropdown-item alert-destroy"
-                                                                            href="{{ url('get-articlesRepair-destroy', $da->id) }}"><i
+                                                                            href="{{ url('bet-distribution-destroy', $da->id) }}"><i
                                                                                 class="bx bx-trash me-1"></i> ยกเลิก</a>
-                                                                        <a class="dropdown-item  alert-destroy"
-                                                                            href="{{ url('get-articlesRepair-updateRepair', $da->id) }}">
-                                                                            <i class='bx bxs-check-circle'></i>
-                                                                            ซ่อมสำเร็จ</a>
                                                                     @endif
                                                                 </div>
                                                             </div>
                                                         </td>
                                                     @endif
                                                 </tr>
-                                            @endforeach --}}
+                                            @endforeach
                                         </tbody>
                                     </table>
-                                    {{--  <div class="mt-5">
+                                    <div class="mt-5">
                                         {!! $data->links() !!}
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
 

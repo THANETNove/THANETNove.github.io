@@ -167,6 +167,10 @@ Route::group(['middleware' => ['is_admin']], function () {
     //ระบบแทงจำหน่ายครุภัณฑ์
     Route::get('bet-distribution-index', [BetDistributionController::class, 'index'])->name('bet-distribution-index');
     Route::get('bet-distribution-create', [BetDistributionController::class, 'create'])->name('bet-distribution-create');
+    Route::post('bet-distribution-store', [BetDistributionController::class, 'store'])->name('bet-distribution-store');
+    Route::get('bet-distribution-edit/{id}', [BetDistributionController::class, 'edit'])->name('bet-distribution-edit');
+    Route::put('bet-distribution-update/{id}', [BetDistributionController::class, 'update'])->name('bet-distribution-update');
+    Route::get('bet-distribution-destroy/{id}', [BetDistributionController::class, 'destroy'])->name('bet-distribution-destroy');
 
 });
 
