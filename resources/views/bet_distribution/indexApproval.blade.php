@@ -24,11 +24,11 @@
                                                 <th>จำนวนที่เเทงจำหน่าย</th>
                                                 <th>หน่วยนับ</th>
                                                 <th>ราคาซาก</th>
-                                                <th>สถานะ </th>
+
                                                 <th>สถานะการอนุมัติ </th>
                                                 <th>รายละเอียด</th>
                                                 <th>วันที่สร้าง</th>
-                                                <th>Actions</th>
+                                                <th>การอนุมัติ </th>
                                             </tr>
                                         </thead>
                                         @php
@@ -38,12 +38,12 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->category_name }}</td>
+                                                    <td>{{ $da->category_name }} {{ $da->id }}</td>
                                                     <td>{{ $da->code_durable_articles }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->amount_bet_distribution }}</td>
+                                                    <td>{{ number_format($da->amount_bet_distribution) }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
-                                                    <td>{{ $da->salvage_price }}</td>
+                                                    <td>{{ number_format($da->salvage_price) }}</td>
 
                                                     <td>
                                                         @if ($da->statusApproval == '0')
@@ -54,36 +54,21 @@
                                                             <span class="badge bg-label-warning me-1">ไม่อนุมัติ</span>
                                                         @endif
                                                     </td>
-                                                    <td>
-                                                        @if ($da->status == 'on')
-                                                            <span class="badge bg-label-success me-1">เเทงจำหน่าย</span>
-                                                        @else
-                                                            <span class="badge bg-label-warning me-1">ยกเลิก</span>
-                                                        @endif
-                                                    </td>
+
                                                     <td>{{ $da->repair_detail }}</td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
-                                                    @if ($da->status == 'on' && $da->statusApproval == '0')
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <button type="button"
-                                                                    class="btn p-0 dropdown-toggle hide-arrow"
-                                                                    data-bs-toggle="dropdown">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('bet-distribution-edit', $da->id) }}"><i
-                                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                                    @if (Auth::user()->status == '2')
-                                                                        <a class="dropdown-item alert-destroy"
-                                                                            href="{{ url('bet-distribution-destroy', $da->id) }}"><i
-                                                                                class="bx bx-trash me-1"></i> ยกเลิก</a>
-                                                                    @endif
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    @endif
+                                                    <td>
+                                                        <a href="{{ url('approved_bet_distribution', $da->id) }}"
+                                                            class="alert-destroy">
+                                                            <button type="button" class="btn btn-info">อนุมัติ</button>
+                                                        </a>
+
+                                                        <button type="button" class="btn btn-danger"
+                                                            style="margin-left: 6px" onclick="setId('{{ $da->id }}')"
+                                                            data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                                            ไม่อนุมัติ
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -100,6 +85,47 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">ไม่อนุมัติ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="user" id="myForm" method="POST"
+                        action="{{ route('not-approved-bet-distribution') }}">
+                        @csrf
+
+                        <input type="text" name="id" id="rejectedId" value="" style="display: none;">
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="nameWithTitle" class="form-label">หมายเหตุ</label>
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-message2" class="input-group-text"><i
+                                            class="bx bx-comment"></i></span>
+                                    <textarea id="basic-icon-default-message" name="commentApproval" class="form-control" placeholder="หมายเหตุ"
+                                        aria-label="หมายเหตุ" aria-describedby="basic-icon-default-message2" style="height: 78px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setId(id) {
+            $('#rejectedId').val(id);
+        }
+    </script>
 
     <!-- / Layout wrapper -->
 @endsection

@@ -128,10 +128,13 @@ class BetDistributionController extends Controller
     public function edit(string $id)
     {
         $data = DB::table('bet_distributions')
+        ->where('bet_distributions.id', '=', $id)
         ->leftJoin('durable_articles', 'bet_distributions.durable_articles_name', '=', 'durable_articles.id')
         ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
         ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name')
         ->get();
+
+
 
         return view("bet_distribution.edit",['data' => $data]);
     }
@@ -152,6 +155,37 @@ class BetDistributionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function approvedBetDistribution(string $id)
+    {
+        $data =  BetDistribution::find($id);
+        $dataArt =  DurableArticles::find($data['durable_articles_name']);
+        $data->statusApproval = "1";
+
+        DurableArticles::where('id', $data['durable_articles_name'])->update([
+            'bet_on_distribution_number' => $dataArt->bet_on_distribution_number + $data->amount_bet_distribution,
+            'durableArticles_number' => $dataArt->durableArticles_number - $data->amount_bet_distribution,
+            'damaged_number' => $dataArt->damaged_number - $data->amount_bet_distribution,
+        ]);
+
+        DurableArticlesDamaged::where('id', $data['durable_articles_id'])->update([
+            'status' => "4", // เเทงจำหน่าย
+        ]);
+
+        $data->save();
+
+        return redirect('bet-distribution-indexApproval')->with('message', "บันทึกสำเร็จ");
+    }
+
+
+    public function notApprovedBetDistribution(Request $request)
+    {
+        dd("5599");
+        $data =  BetDistribution::find($id);
+        $data->statusApproval = "2";
+        $data->commentApproval = $request['commentApproval'];;
+        $data->save();
+        return redirect('bet-distribution-indexApproval')->with('message', "บันทึกสำเร็จ");
+    }
     public function destroy(string $id)
     {
         //

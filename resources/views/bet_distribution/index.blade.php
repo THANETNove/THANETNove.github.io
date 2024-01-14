@@ -17,7 +17,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>ลำดับ</th>
+                                                <th>ลำดับ </th>
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>รหัสครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
@@ -41,9 +41,9 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->code_durable_articles }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->amount_bet_distribution }}</td>
+                                                    <td>{{ number_format($da->amount_bet_distribution) }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
-                                                    <td>{{ $da->salvage_price }}</td>
+                                                    <td>{{ number_format($da->salvage_price) }}</td>
 
                                                     <td>
                                                         @if ($da->statusApproval == '0')

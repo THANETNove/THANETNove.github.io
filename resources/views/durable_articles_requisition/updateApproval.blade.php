@@ -76,8 +76,8 @@
                                                         </a>
 
                                                         <button type="button" class="btn btn-danger"
-                                                            onclick="setId('{{ $da->id }}')" data-bs-toggle="modal"
-                                                            data-bs-target="#modalCenter">
+                                                            style="margin-left: 6px" onclick="setId('{{ $da->id }}')"
+                                                            data-bs-toggle="modal" data-bs-target="#modalCenter">
                                                             ไม่อนุมัติ
                                                         </button>
                                                     </td>
