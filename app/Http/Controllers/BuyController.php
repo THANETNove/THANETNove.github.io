@@ -132,11 +132,10 @@ class BuyController extends Controller
             ->orderBy('id', 'ASC')
             ->get();
 
-            $number = $request['quantity'] + $dura[0]->durableArticles_number;
-            $amount = $request['quantity'] + $dura[0]->remaining_amount;
+            $number = $request['quantity'];
             $dur =  DurableArticles::find($dura[0]->id);
             $dur->durableArticles_number =  $number;
-            $dur->remaining_amount =  $amount;
+            $dur->remaining_amount =  $number;
             $dur->save();
         }
 
