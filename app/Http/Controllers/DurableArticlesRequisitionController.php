@@ -83,7 +83,7 @@ class DurableArticlesRequisitionController extends Controller
         $data->amount_withdraw = $request['amount_withdraw'];
         $data->name_durable_articles_count = $request['name_durable_articles_count'];
         $data->statusApproval = "0";
-        $data->status = "on";
+        $data->status = "0";
         $data->save();
 
 
@@ -179,7 +179,22 @@ class DurableArticlesRequisitionController extends Controller
             'remaining_amount' =>  $data->remaining_amount + $data_requisition->amount_withdraw,
         ]);
         DurableArticlesRequisition::where('id', $id)->update([
-            'status' =>  "off",
+            'status' =>  "1",
+        ]);
+        return redirect('durable-articles-requisition-index')->with('message', "ยกเลิกสำเร็จ");
+    }
+
+    public function durableRequisitionReturn(string $id)
+    {
+        $data_requisition = DurableArticlesRequisition::find($id);
+        $data = DurableArticles::find($data_requisition->durable_articles_name);
+
+
+        DurableArticles::where('id', $data_requisition->durable_articles_name)->update([
+            'remaining_amount' =>  $data->remaining_amount + $data_requisition->amount_withdraw,
+        ]);
+        DurableArticlesRequisition::where('id', $id)->update([
+            'status' =>  "3",
         ]);
         return redirect('durable-articles-requisition-index')->with('message', "ยกเลิกสำเร็จ");
     }
@@ -187,7 +202,7 @@ class DurableArticlesRequisitionController extends Controller
     public function approvalUpdate()
     {
         $data = DB::table('durable_articles_requisitions')
-        ->where('durable_articles_requisitions.status', "on")
+        ->where('durable_articles_requisitions.status', "0")
         ->where('durable_articles_requisitions.statusApproval', "0")
         ->leftJoin('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
         ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_name', '=', 'durable_articles.id')

@@ -81,7 +81,7 @@
                                                     </td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                     <td>
-                                                        @if ($da->status == 'on')
+                                                        @if ($da->status == '0')
                                                             @if ($da->statusApproval == '0')
                                                                 <span class="badge bg-label-info me-1">รอการอนุมัติ</span>
                                                             @elseif ($da->statusApproval == '1')
@@ -94,11 +94,13 @@
                                                     </td>
 
                                                     <td>
-                                                        @if ($da->status == 'on')
+                                                        @if ($da->status == '0')
                                                             <span class="badge bg-label-success me-1">เบิกครุภัณฑ์</span>
-                                                        @else
+                                                        @elseif ($da->status == '1')
                                                             <span
                                                                 class="badge bg-label-warning me-1">ยกเลิกเบิกครุภัณฑ์</span>
+                                                        @else
+                                                            <span class="badge bg-label-primary me-1">คึนครุภัณฑ์</span>
                                                         @endif
                                                     </td>
                                                     <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
@@ -116,14 +118,22 @@
                                                                 <a class="dropdown-item"
                                                                     href="{{ url('durable-articles-requisition-show', $da->id) }}"><i
                                                                         class='bx bxs-show'></i> View</a>
-                                                                @if ($da->statusApproval == '0' && $da->status == 'on')
+                                                                @if ($da->statusApproval == '0' && $da->status == '0')
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('durable-articles-requisition-edit', $da->id) }}"><i
                                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                                    @if (Auth::user()->status != '1')
+
+                                                                    <a class="dropdown-item alert-destroy"
+                                                                        href="{{ url('durable-articles-requisition-destroy', $da->id) }}"><i
+                                                                            class="bx bx-trash me-1"></i> ยกเลิก</a>
+                                                                @endif
+                                                                @if ($da->statusApproval == '1' && $da->status == '0')
+                                                                    @if (Auth::user()->status > '0')
                                                                         <a class="dropdown-item alert-destroy"
-                                                                            href="{{ url('durable-articles-requisition-destroy', $da->id) }}"><i
-                                                                                class="bx bx-trash me-1"></i> ยกเลิก</a>
+                                                                            href="{{ url('durable-articles-requisition-return', $da->id) }}">
+
+                                                                            <i class='bx bxs-send'></i>
+                                                                            คึนครุภัณฑ์</a>
                                                                     @endif
                                                                 @endif
                                                             </div>
