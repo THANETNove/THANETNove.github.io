@@ -130,7 +130,7 @@
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         Close
                     </button>
-                    <button type="submit" class="btn btn-primary alert-destroy">บันทึก</button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
                 </div>
                 </form>
             </div>

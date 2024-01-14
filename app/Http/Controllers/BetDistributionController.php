@@ -179,8 +179,8 @@ class BetDistributionController extends Controller
 
     public function notApprovedBetDistribution(Request $request)
     {
-        dd("5599");
-        $data =  BetDistribution::find($id);
+
+        $data =  BetDistribution::find($request["id"]);
         $data->statusApproval = "2";
         $data->commentApproval = $request['commentApproval'];;
         $data->save();

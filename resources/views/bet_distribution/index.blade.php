@@ -27,6 +27,7 @@
                                                 <th>สถานะ </th>
                                                 <th>สถานะการอนุมัติ </th>
                                                 <th>รายละเอียด</th>
+                                                <th>รายละเอียดการอนุมัติ</th>
                                                 <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -62,6 +63,7 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $da->repair_detail }}</td>
+                                                    <td>{{ $da->commentApproval }}</td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                     @if ($da->status == 'on' && $da->statusApproval == '0')
                                                         <td>
