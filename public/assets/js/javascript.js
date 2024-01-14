@@ -437,6 +437,17 @@ if (targetUrls === "durable-articles-repair-create") {
     setActiveClass("durable-articles-repair", "durable-articles-repair-create");
 }
 
+//เเทงจำหน่ายครุภัณฑ์
+if (
+    targetUrls === "bet-distribution-index" ||
+    targetUrls === "bet-distribution-edit"
+) {
+    setActiveClass("bet-distribution", "bet-distribution-index");
+}
+if (targetUrls === "bet-distribution-create") {
+    setActiveClass("bet-distribution", "bet-distribution-create");
+}
+
 //อนุมัติ
 if (targetUrls === "approval-update") {
     setActiveClass("approval", "approval-update");

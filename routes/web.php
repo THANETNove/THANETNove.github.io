@@ -13,6 +13,7 @@ use App\Http\Controllers\DurableArticlesDamagedController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DurableArticlesRepairController;
+use App\Http\Controllers\BetDistributionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -162,6 +163,9 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('get-articlesRepair-edit/{id}', [DurableArticlesRepairController::class, 'edit'])->name('get-articlesRepair-edit');
     Route::get('get-articlesRepair-destroy/{id}', [DurableArticlesRepairController::class, 'destroy'])->name('get-articlesRepair-destroy');
     Route::get('get-articlesRepair-updateRepair/{id}', [DurableArticlesRepairController::class, 'updateRepair'])->name('get-articlesRepair-updateRepair');
+
+    //ระบบแทงจำหน่ายครุภัณฑ์
+    Route::get('bet-distribution-index', [BetDistributionController::class, 'index'])->name('bet-distribution-index');
 
 });
 

@@ -206,47 +206,65 @@
             </ul>
         </li>
 
-        <li class="menu-item" id="durable-articles-damaged">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class='menu-icon tf-icons bx bxs-layer-plus'></i>
-                <div data-i18n="Authentications">ระบบครุภัณฑ์ชำรุด</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item" id="durable-articles-damaged-index">
-                    <a href="{{ url('durable-articles-damaged-index') }}" class="menu-link">
-                        <div data-i18n="Basic">ครุภัณฑ์ที่ชำรุด</div>
-                    </a>
-                </li>
-                @if (Auth::user()->status > 0)
+        @if (Auth::user()->status > 0)
+            <li class="menu-item" id="durable-articles-damaged">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class='menu-icon tf-icons bx bxs-layer-plus'></i>
+                    <div data-i18n="Authentications">ระบบครุภัณฑ์ชำรุด</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="durable-articles-damaged-index">
+                        <a href="{{ url('durable-articles-damaged-index') }}" class="menu-link">
+                            <div data-i18n="Basic">ครุภัณฑ์ที่ชำรุด</div>
+                        </a>
+                    </li>
                     <li class="menu-item" id="durable-articles-damaged-create">
                         <a href="{{ url('durable-articles-damaged-create') }}" class="menu-link">
                             <div data-i18n="Basic">ลงทะเบียนครุภัณฑ์ชำรุด</div>
                         </a>
                     </li>
-                @endif
-            </ul>
-        </li>
+                </ul>
+            </li>
 
-        <li class="menu-item" id="durable-articles-repair">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class='menu-icon tf-icons bx bxs-wrench'></i>
-                <div data-i18n="Authentications">ระบบการซ่อมครุภัณฑ์</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item" id="durable-articles-repair-index">
-                    <a href="{{ url('durable-articles-repair-index') }}" class="menu-link">
-                        <div data-i18n="Basic">การซ่อมครุภัณฑ์</div>
-                    </a>
-                </li>
-                @if (Auth::user()->status > 0)
+            <li class="menu-item" id="durable-articles-repair">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class='menu-icon tf-icons bx bxs-wrench'></i>
+                    <div data-i18n="Authentications">ระบบการซ่อมครุภัณฑ์</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="durable-articles-repair-index">
+                        <a href="{{ url('durable-articles-repair-index') }}" class="menu-link">
+                            <div data-i18n="Basic">การซ่อมครุภัณฑ์</div>
+                        </a>
+                    </li>
                     <li class="menu-item" id="durable-articles-repair-create">
                         <a href="{{ url('durable-articles-repair-create') }}" class="menu-link">
                             <div data-i18n="Basic">ลงทะเบียนซ่อมครุภัณฑ์</div>
                         </a>
                     </li>
-                @endif
-            </ul>
-        </li>
+
+                </ul>
+            </li>
+            <li class="menu-item" id="bet-distribution">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class='menu-icon tf-icons bx bxs-log-out-circle'></i>
+                    <div data-i18n="Authentications">ระบบการเเทงจำหน่ายครุภัณฑ์</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="bet-distribution-index">
+                        <a href="{{ url('bet-distribution-index') }}" class="menu-link">
+                            <div data-i18n="Basic">การเเทงจำหน่ายครุภัณฑ์</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="bet-distribution-create">
+                        <a href="{{ url('bet-distribution-create') }}" class="menu-link">
+                            <div data-i18n="Basic">ลงทะเบียนเเทงจำหน่ายครุภัณฑ์</div>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+        @endif
 
     </ul>
 </aside>
