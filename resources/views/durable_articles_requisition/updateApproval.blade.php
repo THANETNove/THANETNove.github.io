@@ -40,7 +40,7 @@
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->code_durable_articles }}</td>
-                                                    <td>{{ $da->durable_articles_name }}</td>
+                                                    <td>{{ $da->durableArticles_name }}</td>
                                                     <td>{{ $da->amount_withdraw }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
                                                     @if (Auth::user()->status != '0')

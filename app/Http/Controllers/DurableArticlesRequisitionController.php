@@ -33,8 +33,12 @@ class DurableArticlesRequisitionController extends Controller
 
        if ($search) {
         $data =  $data
-            ->where('category_name', 'LIKE', "%$search%")
-            ->orWhere('durableArticles_name', 'LIKE', "%$search%");
+            ->where(function ($query) use ($search) {
+                $query->where('category_name', 'LIKE', "%$search%")
+                    ->orWhere('durableArticles_name', 'LIKE', "%$search%")
+                    ->orWhere('first_name', 'LIKE', "%$search%")
+                    ->orWhere('last_name', 'LIKE', "%$search%");
+            });
         }
 
        if (Auth::user()->status == "0") {
@@ -185,8 +189,9 @@ class DurableArticlesRequisitionController extends Controller
         $data = DB::table('durable_articles_requisitions')
         ->where('durable_articles_requisitions.status', "on")
         ->where('durable_articles_requisitions.statusApproval', "0")
-        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
-        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name')
+        ->leftJoin('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_name', '=', 'durable_articles.id')
+        ->select('durable_articles_requisitions.*', 'durable_articles.durableArticles_name','users.prefix', 'users.first_name','users.last_name')
         ->orderBy('durable_articles_requisitions.id','DESC')->paginate(100);
 
         return view("durable_articles_requisition.updateApproval",['data' => $data]);
