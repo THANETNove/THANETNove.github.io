@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('durable_articles_damaged', function (Blueprint $table) {
+        Schema::create('bet_distributions', function (Blueprint $table) {
             $table->id();
             $table->string('id_user')->nullable()->comment('id user');
+            $table->string('group_id')->nullable()->comment('group_id');
             $table->string('durable_articles_id')->nullable()->comment('รหัสครุภัณฑ์');
             $table->string('code_durable_articles')->nullable()->comment('กลุ่ม/ประเภท type');
             $table->string('durable_articles_name')->nullable()->comment('ชื่อ');
-            $table->string('amount_damaged')->nullable()->comment('จำนวนที่ชำรุด');
+            $table->string('amount_bet_distribution')->nullable()->comment('จำนวนที่เเทงจำหน่าย');
             $table->string('name_durable_articles_count')->nullable()->comment('ชื่อเรียก');
-            $table->string('damaged_detail')->nullable()->comment('รายละเอียดการชำรุด');
+            $table->string('repair_detail')->nullable()->comment('รายละเอียดการซ่อม');
             $table->string('status')->nullable()->comment('สถานะ on/ off');
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('bet_distributions');
     }
 };

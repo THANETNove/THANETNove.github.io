@@ -166,6 +166,7 @@ Route::group(['middleware' => ['is_admin']], function () {
 
     //ระบบแทงจำหน่ายครุภัณฑ์
     Route::get('bet-distribution-index', [BetDistributionController::class, 'index'])->name('bet-distribution-index');
+    Route::get('bet-distribution-create', [BetDistributionController::class, 'create'])->name('bet-distribution-create');
 
 });
 

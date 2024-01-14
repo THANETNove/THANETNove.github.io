@@ -7,7 +7,7 @@
 
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title text-primary ">ลงทะเบียนซ่อมครุภัณฑ์</h1>
+                        <h1 class="card-title text-primary ">ลงทะเบียนเเทงจำหน่ายครุภัณฑ์</h1>
                         <form method="POST" action="{{ route('durable-articles-repair-store') }}">
                             @csrf
                             <div class="row">
@@ -47,7 +47,7 @@
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รหัสครุภัณฑ์</label>
                                     <input type="text" class="form-control" id="code_durable_articles"
-                                        name="code_durable_articles" placeholder="รหัสครุภัณฑ์" required />
+                                        name="code_durable_articles" placeholder="รหัสครุภัณฑ์" required readonly />
 
                                 </div>
 
@@ -55,11 +55,12 @@
 
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">จำนวนที่ซ่อม</label>
-                                    <input type="number" class="form-control @error('amount_repair') is-invalid @enderror"
-                                        id="amount_withdraw" name="amount_repair" placeholder="จำนวนที่ชำรุด" min="1"
-                                        required readonly />
-                                    @error('amount_repair')
+                                    <label for="prefix" class="form-label">จำนวนที่เเทงจำหน่าย</label>
+                                    <input type="number"
+                                        class="form-control @error('amount_bet_distribution') is-invalid @enderror"
+                                        id="amount_withdraw" name="amount_bet_distribution"
+                                        placeholder="จำนวนที่เเทงจำหน่าย" min="1" required readonly />
+                                    @error('amount_bet_distribution')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

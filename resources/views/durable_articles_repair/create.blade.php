@@ -47,7 +47,7 @@
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รหัสครุภัณฑ์</label>
                                     <input type="text" class="form-control" id="code_durable_articles"
-                                        name="code_durable_articles" placeholder="รหัสครุภัณฑ์" required />
+                                        name="code_durable_articles" placeholder="รหัสครุภัณฑ์" required readonly />
 
                                 </div>
 
