@@ -75,12 +75,14 @@ class BuyController extends Controller
             ->get();
         }else{
             $data = DB::table('durable_articles')
-            ->leftJoin('buys', 'durable_articles.buy_name', '=', 'buys.id')
+            ->leftJoin('buys', 'durable_articles.id', '=', 'buys.buy_name')
             ->where('durable_articles.group_id', '=', $id)
-            ->where('durable_articles.buy_name', '!=', 'buys.id') // เพิ่มเงื่อนไขนี้
+          /*   ->where('durable_articles.buy_name', '!=', 'buys.id') // เพิ่มเงื่อนไขนี้ */
             ->select('durable_articles.*')
             ->orderBy('durable_articles.id', 'ASC')
             ->get();
+
+            /* dd($data); */
         }
 
 

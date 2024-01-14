@@ -603,6 +603,13 @@ $("#buy_name").on("change", function () {
                 ? foundItem.name_material_count
                 : foundItem.name_durableArticles_count
         );
+
+        if (globalResType == 2) {
+            $("#quantity").val(foundItem.remaining_amount);
+            $("#quantity").attr("readonly", true);
+        } else {
+            $("#quantity").attr("readonly", false);
+        }
     }
 });
 
