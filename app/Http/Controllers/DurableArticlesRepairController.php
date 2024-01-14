@@ -69,6 +69,7 @@ class DurableArticlesRepairController extends Controller
 
         $data = DB::table('durable_articles_damageds')
         ->where('durable_articles_damageds.group_id', $id)
+        ->where('durable_articles_damageds.status', 0)
         ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
         ->select('durable_articles_damageds.*','durable_articles.durableArticles_name')
         ->orderBy('durable_articles_damageds.id', 'ASC')
@@ -105,7 +106,7 @@ class DurableArticlesRepairController extends Controller
         DurableArticles::where('id', $request['durable_articles_name'])->update([
             'repair_number' => $amount_repair->repair_number + $repair,
         ]);
-        DurableArticlesDamaged::where('id', $request['durable_articles_name'])->update([
+        DurableArticlesDamaged::where('id', $request['durable_articles_id'])->update([
             'status' => "3", // ส่งซ่อม
         ]);
 
@@ -134,8 +135,30 @@ class DurableArticlesRepairController extends Controller
 
         return redirect('durable-articles-repair-index')->with('message', "บันทึกสำเร็จ");
 
+    }
+
+    public function destroy($id)
+    {
+
+        $data =  DurableArticlesRepair::find($id);
+        $dataArt =  DurableArticles::find($data->durable_articles_name);
 
 
+
+        DurableArticlesDamaged::where('id',  $data->durable_articles_id)->update([
+            'status' =>  "0",
+
+        ]);
+        DurableArticles::where('id',  $data->durable_articles_name)->update([
+            'repair_number' =>   $dataArt->repair_number - $data->amount_repair,
+
+        ]);
+
+        $data->status = "1";
+        $data->save();
+
+
+        return redirect('durable-articles-repair-index')->with('message', "บันทึกสำเร็จ");
 
     }
 }

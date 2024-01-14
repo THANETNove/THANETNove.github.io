@@ -159,6 +159,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('get-articlesRepair/{id}', [DurableArticlesRepairController::class, 'articlesRepair'])->name('get-articlesRepair');
     Route::put('durable-articles-repair-update/{id}', [DurableArticlesRepairController::class, 'update'])->name('durable-articles-repair-update');
     Route::get('get-articlesRepair-edit/{id}', [DurableArticlesRepairController::class, 'edit'])->name('get-articlesRepair-edit');
+    Route::get('get-articlesRepair-destroy/{id}', [DurableArticlesRepairController::class, 'destroy'])->name('get-articlesRepair-destroy');
 
 });
 

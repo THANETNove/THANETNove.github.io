@@ -889,7 +889,7 @@ function groupDurableArticlesRepair(selectedValue) {
             $.each(res, function (index, data) {
                 groupName.append(
                     $("<option>", {
-                        value: data.durable_articles_name,
+                        value: data.id,
                         text: data.durableArticles_name,
                     })
                 );
@@ -906,22 +906,11 @@ $("#durable_articles_repair_name").on("change", function () {
 
     // ใช้ globalRes ที่เก็บค่า res จาก getGroup
     var foundItem = durableArticlesRepairRes.find(function (item) {
-        return item.durable_articles_name == selectedValue;
+        return item.id == selectedValue;
     });
     console.log("foundItem", foundItem);
-    if (foundItem) {
-        console.log("5555");
-        /*       if (foundItem.remaining_amount == 0) {
-            document.getElementById("out-stock").textContent =
-                " วัสดุหมดแล้ว ไม่สามารถเบิกได้";
-            var popup = document.getElementById("submit");
-            popup.style.display = "none";
-        } else {
-            document.getElementById("out-stock").textContent = "";
-            var popup = document.getElementById("submit");
-            popup.style.display = "block";
-        } */
 
+    if (foundItem) {
         document
             .getElementById("amount_withdraw")
             .setAttribute("max", foundItem.durableArticles_number);
@@ -930,6 +919,8 @@ $("#durable_articles_repair_name").on("change", function () {
         $("#name-durable_articles-count").val(
             foundItem.name_durable_articles_count
         );
+        $("#durable_articles_id").val(foundItem.id);
+        $("#durable_articles_name").val(foundItem.durable_articles_name);
     }
 });
 

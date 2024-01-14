@@ -13,6 +13,17 @@
                             <div class="row">
                                 <p style="color: red" id="out-stock"></p>
 
+                                <div class="col-md-6" style="display: none;">
+                                    <label for="prefix" class="form-label">id ครุภัณฑ์ชำรุด</label>
+                                    <input type="text" class="form-control" name="durable_articles_id"
+                                        id="durable_articles_id">
+                                </div>
+                                <div class="col-md-6" style="display: none;">
+                                    <label for="prefix" class="form-label">idชื่อครุภัณฑ์ชำรุด</label>
+                                    <input type="text" class="form-control" name="durable_articles_name"
+                                        id="durable_articles_name">
+                                </div>
+
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">หมวดหมู่ครุภัณฑ์</label>
                                     <select class="form-select" onchange="groupDurableArticlesRepair(this.value)"
@@ -26,8 +37,8 @@
 
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
                                     <label for="prefix" class="form-label">ชื่อ</label>
-                                    <select class="form-select" name="durable_articles_name"
-                                        id="durable_articles_repair_name" aria-label="Default select example">
+                                    <select class="form-select" id="durable_articles_repair_name"
+                                        aria-label="Default select example">
                                         <option selected disabled>เลือกวัสดุ</option>
 
                                     </select>
