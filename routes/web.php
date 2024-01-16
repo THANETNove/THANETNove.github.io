@@ -14,6 +14,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DurableArticlesRepairController;
 use App\Http\Controllers\BetDistributionController;
+use App\Http\Controllers\CalculateDepreciationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -179,6 +180,9 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('approved_bet_distribution/{id}', [BetDistributionController::class, 'approvedBetDistribution'])->name('approved_bet_distribution');
     Route::post('not-approved-bet-distribution', [BetDistributionController::class, 'notApprovedBetDistribution'])->name('not-approved-bet-distribution');
     Route::get('get-bet-distribution/{id}', [BetDistributionController::class, 'betDistribution'])->name('get-bet-distribution');
+    Route::get('calculator-create', [CalculateDepreciationController::class, 'create'])->name('calculator-create');
+    Route::get('get-calculate/{id}', [CalculateDepreciationController::class, 'calculate'])->name('get-calculate');
+    Route::post('calculator-store', [CalculateDepreciationController::class, 'store'])->name('calculator-store');
 
 });
 

@@ -1013,6 +1013,109 @@ $("#durable_articles_repair_name").on("change", function () {
     }
 });
 
+//ระบบคำนวนค่าเสื่อม
+
+var calculateRes;
+function calculateGroup(selectedValue) {
+    $.ajax({
+        url: "get-calculate/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            calculateRes = res;
+            console.log("res", res);
+            var groupName = $("#calculate-id");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกวัสดุ",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.durableArticles_name,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+}
+
+$("#calculate-id").on("change", function () {
+    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+    console.log("6666");
+    // ใช้ globalRes ที่เก็บค่า res จาก getGroup
+    var foundItem = calculateRes.find(function (item) {
+        return item.id == selectedValue;
+    });
+
+    console.log("foundItem", foundItem);
+    if (foundItem) {
+        $("#articles_id").val(foundItem.id);
+        $("#categories_id").val(
+            foundItem.group_class +
+                "-" +
+                foundItem.type_durableArticles +
+                "-" +
+                foundItem.description
+        );
+
+        $("#quantity").val(foundItem.durableArticles_number);
+        $("#counting_unit").val(foundItem.name_durableArticles_count);
+        $("#price_per_piece").val(
+            Number(foundItem.price_per_piece).toLocaleString()
+        );
+
+        const salvagePrice =
+            foundItem.salvage_price !== null
+                ? Number(foundItem.salvage_price).toLocaleString()
+                : 0;
+        $("#salvage_price").val(salvagePrice);
+
+        const createdAtTimestamp = foundItem.created_at;
+
+        // แปลง timestamp เป็น milliseconds
+        const createdAtMillis = new Date(createdAtTimestamp).getTime();
+
+        // หาวันที่ปัจจุบัน
+        const currentDateMillis = new Date().getTime();
+
+        // คำนวณอายุการใช้งาน (ปี)
+        const ageInYears = Math.floor(
+            (currentDateMillis - createdAtMillis) /
+                (365.25 * 24 * 60 * 60 * 1000)
+        );
+
+        let ageMultiplier = ageInYears + 1; //ปี
+
+        $("#service_life").val(ageMultiplier);
+
+        if (foundItem.salvage_price == 0) {
+            // คำนวณค่าเสื่อม (ราคา * ค่าเสื่อม/100) / ปี (กรณีที่ยังไม่ได้จำหน่าย)
+            let price = (foundItem.price_per_piece * 20) / 100 / ageMultiplier;
+            $("#calulate-depreciation").val(price.toLocaleString());
+        } else {
+            // คำนวณค่าเสื่อม (ราคา - ราคาซาก) / ปี (กรณีที่จำหน่าย)
+            let price =
+                (foundItem.price_per_piece - foundItem.salvage_price) /
+                ageMultiplier;
+            $("#calulate-depreciation").val(price.toLocaleString());
+        }
+    }
+});
+
 //alert-destroy
 $(".alert-destroy").click(function () {
     var url = $(this).attr("href");
