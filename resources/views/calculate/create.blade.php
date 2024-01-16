@@ -8,10 +8,13 @@
                 <div class="card ">
                     <div class="card-body">
                         <h1 class="card-title text-primary ">ระบบการคำนวณค่าเสื่อมครุภัณฑ์</h1>
+                        @if (session('message'))
+                            <p class="message-text text-center mt-4 mb-4"> {{ session('message') }}</p>
+                        @endif
                         <form method="POST" action="{{ route('calculator-store') }}">
                             @csrf
                             <div class="row">
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-6" style="display:none">
                                     <label for="articles_id" class="form-label">id</label>
                                     <input id="articles_id" type="text" class="form-control" name="articles_id" required
                                         placeholder="id" autocomplete="articles_id" readonly>
@@ -129,8 +132,8 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label for="service_life" class="form-label">ค่าเสื่อมครุภัณฑ์</label>
-                                    <input class="form-control" id="calulate-depreciation" type="text" name="depreciation"
-                                        placeholder="ค่าเสื่อม" readonly>
+                                    <input class="form-control" id="calulate-depreciation" type="text"
+                                        name="depreciation" placeholder="ค่าเสื่อม" readonly>
                                 </div>
 
 

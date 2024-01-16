@@ -32,6 +32,7 @@
                                                 <th>ชำรุด</th>
                                                 <th>แทงจำหน่าย</th>
                                                 <th>ซ่อม</th>
+                                                <th>ค่าเสื่อม</th>
                                                 <th>ที่จัดเก็บ</th>
                                                 <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
@@ -56,6 +57,7 @@
                                                         <td>{{ number_format($da->damaged_number) }}</td>
                                                         <td>{{ number_format($da->bet_on_distribution_number) }}</td>
                                                         <td>{{ number_format($da->repair_number) }}</td>
+                                                        <td>{{ number_format($da->depreciation_price) }}</td>
                                                         <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
                                                             {{ $da->room_name }}</td>
                                                         <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
