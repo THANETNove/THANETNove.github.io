@@ -31,7 +31,7 @@
                                 $count = $data->count();
                             @endphp
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">รายการเข้า</h1>
+                                <h1 class="card-title text-primary ">รายการข้อมูลเข้า</h1>
                                 <p class="mt--16">จำนวนทั้งหมด {{ $count }} รายการ</p>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">

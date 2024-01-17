@@ -169,6 +169,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('get-articlesRepair-edit/{id}', [DurableArticlesRepairController::class, 'edit'])->name('get-articlesRepair-edit');
     Route::get('get-articlesRepair-destroy/{id}', [DurableArticlesRepairController::class, 'destroy'])->name('get-articlesRepair-destroy');
     Route::post('get-articlesRepair-updateRepair', [DurableArticlesRepairController::class, 'updateRepair'])->name('get-articlesRepair-updateRepair');
+    Route::get('articlesRepair-export/pdf', [DurableArticlesRepairController::class, 'exportPDF'])->name('articlesRepair-export/pdf');
 
     //ระบบแทงจำหน่ายครุภัณฑ์
     Route::get('bet-distribution-index', [BetDistributionController::class, 'index'])->name('bet-distribution-index');
@@ -178,12 +179,14 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('bet-distribution-edit/{id}', [BetDistributionController::class, 'edit'])->name('bet-distribution-edit');
     Route::put('bet-distribution-update/{id}', [BetDistributionController::class, 'update'])->name('bet-distribution-update');
     Route::get('bet-distribution-destroy/{id}', [BetDistributionController::class, 'destroy'])->name('bet-distribution-destroy');
-
     Route::get('bet-distribution-indexApproval', [BetDistributionController::class, 'indexApproval'])->name('bet-distribution-indexApproval');
     Route::post('bet-distribution-indexApproval', [BetDistributionController::class, 'indexApproval'])->name('bet-distribution-indexApproval');
     Route::get('approved_bet_distribution/{id}', [BetDistributionController::class, 'approvedBetDistribution'])->name('approved_bet_distribution');
     Route::post('not-approved-bet-distribution', [BetDistributionController::class, 'notApprovedBetDistribution'])->name('not-approved-bet-distribution');
     Route::get('get-bet-distribution/{id}', [BetDistributionController::class, 'betDistribution'])->name('get-bet-distribution');
+    Route::get('bet-distribution-export/pdf', [BetDistributionController::class, 'exportPDF'])->name('bet-distribution-export/pdf');
+
+ //ค่าเสื่อมครุภัณฑ์
     Route::get('calculator-create', [CalculateDepreciationController::class, 'create'])->name('calculator-create');
     Route::get('get-calculate/{id}', [CalculateDepreciationController::class, 'calculate'])->name('get-calculate');
     Route::post('calculator-store', [CalculateDepreciationController::class, 'store'])->name('calculator-store');

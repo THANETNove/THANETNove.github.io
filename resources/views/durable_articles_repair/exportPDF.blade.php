@@ -20,7 +20,7 @@
                     <div class="d-flex align-items-end row">
                         <div class="col-12">
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">รายงานข้อมูลครุภัณฑ์ที่ชำรุด</h1>
+                                <h1 class="card-title text-primary ">รายงานข้อมูลครุภัณฑ์ที่ซ่อม</h1>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
@@ -29,12 +29,10 @@
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>รหัสครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
-                                                <th>จำนวนที่ชำรุด</th>
+                                                <th>จำนวนที่ซ่อม</th>
                                                 <th>หน่วยนับ</th>
-                                                {{--  @if (Auth::user()->status != '0')
-                                                    <th>ชื่อ นามสกุล ผู้แจ้ง </th>
-                                                @endif --}}
                                                 <th>สถานะ </th>
+                                                <th>ค่าซ่อม </th>
                                                 <th>รายละเอียด</th>
                                                 <th>วันที่สร้าง</th>
                                             </tr>
@@ -49,20 +47,19 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->code_durable_articles }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td class="td-center">{{ $da->amount_damaged }}</td>
+                                                    <td class="td-center">{{ number_format($da->amount_repair) }}</td>
                                                     <td class="td-center">{{ $da->name_durable_articles_count }}</td>
-                                                    {{--  @if (Auth::user()->status != '0')
-                                                        <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
-                                                        </td>
-                                                    @endif --}}
                                                     <td class="td-center">
                                                         @if ($da->status == '0')
-                                                            <span class="badge bg-label-success me-1">ชำรุด</span>
+                                                            <span class="badge bg-label-success me-1">ซ่อม</span>
                                                         @elseif ($da->status == '1')
                                                             <span class="badge bg-label-warning me-1">ยกเลิก</span>
+                                                        @else
+                                                            <span class="badge bg-label-primary me-1">ซ่อมสำเร็จ</span>
                                                         @endif
                                                     </td>
-                                                    <td>{{ $da->damaged_detail }}</td>
+                                                    <td class="td-center">{{ number_format($da->repair_price) }}</td>
+                                                    <td>{{ $da->repair_detail }}</td>
                                                     <td class="td-center">
                                                         {{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                 </tr>

@@ -20,7 +20,7 @@
                     <div class="d-flex align-items-end row">
                         <div class="col-12">
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">รายงานข้อมูลวัสดุ</h1>
+                                <h1 class="card-title text-primary ">รายงานข้อมูลครุภัณฑ์</h1>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>

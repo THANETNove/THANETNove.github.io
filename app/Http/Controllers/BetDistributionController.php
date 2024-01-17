@@ -230,4 +230,16 @@ class BetDistributionController extends Controller
         return redirect('bet-distribution-index')->with('message', "บันทึกสำเร็จ");
 
     }
+
+    public function exportPDF()
+    {
+        $data = DB::table('bet_distributions')
+        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
+        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name')
+        ->get();
+        $pdf = PDF::loadView('bet_distribution.exportPDF',['data' =>  $data]);
+        $pdf->setPaper('a4');
+       return $pdf->stream('exportPDF.pdf');
+    }
 }

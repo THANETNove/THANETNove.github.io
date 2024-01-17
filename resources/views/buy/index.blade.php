@@ -11,9 +11,9 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">ข้อมูลการรับเข้า</h1>
+                                <h1 class="card-title text-primary ">รายการข้อมูลเข้า</h1>
                                 <a href="{{ url('buy-export/pdf') }}" target="_blank"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลวัสดุ</a>
+                                    class="btn rounded-pill btn-outline-info mb-3">รายการข้อมูลเข้า</a>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif

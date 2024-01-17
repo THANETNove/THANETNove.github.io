@@ -191,4 +191,16 @@ class DurableArticlesRepairController extends Controller
         return redirect('durable-articles-repair-index')->with('message', "บันทึกสำเร็จ");
 
     }
+
+    public function exportPDF()
+    {
+        $data = DB::table('durable_articles_repairs')
+        ->leftJoin('durable_articles', 'durable_articles_repairs.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('categories', 'durable_articles_repairs.group_id', '=', 'categories.id')
+        ->select('durable_articles_repairs.*','durable_articles.durableArticles_name','categories.category_name')
+        ->get();
+        $pdf = PDF::loadView('durable_articles_repair.exportPDF',['data' =>  $data]);
+        $pdf->setPaper('a4');
+       return $pdf->stream('exportPDF.pdf');
+    }
 }
