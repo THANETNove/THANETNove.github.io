@@ -30,7 +30,6 @@
                             @endphp
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">สถานที่จัดเก็บ</h1>
-                                <p>รายงานข้อมูลสถานที่จัดเก็บ</p>
                                 <p class="mt--16">จำนวนสถานะที่เปิดใช้งาน {{ $countOn }}</p>
                                 <p class="mt--16">จำนวนสถานะที่ปิดใช้งาน {{ $countOff }}</p>
                                 <div class="table-responsive text-nowrap">

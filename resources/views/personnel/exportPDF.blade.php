@@ -31,7 +31,6 @@
                             @endphp
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">รายงานข้อมูลพนักงาน</h1>
-                                <p>รายงานข้อมูลพนักงาน</p>
                                 {{--  <p class="mt--16">จำนวนผู้เบิก &nbsp; {{ $count0 }} &nbsp; คน</p> --}}
                                 <p class="mt--16">จำนวนหัวหน้าวัสดุ &nbsp; {{ $count2 }} &nbsp; คน</p>
                                 <p class="mt--16">จำนวนเจ้าหน้าที่วัสดุ &nbsp; {{ $count1 }} &nbsp; คน</p>

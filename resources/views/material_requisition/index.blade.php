@@ -12,7 +12,7 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">เบิกวัสดุอุปกรณ์</h1>
-                                <a href="{{ url('material-requisition-export/pdf') }}"
+                                <a href="{{ url('material-requisition-export/pdf') }}" target="_blank"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกวัสดุอุปกรณ์</a>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>

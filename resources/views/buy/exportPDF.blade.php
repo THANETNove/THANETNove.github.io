@@ -29,11 +29,9 @@
                                 $i = 1;
                                 $j = 1;
                                 $count = $data->count();
-
                             @endphp
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">รายการเข้า</h1>
-                                <p>รายงานการเข้า</p>
                                 <p class="mt--16">จำนวนทั้งหมด {{ $count }} รายการ</p>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
@@ -55,9 +53,9 @@
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>
                                                         @if ($da->typeBuy == 1)
-                                                            ประเภทวัสดุ
+                                                            วัสดุ
                                                         @else
-                                                            ประเภทครุภัณฑ์
+                                                            ครุภัณฑ์
                                                         @endif
                                                     </td>
                                                     <td>{{ $da->category_name }}</td>
@@ -68,11 +66,11 @@
                                                             {{ $da->durableArticles_name }}
                                                         @endif
                                                     </td>
-                                                    <td>{{ number_format($da->quantity) }} &nbsp;
+                                                    <td class="td-center">{{ number_format($da->quantity) }} &nbsp;
                                                         {{ $da->counting_unit }}</td>
 
-                                                    <td>{{ number_format($da->price_per_piece) }}</td>
-                                                    <td>{{ number_format($da->total_price) }}</td>
+                                                    <td class="td-center">{{ number_format($da->price_per_piece) }}</td>
+                                                    <td class="td-center">{{ number_format($da->total_price) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

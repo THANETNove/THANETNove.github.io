@@ -174,20 +174,21 @@ class MaterialRequisitionController extends Controller
     public function exportPDF()
     {
 
-     $data = DB::table('material_requisitions')
-     ->join('users', 'material_requisitions.id_user', '=', 'users.id')
-     ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name');
+        $data = DB::table('material_requisitions')
+        ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
+       ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
+         ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
+        ->where('material_requisitions.status', "on")
+        ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
+        'materials.material_name as name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
         if (Auth::user()->status == "0") {
             $data =  $data->where('id_user', Auth::user()->id);
         }
 
-
-
-
-
         $pdf = PDF::loadView('material_requisition.exportPDF',['data' =>  $data->get()]);
         $pdf->setPaper('a4');
-        return $pdf->download('exportPDF.pdf');
+        return $pdf->stream('exportPDF.pdf');
 
     }
 }
