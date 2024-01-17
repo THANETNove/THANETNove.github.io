@@ -10,23 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     @include('layouts.fonts_DPF')
-    <style>
-        .table td {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
 
-        .table th,
-        .table td {
-            text-align: center;
-            vertical-align: middle !important;
-        }
-
-        .badge {
-            font-size: 0.8rem;
-        }
-    </style>
 
 </head>
 
@@ -67,9 +51,9 @@
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->building_name }}</td>
-                                                    <td>{{ $da->floor }}</td>
+                                                    <td class="td-center">{{ $da->floor }}</td>
                                                     <td>{{ $da->room_name }}</td>
-                                                    <td>เปิดใช้งานอยู่</td>
+                                                    <td class="td-center">เปิดใช้งานอยู่</td>
 
                                                 </tr>
                                             @endforeach

@@ -10,24 +10,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     @include('layouts.fonts_DPF')
-    <style>
-        .table td {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .table th,
-        .table td {
-
-            vertical-align: middle !important;
-        }
-
-        .badge {
-            font-size: 0.8rem;
-        }
-    </style>
-
 </head>
 
 <body>

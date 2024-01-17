@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use PDF;
 use Illuminate\Support\Str;
 use App\Models\DurableArticles;
 
@@ -132,5 +133,16 @@ class DurableArticlesController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function exportPDF()
+    {
+        $data = DB::table('durable_articles')->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'durable_articles.group_id', '=', 'categories.id')
+        ->select('durable_articles.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->get();
+        $pdf = PDF::loadView('durable_articles.exportPDF',['data' =>  $data]);
+        $pdf->setPaper('a4');
+       return $pdf->stream('exportPDF.pdf');
     }
 }

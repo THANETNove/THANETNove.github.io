@@ -12,7 +12,7 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">ข้อมูลครุภัณฑ์</h1>
-                                <a href="{{ url('personnel-export/pdf') }}"
+                                <a href="{{ url('durable-articles-export/pdf') }}" target="_blank"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลครุภัณฑ์</a>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
@@ -28,11 +28,11 @@
                                                 <th>ชื่อ</th>
                                                 <th>จำนวน</th>
                                                 <th>จำนวนที่เบิกได้</th>
-                                                <th>จำนวนนับ</th>
                                                 <th>ชำรุด</th>
                                                 <th>แทงจำหน่าย</th>
                                                 <th>ซ่อม</th>
                                                 <th>ค่าเสื่อม</th>
+                                                <th>หน่วย</th>
                                                 <th>ที่จัดเก็บ</th>
                                                 <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
@@ -53,11 +53,11 @@
                                                         <td>{{ $da->durableArticles_name }}</td>
                                                         <td>{{ number_format($da->durableArticles_number) }}</td>
                                                         <td>{{ number_format($da->remaining_amount) }}</td>
-                                                        <td>{{ $da->name_durableArticles_count }}</td>
                                                         <td>{{ number_format($da->damaged_number) }}</td>
                                                         <td>{{ number_format($da->bet_on_distribution_number) }}</td>
                                                         <td>{{ number_format($da->repair_number) }}</td>
                                                         <td>{{ number_format($da->depreciation_price) }}</td>
+                                                        <td>{{ $da->name_durableArticles_count }}</td>
                                                         <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
                                                             {{ $da->room_name }}</td>
                                                         <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>

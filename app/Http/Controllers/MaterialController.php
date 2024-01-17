@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use PDF;
 use Illuminate\Support\Str;
 use App\Models\Material;
 
@@ -146,10 +147,13 @@ class MaterialController extends Controller
     {
         //
     }
-    public function exportPDF(string $id)
+    public function exportPDF()
     {
-        $data = DB::table('users')->get();
-        $pdf = PDF::loadView('personnel.exportPDF',['data' =>  $data]);
+        $data = DB::table('materials')->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
+        ->select('materials.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->get();
+        $pdf = PDF::loadView('material.exportPDF',['data' =>  $data]);
         $pdf->setPaper('a4');
        return $pdf->stream('exportPDF.pdf');
     }

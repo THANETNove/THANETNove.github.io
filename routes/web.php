@@ -110,7 +110,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('material-store', [MaterialController::class, 'store'])->name('material-store');
     Route::get('material-edit/{id}', [MaterialController::class, 'edit'])->name('material-edit');
     Route::put('material-update/{id}', [MaterialController::class, 'update'])->name('material-update');
-    Route::get('material-export/pdf', [PersonnelController::class, 'exportPDF'])->name('material-export/pdf');
+    Route::get('material-export/pdf', [MaterialController::class, 'exportPDF'])->name('material-export/pdf');
 
 
     Route::get('durable-articles-index', [DurableArticlesController::class, 'index'])->name('durable-articles-index');
@@ -119,6 +119,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('durable-articles-index', [DurableArticlesController::class, 'index'])->name('durable-articles-index');
     Route::get('durable-articles-edit/{id}', [DurableArticlesController::class, 'edit'])->name('durable-articles-edit');
     Route::put('durable-articles-update/{id}', [DurableArticlesController::class, 'update'])->name('durable-articles-update');
+    Route::get('durable-articles-export/pdf', [DurableArticlesController::class, 'exportPDF'])->name('durable-articles-export/pdf');
 
     Route::get('buy-index', [BuyController::class, 'index'])->name('buy-index');
     Route::post('buy-index', [BuyController::class, 'index'])->name('buy-index');

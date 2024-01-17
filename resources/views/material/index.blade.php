@@ -12,7 +12,7 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">ข้อมูลวัสดุ</h1>
-                                <a href="{{ url('personnel-export/pdf') }}" target="_blank"
+                                <a href="{{ url('material-export/pdf') }}" target="_blank"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลวัสดุ</a>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
@@ -30,7 +30,7 @@
                                                 <th>จำนวนวัสดุ (จ่อหน่วยนับ)</th>
                                                 {{-- <th>จำนวนวัสดุ เเพค/โหล</th> --}}
                                                 <th>จำนวนที่เหลือ</th>
-                                                <th>จำนวนนับวัสดุ</th>
+                                                <th>หน่วย</th>
 
                                                 <th>ที่จัดเก็บ</th>
                                                 <th>date</th>
