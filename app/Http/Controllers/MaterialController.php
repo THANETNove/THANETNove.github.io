@@ -146,4 +146,11 @@ class MaterialController extends Controller
     {
         //
     }
+    public function exportPDF(string $id)
+    {
+        $data = DB::table('users')->get();
+        $pdf = PDF::loadView('personnel.exportPDF',['data' =>  $data]);
+        $pdf->setPaper('a4');
+       return $pdf->stream('exportPDF.pdf');
+    }
 }

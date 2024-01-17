@@ -184,11 +184,11 @@ class PersonnelController extends Controller
 
     public function exportPDF()
     {
-         $data = DB::table('users')->get();
+
+        $data = DB::table('users')->get();
         $pdf = PDF::loadView('personnel.exportPDF',['data' =>  $data]);
         $pdf->setPaper('a4');
-        return $pdf->download('exportPDF.pdf');
+       return $pdf->stream('exportPDF.pdf');
 
-      /*   return view('storage_location.exportPDF',['data' => $data]); */
     }
 }

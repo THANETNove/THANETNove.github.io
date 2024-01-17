@@ -19,7 +19,7 @@
 
         .table th,
         .table td {
-            text-align: center;
+
             vertical-align: middle !important;
         }
 
@@ -48,11 +48,11 @@
 
                             @endphp
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">สถานที่จัดเก็บ</h1>
-                                <p>รายงานข้อมูลสถานที่จัดเก็บ</p>
-                                <p class="mt--16">จำนวนผู้เบิก &nbsp; {{ $count0 }} &nbsp; คน</p>
-                                <p class="mt--16">จำนวนเจ้าหน้าที่วัสดุ &nbsp; {{ $count1 }} &nbsp; คน</p>
+                                <h1 class="card-title text-primary ">รายงานข้อมูลพนักงาน</h1>
+                                <p>รายงานข้อมูลพนักงาน</p>
+                                {{--  <p class="mt--16">จำนวนผู้เบิก &nbsp; {{ $count0 }} &nbsp; คน</p> --}}
                                 <p class="mt--16">จำนวนหัวหน้าวัสดุ &nbsp; {{ $count2 }} &nbsp; คน</p>
+                                <p class="mt--16">จำนวนเจ้าหน้าที่วัสดุ &nbsp; {{ $count1 }} &nbsp; คน</p>
                                 <p class="mt--16">จำนวนพนักงาน &nbsp; {{ $countOn }} &nbsp; คน</p>
                                 <p class="mt--16">จำนวนพนักงานพ้นสภาพ &nbsp; {{ $countOff }} &nbsp; คน</p>
                                 <div class="table-responsive text-nowrap">
@@ -70,7 +70,7 @@
                                         </thead>
                                         <tbody class="table-border-bottom-0">
                                             {{--  <h3>เปิดใช้งาน</h3> --}}
-                                            @foreach ($data->where('status', '0')->sortByDesc('created_at') as $da)
+                                            @foreach ($data->where('status', '2')->sortByDesc('created_at') as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->employee_id }}</td>
@@ -89,7 +89,6 @@
 
                                                 </tr>
                                             @endforeach
-                                            <br>
                                             @foreach ($data->where('status', '1')->sortByDesc('created_at') as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
@@ -110,8 +109,7 @@
 
                                                 </tr>
                                             @endforeach
-                                            <br>
-                                            @foreach ($data->where('status', '2')->sortByDesc('created_at') as $da)
+                                            @foreach ($data->where('status', '0')->sortByDesc('created_at') as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->employee_id }}</td>

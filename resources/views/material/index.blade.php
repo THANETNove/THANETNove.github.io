@@ -12,7 +12,7 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">ข้อมูลวัสดุ</h1>
-                                <a href="{{ url('personnel-export/pdf') }}"
+                                <a href="{{ url('personnel-export/pdf') }}" target="_blank"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลวัสดุ</a>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
