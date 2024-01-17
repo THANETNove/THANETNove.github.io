@@ -194,12 +194,15 @@ class DurableArticlesRepairController extends Controller
 
     public function exportPDF()
     {
+        $currentYear = date('Y');
+
         $data = DB::table('durable_articles_repairs')
+        ->whereYear('durable_articles_repairs.created_at', $currentYear)
         ->leftJoin('durable_articles', 'durable_articles_repairs.durable_articles_name', '=', 'durable_articles.id')
         ->leftJoin('categories', 'durable_articles_repairs.group_id', '=', 'categories.id')
         ->select('durable_articles_repairs.*','durable_articles.durableArticles_name','categories.category_name')
         ->get();
-        $pdf = PDF::loadView('durable_articles_repair.exportPDF',['data' =>  $data]);
+        $pdf = PDF::loadView('durable_articles_repair.exportPDF',['data' =>  $data,'currentYear' => $currentYear]);
         $pdf->setPaper('a4');
        return $pdf->stream('exportPDF.pdf');
     }

@@ -149,11 +149,15 @@ class MaterialController extends Controller
     }
     public function exportPDF()
     {
-        $data = DB::table('materials')->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+        $currentYear = date('Y');
+
+        $data = DB::table('materials')
+        /* ->whereYear('materials.created_at', $currentYear) */
+        ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
         ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
         ->select('materials.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
         ->get();
-        $pdf = PDF::loadView('material.exportPDF',['data' =>  $data]);
+        $pdf = PDF::loadView('material.exportPDF',['data' =>  $data, 'currentYear' => $currentYear]);
         $pdf->setPaper('a4');
        return $pdf->stream('exportPDF.pdf');
     }

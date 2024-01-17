@@ -166,8 +166,11 @@ class DurableArticlesDamagedController extends Controller
 
     public function exportPDF()
     {
+        $currentYear = date('Y');
+
         $data = DB::table('durable_articles_damageds')
         ->where('durable_articles_damageds.status', '=', 0)
+        ->whereYear('durable_articles_damageds.created_at', $currentYear)
         ->join('users', 'durable_articles_damageds.id_user', '=', 'users.id')
         ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
         ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
@@ -176,7 +179,7 @@ class DurableArticlesDamagedController extends Controller
         ->select('durable_articles_damageds.*', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
     'durable_articles.durableArticles_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
         ->get();
-        $pdf = PDF::loadView('durable_articles_damaged.exportPDF',['data' =>  $data]);
+        $pdf = PDF::loadView('durable_articles_damaged.exportPDF',['data' =>  $data,'currentYear' => $currentYear]);
         $pdf->setPaper('a4');
        return $pdf->stream('exportPDF.pdf');
     }
