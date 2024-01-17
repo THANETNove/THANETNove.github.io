@@ -29,7 +29,8 @@
 
                             @endphp
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">รายงานข้อมูลการเบิกวัสดุอุปกรณ์</h1>
+                                <h1 class="card-title text-primary ">รายงานข้อมูลการเบิกวัสดุอุปกรณ์ ประจำปี
+                                    {{ $currentYear + 543 }}</h1>
                                 {{--    <p>รายงานข้อมูลการเบิกวัสดุอุปกรณ์</p>
                                 <p class="mt--16">จำนวนเบิกวัสดุ {{ $countOn }}</p>
                                 <p class="mt--16">จำนวนยกเลิกเบิกวัสดุ {{ $countOff }}</p> --}}
@@ -42,7 +43,7 @@
                                                 <th>รหัสวัสดุ</th>
                                                 <th>ชื่อวัสดุ</th>
                                                 <th>จำนวนที่เบิก</th>
-                                                <th>หน่วยนับ </th>
+                                                <th>หน่วย</th>
                                                 @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                 @endif

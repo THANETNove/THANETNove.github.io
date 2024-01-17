@@ -173,8 +173,10 @@ class MaterialRequisitionController extends Controller
 
     public function exportPDF()
     {
+        $currentYear = date('Y');
 
         $data = DB::table('material_requisitions')
+        ->whereYear('material_requisitions.created_at', $currentYear)
         ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
        ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
          ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
@@ -186,7 +188,7 @@ class MaterialRequisitionController extends Controller
             $data =  $data->where('id_user', Auth::user()->id);
         }
 
-        $pdf = PDF::loadView('material_requisition.exportPDF',['data' =>  $data->get()]);
+        $pdf = PDF::loadView('material_requisition.exportPDF',['data' =>  $data->get(),'currentYear' => $currentYear]);
         $pdf->setPaper('a4');
         return $pdf->stream('exportPDF.pdf');
 

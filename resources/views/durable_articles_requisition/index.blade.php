@@ -11,7 +11,7 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">เบิกครุภัณฑ์</h1>
-                                <a href="{{ url('durable-articles-requisition-export/pdf') }}"
+                                <a href="{{ url('durable-articles-requisition-export/pdf') }}" target="_blank"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกครุภัณฑ์</a>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
