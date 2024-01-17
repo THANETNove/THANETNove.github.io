@@ -157,6 +157,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('durable-articles-damaged-edit/{id}', [DurableArticlesDamagedController::class, 'edit'])->name('durable-articles-damaged-edit');
     Route::put('durable-articles-damaged-update/{id}', [DurableArticlesDamagedController::class, 'update'])->name('durable-articles-damaged-update');
     Route::get('durable-articles-damaged-destroy/{id}', [DurableArticlesDamagedController::class, 'destroy'])->name('durable-articles-damaged-destroy');
+    Route::get('durable-articles-damaged-export/pdf', [DurableArticlesDamagedController::class, 'exportPDF'])->name('durable-articles-damaged-export/pdf');
 
     //ระบบการซ่อมครุภัณฑ์
     Route::get('durable-articles-repair-index', [DurableArticlesRepairController::class, 'index'])->name('durable-articles-repair-index');

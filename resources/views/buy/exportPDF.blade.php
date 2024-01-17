@@ -44,7 +44,7 @@
                                                 <th scope="col">จำนวน</th>
                                                 <th scope="col">ราคา</th>
                                                 <th scope="col">ราคารวม</th>
-
+                                                <th>วันที่สร้าง</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -71,6 +71,8 @@
 
                                                     <td class="td-center">{{ number_format($da->price_per_piece) }}</td>
                                                     <td class="td-center">{{ number_format($da->total_price) }}</td>
+                                                    <td class="td-center">
+                                                        {{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

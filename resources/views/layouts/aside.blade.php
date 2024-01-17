@@ -172,7 +172,7 @@
             <a href="javascript:void(0);" class="menu-link menu-toggle">
 
                 <i class='menu-icon tf-icons bx bxs-blanket'></i>
-                <div data-i18n="Authentications">ระบบเบิกวัสดุอุปกรณ์</div>
+                <div data-i18n="Authentications">ระบบเบิกวัสดุ</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item" id="material-requisition-index">

@@ -1,18 +1,26 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-    <!-- Content -->
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>รายงานข้อมูลสถานที่</title>
+    <meta http-equiv="Content-Language" content="th" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @include('layouts.fonts_DPF')
+</head>
+
+<body>
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
             <div class="col-12 mb-4 order-0">
                 <div class="card">
                     <div class="d-flex align-items-end row">
                         <div class="col-12">
-
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">ครุภัณฑ์ที่ชำรุด</h1>
-                                <a href="{{ url('durable-articles-damaged-export/pdf') }}" target="_blank"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลครุภัณฑ์ที่ชำรุด</a>
+                                <h1 class="card-title text-primary ">รายงานข้อมูลวัสดุ</h1>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
@@ -29,7 +37,6 @@
                                                 <th>สถานะ </th>
                                                 <th>รายละเอียด</th>
                                                 <th>วันที่สร้าง</th>
-                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         @php
@@ -42,13 +49,13 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->code_durable_articles }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->amount_damaged }}</td>
-                                                    <td>{{ $da->name_durable_articles_count }}</td>
+                                                    <td class="td-center">{{ $da->amount_damaged }}</td>
+                                                    <td class="td-center">{{ $da->name_durable_articles_count }}</td>
                                                     {{--  @if (Auth::user()->status != '0')
                                                         <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
                                                         </td>
                                                     @endif --}}
-                                                    <td>
+                                                    <td class="td-center">
                                                         @if ($da->status == '0')
                                                             <span class="badge bg-label-success me-1">ชำรุด</span>
                                                         @elseif ($da->status == '1')
@@ -56,42 +63,14 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $da->damaged_detail }}</td>
-                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
-                                                    @if ($da->status == '0')
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <button type="button"
-                                                                    class="btn p-0 dropdown-toggle hide-arrow"
-                                                                    data-bs-toggle="dropdown">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-
-                                                                <div class="dropdown-menu">
-                                                                    @if (Auth::user()->status > '0')
-                                                                        <a class="dropdown-item"
-                                                                            href="{{ url('durable-articles-damaged-edit', $da->id) }}"><i
-                                                                                class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                                        @if (Auth::user()->status == '2')
-                                                                            <a class="dropdown-item alert-destroy"
-                                                                                href="{{ url('durable-articles-damaged-destroy', $da->id) }}"><i
-                                                                                    class="bx bx-trash me-1"></i> ยกเลิก</a>
-                                                                        @endif
-                                                                    @endif
-                                                                </div>
-
-                                                            </div>
-                                                        </td>
-                                                    @endif
+                                                    <td class="td-center">
+                                                        {{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <div class="mt-5">
-                                        {!! $data->links() !!}
-                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -99,5 +78,6 @@
         </div>
     </div>
 
-    <!-- / Layout wrapper -->
-@endsection
+</body>
+
+</html>
