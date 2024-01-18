@@ -456,6 +456,11 @@ if (targetUrls === "bet-distribution-indexApproval") {
 if (targetUrls === "calculator-create") {
     setActiveClass("calculator", "calculator-create");
 }
+//คึนครุภัณฑ์
+
+if (targetUrls === "return-item-index") {
+    setActiveClass("return-item", "return-item-index");
+}
 
 //อนุมัติ
 if (targetUrls === "approval-update") {

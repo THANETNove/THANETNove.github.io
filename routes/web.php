@@ -15,6 +15,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DurableArticlesRepairController;
 use App\Http\Controllers\BetDistributionController;
 use App\Http\Controllers\CalculateDepreciationController;
+use App\Http\Controllers\ReturnItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,7 +68,6 @@ Route::post('not-approved', [DurableArticlesRequisitionController::class, 'notAp
 Route::get('durable-articles-requisition-show/{id}', [DurableArticlesRequisitionController::class, 'show'])->name('durable-articles-requisition-show');
 Route::get('durable-articles-requisition-export/pdf', [DurableArticlesRequisitionController::class, 'exportPDF'])->name('durable-articles-requisition-export/pdf');
 Route::get('get-articlesRes/{id}', [DurableArticlesRequisitionController::class, 'durableRequisition'])->name('get-articlesRes');
-Route::get('durable-articles-requisition-return/{id}', [DurableArticlesRequisitionController::class, 'durableRequisitionReturn'])->name('durable-articles-requisition-return');
 
 
 // is_drawer ผู้เบิก
@@ -190,6 +190,12 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('calculator-create', [CalculateDepreciationController::class, 'create'])->name('calculator-create');
     Route::get('get-calculate/{id}', [CalculateDepreciationController::class, 'calculate'])->name('get-calculate');
     Route::post('calculator-store', [CalculateDepreciationController::class, 'store'])->name('calculator-store');
+
+ //ระบบคึน
+
+    Route::get('return-item-index', [ReturnItemController::class, 'index'])->name('return-item-index');
+    Route::post('return-item-index', [ReturnItemController::class, 'index'])->name('return-item-index');
+    Route::get('durable-articles-requisition-return/{id}', [ReturnItemController::class, 'durableRequisitionReturn'])->name('durable-articles-requisition-return');
 
 });
 

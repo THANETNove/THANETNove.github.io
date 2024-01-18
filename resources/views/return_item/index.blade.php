@@ -10,9 +10,9 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">เบิกครุภัณฑ์</h1>
-                                <a href="{{ url('durable-articles-requisition-export/pdf') }}" target="_blank"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกครุภัณฑ์</a>
+                                <h1 class="card-title text-primary ">คึนครุภัณฑ์</h1>
+                                {{--   <a href="{{ url('durable-articles-requisition-export/pdf') }}" target="_blank"
+                                    class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกครุภัณฑ์</a> --}}
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif
@@ -118,7 +118,7 @@
                                                                 <a class="dropdown-item"
                                                                     href="{{ url('durable-articles-requisition-show', $da->id) }}"><i
                                                                         class='bx bxs-show'></i> View</a>
-                                                                @if ($da->statusApproval == '0' && $da->status == '0')
+                                                                {{--     @if ($da->statusApproval == '0' && $da->status == '0')
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('durable-articles-requisition-edit', $da->id) }}"><i
                                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
@@ -126,8 +126,8 @@
                                                                     <a class="dropdown-item alert-destroy"
                                                                         href="{{ url('durable-articles-requisition-destroy', $da->id) }}"><i
                                                                             class="bx bx-trash me-1"></i> ยกเลิก</a>
-                                                                @endif
-                                                                {{--  @if ($da->statusApproval == '1' && $da->status == '0')
+                                                                @endif --}}
+                                                                @if ($da->statusApproval == '1' && $da->status == '0')
                                                                     @if (Auth::user()->status > '1')
                                                                         <a class="dropdown-item alert-destroy"
                                                                             href="{{ url('durable-articles-requisition-return', $da->id) }}">
@@ -135,7 +135,7 @@
                                                                             <i class='bx bxs-send'></i>
                                                                             คึนครุภัณฑ์</a>
                                                                     @endif
-                                                                @endif --}}
+                                                                @endif
                                                             </div>
                                                         </div>
 
