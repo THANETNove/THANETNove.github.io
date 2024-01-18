@@ -80,6 +80,7 @@
 
                                                     </td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+
                                                     <td>
                                                         @if ($da->status == '0')
                                                             @if ($da->statusApproval == '0')
@@ -106,6 +107,16 @@
                                                     <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
                                                         {{ $da->room_name }}</td>
 
+                                                    @if ($da->statusApproval == '1' && $da->status == '0')
+                                                        @if (Auth::user()->status > '1')
+                                                            <td> <a href="{{ url('durable-articles-requisition-return', $da->id) }}"
+                                                                    class="alert-destroy">
+                                                                    <button type="button"
+                                                                        class="btn btn-info">คึนครุภัณฑ์</button>
+                                                                </a></td>
+                                                        @endif
+                                                    @endif
+
                                                     <td>
 
                                                         <div class="dropdown">
@@ -127,7 +138,7 @@
                                                                         href="{{ url('durable-articles-requisition-destroy', $da->id) }}"><i
                                                                             class="bx bx-trash me-1"></i> ยกเลิก</a>
                                                                 @endif --}}
-                                                                @if ($da->statusApproval == '1' && $da->status == '0')
+                                                                {{--  @if ($da->statusApproval == '1' && $da->status == '0')
                                                                     @if (Auth::user()->status > '1')
                                                                         <a class="dropdown-item alert-destroy"
                                                                             href="{{ url('durable-articles-requisition-return', $da->id) }}">
@@ -135,7 +146,7 @@
                                                                             <i class='bx bxs-send'></i>
                                                                             คึนครุภัณฑ์</a>
                                                                     @endif
-                                                                @endif
+                                                                @endif --}}
                                                             </div>
                                                         </div>
 
