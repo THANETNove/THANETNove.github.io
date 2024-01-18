@@ -106,7 +106,7 @@
                     </li>
                     <li class="menu-item" id="category-create">
                         <a href="{{ url('category-create') }}" class="menu-link">
-                            <div data-i18n="Notifications">ลงทะเบียนsหมวดวัสดุเเละครุภัณฑ์</div>
+                            <div data-i18n="Notifications">ลงทะเบียนหมวดวัสดุเเละครุภัณฑ์</div>
                         </a>
                     </li>
                 </ul>
