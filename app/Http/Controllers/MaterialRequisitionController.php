@@ -33,7 +33,9 @@ class MaterialRequisitionController extends Controller
        if ($search) {
         $data
         ->where('category_name', 'LIKE', "%$search%")
-        ->orWhere('materials.material_name', 'LIKE', "%$search%");
+        ->orWhere('materials.material_name', 'LIKE', "%$search%")
+        ->orWhere('users.first_name', 'LIKE', "%$search%")
+        ->orWhere('users.last_name', 'LIKE', "%$search%");
        }
        if (Auth::user()->status == 0) {
         $data = $data->where('id_user', Auth::user()->id);
