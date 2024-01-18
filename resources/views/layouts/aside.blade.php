@@ -73,6 +73,21 @@
                         </li>
                     </ul>
                 </li>
+                <li class="menu-item" id="index-approval">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class='menu-icon tf-icons bx bxs-check-circle'></i>
+                        <div data-i18n="Account Settings">อนุมัติครุภัณฑ์จำหน่าย
+                        </div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item" id="bet-distribution-indexApproval">
+                            <a href="{{ url('bet-distribution-indexApproval') }}" class="menu-link">
+                                <div data-i18n="Notifications">อนุมัติครุภัณฑ์จำหน่าย
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="menu-item" id="return-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class='menu-icon tf-icons bx bx-redo'></i>
@@ -264,13 +279,13 @@
                     <div data-i18n="Authentications">ระบบการเเทงจำหน่ายครุภัณฑ์</div>
                 </a>
                 <ul class="menu-sub">
-                    @if (Auth::user()->status == 2)
+                    {{--     @if (Auth::user()->status == 2)
                         <li class="menu-item" id="bet-distribution-indexApproval">
                             <a href="{{ url('bet-distribution-indexApproval') }}" class="menu-link">
                                 <div data-i18n="Basic">อนุมัติเเทงจำหน่ายครุภัณฑ์</div>
                             </a>
                         </li>
-                    @endif
+                    @endif --}}
                     <li class="menu-item" id="bet-distribution-index">
                         <a href="{{ url('bet-distribution-index') }}" class="menu-link">
                             <div data-i18n="Basic">การเเทงจำหน่ายครุภัณฑ์</div>

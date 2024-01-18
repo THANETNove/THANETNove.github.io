@@ -447,14 +447,16 @@ if (
 if (targetUrls === "bet-distribution-create") {
     setActiveClass("bet-distribution", "bet-distribution-create");
 }
-if (targetUrls === "bet-distribution-indexApproval") {
-    setActiveClass("bet-distribution", "bet-distribution-indexApproval");
-}
 
 //เเทงจำหน่ายครุภัณฑ์
 
 if (targetUrls === "calculator-create") {
     setActiveClass("calculator", "calculator-create");
+}
+//อนุมัติเเทงจำหน่ายครุภัณฑ์
+
+if (targetUrls === "bet-distribution-indexApproval") {
+    setActiveClass("index-approval", "bet-distribution-indexApproval");
 }
 //คึนครุภัณฑ์
 

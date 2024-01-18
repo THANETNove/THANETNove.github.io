@@ -10,7 +10,7 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">ครุภัณฑ์ที่แทงจำหน่าย</h1>
+                                <h1 class="card-title text-primary ">ครุภัณฑ์ที่แทงจำหน่าย </h1>
                                 <a href="{{ url('bet-distribution-export/pdf') }}" target="_blank"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลครุภัณฑ์ที่แทงจำหน่าย</a>
                                 <div class="table-responsive text-nowrap">

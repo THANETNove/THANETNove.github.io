@@ -10,9 +10,8 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">ครุภัณฑ์ที่แทงจำหน่าย</h1>
-                                <a href="{{ url('personnel-export/pdf') }}"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลครุภัณฑ์ที่แทงจำหน่าย</a>
+                                <h1 class="card-title text-primary ">อนุมัติครุภัณฑ์จำหน่าย</h1>
+
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
