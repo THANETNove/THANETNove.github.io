@@ -19,7 +19,8 @@ class TypeCategoryController extends Controller
         ->select('type_categories.*','categories.category_name')
         ->orderBy('type_categories.id', 'DESC');
         if ($search) {
-            $data =  $data->where('category_id', 'LIKE', "%$search%")
+            $data =  $data->where('categories.category_name', 'LIKE', "%$search%")
+            ->orWhere('type_categories.type_name', 'LIKE', "%$search%")
             ->paginate(100);
 
         }else{
