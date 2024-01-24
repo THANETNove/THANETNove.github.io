@@ -8,8 +8,9 @@
                 <div class="card ">
                     <div class="card-body">
                         <h1 class="card-title text-primary ">เพิ่ม ชื่อครุภัณฑ์</h1>
-                        <form method="POST" action="{{ route('typeCategory-store') }}">
+                        <form method="POST" action="{{ route('typeCategory-update', $data['id']) }}">
                             @csrf
+                            @method('PUT')
                             <div class="row">
                                 <div class="mb-3 col-md-4">
                                     <label for="department_name" class="form-label">หมวดหมู่</label>
@@ -17,27 +18,29 @@
                                     <select class="form-select" name="type_id" aria-label="Default select example">
                                         <option>เลือกหมวดหมู่</option>
                                         @foreach ($group as $gr)
-                                            <option value="{{ $gr->category_code }}">
-                                                {{ $gr->category_name }}</option>
+                                            @if ($data['type_id'] == $gr->category_code)
+                                                <option value="{{ $gr->category_code }}" selected>
+                                                    {{ $gr->category_name }}</option>
+                                            @else
+                                                <option value="{{ $gr->category_code }}">
+                                                    {{ $gr->category_name }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3 col-md-8">
                                     <label for="type_code" class="form-label">รหัสชื่อ</label>
                                     <input id="type_code" type="text" class="form-control" name="type_code" required
-                                        placeholder="รหัสชื่อ" autocomplete="category_code">
+                                        placeholder="รหัสชื่อ" value="{{ $data['type_code'] }}"
+                                        autocomplete="category_code">
 
-                                    @error('category_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-md-12">
                                     <label for="category_name" class="form-label">ชื่อ</label>
-                                    <input id="category_name" type="text" class="form-control" name="type_name" required
+                                    <input id="category_name" type="text" class="form-control"
+                                        value="{{ $data['type_name'] }}" name="type_name" required
                                         placeholder="ชื่อหมวดหมู่" autocomplete="category_name">
                                 </div>
 

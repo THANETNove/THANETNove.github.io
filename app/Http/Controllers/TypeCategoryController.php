@@ -4,16 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use App\Models\Photo;
+use App\Models\TypeCategory;
 
 class TypeCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search =  $request['search'];
+        $data = DB::table('type_categories')
+        ->leftJoin('categories', 'type_categories.type_id', '=', 'categories.category_code')
+        ->select('type_categories.*','categories.category_name')
+        ->orderBy('type_categories.id', 'DESC');
+        if ($search) {
+            $data =  $data->where('category_id', 'LIKE', "%$search%")
+            ->paginate(100);
+
+        }else{
+            $data =  $data
+            ->paginate(100);
+
+        }
+
+        return view('type_category.index',['data' => $data,]);
     }
 
     /**
@@ -22,8 +37,10 @@ class TypeCategoryController extends Controller
     public function create()
     {
         $group = DB::table('categories')
+        ->where('category_id', 2)
             ->get();
-      return view("photo.create",['group' => $group]);
+
+      return view("type_category.create",['group' => $group]);
     }
 
     /**
@@ -31,14 +48,14 @@ class TypeCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Photo;
+        $data = new TypeCategory;
 
-        $data->photo_id = $request['type_id'];
-        $data->photo_code = $request['type_code'];
-        $data->photo_name = $request['type_name'];
+        $data->type_id = $request['type_id'];
+        $data->type_code = $request['type_code'];
+        $data->type_name = $request['type_name'];
         $data->save();
 
-        return redirect('category-index')->with('message', "บันทึกสำเร็จ");
+        return redirect('typeCategory-index')->with('message', "บันทึกสำเร็จ");
     }
 
     /**
@@ -54,15 +71,27 @@ class TypeCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
-    }
+        $group = DB::table('categories')
+        ->where('category_id', 2)
+            ->get();
+
+            $data =  TypeCategory::find($id);
+            return view('type_category.edit',['data' => $data,"group" => $group]);
+        }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data =  TypeCategory::find($id);
+
+        $data->type_id = $request['type_id'];
+        $data->type_code = $request['type_code'];
+        $data->type_name = $request['type_name'];
+        $data->save();
+
+        return redirect('typeCategory-index')->with('message', "บันทึกสำเร็จ");
     }
 
     /**

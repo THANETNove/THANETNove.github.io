@@ -381,6 +381,13 @@ if (targetUrls === "category-index" || targetUrls === "category-edit") {
 if (targetUrls === "category-create") {
     setActiveClass("category", "category-create");
 }
+//หมวดหมู่ เพิ่ม ชื่อครุภัณฑ์
+if (targetUrls === "typeCategory-index") {
+    setActiveClass("typeCategory", "typeCategory-index");
+}
+if (targetUrls === "typeCategory-create") {
+    setActiveClass("typeCategory", "typeCategory-create");
+}
 // ระบบเบิกวัสดุ
 if (
     targetUrls === "material-requisition-index" ||

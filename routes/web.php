@@ -198,8 +198,12 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('return-item-index', [ReturnItemController::class, 'index'])->name('return-item-index');
     Route::get('durable-articles-requisition-return/{id}', [ReturnItemController::class, 'durableRequisitionReturn'])->name('durable-articles-requisition-return');
 
-    Route::get('photo-create', [TypeCategoryController::class, 'create'])->name('photo-create');
-    Route::post('photo-store', [TypeCategoryController::class, 'store'])->name('photo-store');
+    Route::get('typeCategory-index', [TypeCategoryController::class, 'index'])->name('typeCategory-index');
+    Route::post('typeCategory-index', [TypeCategoryController::class, 'index'])->name('typeCategory-index');
+    Route::get('typeCategory-create', [TypeCategoryController::class, 'create'])->name('typeCategory-create');
+    Route::post('typeCategory-store', [TypeCategoryController::class, 'store'])->name('typeCategory-store');
+    Route::get('typeCategory-edit/{id}', [TypeCategoryController::class, 'edit'])->name('typeCategory-edit');
+    Route::put('typeCategory-update/{id}', [TypeCategoryController::class, 'update'])->name('typeCategory-update');
 
 });
 

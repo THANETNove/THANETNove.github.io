@@ -137,8 +137,22 @@
                             <div data-i18n="Notifications">ลงทะเบียนหมวดวัสดุเเละครุภัณฑ์</div>
                         </a>
                     </li>
-                    <li class="menu-item" id="category-create">
-                        <a href="{{ url('photo-create') }}" class="menu-link">
+
+                </ul>
+            </li>
+            <li class="menu-item" id="typeCategory">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class='menu-icon tf-icons bx bx-grid-alt'></i>
+                    <div data-i18n="Account Settings">ลงทะเบียนชื่อครุภัณฑ์</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="typeCategory-index">
+                        <a href="{{ url('typeCategory-index') }}" class="menu-link">
+                            <div data-i18n="Account">ชื่อครุภัณฑ์</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="typeCategory-create">
+                        <a href="{{ url('typeCategory-create') }}" class="menu-link">
                             <div data-i18n="Notifications">ลงทะเบียนชื่อครุภัณฑ์</div>
                         </a>
                     </li>
