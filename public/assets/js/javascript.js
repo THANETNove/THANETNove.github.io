@@ -1141,3 +1141,37 @@ function confirmDestroy(url) {
         console.log("ผู้ใช้กดยกเลิก");
     }
 }
+
+//category_id
+
+$("#category_id").on("change", function () {
+    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+
+    const popup = document.getElementById("category_code");
+    const popup2 = document.getElementById("category_code_id");
+
+    if (selectedValue == 1) {
+        popup.removeAttribute("required");
+        popup2.style.display = "none";
+    } else {
+        popup.setAttribute("required", true);
+        popup2.style.display = "block";
+    }
+});
+
+if (targetUrls == "category-edit") {
+    const popup_edit = document.getElementById("category_id");
+    const selectedValue = popup_edit.value;
+
+    const popup = document.getElementById("category_code");
+    const popup2 = document.getElementById("category_code_id");
+    if (selectedValue == 1) {
+        popup.removeAttribute("required");
+        popup2.style.display = "none";
+    } else {
+        popup.setAttribute("required", true);
+        popup2.style.display = "block";
+    }
+}
+
+console.log("11");

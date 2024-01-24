@@ -10,6 +10,7 @@ class Category extends Model
     use HasFactory;
     protected $fillable = [
         'category_id',//รหัสครุภัณฑ์
+        'category_code', // กลุ่ม/ประเภท
         'category_name', // กลุ่ม/ประเภท
     ];
 }

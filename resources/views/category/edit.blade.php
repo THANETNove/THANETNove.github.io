@@ -7,7 +7,7 @@
 
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title text-primary ">เเก้ไข เเผนก</h1>
+                        <h1 class="card-title text-primary ">เเก้ไข หมวดหมู่วัสดุเเละครุภัณฑ์</h1>
                         <form method="POST" action="{{ route('category-update', $data->id) }}">
                             @csrf
                             @method('PUT')
@@ -15,7 +15,8 @@
                                 <div class="mb-3 col-md-4">
                                     <label for="department_name" class="form-label">หมวดหมู่</label>
 
-                                    <select class="form-select" name="category_id" aria-label="Default select example">
+                                    <select class="form-select" id="category_id" name="category_id"
+                                        aria-label="Default select example">
                                         <option selected disabled>เลือกหมวดหมู่</option>
 
                                         <option value="1" @if ($data['category_id'] == 1) selected @endif>
@@ -39,7 +40,26 @@
                                     @enderror
 
                                 </div>
+                            </div>
+                            <div class="row" id="category_code_id">
+                                <div class="mb-3 col-md-6">
 
+                                    <label for="category_code" class="form-label">รหัสหมวดหมู่/ประเภท</label>
+                                    <input id="category_code" type="text"
+                                        class="form-control @error('category_code') is-invalid @enderror"
+                                        name="category_code" value="{{ $data['category_code'] }}"
+                                        placeholder="รหัสหมวดหมู่/ประเภท" autocomplete="category_code" required>
+
+                                    @error('category_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+
+
+
+                                </div>
 
                             </div>
                             <div class="mt-2">

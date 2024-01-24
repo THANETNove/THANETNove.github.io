@@ -16,6 +16,7 @@ use App\Http\Controllers\DurableArticlesRepairController;
 use App\Http\Controllers\BetDistributionController;
 use App\Http\Controllers\CalculateDepreciationController;
 use App\Http\Controllers\ReturnItemController;
+use App\Http\Controllers\TypeCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -196,6 +197,9 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('return-item-index', [ReturnItemController::class, 'index'])->name('return-item-index');
     Route::post('return-item-index', [ReturnItemController::class, 'index'])->name('return-item-index');
     Route::get('durable-articles-requisition-return/{id}', [ReturnItemController::class, 'durableRequisitionReturn'])->name('durable-articles-requisition-return');
+
+    Route::get('photo-create', [TypeCategoryController::class, 'create'])->name('photo-create');
+    Route::post('photo-store', [TypeCategoryController::class, 'store'])->name('photo-store');
 
 });
 

@@ -137,6 +137,11 @@
                             <div data-i18n="Notifications">ลงทะเบียนหมวดวัสดุเเละครุภัณฑ์</div>
                         </a>
                     </li>
+                    <li class="menu-item" id="category-create">
+                        <a href="{{ url('photo-create') }}" class="menu-link">
+                            <div data-i18n="Notifications">ลงทะเบียนชื่อครุภัณฑ์</div>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

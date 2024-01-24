@@ -14,7 +14,8 @@
                                 <div class="mb-3 col-md-4">
                                     <label for="department_name" class="form-label">หมวดหมู่</label>
 
-                                    <select class="form-select" name="category_id" aria-label="Default select example">
+                                    <select class="form-select" name="category_id" id="category_id"
+                                        aria-label="Default select example">
                                         <option selected disabled>เลือกหมวดหมู่</option>
                                         <option value="1">หมวดหมู่วัสดุ</option>
                                         <option value="2">หมวดหมู่ครุภัณฑ์</option>
@@ -33,11 +34,30 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+                            </div>
+                            <div class="row" id="category_code_id">
+                                <div class="mb-3 col-md-6">
+
+                                    <label for="category_code" class="form-label">รหัสหมวดหมู่/ประเภท</label>
+                                    <input id="category_code" type="text"
+                                        class="form-control @error('category_code') is-invalid @enderror"
+                                        name="category_code" placeholder="รหัสหมวดหมู่/ประเภท" autocomplete="category_code"
+                                        required>
+
+                                    @error('category_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+
+
 
                                 </div>
 
-
                             </div>
+
                             <div class="mt-2">
                                 <button type="submit" class="btn btn-primary me-2">บักทึก</button>
                             </div>

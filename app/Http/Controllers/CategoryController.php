@@ -50,6 +50,7 @@ class CategoryController extends Controller
         $data = new Category;
 
         $data->category_id = $request['category_id'];
+        $data->category_code = $request['category_code'];
         $data->category_name = $request['category_name'];
         $data->save();
 
@@ -81,6 +82,7 @@ class CategoryController extends Controller
 
         $data =  Category::find($id);
         $data->category_id = $request['category_id'];
+        $data->category_code = $request['category_code'];
         $data->category_name = $request['category_name'];
         $data->save();
      return redirect('category-index')->with('message', "บันทึกสำเร็จ");
