@@ -33,7 +33,8 @@ class DurableArticlesController extends Controller
                 ->orWhere('durableArticles_name', 'LIKE', "%$search%");
                 // Add additional conditions for other cases if needed
             })
-            ->orderBy('durable_articles.id', 'DESC')
+            ->orderBy('categories.category_name', 'ASC')
+            ->orderBy('durable_articles.durableArticles_name', 'ASC')
             ->paginate(100);
 
 
@@ -77,6 +78,7 @@ class DurableArticlesController extends Controller
         $durable_cont = DB::table('durable_articles')
         ->where('group_class',$request['group_class'])
         ->where('type_durableArticles', $request['type_durableArticles'])
+        ->where('description', $request['description'])
         ->count();
         $currentDate = Carbon::now();
         $thaiYear = ($currentDate->year + 543) % 100;
