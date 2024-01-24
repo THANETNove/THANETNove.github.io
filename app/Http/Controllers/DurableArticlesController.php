@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use DB;
 use PDF;
 use Illuminate\Support\Str;
@@ -22,8 +23,9 @@ class DurableArticlesController extends Controller
     {
 
         $search =  $request['search']; // ตัวเลขชุดเเรก 7115 คือ group_class 005 คือ  type_durableArticles 0003 คือ description
-        $data = DB::table('durable_articles')->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
-        ->leftJoin('categories', 'durable_articles.group_id', '=', 'categories.id')
+        $data = DB::table('durable_articles')
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.category_code')
         ->select('durable_articles.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
         if ($search) {
             $data = $data->where(function ($query) use ($search) {
@@ -54,8 +56,16 @@ class DurableArticlesController extends Controller
     {
         $data = DB::table('storage_locations')->where('status','on')->get();
         $group = DB::table('categories')
-        ->where('category_id', '=', 2)->orderBy('id', 'DESC')->get();
+        ->where('category_id', '=', 2)->orderBy('category_name', 'ASC')->get();
         return view('durable_articles.create',['data' => $data,'group' => $group]);
+    }
+    public function getTypeCategories($id)
+    {
+
+        $data = DB::table('type_categories')
+        ->where('type_id',$id)
+        ->orderBy('type_name', 'ASC')->get();
+       return response()->json($data);
     }
 
     /**
@@ -63,6 +73,19 @@ class DurableArticlesController extends Controller
      */
     public function store(Request $request)
     {
+
+        $durable_cont = DB::table('durable_articles')
+        ->where('group_class',$request['group_class'])
+        ->where('type_durableArticles', $request['type_durableArticles'])
+        ->count();
+        $currentDate = Carbon::now();
+        $thaiYear = ($currentDate->year + 543) % 100;
+        $thaiMonth = $currentDate->format('m');
+
+        $countDurable = $thaiMonth . "-" . $thaiYear . "/" . $durable_cont+1;
+
+
+
         $random = "dura-" . Str::random(10);
 
 
@@ -71,12 +94,13 @@ class DurableArticlesController extends Controller
         $data->group_class = $request['group_class'];
         $data->type_durableArticles = $request['type_durableArticles'];
         $data->description = $request['description'];
-        $data->group_id = $request['group_id'];
+        $data->group_count = $countDurable;
         $data->durableArticles_name = $request['durableArticles_name'];
         $data->durableArticles_number = $request['durableArticles_number'];
         $data->remaining_amount = $request['durableArticles_number'];
         $data->name_durableArticles_count = $request['name_durableArticles_count'];
         $data->code_material_storage = $request['code_material_storage'];
+        $data->warranty_period = $request['warranty_period'];
         $data->damaged_number = 0;
         $data->bet_on_distribution_number = 0;
         $data->repair_number = 0;

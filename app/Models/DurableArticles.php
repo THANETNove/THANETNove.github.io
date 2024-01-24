@@ -12,7 +12,7 @@ class DurableArticles extends Model
         'code_DurableArticles',//รหัสครุภัณฑ์
         'group_class', // กลุ่ม/ประเภท
         'type_durableArticles', // ชนิด
-        'group_id',
+        'group_count',
         'description', // รายละเอียด
         'durableArticles_name',//ชื่อ
         'durableArticles_number',//จำนวนครุภัณฑ์

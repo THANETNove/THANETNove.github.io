@@ -17,6 +17,7 @@ class DurableArticlesDamaged extends Model
         'amount_damaged', // จำนวนที่ชำรุด
         'name_durable_articles_count', // ชื่อเรียกจำนวนนับครุภัณฑ์
         'damaged_detail', // รายละเอียดการชำรุด
+        'warranty_period', // รายละเอียดการชำรุด
         'status', //สถานะ on/ off
     ];
 }

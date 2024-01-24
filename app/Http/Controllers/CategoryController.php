@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $search =  $request['search'];
-        $data = DB::table('categories')->orderBy('id', 'DESC');
+        $data = DB::table('categories')->orderBy('category_name', 'ASC');
         if ($search && $search != 3) {
             $data =  $data->where('category_id', 'LIKE', "%$search%")
             ->paginate(100);

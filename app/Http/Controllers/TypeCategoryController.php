@@ -17,7 +17,8 @@ class TypeCategoryController extends Controller
         $data = DB::table('type_categories')
         ->leftJoin('categories', 'type_categories.type_id', '=', 'categories.category_code')
         ->select('type_categories.*','categories.category_name')
-        ->orderBy('type_categories.id', 'DESC');
+        ->orderBy('categories.category_name', 'ASC')
+        ->orderBy('type_categories.type_name', 'ASC');
         if ($search) {
             $data =  $data->where('categories.category_name', 'LIKE', "%$search%")
             ->orWhere('type_categories.type_name', 'LIKE', "%$search%")

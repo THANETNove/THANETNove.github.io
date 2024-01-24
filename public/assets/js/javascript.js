@@ -1181,4 +1181,44 @@ if (targetUrls == "category-edit") {
     }
 }
 
-console.log("11");
+// ระบบลงทะเบียนครุภัณฑ์ ใหม่
+
+$("#durable-articles-group-id").on("change", function () {
+    const selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+
+    console.log("selectedValue", selectedValue);
+    $.ajax({
+        url: "get-type-categories/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            calculateRes = res;
+            console.log("res", res);
+            const groupName = $("#durable-articles-type-durableArticles");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกครุภัณฑ์",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.type_code,
+                        text: data.type_name,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+});
