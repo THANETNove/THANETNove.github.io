@@ -18,9 +18,10 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
-                                                <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>รหัสครุภัณฑ์</th>
+                                                <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
+                                                <th>รายละเอียดครุภัณฑ์</th>
                                                 <th>จำนวนที่ชำรุด</th>
                                                 <th>หน่วยนับ</th>
                                                 {{--  @if (Auth::user()->status != '0')
@@ -39,8 +40,11 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->category_name }}</td>
+
                                                     <td>{{ $da->code_durable_articles }}</td>
+
+                                                    <td>{{ $da->category_name }}</td>
+                                                    <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
                                                     <td>{{ $da->amount_damaged }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
@@ -68,9 +72,9 @@
 
                                                                 <div class="dropdown-menu">
                                                                     @if (Auth::user()->status > '0')
-                                                                        <a class="dropdown-item"
+                                                                        {{--  <a class="dropdown-item"
                                                                             href="{{ url('durable-articles-damaged-edit', $da->id) }}"><i
-                                                                                class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                                class="bx bx-edit-alt me-1"></i> Edit</a> --}}
                                                                         @if (Auth::user()->status == '2')
                                                                             <a class="dropdown-item alert-destroy"
                                                                                 href="{{ url('durable-articles-damaged-destroy', $da->id) }}"><i
