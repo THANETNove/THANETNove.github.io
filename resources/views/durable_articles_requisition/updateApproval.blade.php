@@ -20,14 +20,16 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
-                                                <th>รหัสวัสดุ</th>
-                                                <th>ชื่อวัสดุ</th>
+                                                <th>รหัสครุภัณฑ์</th>
+                                                <th>หมวดหมู่</th>
+                                                <th>ชื่อครุภัณฑ์</th>
+                                                <th>รายละเอียดครุภัณฑ์</th>
                                                 <th>จำนวนที่เบิก</th>
                                                 <th>หน่วยนับ </th>
                                                 @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                 @endif
-                                                <th>ระยะประกัน </th>
+                                                {{--  <th>ระยะประกัน </th> --}}
                                                 <th>การอนุมัติ </th>
 
                                             </tr>
@@ -40,6 +42,8 @@
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->code_durable_articles }}</td>
+                                                    <td>{{ $da->category_name }}</td>
+                                                    <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
                                                     <td>{{ $da->amount_withdraw }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
@@ -47,7 +51,7 @@
                                                         <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
                                                         </td>
                                                     @endif
-                                                    @php
+                                                    {{-- @php
                                                         $originalDate = $da->created_at;
                                                         $newDate = (new DateTime($originalDate))->modify('+7 days')->format('d/m/Y');
                                                         $newDate2 = (new DateTime($originalDate))->modify('+7 days');
@@ -55,8 +59,8 @@
                                                         $now = new DateTime();
 
                                                         $daysRemaining = $now > $targetDate ? 0 : $now->diff($targetDate)->format('%a') + 1;
-                                                    @endphp
-                                                    <td>{{ $newDate }}
+                                                    @endphp --}}
+                                                    {{--                            <td>{{ $newDate }}
                                                         @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
                                                             <span
                                                                 class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
@@ -69,7 +73,7 @@
                                                             @endif
                                                         @endif
 
-                                                    </td>
+                                                    </td> --}}
                                                     <td>
                                                         <a href="{{ url('approved', $da->id) }}" class="alert-destroy">
                                                             <button type="button" class="btn btn-info">อนุมัติ</button>

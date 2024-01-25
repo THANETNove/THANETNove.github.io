@@ -128,9 +128,10 @@ class DurableArticlesRequisitionController extends Controller
         ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
         ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
         ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
-        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.id')
+        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.category_code')
+        ->leftJoin('type_categories', 'durable_articles_requisitions.durable_articles_name', '=', 'type_categories.type_code')
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
-        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
+        ->select('durable_articles_requisitions.*', 'users.prefix', 'type_categories.type_name','users.first_name','users.last_name','departments.department_name',
     'durable_articles.durableArticles_name','durable_articles.warranty_period','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
     ->get();
 
@@ -190,11 +191,13 @@ class DurableArticlesRequisitionController extends Controller
     public function destroy(string $id)
     {
         $data_requisition = DurableArticlesRequisition::find($id);
-        $data = DurableArticles::find($data_requisition->durable_articles_name);
+        $data = DB::table('durable_articles')
+        ->where('code_DurableArticles', $data_requisition->durable_articles_id)
+        ->get();
 
 
-        DurableArticles::where('id', $data_requisition->durable_articles_name)->update([
-            'remaining_amount' =>  $data->remaining_amount + $data_requisition->amount_withdraw,
+        DurableArticles::where('code_DurableArticles', $data_requisition->durable_articles_id)->update([
+            'remaining_amount' =>  $data[0]->remaining_amount + $data_requisition->amount_withdraw,
         ]);
         DurableArticlesRequisition::where('id', $id)->update([
             'status' =>  "1",
@@ -209,8 +212,12 @@ class DurableArticlesRequisitionController extends Controller
         ->where('durable_articles_requisitions.status', "0")
         ->where('durable_articles_requisitions.statusApproval', "0")
         ->leftJoin('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
-        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_name', '=', 'durable_articles.id')
-        ->select('durable_articles_requisitions.*', 'durable_articles.durableArticles_name','users.prefix', 'users.first_name','users.last_name')
+        ->leftJoin('type_categories', 'durable_articles_requisitions.durable_articles_name', '=', 'type_categories.type_code')
+        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.category_code')
+        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->select('durable_articles_requisitions.*','categories.category_name','type_categories.type_name',
+         'durable_articles.durableArticles_name','users.prefix', 'users.first_name',
+         'users.last_name')
         ->orderBy('durable_articles_requisitions.id','DESC')->paginate(100);
 
         return view("durable_articles_requisition.updateApproval",['data' => $data]);
@@ -229,7 +236,15 @@ class DurableArticlesRequisitionController extends Controller
     public function notApproved(Request $request)
     {
 
+        $data_requisition = DurableArticlesRequisition::find($request["id"]);
+        $data = DB::table('durable_articles')
+        ->where('code_DurableArticles', $data_requisition->durable_articles_id)
+        ->get();
 
+
+        DurableArticles::where('code_DurableArticles', $data_requisition->durable_articles_id)->update([
+            'remaining_amount' =>  $data[0]->remaining_amount + $data_requisition->amount_withdraw,
+        ]);
         DurableArticlesRequisition::where('id', $request["id"])->update([
             'statusApproval' =>  "2",
             'commentApproval' =>  $request["commentApproval"],
