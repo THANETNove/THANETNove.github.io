@@ -13,24 +13,26 @@
                             <p style="color: red" id="out-stock"></p>
                             <div class="mb-3 col-md-6">
 
+                                <label for="prefix" class="form-label">รหัสครุภัณฑ์ </label>
+                                <input type="text" class="form-control" id="code_durable_articles"
+                                    name="code_durable_articles" placeholder="รหัสครุภัณฑ์"
+                                    value="{{ $data[0]->code_durable_articles }}" required />
+                            </div>
+                            <div class="mb-3 col-md-6">
+
                                 <label for="prefix" class="form-label">หมวดหมู่ครุภัณฑ์ </label>
                                 <input type="text" class="form-control" id="code_durable_articles"
                                     name="code_durable_articles" placeholder="รหัสครุภัณฑ์"
                                     value="{{ $data[0]->category_name }}" required />
                             </div>
                             <div class="mb-3 col-md-6">
-
-                                <label for="prefix" class="form-label">รหัสครุภัณฑ์ </label>
-                                <input type="text" class="form-control" id="code_durable_articles"
-                                    name="code_durable_articles" placeholder="รหัสครุภัณฑ์"
-                                    value="{{ $data[0]->code_durable_articles }}" required />
+                                <label for="prefix" class="form-label">ชื่อครุภัณฑ์ </label>
+                                <input type="text" class="form-control" value="{{ $data[0]->durableArticles_name }}">
                             </div>
-
                             <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
-                                <label for="prefix" class="form-label">ชื่อ</label>
-                                <input type="text" class="form-control" id="durable_articles-name"
-                                    name="durable_articles_name" placeholder="ชื่อ"
-                                    value={{ $data[0]->durableArticles_name }} required />
+                                <label for="prefix" class="form-label">รายละเอียดครุภัณฑ์</label>
+                                <input type="text" class="form-control" name="durable_articles_name" placeholder="ชื่อ"
+                                    value={{ $data[0]->type_name }} required />
                                 <div id="popup-durable" style="display: none;" class="mt-2">
                                     <!-- Content of the popup goes here -->
                                 </div>
