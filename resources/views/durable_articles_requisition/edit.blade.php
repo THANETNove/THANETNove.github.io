@@ -20,6 +20,18 @@
                                         readonly />
 
                                 </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">ชื่อครุภัณฑ์ </label>
+                                    <input type="text" class="form-control" value="{{ $data[0]->type_name }}" required
+                                        readonly />
+
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">รายละเอียดครุภัณฑ์ </label>
+                                    <input type="text" class="form-control" value="{{ $data[0]->durableArticles_name }}"
+                                        required readonly />
+
+                                </div>
 
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รหัสครุภัณฑ์ </label>
@@ -55,12 +67,13 @@
 
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">จำนวนที่ต้องการเบิก</label>
+                                    <label for="prefix" class="form-label">จำนวนที่ต้องการเบิก
+                                        {{ $data[0]->amount_withdraw }} {{ $data[0]->remaining_amount }}</label>
                                     <input type="number"
                                         class="form-control @error('amount_withdraw') is-invalid @enderror"
                                         id="amount_withdraw" name="amount_withdraw" placeholder="จำนวนที่ต้องการเบิก"
                                         value="{{ $data[0]->amount_withdraw }}" min="1"
-                                        max="{{ $data[0]->remaining_amount }}" required />
+                                        max="{{ $data[0]->amount_withdraw + $data[0]->remaining_amount }}" required />
                                     @error('amount_withdraw')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

@@ -7,7 +7,7 @@
 
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title text-primary ">รายละเอียดการเบิกครุภัณฑ์ {{ $data[0]->warranty_period }}</h1>
+                        <h1 class="card-title text-primary ">รายละเอียดการเบิกครุภัณฑ์ </h1>
 
                         <div class="row">
                             <p style="color: red" id="out-stock"></p>

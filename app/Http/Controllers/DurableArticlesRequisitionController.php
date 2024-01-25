@@ -148,12 +148,14 @@ class DurableArticlesRequisitionController extends Controller
         $data = DB::table('durable_articles_requisitions')
         ->where('durable_articles_requisitions.id', $id)
         ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
-        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_name', '=', 'durable_articles.id')
-        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.id')
+        ->leftJoin('type_categories', 'durable_articles_requisitions.durable_articles_name', '=', 'type_categories.type_code')
+        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.category_code')
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
-    'durable_articles.durableArticles_name','durable_articles.remaining_amount','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+    'durable_articles.durableArticles_name','type_categories.type_name','durable_articles.remaining_amount','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
     ->get();
+
 
 
         return view('durable_articles_requisition.edit',['data' =>$data]);
