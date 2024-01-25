@@ -755,6 +755,7 @@ $("#material-name").on("change", function () {
 //ครุภัณฑ์-ครุภัณฑ์ที่ชำรุด
 
 var durableArticlesRes;
+
 function groupDurableArticles(selectedValue) {
     $.ajax({
         url: "get-typeCategories/" + selectedValue,
@@ -793,11 +794,11 @@ function groupDurableArticles(selectedValue) {
 }
 
 var details_name;
+
 $("#durable_articles_name").on("change", function () {
     var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
 
     // ใช้ globalRes ที่เก็บค่า res จาก getGroup
-
     $.ajax({
         url: "get-articlesRes/" + selectedValue,
         type: "GET",
@@ -839,6 +840,7 @@ $("#details-name").on("change", function () {
     var foundItem = details_name.find(function (item) {
         return item.id == selectedValue;
     });
+
     if (foundItem) {
         if (foundItem.remaining_amount == 0) {
             document.getElementById("out-stock").textContent =
@@ -890,7 +892,7 @@ function groupDurableArticlesDamaged(selectedValue) {
             groupName.append(
                 $("<option>", {
                     value: "",
-                    text: "เลือกวัสดุ",
+                    text: "เลือกครุภัณฑ์",
                     selected: true,
                     disabled: true, // or use .prop('selected', true)
                 })
@@ -1011,7 +1013,7 @@ function groupDurableArticlesRepair(selectedValue) {
             groupName.append(
                 $("<option>", {
                     value: "",
-                    text: "เลือกวัสดุ",
+                    text: "เลือกครุภัณฑ์",
                     selected: true,
                     disabled: true, // or use .prop('selected', true)
                 })
@@ -1020,8 +1022,8 @@ function groupDurableArticlesRepair(selectedValue) {
             $.each(res, function (index, data) {
                 groupName.append(
                     $("<option>", {
-                        value: data.id,
-                        text: data.durableArticles_name,
+                        value: data.type_code,
+                        text: data.type_name,
                     })
                 );
             });

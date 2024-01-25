@@ -52,7 +52,7 @@ class DurableArticlesRepairController extends Controller
         $group = DB::table('categories')
         ->where('category_id', '=', 2)
         ->where('durable_articles_damageds.status', '=', 0)
-        ->rightJoin('durable_articles_damageds', 'categories.id', '=', 'durable_articles_damageds.group_id')
+        ->rightJoin('durable_articles_damageds', 'categories.category_code', '=', 'durable_articles_damageds.group_id')
         ->groupBy('group_id')
         ->orderBy('categories.id', 'ASC')
         ->select('categories.*')
@@ -70,10 +70,19 @@ class DurableArticlesRepairController extends Controller
         $data = DB::table('durable_articles_damageds')
         ->where('durable_articles_damageds.group_id', $id)
         ->where('durable_articles_damageds.status', 0)
+        ->join('type_categories', 'durable_articles_damageds.durable_articles_name', '=', 'type_categories.type_code')
+        ->select('type_categories.*')
+        ->groupBy('type_code')
+        ->get();
+   
+/*
+        $data = DB::table('durable_articles_damageds')
+        ->where('durable_articles_damageds.group_id', $id)
+        ->where('durable_articles_damageds.status', 0)
         ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
         ->select('durable_articles_damageds.*','durable_articles.durableArticles_name')
         ->orderBy('durable_articles_damageds.id', 'ASC')
-        ->get();
+        ->get(); */
 
         return response()->json($data);
     }

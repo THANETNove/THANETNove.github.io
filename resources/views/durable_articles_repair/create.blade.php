@@ -30,7 +30,7 @@
                                         id="id-group" name="group_id" aria-label="Default select example">
                                         <option selected disabled>เลือกหมวดหมู่</option>
                                         @foreach ($group as $gro)
-                                            <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
+                                            <option value="{{ $gro->category_code }}">{{ $gro->category_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -39,7 +39,7 @@
                                     <label for="prefix" class="form-label">ชื่อ</label>
                                     <select class="form-select" id="durable_articles_repair_name"
                                         aria-label="Default select example">
-                                        <option selected disabled>เลือกวัสดุ</option>
+                                        <option selected disabled>เลือกครุภัณฑ์</option>
 
                                     </select>
                                 </div>
