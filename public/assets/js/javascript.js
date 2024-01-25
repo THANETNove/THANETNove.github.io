@@ -1188,7 +1188,7 @@ $("#durable-articles-group-id").on("change", function () {
 
     console.log("selectedValue", selectedValue);
     $.ajax({
-        url: "get-type-categories/" + selectedValue,
+        url: "/get-type-categories/" + selectedValue,
         type: "GET",
         success: function (res) {
             calculateRes = res;
@@ -1222,3 +1222,46 @@ $("#durable-articles-group-id").on("change", function () {
         },
     });
 });
+
+if (targetUrls == "durable-articles-edit") {
+    const popup_edit = document.getElementById("durable-articles-group-id");
+    const selectedValue = popup_edit.value;
+    const popup_type = document.getElementById("type-articles");
+    const typeValue = popup_type.value;
+    console.log("typeValue 55", typeValue);
+    $.ajax({
+        url: "/get-type-categories/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            calculateRes = res;
+            console.log("res", res);
+            const groupName = $("#durable-articles-type-durableArticles");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกครุภัณฑ์",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.type_code,
+                        text: data.type_name,
+                        selected: typeValue == data.type_code,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+}

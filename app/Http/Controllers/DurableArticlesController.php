@@ -38,11 +38,18 @@ class DurableArticlesController extends Controller
             ->paginate(100);
 
 
-        }else{
-            $data = $data
-           ->orderBy('durable_articles.id','DESC')->paginate(100);
-
         }
+
+        $data = $data
+        ->orderBy('durable_articles.group_class','ASC')
+        ->orderBy('durable_articles.type_durableArticles','ASC')
+        ->orderBy('durable_articles.description','ASC')
+        ->orderBy('durable_articles.group_count','ASC')
+        ->orderBy('categories.category_name','ASC')
+        ->orderBy('durable_articles.durableArticles_name','ASC')
+        ->paginate(100);
+
+
       /*   $data = DB::table('durable_articles')->join('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->orderBy('durable_articles.id', 'DESC')
         ->paginate(100);
@@ -62,6 +69,7 @@ class DurableArticlesController extends Controller
     }
     public function getTypeCategories($id)
     {
+
 
         $data = DB::table('type_categories')
         ->where('type_id',$id)
@@ -143,11 +151,12 @@ class DurableArticlesController extends Controller
         $data->group_class = $request['group_class'];
         $data->type_durableArticles = $request['type_durableArticles'];
         $data->description = $request['description'];
-        $data->group_id = $request['group_id'];
         $data->durableArticles_name = $request['durableArticles_name'];
         $data->durableArticles_number = $request['durableArticles_number'];
+        $data->remaining_amount = $request['durableArticles_number'];
         $data->name_durableArticles_count = $request['name_durableArticles_count'];
         $data->code_material_storage = $request['code_material_storage'];
+        $data->warranty_period = $request['warranty_period'];
         $data->save();
 
         return redirect('durable-articles-index')->with('message', "บันทึกสำเร็จ");

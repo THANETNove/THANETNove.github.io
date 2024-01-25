@@ -14,36 +14,47 @@
                             @method('PUT')
                             <div class="row">
                                 <div class="mb-3 col-md-6">
-                                    <label for="group_class" class="form-label">กลุ่ม/ประเภท</label>
+                                    {{--  <label for="group_class" class="form-label">กลุ่ม/ประเภท</label>
                                     <input id="group_class" type="number"
                                         class="form-control @error('group_class') is-invalid @enderror" name="group_class"
-                                        required placeholder="กลุ่ม/ประเภท" value="{{ $dueArt['group_class'] }}"
-                                        autocomplete="group_class">
+                                        required placeholder="กลุ่ม/ประเภท" autocomplete="group_class">
 
                                     @error('group_class')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                    @enderror --}}
+                                    <label for="material_name" class="form-label">หมวดหมู่ครุภัณฑ์</label>
+
+                                    <select class="form-select" name="group_class" id="durable-articles-group-id"
+                                        aria-label="Default select example">
+                                        <option selected disabled>หมวดหมู่ครุภัณฑ์ </option>
+                                        @foreach ($group as $gro)
+                                            @if ($dueArt['group_class'] == $gro->category_code)
+                                                <option value="{{ $gro->category_code }}" selected>{{ $gro->category_name }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $gro->category_code }}">{{ $gro->category_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
 
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="type_durableArticles" class="form-label">ชนิด</label>
-                                    <input id="type_durableArticles" type="number"
-                                        value="{{ $dueArt['type_durableArticles'] }}"
-                                        class="form-control @error('type_durableArticles') is-invalid @enderror"
-                                        name="type_durableArticles" required placeholder="ชนิด"
-                                        autocomplete="type_durableArticles">
+                                    <label for="type_durableArticles" class="form-label">ครุภัณฑ์</label>
 
-                                    @error('type_durableArticles')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
+                                    <select class="form-select" name="type_durableArticles"
+                                        id="durable-articles-type-durableArticles" aria-label="Default select example">
+                                        <option selected disabled>เลือกครุภัณฑ์</option>
+                                    </select>
                                 </div>
+
+                                <input id="type-articles" type="text" class="form-control" style="display: none"
+                                    value="{{ $dueArt['type_durableArticles'] }}">
+
+
                                 <div class="mb-3 col-md-6">
-                                    <label for="description" class="form-label">รายละเอียด</label>
+                                    <label for="description" class="form-label">รหัสรายละเอียด</label>
                                     <input id="description" type="number"
                                         class="form-control @error('description') is-invalid @enderror" name="description"
                                         required placeholder="รายละเอียด" value="{{ $dueArt['description'] }}"
@@ -54,52 +65,22 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-
                                 </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="material_name" class="form-label">หมวดหมู่ครุภัณฑ์</label>
-                                    {{--  <input id="material_name" type="text"
-                                        class="form-control @error('material_name') is-invalid @enderror"
-                                        name="group_id" required placeholder="ชื่อวัสดุ" autocomplete="material_name"> --}}
-                                    <select class="form-select" name="group_id" aria-label="Default select example">
-                                        <option selected disabled>หมวดหมู่ครุภัณฑ์</option>
-                                        @foreach ($group as $gro)
-                                            @if ($dueArt['group_id'] == $gro->id)
-                                                <option value="{{ $gro->id }}" selected>{{ $gro->category_name }}
-                                                </option>
-                                            @else
-                                                <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
-                                            @endif
-                                        @endforeach
 
-                                    </select>
-                                    @error('group_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
-                                </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="durableArticles_name" class="form-label">ชื่อครุภัณฑ์</label>
-                                    <input id="durableArticles_name" type="text"
-                                        class="form-control @error('durableArticles_name') is-invalid @enderror"
+                                    <label for="material_name" class="form-label">ชื่อครุภัณฑ์ย่อ</label>
+                                    <input id="durableArticles_name" type="text" class="form-control"
                                         name="durableArticles_name" value="{{ $dueArt['durableArticles_name'] }}" required
-                                        placeholder="ชื่อครุภัณฑ์" autocomplete="durableArticles_name">
-
-                                    @error('durableArticles_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                        placeholder="ชื่อครุภัณฑ์ย่อ" autocomplete="durableArticles_name">
 
                                 </div>
+
                                 <div class="mb-3 col-md-6">
                                     <label for="durableArticles_number" class="form-label">จำนวนครุภัณฑ์</label>
                                     <input id="durableArticles_number" type="number"
                                         class="form-control @error('durableArticles_number') is-invalid @enderror"
-                                        name="durableArticles_number" value="{{ $dueArt['durableArticles_number'] }}"
-                                        required placeholder="จำนวนครุภัณฑ์" autocomplete="durableArticles_number">
+                                        name="durableArticles_number" required placeholder="จำนวนครุภัณฑ์"
+                                        autocomplete="durableArticles_number" value="1" readonly>
 
                                     @error('durableArticles_number')
                                         <span class="invalid-feedback" role="alert">
@@ -116,16 +97,17 @@
                                         )</label>
                                     <input id="name_durableArticles_count" type="text"
                                         class="form-control @error('name_durableArticles_count') is-invalid @enderror"
-                                        name="name_durableArticles_count" required placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์"
-                                        value="{{ $dueArt['name_durableArticles_count'] }}"
-                                        autocomplete="name_durableArticles_count">
+                                        name="name_durableArticles_count"
+                                        value="{{ $dueArt['name_durableArticles_count'] }}" required
+                                        placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์" autocomplete="name_durableArticles_count">
+                                </div>
 
-                                    @error('name_durableArticles_count')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
+                                <div class="mb-3 col-md-6">
+                                    <label for="name_durableArticles_count" class="form-label">ระยะเวลประกัน
+                                        {{ $dueArt['warranty_period'] }}</label>
+                                    <input id="warranty_period" type="text" class="date form-control "
+                                        name="warranty_period" required value="{{ $dueArt['warranty_period'] }}"
+                                        placeholder="dd-mm-yyyy" autocomplete="warranty_period">
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="code_material_storage" class="form-label">ที่เก็บครุภัณฑ์</label>
@@ -133,7 +115,7 @@
                                         name="code_material_storage" required>
                                         <option selected disabled>ที่เก็บครุภัณฑ์</option>
                                         @foreach ($data as $lo)
-                                            @if ($lo->code_storage == $dueArt['code_material_storage'])
+                                            @if ($dueArt['code_material_storage'] == $lo->code_storage)
                                                 <option value="{{ $lo->code_storage }}" selected>{{ $lo->building_name }}
                                                     {{ $lo->floor }} {{ $lo->room_name }}</option>
                                             @else
@@ -141,6 +123,7 @@
                                                     {{ $lo->floor }} {{ $lo->room_name }}</option>
                                             @endif
                                         @endforeach
+
                                     </select>
                                 </div>
 
