@@ -25,11 +25,12 @@ class DurableArticlesRequisitionController extends Controller
         $data = DB::table('durable_articles_requisitions')
         ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
         ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
-        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_name', '=', 'durable_articles.id')
-        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.id')
+        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->leftJoin('type_categories', 'durable_articles_requisitions.durable_articles_name', '=', 'type_categories.type_code')
+        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.category_code')
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
-        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
-    'durable_articles.durableArticles_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+        ->select('durable_articles_requisitions.*','type_categories.type_name', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
+    'durable_articles.durableArticles_name','durable_articles.warranty_period','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
 
        if ($search) {
         $data =  $data
@@ -61,10 +62,24 @@ class DurableArticlesRequisitionController extends Controller
         return view("durable_articles_requisition.create",['group' =>  $group]);
     }
 
+    public function typeCategories($id) {
+
+
+        $data = DB::table('type_categories')
+        ->orderBy('type_name','ASC')
+        ->where('type_id',$id)
+        ->get();
+        return response()->json($data);
+    }
+
+
     public function durableRequisition($id) {
 
 
-        $data = DB::table('durable_articles')->where('group_id',$id)->get();
+        $data = DB::table('durable_articles')
+        ->select('durable_articles.*')
+        ->orderBy('durable_articles.durableArticles_name','ASC')
+        ->where('type_durableArticles',$id)->get();
 
         return response()->json($data);
     }
@@ -79,6 +94,7 @@ class DurableArticlesRequisitionController extends Controller
         $data->id_user = Auth::user()->id;
         $data->group_id = $request['group_id'];
         $data->code_durable_articles = $request['code_durable_articles'];
+        $data->durable_articles_id = $request['durable_articles_id'];
         $data->durable_articles_name = $request['durable_articles_name'];
         $data->amount_withdraw = $request['amount_withdraw'];
         $data->name_durable_articles_count = $request['name_durable_articles_count'];
@@ -93,7 +109,7 @@ class DurableArticlesRequisitionController extends Controller
 
       $amount =  $remaining - $withdraw;
 
-      DurableArticles::where('id', $request['durable_articles_name'])->update([
+      DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
             'remaining_amount' =>  $amount,
         ]);
 
@@ -111,11 +127,11 @@ class DurableArticlesRequisitionController extends Controller
         ->where('durable_articles_requisitions.id', $id)
         ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
         ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
-        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
         ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.id')
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
-    'durable_articles.durableArticles_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+    'durable_articles.durableArticles_name','durable_articles.warranty_period','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
     ->get();
 
 
@@ -184,7 +200,7 @@ class DurableArticlesRequisitionController extends Controller
         return redirect('durable-articles-requisition-index')->with('message', "ยกเลิกสำเร็จ");
     }
 
-    
+
     public function approvalUpdate()
     {
         $data = DB::table('durable_articles_requisitions')

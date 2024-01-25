@@ -7,7 +7,7 @@
 
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title text-primary ">รายละเอียดการเบิกครุภัณฑ์ </h1>
+                        <h1 class="card-title text-primary ">รายละเอียดการเบิกครุภัณฑ์ {{ $data[0]->warranty_period }}</h1>
 
                         <div class="row">
                             <p style="color: red" id="out-stock"></p>
@@ -85,11 +85,12 @@
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="name_durable_articles_count" class="form-label">ระยะประกัน
+
                                 </label>
                                 @php
-                                    $originalDate = $data[0]->created_at;
-                                    $newDate = (new DateTime($originalDate))->modify('+7 days')->format('d/m/Y');
-                                    $newDate2 = (new DateTime($originalDate))->modify('+7 days');
+                                    $originalDate = $data[0]->warranty_period;
+                                    $newDate = (new DateTime($originalDate))->format('d/m/Y');
+                                    $newDate2 = new DateTime($originalDate);
                                     $targetDate = $newDate2;
                                     $now = new DateTime();
 

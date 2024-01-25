@@ -22,9 +22,11 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
+
+                                                <th>รหัสครุภัณฑ์</th>
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
-                                                <th>รหัสวัสดุ</th>
-                                                <th>ชื่อวัสดุ</th>
+                                                <th>ชื่อครุภัณฑ์</th>
+                                                <th>รายละเอียดครุภัณฑ์</th>
                                                 <th>จำนวนที่เบิก</th>
                                                 <th>หน่วยนับ </th>
 
@@ -47,8 +49,9 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->code_durable_articles }}</td>
+                                                    <td>{{ $da->category_name }}</td>
+                                                    <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
                                                     <td>{{ $da->amount_withdraw }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
@@ -57,9 +60,9 @@
                                                         </td>
                                                     @endif
                                                     @php
-                                                        $originalDate = $da->created_at;
-                                                        $newDate = (new DateTime($originalDate))->modify('+7 days')->format('d/m/Y');
-                                                        $newDate2 = (new DateTime($originalDate))->modify('+7 days');
+                                                        $originalDate = $da->warranty_period;
+                                                        $newDate = (new DateTime($originalDate))->format('d/m/Y');
+                                                        $newDate2 = new DateTime($originalDate);
                                                         $targetDate = $newDate2;
                                                         $now = new DateTime();
 

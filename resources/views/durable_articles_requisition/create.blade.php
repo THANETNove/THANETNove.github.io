@@ -20,7 +20,7 @@
                                         name="group_id" aria-label="Default select example">
                                         <option selected disabled>เลือกหมวดหมู่</option>
                                         @foreach ($group as $gro)
-                                            <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
+                                            <option value="{{ $gro->category_code }}">{{ $gro->category_name }}</option>
                                         @endforeach
 
 
@@ -32,7 +32,16 @@
                                     <label for="prefix" class="form-label">ชื่อ</label>
                                     <select class="form-select" name="durable_articles_name" id="durable_articles_name"
                                         aria-label="Default select example">
-                                        <option selected disabled>เลือกวัสดุ</option>
+                                        <option selected disabled>เลือกครุภัณฑ์</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
+                                    <label for="prefix" class="form-label">รายละเอียดรุภัณฑ์</label>
+                                    <select class="form-select" name="details_name" id="details-name"
+                                        aria-label="Default select example">
+                                        <option selected disabled>รายละเอียดรุภัณฑ์</option>
 
                                     </select>
                                 </div>
@@ -42,6 +51,11 @@
                                     <input type="text" class="form-control" id="code_durable_articles"
                                         name="code_durable_articles" placeholder="รหัสครุภัณฑ์" required />
 
+                                </div>
+                                <div class="mb-3 col-md-6" style="display: none">
+                                    <label for="prefix" class="form-label">durable_articles_id</label>
+                                    <input type="text" class="form-control" id="durable_articles_id"
+                                        name="durable_articles_id" placeholder="รหัสครุภัณฑ์" required />
                                 </div>
 
 

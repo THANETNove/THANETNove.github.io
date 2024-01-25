@@ -757,7 +757,7 @@ $("#material-name").on("change", function () {
 var durableArticlesRes;
 function groupDurableArticles(selectedValue) {
     $.ajax({
-        url: "get-articlesRes/" + selectedValue,
+        url: "get-typeCategories/" + selectedValue,
         type: "GET",
         success: function (res) {
             durableArticlesRes = res;
@@ -771,7 +771,49 @@ function groupDurableArticles(selectedValue) {
             groupName.append(
                 $("<option>", {
                     value: "",
-                    text: "เลือกวัสดุ",
+                    text: "เลือกครุภัณฑ์",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.type_code,
+                        text: data.type_name,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+}
+
+var details_name;
+$("#durable_articles_name").on("change", function () {
+    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+
+    // ใช้ globalRes ที่เก็บค่า res จาก getGroup
+
+    $.ajax({
+        url: "get-articlesRes/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            details_name = res;
+
+            var groupName = $("#details-name");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "รายละเอียดรุภัณฑ์",
                     selected: true,
                     disabled: true, // or use .prop('selected', true)
                 })
@@ -790,13 +832,11 @@ function groupDurableArticles(selectedValue) {
             console.error(error);
         },
     });
-}
+});
 
-$("#durable_articles_name").on("change", function () {
-    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
-
-    // ใช้ globalRes ที่เก็บค่า res จาก getGroup
-    var foundItem = durableArticlesRes.find(function (item) {
+$("#details-name").on("change", function () {
+    const selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+    var foundItem = details_name.find(function (item) {
         return item.id == selectedValue;
     });
     if (foundItem) {
@@ -810,7 +850,7 @@ $("#durable_articles_name").on("change", function () {
             var popup = document.getElementById("submit");
             popup.style.display = "block";
         }
-        console.log("foundItem", foundItem);
+
         document
             .getElementById("amount_withdraw")
             .setAttribute("max", foundItem.remaining_amount);
@@ -819,12 +859,15 @@ $("#durable_articles_name").on("change", function () {
                 "-" +
                 foundItem.type_durableArticles +
                 "-" +
-                foundItem.description
+                foundItem.description +
+                "-" +
+                foundItem.group_count
         );
         $("#remaining-amount").val(foundItem.remaining_amount);
         $("#name-durable_articles-count").val(
             foundItem.name_durableArticles_count
         );
+        $("#durable_articles_id").val(foundItem.code_DurableArticles);
     }
 });
 
