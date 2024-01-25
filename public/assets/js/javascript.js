@@ -560,10 +560,12 @@ function getCategories(selectedValue) {
 }
 
 function getGroup(selectedValue) {
+    console.log("5555", selectedValue);
     $.ajax({
         url: "get-categoriesData/" + selectedValue,
         type: "GET",
         success: function (res) {
+            console.log("res", res);
             globalRes = res;
             var groupSelect = $("#buy_name");
 
@@ -616,7 +618,9 @@ $("#buy_name").on("change", function () {
                       "-" +
                       foundItem.type_durableArticles +
                       "-" +
-                      foundItem.description
+                      foundItem.description +
+                      "-" +
+                      foundItem.group_count
         );
         $("#counting_unit").val(
             globalResType == 1

@@ -26,6 +26,7 @@
                                                 <th>ประเภท</th>
                                                 <th>ชื่อประเภท</th>
                                                 <th>ชื่อ</th>
+                                                <th>รายละเอียด</th>
                                                 <th>จำนวน</th>
                                                 <th>หน่วยนับ</th>
                                                 <th>ราคา ต่อชิ้น</th>
@@ -54,13 +55,21 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $da->category_name }}</td>
-                                                    <td>
-                                                        @if ($da->typeBuy == 1)
+                                                    @if ($da->typeBuy == 1)
+                                                        <td>
                                                             {{ $da->material_name }}
-                                                        @else
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                    @endif
+                                                    @if ($da->typeBuy == 2)
+                                                        <td>
+                                                            {{ $da->type_name }}
+                                                        </td>
+                                                        <td>
                                                             {{ $da->durableArticles_name }}
-                                                        @endif
-                                                    </td>
+                                                        </td>
+                                                    @endif
                                                     <td>{{ number_format($da->quantity) }}</td>
                                                     <td>{{ $da->counting_unit }}</td>
                                                     <td>{{ number_format($da->price_per_piece) }} </td>

@@ -28,7 +28,8 @@ class BuyController extends Controller
         ->leftJoin('categories', 'buys.group_id', '=', 'categories.id')
         ->leftJoin('materials', 'buys.buy_name', '=', 'materials.id')
         ->leftJoin('durable_articles', 'buys.buy_name', '=', 'durable_articles.id')
-        ->select('buys.*', 'categories.category_name' , 'materials.material_name',
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.type_code')
+        ->select('buys.*', 'categories.category_name' , 'materials.material_name', 'type_categories.type_name',
          'durable_articles.durableArticles_name');
 
         if($search) {
@@ -66,19 +67,22 @@ class BuyController extends Controller
     public function categoriesData($id)
     {
 
-        $cate = DB::table('categories')
+
+       $cate = DB::table('categories')
         ->where('id', '=', $id)
         ->orderBy('id', 'ASC')
         ->get();
 
+
         if ($cate[0]->category_id == 1) {
             $data = DB::table('materials')
             ->where('group_id', '=', $id)
-            ->orderBy('id', 'ASC')
+            ->orderBy('material_name', 'ASC')
             ->get();
         }else{
+
             $data = DB::table('durable_articles')
-            ->where('durable_articles.group_id', '=', $id)
+            ->where('durable_articles.group_class', '=', $cate[0]->category_code)
             ->leftJoin('buys', 'durable_articles.id', '=', 'buys.buy_name')
             ->whereRaw('buys.buy_name IS NULL OR durable_articles.id != buys.buy_name') // เพิ่มเงื่อนไขนี้
             ->select('durable_articles.*')

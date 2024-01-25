@@ -26,6 +26,7 @@
                                                 <th>รหัส</th>
                                                 <th>ประเภทครุภัณฑ์</th>
                                                 <th>ชื่อ</th>
+                                                <th>รายละเอียด</th>
                                                 <th>จำนวน</th>
                                                 <th>จำนวนที่เบิกได้</th>
                                                 <th>ชำรุด</th>
@@ -50,6 +51,7 @@
                                                         <td>{{ $da->group_class }}-{{ $da->type_durableArticles }}-{{ $da->description }}-{{ $da->group_count }}
                                                         </td>
                                                         <td>{{ $da->category_name }}</td>
+                                                        <td>{{ $da->type_name }}</td>
                                                         <td>{{ $da->durableArticles_name }}</td>
                                                         <td>{{ number_format($da->durableArticles_number) }}</td>
                                                         <td>{{ number_format($da->remaining_amount) }}</td>
