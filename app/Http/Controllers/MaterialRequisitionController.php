@@ -120,7 +120,7 @@ class MaterialRequisitionController extends Controller
         $data =   DB::table('material_requisitions')
         ->where('material_requisitions.id', $id)
         ->join('materials', 'material_requisitions.material_name', '=', 'materials.id')
-        ->leftJoin('categories', 'material_requisitions.material_name', '=', 'categories.id')
+        ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
         ->select('material_requisitions.*', 'materials.remaining_amount' ,'materials.material_name as name','categories.category_name')
         ->get();
 
