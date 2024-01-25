@@ -72,23 +72,25 @@ class DurableArticlesDamagedController extends Controller
         $data->durable_articles_id = $request['durable_articles_id'];
         $data->code_durable_articles = $request['code_durable_articles'];
         $data->durable_articles_name = $request['durable_articles_name'];
-        $data->amount_damaged = $request['amount_damaged'];
+        $data->amount_damaged = $request['amount_withdraw'];
         $data->name_durable_articles_count = $request['name_durable_articles_count'];
         $data->damaged_detail = $request['damaged_detail'];
         $data->status = "0";
         $data->save();
 
 
-
-        $damaged =  $request['amount_damaged'];
+        $damaged =  $request['amount_withdraw'];
         $remaining = $request['remaining_amount'];
 
         $amount =  $remaining - $damaged;
-        $amount_damaged = DurableArticles::find($request['durable_articles_name']);
 
-        DurableArticles::where('id', $request['durable_articles_name'])->update([
-            'remaining_amount' =>   $amount_damaged->remaining_amount -  $damaged,
-            'damaged_number' => $amount_damaged->damaged_number + $damaged,
+        $amount_damaged = DB::table('durable_articles')
+        ->where('code_DurableArticles', $request['durable_articles_id'])
+        ->get();
+
+        DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
+            'remaining_amount' =>   $amount_damaged[0]->remaining_amount -  $damaged,
+            'damaged_number' => $amount_damaged[0]->damaged_number + $damaged,
         ]);
 
 

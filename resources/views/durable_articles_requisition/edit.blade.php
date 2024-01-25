@@ -68,7 +68,7 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">จำนวนที่ต้องการเบิก
-                                        {{ $data[0]->amount_withdraw }} {{ $data[0]->remaining_amount }}</label>
+                                    </label>
                                     <input type="number"
                                         class="form-control @error('amount_withdraw') is-invalid @enderror"
                                         id="amount_withdraw" name="amount_withdraw" placeholder="จำนวนที่ต้องการเบิก"

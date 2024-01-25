@@ -14,36 +14,54 @@
                                 <p style="color: red" id="out-stock"></p>
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">หมวดหมู่ครุภัณฑ์</label>
-                                    <select class="form-select" onchange="groupDurableArticlesDamaged(this.value)"
-                                        id="id-group" name="group_id" aria-label="Default select example">
+                                    <label for="prefix" class="form-label">หมวดหมู่</label>
+
+                                    <select class="form-select" onchange="groupDurableArticles(this.value)" id="id-group"
+                                        name="group_id" aria-label="Default select example">
                                         <option selected disabled>เลือกหมวดหมู่</option>
                                         @foreach ($group as $gro)
-                                            <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
+                                            <option value="{{ $gro->category_code }}">{{ $gro->category_name }}</option>
                                         @endforeach
+
+
                                     </select>
+
                                 </div>
+
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
                                     <label for="prefix" class="form-label">ชื่อ</label>
-                                    <select class="form-select" name="durable_articles_name"
-                                        id="durable_articles_damaged_name" aria-label="Default select example">
-                                        <option selected disabled>เลือกวัสดุ</option>
+                                    <select class="form-select" name="durable_articles_name" id="durable_articles_name"
+                                        aria-label="Default select example">
+                                        <option selected disabled>เลือกครุภัณฑ์</option>
 
                                     </select>
                                 </div>
 
+                                <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
+                                    <label for="prefix" class="form-label">รายละเอียดรุภัณฑ์</label>
+                                    <select class="form-select" name="details_name" id="details-name"
+                                        aria-label="Default select example">
+                                        <option selected disabled>รายละเอียดรุภัณฑ์</option>
+
+                                    </select>
+                                </div>
 
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รหัสครุภัณฑ์</label>
-                                    <input type="text" class="form-control" id="code_durable_damaged_articles"
+                                    <input type="text" class="form-control" id="code_durable_articles"
                                         name="code_durable_articles" placeholder="รหัสครุภัณฑ์" required />
 
+                                </div>
+                                <div class="mb-3 col-md-6" style="display: none">
+                                    <label for="prefix" class="form-label">durable_articles_id</label>
+                                    <input type="text" class="form-control" id="durable_articles_id"
+                                        name="durable_articles_id" placeholder="รหัสครุภัณฑ์" required />
                                 </div>
 
 
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">ครุภัณฑ์ทั้งหมด</label>
+                                    <label for="prefix" class="form-label">ครุภัณฑ์ที่เหลือ</label>
                                     <input type="text"
                                         class="form-control  @error('remaining_amount') is-invalid @enderror"
                                         id="remaining-amount" name="remaining_amount" placeholder="ครุภัณฑ์ที่เหลือ"
@@ -55,12 +73,14 @@
                                     @enderror
                                 </div>
 
+
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">จำนวนที่ชำรุด</label>
-                                    <input type="number" class="form-control @error('amount_damaged') is-invalid @enderror"
-                                        id="amount_withdraw" name="amount_damaged" placeholder="จำนวนที่ชำรุด"
+                                    <input type="number"
+                                        class="form-control @error('amount_withdraw') is-invalid @enderror"
+                                        id="amount_withdraw" name="amount_withdraw" placeholder="จำนวนที่ชำรุด"
                                         min="1" required />
-                                    @error('amount_damaged')
+                                    @error('amount_withdraw')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -78,13 +98,6 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">รายละเอียดการชำรุด</label>
-                                    <textarea class="form-control" name="damaged_detail" placeholder="รายละเอียดการชำรุด" id="exampleFormControlTextarea1"
-                                        rows="3"></textarea>
-                                    {{--  <input type="text" class="form-control" id="damaged_detail"
-                                        name="damaged_detail" placeholder="รายละเอียดการชำรุด" required /> --}}
                                 </div>
                             </div>
                             <div class="mt-2">

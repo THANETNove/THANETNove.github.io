@@ -752,7 +752,7 @@ $("#material-name").on("change", function () {
     }
 });
 
-//ครุภัณฑ์
+//ครุภัณฑ์-ครุภัณฑ์ที่ชำรุด
 
 var durableArticlesRes;
 function groupDurableArticles(selectedValue) {
@@ -876,12 +876,12 @@ $("#details-name").on("change", function () {
 var durableArticlesDamagedRes;
 function groupDurableArticlesDamaged(selectedValue) {
     $.ajax({
-        url: "get-articlesRes/" + selectedValue,
+        url: "get-typeCategories/" + selectedValue,
         type: "GET",
         success: function (res) {
             durableArticlesDamagedRes = res;
-            console.log("res", res);
-            var groupName = $("#durable_articles_damaged_name");
+
+            var groupName = $("#durable_articles_name");
 
             // Clear existing options (optional, depending on your use case)
             groupName.empty();
@@ -891,6 +891,48 @@ function groupDurableArticlesDamaged(selectedValue) {
                 $("<option>", {
                     value: "",
                     text: "เลือกวัสดุ",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.type_code,
+                        text: data.type_name,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+}
+
+var damaged_name;
+$("#details-name").on("change", function () {
+    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+
+    // ใช้ globalRes ที่เก็บค่า res จาก getGroup
+
+    $.ajax({
+        url: "get-articlesRes/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            damaged_name = res;
+
+            var groupName = $("#details-name");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "รายละเอียดรุภัณฑ์",
                     selected: true,
                     disabled: true, // or use .prop('selected', true)
                 })
@@ -909,16 +951,17 @@ function groupDurableArticlesDamaged(selectedValue) {
             console.error(error);
         },
     });
-}
+});
 
-$("#durable_articles_damaged_name").on("change", function () {
-    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+$("#details-name").on("change", function () {
+    console.log("555");
+    /*  var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
 
     // ใช้ globalRes ที่เก็บค่า res จาก getGroup
-    var foundItem = durableArticlesDamagedRes.find(function (item) {
+    var foundItem = damaged_name.find(function (item) {
         return item.id == selectedValue;
     });
-    console.log("foundItem", foundItem);
+    console.log("foundItem 5555");
     if (foundItem) {
         console.log("5555");
         if (foundItem.remaining_amount == 0) {
@@ -933,7 +976,7 @@ $("#durable_articles_damaged_name").on("change", function () {
         }
 
         document
-            .getElementById("amount_withdraw")
+            .getElementById("amount_damaged")
             .setAttribute("max", foundItem.durableArticles_number);
         $("#code_durable_damaged_articles").val(
             foundItem.group_class +
@@ -946,7 +989,7 @@ $("#durable_articles_damaged_name").on("change", function () {
         $("#name-durable_articles-count").val(
             foundItem.name_durableArticles_count
         );
-    }
+    } */
 });
 
 //ระบบซ่อม groupDurableArticlesRepair
