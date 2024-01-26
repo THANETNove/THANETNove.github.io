@@ -733,9 +733,12 @@ $("#material-name").on("change", function () {
         return item.id == selectedValue;
     });
     if (foundItem) {
-        if (foundItem.remaining_amount == 0) {
+        if (
+            foundItem.remaining_amount == 0 ||
+            foundItem.remaining_amount == null
+        ) {
             document.getElementById("out-stock").textContent =
-                " วัสดุหมดแล้ว ไม่สามารถเบิกได้";
+                "ไม่สามารถลงทะเบียนได้";
             var popup = document.getElementById("submit");
             popup.style.display = "none";
         } else {
@@ -842,9 +845,12 @@ $("#details-name").on("change", function () {
     });
 
     if (foundItem) {
-        if (foundItem.remaining_amount == 0) {
+        if (
+            foundItem.remaining_amount == 0 ||
+            foundItem.remaining_amount == null
+        ) {
             document.getElementById("out-stock").textContent =
-                " วัสดุหมดแล้ว ไม่สามารถเบิกได้";
+                "ไม่สามารถลงทะเบียนได้";
             var popup = document.getElementById("submit");
             popup.style.display = "none";
         } else {
