@@ -203,7 +203,6 @@ class DurableArticlesRepairController extends Controller
         ]);
         DurableArticles::where('code_DurableArticles',  $data->durable_articles_id)->update([
             'repair_number' =>   $dataArt[0]->repair_number - $data->amount_repair,
-            'damaged_number' =>   $dataArt[0]->damaged_number - $data->amount_repair,
             'remaining_amount' =>   $dataArt[0]->remaining_amount + $data->amount_repair,
 
         ]);
