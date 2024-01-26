@@ -81,7 +81,8 @@ class DurableArticlesRepairController extends Controller
     {
 
         $data = DB::table('durable_articles_damageds')
-        ->where('durable_articles_damageds.status','<=',1)
+        ->where('durable_articles_damageds.status',0)
+        ->where('durable_articles_damageds.durable_articles_name', $id)
         ->where('durable_articles_damageds.durable_articles_name', $id)
         ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
         ->select('durable_articles_damageds.*','durable_articles.durableArticles_name')

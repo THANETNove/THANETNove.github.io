@@ -949,49 +949,7 @@ $("#details-name").on("change", function () {
                 );
             });
         },
-        error: function (xhr, status, error) {
-            console.error(error);
-        },
     });
-});
-
-$("#details-name").on("change", function () {
-    console.log("555");
-    /*  var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
-
-    // ใช้ globalRes ที่เก็บค่า res จาก getGroup
-    var foundItem = damaged_name.find(function (item) {
-        return item.id == selectedValue;
-    });
-    console.log("foundItem 5555");
-    if (foundItem) {
-        console.log("5555");
-        if (foundItem.remaining_amount == 0) {
-            document.getElementById("out-stock").textContent =
-                " วัสดุหมดแล้ว ไม่สามารถเบิกได้";
-            var popup = document.getElementById("submit");
-            popup.style.display = "none";
-        } else {
-            document.getElementById("out-stock").textContent = "";
-            var popup = document.getElementById("submit");
-            popup.style.display = "block";
-        }
-
-        document
-            .getElementById("amount_damaged")
-            .setAttribute("max", foundItem.durableArticles_number);
-        $("#code_durable_damaged_articles").val(
-            foundItem.group_class +
-                "-" +
-                foundItem.type_durableArticles +
-                "-" +
-                foundItem.description
-        );
-        $("#remaining-amount").val(foundItem.durableArticles_number);
-        $("#name-durable_articles-count").val(
-            foundItem.name_durableArticles_count
-        );
-    } */
 });
 
 //ระบบซ่อม groupDurableArticlesRepair

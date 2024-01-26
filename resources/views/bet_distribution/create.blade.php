@@ -10,6 +10,7 @@
                         <h1 class="card-title text-primary ">ลงทะเบียนเเทงจำหน่ายครุภัณฑ์</h1>
                         <form method="POST" action="{{ route('bet-distribution-store') }}">
                             @csrf
+
                             <div class="row">
                                 <p style="color: red" id="out-stock"></p>
 
@@ -26,20 +27,29 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">หมวดหมู่ครุภัณฑ์</label>
-                                    <select class="form-select" onchange="groupBetDistribution(this.value)" id="id-group"
-                                        name="group_id" aria-label="Default select example">
+                                    <select class="form-select" onchange="groupDurableArticlesRepair(this.value)"
+                                        id="id-group" name="group_id" aria-label="Default select example">
                                         <option selected disabled>เลือกหมวดหมู่</option>
                                         @foreach ($group as $gro)
-                                            <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
+                                            <option value="{{ $gro->category_code }}">{{ $gro->category_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
-                                    <label for="prefix" class="form-label">ชื่อ</label>
+                                    <label for="prefix" class="form-label">ชื่อครุภัณฑ์</label>
                                     <select class="form-select" id="durable_articles_repair_name"
                                         aria-label="Default select example">
-                                        <option selected disabled>เลือกวัสดุ</option>
+                                        <option selected disabled>เลือกครุภัณฑ์</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
+                                    <label for="prefix" class="form-label">รายละเอียดครุภัณฑ์</label>
+                                    <select class="form-select" name="details_repair_name" id="details_repair_name"
+                                        aria-label="Default select example">
+                                        <option selected disabled>เลือกรายละเอียด</option>
 
                                     </select>
                                 </div>
@@ -55,12 +65,11 @@
 
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">จำนวนที่เเทงจำหน่าย</label>
-                                    <input type="number"
-                                        class="form-control @error('amount_bet_distribution') is-invalid @enderror"
-                                        id="amount_withdraw" name="amount_bet_distribution"
-                                        placeholder="จำนวนที่เเทงจำหน่าย" min="1" required readonly />
-                                    @error('amount_bet_distribution')
+                                    <label for="prefix" class="form-label">จำนวนที่ซ่อม</label>
+                                    <input type="number" class="form-control @error('amount_repair') is-invalid @enderror"
+                                        id="amount_withdraw" name="amount_repair" placeholder="จำนวนที่ชำรุด" min="1"
+                                        required readonly />
+                                    @error('amount_repair')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -74,18 +83,6 @@
                                         id="name-durable_articles-count" name="name_durable_articles_count"
                                         placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์" required readonly />
                                     @error('name_durable_articles_count')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="salvage_price" class="form-label">ราคาซาก
-                                    </label>
-                                    <input type="number" class="form-control @error('salvage_price') is-invalid @enderror"
-                                        id="salvage_price" name="salvage_price" placeholder="ราคาซาก" min="1"
-                                        required />
-                                    @error('salvage_price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
