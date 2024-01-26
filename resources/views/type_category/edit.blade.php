@@ -7,7 +7,7 @@
 
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title text-primary ">เพิ่ม ชื่อครุภัณฑ์</h1>
+                        <h1 class="card-title text-primary ">เเก้ไข ชื่อครุภัณฑ์</h1>
                         <form method="POST" action="{{ route('typeCategory-update', $data['id']) }}">
                             @csrf
                             @method('PUT')
@@ -16,13 +16,13 @@
                                     <label for="department_name" class="form-label">หมวดหมู่</label>
 
                                     <select class="form-select" name="type_id" aria-label="Default select example">
-                                        <option>เลือกหมวดหมู่</option>
+                                        <option selected disabled>เลือกหมวดหมู่</option>
                                         @foreach ($group as $gr)
-                                            @if ($data['type_id'] == $gr->category_code)
-                                                <option value="{{ $gr->category_code }}" selected>
+                                            @if ($data['type_id'] == $gr->id)
+                                                <option value="{{ $gr->id }}" selected>
                                                     {{ $gr->category_name }}</option>
                                             @else
-                                                <option value="{{ $gr->category_code }}">
+                                                <option value="{{ $gr->id }}">
                                                     {{ $gr->category_name }}</option>
                                             @endif
                                         @endforeach

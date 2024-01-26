@@ -15,7 +15,7 @@
                                     <label for="department_name" class="form-label">หมวดหมู่</label>
 
                                     <select class="form-select" name="type_id" aria-label="Default select example">
-                                        <option disabled>เลือกหมวดหมู่</option>
+                                        <option selected disabled>เลือกหมวดหมู่</option>
                                         @foreach ($group as $gr)
                                             <option value="{{ $gr->id }}">
                                                 {{ $gr->category_name }}</option>
@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="mb-3 col-md-8">
                                     <label for="type_code" class="form-label">รหัสชื่อ</label>
-                                    <input id="type_code" type="text" class="form-control" name="type_code" required
+                                    <input id="type_code" type="number" class="form-control" name="type_code" required
                                         placeholder="รหัสชื่อ" autocomplete="category_code">
 
                                     @error('category_name')

@@ -28,7 +28,7 @@
                                         aria-label="Default select example">
                                         <option selected disabled>หมวดหมู่ครุภัณฑ์</option>
                                         @foreach ($group as $gro)
-                                            <option value="{{ $gro->category_code }}">{{ $gro->category_name }}</option>
+                                            <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
                                         @endforeach
                                     </select>
 
