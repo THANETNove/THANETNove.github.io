@@ -1204,7 +1204,7 @@ if (targetUrls == "durable-articles-edit") {
                     $("<option>", {
                         value: data.id,
                         text: data.type_name,
-                        selected: typeValue == data.type_code,
+                        selected: typeValue == data.id,
                     })
                 );
             });
