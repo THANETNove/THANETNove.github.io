@@ -76,9 +76,9 @@
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item"
+                                                                    {{--  <a class="dropdown-item"
                                                                         href="{{ url('bet-distribution-edit', $da->id) }}"><i
-                                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                            class="bx bx-edit-alt me-1"></i> Edit</a> --}}
                                                                     @if (Auth::user()->status == '2')
                                                                         <a class="dropdown-item alert-destroy"
                                                                             href="{{ url('bet-distribution-destroy', $da->id) }}"><i

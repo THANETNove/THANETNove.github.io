@@ -22,8 +22,8 @@ class BetDistributionController extends Controller
 
         $data = DB::table('bet_distributions')
         ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
-        ->leftJoin('type_categories', 'bet_distributions.durable_articles_name', '=', 'type_categories.type_code')
-        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.category_code')
+        ->leftJoin('type_categories', 'bet_distributions.durable_articles_name', '=', 'type_categories.id')
+        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
         ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
 
 
@@ -81,7 +81,7 @@ class BetDistributionController extends Controller
             $group = DB::table('categories')
             ->where('category_id', '=', 2)
             ->where('durable_articles_damageds.status', '=', 0)
-            ->rightJoin('durable_articles_damageds', 'categories.category_code', '=', 'durable_articles_damageds.group_id')
+            ->rightJoin('durable_articles_damageds', 'categories.id', '=', 'durable_articles_damageds.group_id')
             ->groupBy('group_id')
             ->orderBy('categories.id', 'ASC')
             ->select('categories.*')

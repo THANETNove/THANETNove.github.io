@@ -15,12 +15,12 @@
                                 <p style="color: red" id="out-stock"></p>
 
                                 <div class="col-md-6" style="display: none;">
-                                    <label for="prefix" class="form-label">id ครุภัณฑ์ชำรุด</label>
+                                    <label for="prefix" class="form-label"> ครุภัณฑ์จำหน่าย</label>
                                     <input type="text" class="form-control" name="durable_articles_id"
                                         id="durable_articles_id">
                                 </div>
                                 <div class="col-md-6" style="display: none;">
-                                    <label for="prefix" class="form-label">idชื่อครุภัณฑ์ชำรุด</label>
+                                    <label for="prefix" class="form-label">ชื่อครุภัณฑ์จำหน่าย</label>
                                     <input type="text" class="form-control" name="durable_articles_name"
                                         id="durable_articles_name">
                                 </div>
@@ -31,7 +31,7 @@
                                         id="id-group" name="group_id" aria-label="Default select example">
                                         <option selected disabled>เลือกหมวดหมู่</option>
                                         @foreach ($group as $gro)
-                                            <option value="{{ $gro->category_code }}">{{ $gro->category_name }}</option>
+                                            <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
