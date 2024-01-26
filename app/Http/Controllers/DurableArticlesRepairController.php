@@ -26,22 +26,22 @@ class DurableArticlesRepairController extends Controller
         $search =  $request['search'];
 
         $data = DB::table('durable_articles_repairs')
-        ->leftJoin('durable_articles', 'durable_articles_repairs.durable_articles_name', '=', 'durable_articles.id')
-        ->leftJoin('categories', 'durable_articles_repairs.group_id', '=', 'categories.id')
-        ->select('durable_articles_repairs.*','durable_articles.durableArticles_name','categories.category_name');
-
+        ->leftJoin('durable_articles', 'durable_articles_repairs.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->leftJoin('type_categories', 'durable_articles_repairs.durable_articles_name', '=', 'type_categories.type_code')
+        ->leftJoin('categories', 'durable_articles_repairs.group_id', '=', 'categories.category_code')
+        ->select('durable_articles_repairs.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
 
        if ($search) {
         $data =  $data
-            ->where('category_name', 'LIKE', "%$search%")
-            ->orWhere('durableArticles_name', 'LIKE', "%$search%");
+            ->where('categories.category_name', 'LIKE', "%$search%")
+            ->orWhere('type_categories.type_name', 'LIKE', "%$search%")
+            ->orWhere('durable_articles.durableArticles_name', 'LIKE', "%$search%");
 
         }
 
 
 
         $data = $data->orderBy('durable_articles_repairs.id','DESC')->paginate(100);
-
 
         return view("durable_articles_repair.index",['data' => $data]);
     }
@@ -158,16 +158,20 @@ class DurableArticlesRepairController extends Controller
     {
 
         $data =  DurableArticlesRepair::find($id);
-        $dataArt =  DurableArticles::find($data->durable_articles_name);
+        $dataArt  = DB::table('durable_articles')
+        ->where('code_DurableArticles', $data->durable_articles_id)
+        ->get();
 
 
 
-        DurableArticlesDamaged::where('id',  $data->durable_articles_id)->update([
+
+        DurableArticlesDamaged::where('durable_articles_id',  $data->durable_articles_id)->update([
             'status' =>  "0",
 
         ]);
-        DurableArticles::where('id',  $data->durable_articles_name)->update([
-            'repair_number' =>   $dataArt->repair_number - $data->amount_repair,
+        DurableArticles::where('code_DurableArticles',  $data->durable_articles_id)->update([
+            'repair_number' =>   $dataArt[0]->repair_number - $data->amount_repair,
+            'damaged_number' =>   $dataArt[0]->damaged_number + $data->amount_repair,
 
         ]);
 
@@ -185,18 +189,22 @@ class DurableArticlesRepairController extends Controller
 
 
         $data =  DurableArticlesRepair::find($request['id']);
-        $dataArt =  DurableArticles::find($data->durable_articles_name);
+        $dataArt  = DB::table('durable_articles')
+        ->where('code_DurableArticles', $data->durable_articles_id)
+        ->get();
 
 
 
-        DurableArticlesDamaged::where('id',  $data->durable_articles_id)->update([
+
+
+        DurableArticlesDamaged::where('durable_articles_id',  $data->durable_articles_id)->update([
             'status' =>  "3",
 
         ]);
-        DurableArticles::where('id',  $data->durable_articles_name)->update([
-            'repair_number' =>   $dataArt->repair_number - $data->amount_repair,
-            'damaged_number' =>   $dataArt->damaged_number - $data->amount_repair,
-            'remaining_amount' =>   $dataArt->remaining_amount + $data->amount_repair,
+        DurableArticles::where('code_DurableArticles',  $data->durable_articles_id)->update([
+            'repair_number' =>   $dataArt[0]->repair_number - $data->amount_repair,
+            'damaged_number' =>   $dataArt[0]->damaged_number - $data->amount_repair,
+            'remaining_amount' =>   $dataArt[0]->remaining_amount + $data->amount_repair,
 
         ]);
 
