@@ -146,7 +146,7 @@ class BetDistributionController extends Controller
         DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
             'bet_on_distribution_number' => $amount_repair[0]->repair_number + $repair,
             'damaged_number' => $amount_repair[0]->damaged_number - $repair,
-            'durableArticles_number' => $amount_repair[0]->durableArticles_number - $data->amount_bet_distribution,
+            /* 'durableArticles_number' => $amount_repair[0]->durableArticles_number - $data->amount_bet_distribution, */
         ]);
         DurableArticlesDamaged::where('durable_articles_id', $request['durable_articles_id'])->update([
             'status' => "4", // เเทงจำหน่าย
@@ -201,20 +201,17 @@ class BetDistributionController extends Controller
     public function approvedBetDistribution(string $id)
     {
         $data =  BetDistribution::find($id);
-        $dataArt =  DurableArticles::find($data['durable_articles_name']);
         $data->statusApproval = "1";
-
-        DurableArticles::where('id', $data['durable_articles_name'])->update([
-            'bet_on_distribution_number' => $dataArt->bet_on_distribution_number + $data->amount_bet_distribution,
-            'durableArticles_number' => $dataArt->durableArticles_number - $data->amount_bet_distribution,
-            'damaged_number' => $dataArt->damaged_number - $data->amount_bet_distribution,
-        ]);
-
-        DurableArticlesDamaged::where('id', $data['durable_articles_id'])->update([
-            'status' => "4", // เเทงจำหน่าย
-        ]);
-
         $data->save();
+
+        $dataArt = DB::table('durable_articles')
+        ->where('code_DurableArticles', $data->durable_articles_id)
+        ->get();
+        DurableArticles::where('code_DurableArticles', $data->durable_articles_id)->update([
+
+            'durableArticles_number' => $dataArt[0]->durableArticles_number - $data->amount_bet_distribution
+        ]);
+
 
         return redirect('bet-distribution-indexApproval')->with('message', "บันทึกสำเร็จ");
     }
@@ -227,8 +224,28 @@ class BetDistributionController extends Controller
         $data->statusApproval = "2";
         $data->commentApproval = $request['commentApproval'];;
         $data->save();
+
+
+
+        $dataArt   = DB::table('durable_articles')
+        ->where('code_DurableArticles', $data->durable_articles_id)
+        ->get();
+        $data->status = "off";
+
+        DurableArticles::where('code_DurableArticles', $data->durable_articles_id)->update([
+            'bet_on_distribution_number' => $dataArt[0]->bet_on_distribution_number - $data->amount_bet_distribution,
+            'damaged_number' => $dataArt[0]->damaged_number + $data->amount_bet_distribution,
+        ]);
+
+        DurableArticlesDamaged::where('durable_articles_id', $data->durable_articles_id)->update([
+            'status' => "0", // เเทงจำหน่าย
+        ]);
+
+
         return redirect('bet-distribution-indexApproval')->with('message', "บันทึกสำเร็จ");
     }
+
+
     public function destroy(string $id)
     {
         //
@@ -242,7 +259,6 @@ class BetDistributionController extends Controller
 
         DurableArticles::where('code_DurableArticles', $data->durable_articles_id)->update([
             'bet_on_distribution_number' => $dataArt[0]->bet_on_distribution_number - $data->amount_bet_distribution,
-            'durableArticles_number' => $dataArt[0]->durableArticles_number + $data->amount_bet_distribution,
             'damaged_number' => $dataArt[0]->damaged_number + $data->amount_bet_distribution,
         ]);
 
