@@ -146,9 +146,10 @@ class BetDistributionController extends Controller
         DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
             'bet_on_distribution_number' => $amount_repair[0]->repair_number + $repair,
             'damaged_number' => $amount_repair[0]->damaged_number - $repair,
+            'durableArticles_number' => $amount_repair[0]->durableArticles_number - $data->amount_bet_distribution,
         ]);
         DurableArticlesDamaged::where('durable_articles_id', $request['durable_articles_id'])->update([
-            'status' => "4", // ส่งซ่อม
+            'status' => "4", // เเทงจำหน่าย
         ]);
 
 
