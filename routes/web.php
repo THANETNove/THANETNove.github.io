@@ -174,6 +174,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('get-articlesRepair-destroy/{id}', [DurableArticlesRepairController::class, 'destroy'])->name('get-articlesRepair-destroy');
     Route::post('get-articlesRepair-updateRepair', [DurableArticlesRepairController::class, 'updateRepair'])->name('get-articlesRepair-updateRepair');
     Route::get('articlesRepair-export/pdf', [DurableArticlesRepairController::class, 'exportPDF'])->name('articlesRepair-export/pdf');
+    Route::get('get-details_repair_name/{id}', [DurableArticlesRepairController::class, 'detailsRepairName'])->name('get-details_repair_name');
 
     //ระบบแทงจำหน่ายครุภัณฑ์
     Route::get('bet-distribution-index', [BetDistributionController::class, 'index'])->name('bet-distribution-index');

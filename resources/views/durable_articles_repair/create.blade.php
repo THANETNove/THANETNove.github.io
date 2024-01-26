@@ -36,10 +36,19 @@
                                 </div>
 
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
-                                    <label for="prefix" class="form-label">ชื่อ</label>
+                                    <label for="prefix" class="form-label">ชื่อครุภัณฑ์</label>
                                     <select class="form-select" id="durable_articles_repair_name"
                                         aria-label="Default select example">
                                         <option selected disabled>เลือกครุภัณฑ์</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
+                                    <label for="prefix" class="form-label" >รายละเอียดครุภัณฑ์</label>
+                                    <select class="form-select" name="details_repair_name" id="details_repair_name"
+                                        aria-label="Default select example">
+                                        <option selected disabled>เลือกรายละเอียด</option>
 
                                     </select>
                                 </div>

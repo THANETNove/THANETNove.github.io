@@ -74,15 +74,19 @@ class DurableArticlesRepairController extends Controller
         ->select('type_categories.*')
         ->groupBy('type_code')
         ->get();
-   
-/*
+
+        return response()->json($data);
+    }
+    public function detailsRepairName($id)
+    {
+
         $data = DB::table('durable_articles_damageds')
-        ->where('durable_articles_damageds.group_id', $id)
-        ->where('durable_articles_damageds.status', 0)
-        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
+        ->where('durable_articles_damageds.status','<=',1)
+        ->where('durable_articles_damageds.durable_articles_name', $id)
+        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
         ->select('durable_articles_damageds.*','durable_articles.durableArticles_name')
-        ->orderBy('durable_articles_damageds.id', 'ASC')
-        ->get(); */
+        ->orderBy('durable_articles.durableArticles_name', 'ASC')
+        ->get();
 
         return response()->json($data);
     }
@@ -108,14 +112,18 @@ class DurableArticlesRepairController extends Controller
         $remaining = $request['remaining_amount'];
 
         $amount =  $remaining - $repair;
-        $amount_repair = DurableArticles::find($request['durable_articles_name']);
+        $amount_repair = DB::table('durable_articles')
+        ->where('code_DurableArticles', $request['durable_articles_id'])
+        ->get();
 
 
 
-        DurableArticles::where('id', $request['durable_articles_name'])->update([
-            'repair_number' => $amount_repair->repair_number + $repair,
+
+        DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
+            'repair_number' => $amount_repair[0]->repair_number + $repair,
+            'damaged_number' => $amount_repair[0]->damaged_number - $repair,
         ]);
-        DurableArticlesDamaged::where('id', $request['durable_articles_id'])->update([
+        DurableArticlesDamaged::where('durable_articles_id', $request['durable_articles_id'])->update([
             'status' => "3", // ส่งซ่อม
         ]);
 
