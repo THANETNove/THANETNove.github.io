@@ -27,8 +27,8 @@ class DurableArticlesRepairController extends Controller
 
         $data = DB::table('durable_articles_repairs')
         ->leftJoin('durable_articles', 'durable_articles_repairs.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
-        ->leftJoin('type_categories', 'durable_articles_repairs.durable_articles_name', '=', 'type_categories.type_code')
-        ->leftJoin('categories', 'durable_articles_repairs.group_id', '=', 'categories.category_code')
+        ->leftJoin('type_categories', 'durable_articles_repairs.durable_articles_name', '=', 'type_categories.id')
+        ->leftJoin('categories', 'durable_articles_repairs.group_id', '=', 'categories.id')
         ->select('durable_articles_repairs.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
 
        if ($search) {
@@ -52,7 +52,7 @@ class DurableArticlesRepairController extends Controller
         $group = DB::table('categories')
         ->where('category_id', '=', 2)
         ->where('durable_articles_damageds.status', '=', 0)
-        ->rightJoin('durable_articles_damageds', 'categories.category_code', '=', 'durable_articles_damageds.group_id')
+        ->rightJoin('durable_articles_damageds', 'categories.id', '=', 'durable_articles_damageds.group_id')
         ->groupBy('group_id')
         ->orderBy('categories.id', 'ASC')
         ->select('categories.*')
@@ -67,13 +67,16 @@ class DurableArticlesRepairController extends Controller
     public function articlesRepair($id)
     {
 
+
+
         $data = DB::table('durable_articles_damageds')
         ->where('durable_articles_damageds.group_id', $id)
         ->where('durable_articles_damageds.status', 0)
-        ->join('type_categories', 'durable_articles_damageds.durable_articles_name', '=', 'type_categories.type_code')
+        ->join('type_categories', 'durable_articles_damageds.durable_articles_name', '=', 'type_categories.id')
         ->select('type_categories.*')
         ->groupBy('type_code')
         ->get();
+
 
         return response()->json($data);
     }
@@ -82,7 +85,6 @@ class DurableArticlesRepairController extends Controller
 
         $data = DB::table('durable_articles_damageds')
         ->where('durable_articles_damageds.status',0)
-        ->where('durable_articles_damageds.durable_articles_name', $id)
         ->where('durable_articles_damageds.durable_articles_name', $id)
         ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
         ->select('durable_articles_damageds.*','durable_articles.durableArticles_name')

@@ -901,7 +901,7 @@ function groupDurableArticlesRepair(selectedValue) {
             $.each(res, function (index, data) {
                 groupName.append(
                     $("<option>", {
-                        value: data.type_code,
+                        value: data.id,
                         text: data.type_name,
                     })
                 );
