@@ -781,7 +781,7 @@ function groupDurableArticles(selectedValue) {
             $.each(res, function (index, data) {
                 groupName.append(
                     $("<option>", {
-                        value: data.type_code,
+                        value: data.id,
                         text: data.type_name,
                     })
                 );
@@ -1160,7 +1160,7 @@ $("#durable-articles-group-id").on("change", function () {
             $.each(res, function (index, data) {
                 groupName.append(
                     $("<option>", {
-                        value: data.type_code,
+                        value: data.id,
                         text: data.type_name,
                     })
                 );
@@ -1177,7 +1177,7 @@ if (targetUrls == "durable-articles-edit") {
     const selectedValue = popup_edit.value;
     const popup_type = document.getElementById("type-articles");
     const typeValue = popup_type.value;
-    console.log("typeValue 55", typeValue);
+    console.log("typeValue", typeValue);
     $.ajax({
         url: "/get-type-categories/" + selectedValue,
         type: "GET",
@@ -1202,7 +1202,7 @@ if (targetUrls == "durable-articles-edit") {
             $.each(res, function (index, data) {
                 groupName.append(
                     $("<option>", {
-                        value: data.type_code,
+                        value: data.id,
                         text: data.type_name,
                         selected: typeValue == data.type_code,
                     })

@@ -68,6 +68,8 @@ class DurableArticlesDamagedController extends Controller
     public function store(Request $request)
     {
 
+
+
         $data = new DurableArticlesDamaged;
         $data->id_user = Auth::user()->id;
         $data->group_id = $request['group_id'];

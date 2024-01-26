@@ -24,6 +24,7 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
+                                                {{--  <th>รหัส</th> --}}
                                                 <th>หมวดหมู่</th>
                                                 <th>ชื่อครุภัณฑ์</th>
                                                 <th>Actions</th>
@@ -37,9 +38,11 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
+                                                    {{-- <td>
+                                                        {{ $da->type_code }}
+                                                    </td> --}}
                                                     <td>
                                                         {{ $da->category_name }}
-
                                                     </td>
                                                     <td>{{ $da->type_name }}
                                                     </td>

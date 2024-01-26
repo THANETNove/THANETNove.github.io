@@ -15,9 +15,9 @@
                                     <label for="department_name" class="form-label">หมวดหมู่</label>
 
                                     <select class="form-select" name="type_id" aria-label="Default select example">
-                                        <option>เลือกหมวดหมู่</option>
+                                        <option disabled>เลือกหมวดหมู่</option>
                                         @foreach ($group as $gr)
-                                            <option value="{{ $gr->category_code }}">
+                                            <option value="{{ $gr->id }}">
                                                 {{ $gr->category_name }}</option>
                                         @endforeach
                                     </select>

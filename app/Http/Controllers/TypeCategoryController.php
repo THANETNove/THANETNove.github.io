@@ -15,7 +15,7 @@ class TypeCategoryController extends Controller
     {
         $search =  $request['search'];
         $data = DB::table('type_categories')
-        ->leftJoin('categories', 'type_categories.type_id', '=', 'categories.category_code')
+        ->leftJoin('categories', 'type_categories.type_id', '=', 'categories.id')
         ->select('type_categories.*','categories.category_name')
         ->orderBy('categories.category_name', 'ASC')
         ->orderBy('type_categories.type_name', 'ASC');
