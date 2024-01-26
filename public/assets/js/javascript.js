@@ -752,7 +752,7 @@ $("#material-name").on("change", function () {
     }
 });
 
-//ครุภัณฑ์-ครุภัณฑ์ที่ชำรุด
+//เบิกครุภัณฑ์-ครุภัณฑ์ที่ชำรุด
 
 var durableArticlesRes;
 
@@ -857,9 +857,9 @@ $("#details-name").on("change", function () {
             .getElementById("amount_withdraw")
             .setAttribute("max", foundItem.remaining_amount);
         $("#code_durable_articles").val(
-            foundItem.group_class +
+            foundItem.category_code +
                 "-" +
-                foundItem.type_durableArticles +
+                foundItem.type_code +
                 "-" +
                 foundItem.description +
                 "-" +
