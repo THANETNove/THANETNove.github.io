@@ -21,15 +21,17 @@ class BetDistributionController extends Controller
         $search =  $request['search'];
 
         $data = DB::table('bet_distributions')
-        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_name', '=', 'durable_articles.id')
-        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
-        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name');
+        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->leftJoin('type_categories', 'bet_distributions.durable_articles_name', '=', 'type_categories.type_code')
+        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.category_code')
+        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
 
 
        if ($search) {
         $data =  $data
-            ->where('category_name', 'LIKE', "%$search%")
-            ->orWhere('durableArticles_name', 'LIKE', "%$search%");
+            ->where('categories.category_name', 'LIKE', "%$search%")
+            ->orWhere('type_categories.type_name', 'LIKE', "%$search%")
+            ->orWhere('durable_articles.durableArticles_name', 'LIKE', "%$search%");
 
         }
 
@@ -122,13 +124,32 @@ class BetDistributionController extends Controller
         $data->durable_articles_id = $request['durable_articles_id'];
         $data->code_durable_articles = $request['code_durable_articles'];
         $data->durable_articles_name = $request['durable_articles_name'];
-        $data->amount_bet_distribution = $request['amount_bet_distribution'];
+        $data->amount_bet_distribution = $request['amount_repair'];
         $data->name_durable_articles_count = $request['name_durable_articles_count'];
         $data->salvage_price = $request['salvage_price'];
         $data->repair_detail = $request['repair_detail'];
         $data->status = "on";
         $data->statusApproval = "0";
         $data->save();
+
+        $repair =  $request['amount_repair'];
+        $remaining = $request['remaining_amount'];
+
+        $amount =  $remaining - $repair;
+        $amount_repair = DB::table('durable_articles')
+        ->where('code_DurableArticles', $request['durable_articles_id'])
+        ->get();
+
+
+
+
+        DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
+            'bet_on_distribution_number' => $amount_repair[0]->repair_number + $repair,
+            'damaged_number' => $amount_repair[0]->damaged_number - $repair,
+        ]);
+        DurableArticlesDamaged::where('durable_articles_id', $request['durable_articles_id'])->update([
+            'status' => "4", // ส่งซ่อม
+        ]);
 
 
 
@@ -213,16 +234,18 @@ class BetDistributionController extends Controller
 
 
         $data =  BetDistribution::find($id);
-        $dataArt =  DurableArticles::find($data['durable_articles_name']);
+        $dataArt   = DB::table('durable_articles')
+        ->where('code_DurableArticles', $data->durable_articles_id)
+        ->get();
         $data->status = "off";
 
-        DurableArticles::where('id', $data['durable_articles_name'])->update([
-            'bet_on_distribution_number' => $dataArt->bet_on_distribution_number - $data->amount_bet_distribution,
-            'durableArticles_number' => $dataArt->durableArticles_number + $data->amount_bet_distribution,
-            'damaged_number' => $dataArt->damaged_number + $data->amount_bet_distribution,
+        DurableArticles::where('code_DurableArticles', $data->durable_articles_id)->update([
+            'bet_on_distribution_number' => $dataArt[0]->bet_on_distribution_number - $data->amount_bet_distribution,
+            'durableArticles_number' => $dataArt[0]->durableArticles_number + $data->amount_bet_distribution,
+            'damaged_number' => $dataArt[0]->damaged_number + $data->amount_bet_distribution,
         ]);
 
-        DurableArticlesDamaged::where('id', $data['durable_articles_id'])->update([
+        DurableArticlesDamaged::where('durable_articles_id', $data->durable_articles_id)->update([
             'status' => "0", // เเทงจำหน่าย
         ]);
 

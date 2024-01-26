@@ -65,7 +65,7 @@
 
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">จำนวนที่ซ่อม</label>
+                                    <label for="prefix" class="form-label">จำนวนที่จำหน่าย</label>
                                     <input type="number" class="form-control @error('amount_repair') is-invalid @enderror"
                                         id="amount_withdraw" name="amount_repair" placeholder="จำนวนที่ชำรุด" min="1"
                                         required readonly />
