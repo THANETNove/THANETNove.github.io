@@ -110,7 +110,7 @@ class DurableArticlesController extends Controller
         $data->group_count = $countDurable;
         $data->durableArticles_name = $request['durableArticles_name'];
         $data->durableArticles_number = $request['durableArticles_number'];
-        $data->remaining_amount = $request['durableArticles_number'];
+       /*  $data->remaining_amount = $request['durableArticles_number']; */
         $data->name_durableArticles_count = $request['name_durableArticles_count'];
         $data->code_material_storage = $request['code_material_storage'];
         $data->warranty_period = $request['warranty_period'];

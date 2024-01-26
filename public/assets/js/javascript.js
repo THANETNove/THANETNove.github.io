@@ -629,7 +629,7 @@ $("#buy_name").on("change", function () {
         );
 
         if (globalResType == 2) {
-            $("#quantity").val(foundItem.remaining_amount);
+            $("#quantity").val(foundItem.durableArticles_number);
             $("#quantity").attr("readonly", true);
         } else {
             $("#quantity").attr("readonly", false);

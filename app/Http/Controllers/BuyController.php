@@ -28,7 +28,7 @@ class BuyController extends Controller
         ->leftJoin('categories', 'buys.group_id', '=', 'categories.id')
         ->leftJoin('materials', 'buys.buy_name', '=', 'materials.id')
         ->leftJoin('durable_articles', 'buys.buy_name', '=', 'durable_articles.id')
-        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.type_code')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->select('buys.*', 'categories.category_name' , 'materials.material_name', 'type_categories.type_name',
          'durable_articles.durableArticles_name');
 
@@ -82,7 +82,7 @@ class BuyController extends Controller
         }else{
 
             $data = DB::table('durable_articles')
-            ->where('durable_articles.group_class', '=', $cate[0]->category_code)
+            ->where('durable_articles.group_class', '=', $cate[0]->id)
             ->leftJoin('buys', 'durable_articles.id', '=', 'buys.buy_name')
             ->whereRaw('buys.buy_name IS NULL OR durable_articles.id != buys.buy_name') // เพิ่มเงื่อนไขนี้
             ->select('durable_articles.*')
@@ -138,7 +138,7 @@ class BuyController extends Controller
 
             $number = $request['quantity'];
             $dur =  DurableArticles::find($dura[0]->id);
-            $dur->durableArticles_number =  $number;
+            /* $dur->durableArticles_number =  $number; */
             $dur->remaining_amount =  $number;
             $dur->save();
         }
