@@ -30,11 +30,11 @@
                                         aria-label="Default select example">
                                         <option selected disabled>หมวดหมู่ครุภัณฑ์ </option>
                                         @foreach ($group as $gro)
-                                            @if ($dueArt['group_class'] == $gro->category_code)
-                                                <option value="{{ $gro->category_code }}" selected>{{ $gro->category_name }}
+                                            @if ($dueArt['group_class'] == $gro->id)
+                                                <option value="{{ $gro->id }}" selected>{{ $gro->category_name }}
                                                 </option>
                                             @else
-                                                <option value="{{ $gro->category_code }}">{{ $gro->category_name }}</option>
+                                                <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
                                             @endif
                                         @endforeach
                                     </select>

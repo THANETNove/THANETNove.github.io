@@ -25,9 +25,9 @@ class DurableArticlesController extends Controller
         $search =  $request['search']; // ตัวเลขชุดเเรก 7115 คือ group_class 005 คือ  type_durableArticles 0003 คือ description
         $data = DB::table('durable_articles')
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
-        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.category_code')
-        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.type_code')
-        ->select('durable_articles.*', 'type_categories.type_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->select('durable_articles.*', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
         if ($search) {
             $data = $data->where(function ($query) use ($search) {
                 $query->where('category_name', 'LIKE', "%$search%")

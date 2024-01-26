@@ -26,8 +26,8 @@ class DurableArticlesRequisitionController extends Controller
         ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
         ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
         ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
-        ->leftJoin('type_categories', 'durable_articles_requisitions.durable_articles_name', '=', 'type_categories.id')
-        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.category_code')
+        ->leftJoin('type_categories', 'durable_articles_requisitions.durable_articles_name', '=', 'type_categories.type_id')
+        ->leftJoin('categories', 'durable_articles_requisitions.group_class', '=', 'categories.id')
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->select('durable_articles_requisitions.*','type_categories.type_name', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
     'durable_articles.durableArticles_name','durable_articles.warranty_period','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
