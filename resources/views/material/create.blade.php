@@ -87,8 +87,7 @@
                                     <label for="material_number" class="form-label">จำนวนวัสดุ (ต่อหน่วยนับ)</label>
                                     <input id="material_number" type="number" value="0"
                                         class="form-control @error('material_number') is-invalid @enderror"
-                                        name="material_number" placeholder="จำนวนวัสดุ ชิ้น" autocomplete="material_number"
-                                        readonly>
+                                        name="material_number" placeholder="จำนวนวัสดุ ชิ้น" autocomplete="material_number">
 
                                     @error('material_number')
                                         <span class="invalid-feedback" role="alert">

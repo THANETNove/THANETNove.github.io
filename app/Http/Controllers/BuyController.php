@@ -33,9 +33,10 @@ class BuyController extends Controller
          'durable_articles.durableArticles_name');
 
         if($search) {
-            $data->orWhere('category_name', 'LIKE', "%$search%")
-            ->orWhere('material_name', 'LIKE', "%$search%")
-            ->orWhere('durableArticles_name', 'LIKE', "%$search%");
+            $data->orWhere('categories.category_name', 'LIKE', "%$search%")
+            ->orWhere('materials.material_name', 'LIKE', "%$search%")
+            ->orWhere('type_categories.type_name', 'LIKE', "%$search%")
+            ->orWhere('durable_articles.durableArticles_name', 'LIKE', "%$search%");
         }
         $data = $data->orderBy('id', 'DESC')->paginate(100);
 

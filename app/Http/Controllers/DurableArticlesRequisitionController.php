@@ -35,10 +35,11 @@ class DurableArticlesRequisitionController extends Controller
        if ($search) {
         $data =  $data
             ->where(function ($query) use ($search) {
-                $query->where('category_name', 'LIKE', "%$search%")
-                    ->orWhere('durableArticles_name', 'LIKE', "%$search%")
-                    ->orWhere('first_name', 'LIKE', "%$search%")
-                    ->orWhere('last_name', 'LIKE', "%$search%");
+                $query->where('categories.category_name', 'LIKE', "%$search%")
+                    ->orWhere('durable_articles.durableArticles_name', 'LIKE', "%$search%")
+                    ->orWhere('users.first_name', 'LIKE', "%$search%")
+                    ->orWhere('type_categories.type_name', 'LIKE', "%$search%")
+                    ->orWhere('users.last_name', 'LIKE', "%$search%");
             });
         }
 

@@ -38,9 +38,9 @@ class DurableArticlesDamagedController extends Controller
 
        if ($search) {
         $data =  $data
-            ->where('category_name', 'LIKE', "%$search%")
-            ->orWhere('type_name', 'LIKE', "%$search%")
-            ->orWhere('durableArticles_name', 'LIKE', "%$search%");
+            ->where('categories.category_name', 'LIKE', "%$search%")
+            ->orWhere('type_categories.type_name', 'LIKE', "%$search%")
+            ->orWhere('durable_articles.durableArticles_name', 'LIKE', "%$search%");
 
         }
 

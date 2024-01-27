@@ -27,18 +27,19 @@ class DurableArticlesController extends Controller
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-        ->select('durable_articles.*', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+        ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
         if ($search) {
             $data = $data->where(function ($query) use ($search) {
-                $query->where('category_name', 'LIKE', "%$search%")
-                ->orWhere('durableArticles_name', 'LIKE', "%$search%");
+                $query->where('categories.category_name', 'LIKE', "%$search%")
+                ->orWhere('durable_articles.durableArticles_name', 'LIKE', "%$search%")
+                ->orWhere('type_categories.type_name', 'LIKE', "%$search%");
                 // Add additional conditions for other cases if needed
-            })
-            ->orderBy('categories.category_name', 'ASC')
+            });
+           /*  ->orderBy('categories.category_name', 'ASC')
             ->orderBy('type_categories.type_name', 'ASC')
             ->orderBy('durable_articles.durableArticles_name', 'ASC')
             ->paginate(100);
-
+ */
 
         }
 
