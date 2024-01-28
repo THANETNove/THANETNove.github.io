@@ -44,7 +44,7 @@ class MaterialRequisitionController extends Controller
        $data = $data->orderBy('material_requisitions.id','DESC')->paginate(100);
 
        $department = DB::table('departments')
-      ->orderBy('department_name','ASC')
+       ->orderBy('department_name','ASC')
        ->get();
         return view('material_requisition.index',['data' =>$data, 'department' => $department]);
     }

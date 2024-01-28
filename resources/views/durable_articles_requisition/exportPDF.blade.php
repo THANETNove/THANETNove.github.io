@@ -33,10 +33,11 @@
                                     @if (Auth::user()->status != '0')
                                         <th>ชื่อ นามสกุล ผู้เบิก </th>
                                     @endif
+                                    <th>เเผนก </th>
                                     <th>ระยะประกัน </th>
                                     <th>วันที่เบิก </th>
-                                    <th>การอนุมัติ </th>
-                                    <th>ที่เก็บ </th>
+
+
                                 </tr>
                             </thead>
                             @php
@@ -55,6 +56,7 @@
                                             <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
                                             </td>
                                         @endif
+                                        <td>{{ $da->department_name }}</td>
                                         @php
                                             $originalDate = $da->created_at;
                                             $newDate = (new DateTime($originalDate))->modify('+7 days')->format('d/m/Y');
@@ -67,20 +69,7 @@
                                         <td>{{ $newDate }}
                                         </td>
                                         <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
-                                        <td>
-                                            @if ($da->status == '0')
-                                                @if ($da->statusApproval == '0')
-                                                    <span class="badge bg-label-info me-1">รอการอนุมัติ</span>
-                                                @elseif ($da->statusApproval == '1')
-                                                    <span class="badge bg-label-success me-1">อนุมัติ</span>
-                                                @else
-                                                    <span class="badge bg-label-warning me-1">ไม่อนุมัติ</span>
-                                                @endif
-                                            @endif
 
-                                        </td>
-                                        <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
-                                            {{ $da->room_name }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

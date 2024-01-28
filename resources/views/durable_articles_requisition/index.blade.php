@@ -186,6 +186,15 @@
                                 <input type="text" class="form-control date-created_at" name="end_date" id="end_date"
                                     placeholder="yyyy-mm-dd" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">เเผนก</label>
+                                <select class="form-select" name="dep_name" aria-label="Default select example">
+                                    <option value="all" selected>เลือกทุกเเผนก</option>
+                                    @foreach ($department as $de)
+                                        <option value="{{ $de->id }}">{{ $de->department_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">รายงาน</button>
                     </form>
