@@ -8,6 +8,7 @@ use App\Models\Material;
 use DB;
 use Auth;
 use PDF;
+use Carbon\Carbon;
 
 
 class MaterialRequisitionController extends Controller
@@ -42,7 +43,10 @@ class MaterialRequisitionController extends Controller
        }
        $data = $data->orderBy('material_requisitions.id','DESC')->paginate(100);
 
-        return view('material_requisition.index',['data' =>$data]);
+       $department = DB::table('departments')
+      ->orderBy('department_name','ASC')
+       ->get();
+        return view('material_requisition.index',['data' =>$data, 'department' => $department]);
     }
 
 
@@ -173,22 +177,33 @@ class MaterialRequisitionController extends Controller
 
     }
 
-    public function exportPDF()
+    public function exportPDF(Request $request)
     {
-        $currentYear = date('Y');
+        $start_date = $request["start_date"];
+        $end_date = $request["end_date"];
+        $end_date = Carbon::parse($end_date)->endOfDay()->toDateTimeString();
+        $currentYear =  Carbon::parse($start_date)->year;
+
+
+
 
         $data = DB::table('material_requisitions')
-        ->whereYear('material_requisitions.created_at', $currentYear)
+        ->whereBetween('material_requisitions.created_at', [$start_date, $end_date]) // Add t
         ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
+       ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
        ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
          ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
         ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
         ->where('material_requisitions.status', "on")
         ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
-        'materials.material_name as name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+        'materials.material_name as name','departments.department_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
         if (Auth::user()->status == "0") {
             $data =  $data->where('id_user', Auth::user()->id);
         }
+        if ($request["dep_name"] != "all" || $request["dep_name"] != null) {
+            $data =  $data->where('departments.id', $request["dep_name"]);
+        }
+
 
         $pdf = PDF::loadView('material_requisition.exportPDF',['data' =>  $data->get(),'currentYear' => $currentYear]);
         $pdf->setPaper('a4');

@@ -47,8 +47,9 @@
                                                 @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                 @endif
-                                                <th>ที่เก็บ </th>
-                                                <th>สถานะ </th>
+
+                                                <th>เเผนก </th>
+                                                <th>วันที่เบิก </th>
                                             </tr>
                                         </thead>
                                         @php
@@ -68,16 +69,11 @@
                                                             {{ $da->last_name }}
                                                         </td>
                                                     @endif
-                                                    <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
-                                                        {{ $da->room_name }}</td>
                                                     <td>
-                                                        @if ($da->status == 'on')
-                                                            <span class="badge bg-label-success me-1">เบิกวัสดุ</span>
-                                                        @else
-                                                            <span
-                                                                class="badge bg-label-warning me-1">ยกเลิกเบิกวัสดุ</span>
-                                                        @endif
+                                                        {{ $da->department_name }}
                                                     </td>
+                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+
                                                 </tr>
                                             @endforeach
                                         </tbody>

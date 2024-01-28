@@ -264,10 +264,17 @@ class DurableArticlesRequisitionController extends Controller
     public function exportPDF(Request $request)
     {
 
-        dd($request->all());
+
+
+        $start_date = $request["start_date"];
+        $end_date = $request["end_date"];
+        $end_date = Carbon::parse($end_date)->endOfDay()->toDateTimeString();
+        $currentYear =  Carbon::parse($start_date)->year;
+
+
         $currentYear = date('Y');
         $data = DB::table('durable_articles_requisitions')
-        ->whereYear('durable_articles_requisitions.created_at', $currentYear)
+        ->whereBetween('buys.created_at', [$start_date, $end_date]) // Add t
         ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
         ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
         ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_name', '=', 'durable_articles.id')
@@ -280,7 +287,7 @@ class DurableArticlesRequisitionController extends Controller
                $data =  $data->where('id_user', Auth::user()->id);
            }
 
-          
+
            $pdf = PDF::loadView('durable_articles_requisition.exportPDF',['data' =>  $data->get(),'currentYear' => $currentYear]);
            $pdf->setPaper('a4');
            return $pdf->stream('exportPDF.pdf');
