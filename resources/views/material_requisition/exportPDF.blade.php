@@ -29,7 +29,7 @@
 
                             @endphp
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">รายงานข้อมูลการเบิกวัสดุ ประจำปี
+                                <h1 class="card-title text-primary ">รายงานการเบิกวัสดุ ประจำปี
                                     {{ $currentYear + 543 }}</h1>
                                 {{--    <p>รายงานข้อมูลการเบิกวัสดุอุปกรณ์</p>
                                 <p class="mt--16">จำนวนเบิกวัสดุ {{ $countOn }}</p>

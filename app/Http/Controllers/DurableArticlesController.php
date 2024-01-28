@@ -179,10 +179,10 @@ class DurableArticlesController extends Controller
         $currentYear = date('Y');
 
         $data = DB::table('durable_articles')
-        /* ->whereYear('durable_articles.created_at', $currentYear) */
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
-        ->leftJoin('categories', 'durable_articles.group_id', '=', 'categories.id')
-        ->select('durable_articles.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
         ->get();
         $pdf = PDF::loadView('durable_articles.exportPDF',['data' =>  $data,'currentYear' => $currentYear]);
         $pdf->setPaper('a4');

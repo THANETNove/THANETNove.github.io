@@ -31,7 +31,7 @@
                                 $count = $data->count();
                             @endphp
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">รายการข้อมูลเข้า ประจำปี
+                                <h1 class="card-title text-primary ">รายการเข้า ประจำปี
                                     {{ $currentYear + 543 }}</h1>
                                 <p class="mt--16">จำนวนทั้งหมด {{ $count }} รายการ</p>
                                 <div class="table-responsive text-nowrap">

@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-12 mb-4 order-0">
                 <div class="card">
-                    <h1 class="card-title text-primary ">รายงานข้อมูลการเบิกครุภัณฑ์ ประจำปี
+                    <h1 class="card-title text-primary ">รายงานการเบิกครุภัณฑ์ ประจำปี
                         {{ $currentYear + 543 }}</h1>
                     <div class="table-responsive text-nowrap">
                         <table class="table">
