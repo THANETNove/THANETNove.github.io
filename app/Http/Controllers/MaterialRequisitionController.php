@@ -200,7 +200,7 @@ class MaterialRequisitionController extends Controller
         if (Auth::user()->status == "0") {
             $data =  $data->where('id_user', Auth::user()->id);
         }
-        if ($request["dep_name"] != "all" || $request["dep_name"] != null) {
+        if ($request["dep_name"] != "all" && $request["dep_name"] != null) {
             $data =  $data->where('departments.id', $request["dep_name"]);
         }
 
