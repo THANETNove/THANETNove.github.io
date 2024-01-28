@@ -152,6 +152,29 @@
                                 <input type="text" class="form-control date-created_at" name="end_date" id="end_date"
                                     placeholder="yyyy-mm-dd" required>
                             </div>
+                            <div class="mb-4 mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="category" value="0"
+                                        id="flexRadioDefault1" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        ทั้งหมด
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="category" value="1"
+                                        id="flexRadioDefault2">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        ประเภทวัสดุ
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="category" value="2"
+                                        id="flexRadioDefault2">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        ประเภทครุภัณฑ์
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">รายงาน</button>
                     </form>

@@ -322,7 +322,18 @@ class BuyController extends Controller
         ->leftJoin('materials', 'buys.buy_name', '=', 'materials.id')
         ->leftJoin('durable_articles', 'buys.buy_name', '=', 'durable_articles.id')
         ->select('buys.*', 'categories.category_name' , 'materials.material_name',
-         'durable_articles.durableArticles_name')->where("buys.status",'=',  0)->get();
+         'durable_articles.durableArticles_name')->where("buys.status",'=',  0);
+
+         if ($request["category"] == 1) {
+            $data =  $data->where('categories.category_id', 1);
+           }
+         if ($request["category"] == 2) {
+            $data =  $data->where('categories.category_id', 2);
+           }
+
+
+
+           $data =  $data->get();
         $pdf = PDF::loadView('buy.exportPDF',['data' =>  $data, 'currentYear' => $currentYear]);
         $pdf->setPaper('a4');
 

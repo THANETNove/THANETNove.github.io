@@ -275,11 +275,12 @@ class DurableArticlesRequisitionController extends Controller
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
     'durable_articles.durableArticles_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
-           if (Auth::user()->status == "0") {
+
+    if (Auth::user()->status == "0") {
                $data =  $data->where('id_user', Auth::user()->id);
            }
 
-
+          
            $pdf = PDF::loadView('durable_articles_requisition.exportPDF',['data' =>  $data->get(),'currentYear' => $currentYear]);
            $pdf->setPaper('a4');
            return $pdf->stream('exportPDF.pdf');
