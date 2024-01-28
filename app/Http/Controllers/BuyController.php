@@ -9,6 +9,8 @@ use App\Models\Material;
 use App\Models\DurableArticles;
 use DB;
 use PDF;
+use Carbon\Carbon;
+
 
 class BuyController extends Controller
 {
@@ -301,19 +303,26 @@ class BuyController extends Controller
         return redirect('buy-index')->with('message', "ซื้อสำเร็จ");
     }
 
-    public function exportPDF()
+    public function exportPDF(Request $request)
     {
 
-        $currentYear = date('Y');
+
+
+
+
+        $start_date = $request["start_date"];
+        $end_date = $request["end_date"];
+        $end_date = Carbon::parse($end_date)->endOfDay()->toDateTimeString();
+        $currentYear =  Carbon::parse($start_date)->year;
 
         $data = DB::table('buys')
-        ->whereYear('buys.created_at', $currentYear)
+        ->whereBetween('buys.created_at', [$start_date, $end_date]) // Add this line
+
         ->leftJoin('categories', 'buys.group_id', '=', 'categories.id')
         ->leftJoin('materials', 'buys.buy_name', '=', 'materials.id')
         ->leftJoin('durable_articles', 'buys.buy_name', '=', 'durable_articles.id')
         ->select('buys.*', 'categories.category_name' , 'materials.material_name',
          'durable_articles.durableArticles_name')->where("buys.status",'=',  0)->get();
-
         $pdf = PDF::loadView('buy.exportPDF',['data' =>  $data, 'currentYear' => $currentYear]);
         $pdf->setPaper('a4');
 

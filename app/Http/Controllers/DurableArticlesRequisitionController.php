@@ -263,6 +263,8 @@ class DurableArticlesRequisitionController extends Controller
 
     public function exportPDF(Request $request)
     {
+
+        dd($request->all());
         $currentYear = date('Y');
         $data = DB::table('durable_articles_requisitions')
         ->whereYear('durable_articles_requisitions.created_at', $currentYear)

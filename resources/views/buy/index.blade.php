@@ -12,8 +12,8 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">รายการข้อมูลเข้า</h1>
-                                <a href="{{ url('buy-export/pdf') }}" target="_blank"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายการข้อมูลเข้า</a>
+                                <button {{-- href="{{ url('buy-export/pdf') }}" target="_blank"  --}} data-bs-toggle="modal" data-bs-target="#exampleModalBuy"
+                                    class="btn rounded-pill btn-outline-info mb-3">รายการข้อมูลเข้า</button>
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif
@@ -123,6 +123,38 @@
                         </div>
 
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalBuy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">รายการข้อมูลเข้า</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('buy-export/pdf') }}" target="_blank">
+                        @csrf
+                        <div class="row">
+                            <div class="mb-3 col-6">
+                                <label for="exampleFormControlInput1" class="form-label">วันที่เริ่มต้น</label>
+                                <input type="text" class="form-control date-created_at" name="start_date" id="start_date"
+                                    placeholder="yyy-mm-dd" required>
+                            </div>
+                            <div class="mb-3 col-6">
+                                <label for="exampleFormControlTextarea1" class="form-label">วันที่สิ้นสุด</label>
+                                <input type="text" class="form-control date-created_at" name="end_date" id="end_date"
+                                    placeholder="yyyy-mm-dd" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">รายงาน</button>
+                    </form>
                 </div>
             </div>
         </div>
