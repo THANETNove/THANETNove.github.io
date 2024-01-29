@@ -35,9 +35,14 @@ class HomeController extends Controller
         }
 
     }
-    public function report()
+    public function reportDurable()
     {
-        return view('export.index');
+        return view('export.export_durable');
+
+    }
+    public function reportMaterial()
+    {
+        return view('export.export_material');
 
     }
 

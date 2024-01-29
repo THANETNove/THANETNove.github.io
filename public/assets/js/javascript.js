@@ -472,9 +472,14 @@ if (targetUrls === "return-item-index") {
 }
 //รายงาน
 
-if (targetUrls === "report-index") {
-    setActiveClass("return", "report-index");
+if (targetUrls === "report-material") {
+    setActiveClass("report-ex", "report-material");
 }
+if (targetUrls === "report-durable") {
+    setActiveClass("report-ex", "report-durable");
+}
+
+console.log("targetUrls", targetUrls);
 
 //อนุมัติ
 if (targetUrls === "approval-update") {
