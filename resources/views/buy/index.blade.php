@@ -114,9 +114,9 @@
 
                                         </tbody>
                                     </table>
-                                    {{--  <div class="mt-5">
+                                    <div class="mt-5">
                                         {!! $data->links() !!}
-                                    </div> --}}
+                                    </div>
                                 </div>
 
                             </div>
@@ -143,12 +143,14 @@
                         @csrf
                         <div class="row">
                             <div class="mb-3 col-6">
-                                <label for="exampleFormControlInput1" class="form-label">วันที่เริ่มต้น</label>
+                                <label for="start_date" class="form-label">Start Date</label>
                                 <input type="text" class="form-control date-created_at" name="start_date" id="start_date"
-                                    placeholder="yyy-mm-dd" required>
+                                    placeholder="yyyy-mm-dd" required>
                             </div>
+
+                            <!-- End Date -->
                             <div class="mb-3 col-6">
-                                <label for="exampleFormControlTextarea1" class="form-label">วันที่สิ้นสุด</label>
+                                <label for="end_date" class="form-label">End Date</label>
                                 <input type="text" class="form-control date-created_at" name="end_date" id="end_date"
                                     placeholder="yyyy-mm-dd" required>
                             </div>
@@ -175,6 +177,7 @@
                                     </label>
                                 </div>
                             </div>
+
                         </div>
                         <button type="submit" class="btn btn-primary">รายงาน</button>
                     </form>
@@ -182,6 +185,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- / Layout wrapper -->
 @endsection

@@ -58,6 +58,21 @@
                 </ul>
             </li>
 
+            <li class="menu-item" id="report">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class='menu-icon tf-icons bx bxs-report'></i>
+                    <div data-i18n="Account Settings">รายงาน </div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="report-index">
+                        <a href="{{ url('report-index') }}" class="menu-link">
+                            <div data-i18n="Account">รายงาน</div>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
 
             @if (Auth::user()->status == 2)
                 <li class="menu-item" id="approval">

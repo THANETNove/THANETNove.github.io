@@ -37,6 +37,7 @@ Route::get('/', function () {
 Auth::routes();
 //ใช้รวม
 Route::get('home', [HomeController::class, 'index'])->name('home');
+Route::get('report-index', [HomeController::class, 'report'])->name('report-index');
 Route::get('my-profile/{id}', [HomeController::class, 'myProfile'])->name('my-profile');
 Route::get('new-password', [HomeController::class, 'newPassword'])->name('new-password');
 Route::put('update-password/{id}', [HomeController::class, 'update'])->name('update-password');

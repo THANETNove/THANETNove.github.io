@@ -35,6 +35,11 @@ class HomeController extends Controller
         }
 
     }
+    public function report()
+    {
+        return view('export.index');
+
+    }
 
     public function myProfile($id)
     {
