@@ -745,6 +745,7 @@ var from = $("#start_date").datepicker({
 $("#end_date").datepicker({
     dateFormat: dateFormat,
     changeMonth: true,
+    changeYear: true,
     numberOfMonths: 1,
     dayNames: [
         "อาทิตย์",
@@ -1334,3 +1335,29 @@ if (targetUrls == "durable-articles-edit") {
         },
     });
 }
+const popup2 = document.getElementById("categories-type");
+popup2.style.display = "none";
+
+const popup3 = document.getElementById("department-type");
+popup3.style.display = "none";
+
+const popup4 = document.getElementById("users-type");
+popup4.style.display = "none";
+
+$("#flexRadioDefault2").on("click", function () {
+    popup2.style.display = "block";
+    popup3.style.display = "none";
+    popup4.style.display = "none";
+});
+
+$("#flexRadioDefault3").on("click", function () {
+    popup2.style.display = "none";
+    popup3.style.display = "block";
+    popup4.style.display = "none";
+});
+
+$("#flexRadioDefault4").on("click", function () {
+    popup2.style.display = "none";
+    popup3.style.display = "none";
+    popup4.style.display = "block";
+});

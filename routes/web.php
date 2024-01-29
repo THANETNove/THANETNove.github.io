@@ -42,6 +42,7 @@ Route::get('report-material', [HomeController::class, 'reportMaterial'])->name('
 Route::get('my-profile/{id}', [HomeController::class, 'myProfile'])->name('my-profile');
 Route::get('new-password', [HomeController::class, 'newPassword'])->name('new-password');
 Route::put('update-password/{id}', [HomeController::class, 'update'])->name('update-password');
+Route::post('export-material/pdf', [HomeController::class, 'exportMaterialPDF'])->name('export-material/pdf');
 
 Route::get('districts/{id}', [AddressController::class, 'districts'])->name('districts');
 Route::get('subdistrict/{id}', [AddressController::class, 'subdistricts'])->name('subdistrict');
