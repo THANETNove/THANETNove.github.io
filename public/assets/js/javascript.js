@@ -1344,20 +1344,47 @@ popup3.style.display = "none";
 const popup4 = document.getElementById("users-type");
 popup4.style.display = "none";
 
+var numberClick;
 $("#flexRadioDefault2").on("click", function () {
+    numberClick = 2;
     popup2.style.display = "block";
     popup3.style.display = "none";
     popup4.style.display = "none";
 });
 
 $("#flexRadioDefault3").on("click", function () {
+    numberClick = 3;
     popup2.style.display = "none";
     popup3.style.display = "block";
     popup4.style.display = "none";
 });
 
 $("#flexRadioDefault4").on("click", function () {
+    numberClick = 4;
     popup2.style.display = "none";
     popup3.style.display = "none";
     popup4.style.display = "block";
+});
+
+$("#exportFrom").submit(function (event) {
+    console.log("numberClick", numberClick);
+    if (numberClick == "2") {
+        if ($("#categories_type").val() === null) {
+            alert("กรุณาเลือกประเภท");
+            event.preventDefault(); // ยกเลิกการ submit
+        }
+    }
+    if (numberClick == "3") {
+        if ($("#department_type").val() === null) {
+            alert("กรุณาเลือกหน่วยงาน");
+            event.preventDefault(); // ยกเลิกการ submit
+        }
+    }
+    if (numberClick == "4") {
+        if ($("#users_type").val() === null) {
+            alert("กรุณาเลือกชื่อ");
+            event.preventDefault(); // ยกเลิกการ submit
+        }
+    }
+    // ตรวจสอบว่ามีการเลือกประเภทหรือไม่
 });

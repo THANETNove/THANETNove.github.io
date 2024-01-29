@@ -13,7 +13,8 @@
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">รายงานวัสดุ</h1>
                                 <div>
-                                    <form method="POST" action="{{ route('export-material/pdf') }}" target="_blank">
+                                    <form method="POST" action="{{ route('export-material/pdf') }}" id="exportFrom"
+                                        target="_blank">
                                         @csrf
                                         <div class="row">
                                             <div class="mb-3 col-6">
@@ -54,8 +55,8 @@
                                                     </label>
                                                 </div>
                                                 <div class="form-check mt-3 mb-3" id="categories-type">
-                                                    <select class="form-select" name="categories_type"
-                                                        aria-label="Default select example">
+                                                    <select class="form-select" name="categories_type" id="categories_type"
+                                                        aria-label="Default select example" required>
                                                         <option selected disabled>เลือกประเภท</option>
                                                         @foreach ($categories_type as $cate)
                                                             <option value="{{ $cate->id }}">{{ $cate->category_name }}
@@ -63,6 +64,8 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
+
+
                                                 <div class="form-check mb-3">
                                                     <input class="form-check-input" type="radio" name="search"
                                                         value="3" id="flexRadioDefault3">
@@ -71,7 +74,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="form-check mt-3 mb-3" id="department-type">
-                                                    <select class="form-select" name="department_type"
+                                                    <select class="form-select" name="department_type" id="department_type"
                                                         aria-label="Default select example">
                                                         <option selected disabled>เลือกหน่วยงาน</option>
                                                         @foreach ($department_type as $dep)
@@ -88,7 +91,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="form-check mt-3 mb-3" id="users-type">
-                                                    <select class="form-select" name="users_type"
+                                                    <select class="form-select" name="users_type" id="users_type"
                                                         aria-label="Default select example">
                                                         <option selected disabled>เลือกชื่อ</option>
 
@@ -99,6 +102,13 @@
                                                                 {{ $user->last_name }}</option>
                                                         @endforeach
                                                     </select>
+                                                </div>
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="radio" name="search"
+                                                        value="5" id="flexRadioDefault4">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        รายงานเบิกทั้งหมด
+                                                    </label>
                                                 </div>
 
                                             </div>

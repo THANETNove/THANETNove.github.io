@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
 use Auth;
+use PDF;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -100,8 +102,7 @@ class HomeController extends Controller
         $search = $request["search"];
 
 
-        if ($search == 0) {
-
+        if ($search == 0) {  //รายงานวัสดุคงเหลือ
             $data = DB::table('materials')
             ->whereBetween('materials.created_at', [$start_date, $end_date]) // Add this line
             ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
@@ -113,7 +114,8 @@ class HomeController extends Controller
            return $pdf->stream('exportPDF.pdf');
 
 
-        }elseif ($search == 1) {
+        }elseif ($search == 1) { //รายการรับเข้า
+
             $data = DB::table('buys')
             ->whereBetween('buys.created_at', [$start_date, $end_date]) // Add this line
             ->where("buys.typeBuy",1)
@@ -133,8 +135,40 @@ class HomeController extends Controller
         $pdf = PDF::loadView('buy.exportPDF',['data' =>  $data, 'currentYear' => $currentYear]);
         $pdf->setPaper('a4');
         return $pdf->stream('exportPDF.pdf');
+
         }else{
 
+            $data = DB::table('material_requisitions')
+            ->whereBetween('material_requisitions.created_at', [$start_date, $end_date]) // Add t
+            ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
+            ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+            ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
+            ->where('material_requisitions.status', "on")
+            ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
+            'materials.material_name as name','departments.department_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+            if (Auth::user()->status == "0") {
+                $data =  $data->where('id_user', Auth::user()->id);
+            }
+
+          if ($search == 2 ) {
+                $data =  $data->where('material_requisitions.id_group', $request["categories_type"]);
+            }
+             if ($search == 3 ) {
+
+                $data =  $data->where('users.department_id', $request["department_type"]);
+            }
+            if ($search == 4 ) {
+
+                $data =  $data->where('users.id', $request["users_type"]);
+            }
+
+
+
+            $pdf = PDF::loadView('material_requisition.exportPDF',['data' =>  $data->get(),'currentYear' => $currentYear]);
+            $pdf->setPaper('a4');
+            return $pdf->stream('exportPDF.pdf');
         }
 
 
