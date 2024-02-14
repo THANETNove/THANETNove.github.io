@@ -38,7 +38,7 @@
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">วันที่สร้าง </label>
-                                <p>{{ date('d-m-Y', strtotime($data[0]->created_at)) }}</p>
+
                                 <input type="text" class="form-control"
                                     value="{{ date('d-m-Y', strtotime($data[0]->created_at)) }}">
                             </div>
