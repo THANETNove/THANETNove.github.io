@@ -11,8 +11,8 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">ครุภัณฑ์ที่ชำรุด</h1>
-                                <a href="{{ url('durable-articles-damaged-export/pdf') }}" target="_blank"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลครุภัณฑ์ที่ชำรุด</a>
+                                {{--  <a href="{{ url('durable-articles-damaged-export/pdf') }}" target="_blank"
+                                    class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลครุภัณฑ์ที่ชำรุด</a> --}}
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>

@@ -345,7 +345,7 @@ class HomeController extends Controller
            $pdf->setPaper('a4');
            return $pdf->stream('exportPDF.pdf');
      }elseif($search == 7 ) {
-
+        $name_export = "รายงานครุภัณฑ์ที่ชำรุด";
         $data = DB::table('durable_articles_damageds')
         ->where('durable_articles_damageds.status', 0)
         ->whereBetween('durable_articles_damageds.created_at', [$start_date, $end_date])
@@ -356,11 +356,24 @@ class HomeController extends Controller
         ->leftJoin('type_categories', 'durable_articles_damageds.durable_articles_name', '=', 'type_categories.id')
         ->leftJoin('categories', 'durable_articles_damageds.group_id', '=', 'categories.id')
         ->select('durable_articles_damageds.*', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
-    'durable_articles.durableArticles_name','categories.category_name','type_categories.type_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
-->get();
+            'durable_articles.durableArticles_name','categories.category_name','type_categories.type_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->get();
 
 
-        $pdf = PDF::loadView('durable_articles_damaged.exportPDF',['data' =>  $data,'currentYear' => $currentYear]);
+        $pdf = PDF::loadView('durable_articles_damaged.exportPDF',['data' =>  $data,'name_export' => $name_export,'date_export' => $date_export]);
+        $pdf->setPaper('a4');
+       return $pdf->stream('exportPDF.pdf');
+     }elseif($search == 8 ) {
+        $name_export = "รายงานครุภัณฑ์ที่ซ่อม";
+        $data = DB::table('durable_articles_repairs')
+        ->where('durable_articles_repairs.status', 0)
+        ->whereBetween('durable_articles_repairs.created_at', [$start_date, $end_date])
+        ->leftJoin('durable_articles', 'durable_articles_repairs.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->leftJoin('type_categories', 'durable_articles_repairs.durable_articles_name', '=', 'type_categories.id')
+        ->leftJoin('categories', 'durable_articles_repairs.group_id', '=', 'categories.id')
+        ->select('durable_articles_repairs.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name')
+        ->get();
+        $pdf = PDF::loadView('durable_articles_repair.exportPDF',['data' =>  $data,'name_export' => $name_export,'date_export'=>$date_export]);
         $pdf->setPaper('a4');
        return $pdf->stream('exportPDF.pdf');
      }
