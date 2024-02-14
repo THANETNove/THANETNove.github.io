@@ -139,7 +139,7 @@ class HomeController extends Controller
            return $pdf->stream('exportPDF.pdf');
 
          }elseif ($search == 2) { //รายการรับเข้า
-            $name_export = "รายการรับเข้า";
+            $name_export = "รายการรับเข้าวัสดุ";
             $data = DB::table('buys')
             ->whereBetween('buys.created_at', [$start_date, $end_date]) // Add this line
             ->where("buys.typeBuy",1)
@@ -149,12 +149,6 @@ class HomeController extends Controller
             ->select('buys.*', 'categories.category_name' , 'materials.material_name',
              'durable_articles.durableArticles_name')->where("buys.status",'=',  0);
 
-             if ($request["category"] == 1) {
-                $data =  $data->where('categories.category_id', 1);
-               }
-             if ($request["category"] == 2) {
-                $data =  $data->where('categories.category_id', 2);
-            }
         $data =  $data->get();
         $pdf = PDF::loadView('buy.exportPDF',['data' =>  $data, 'date_export' => $date_export ,'name_export' => $name_export]);
         $pdf->setPaper('a4');
@@ -264,8 +258,25 @@ class HomeController extends Controller
         $pdf->setPaper('a4');
        return $pdf->stream('exportPDF.pdf');
 
+
+    }elseif ($search == 2) {
+        $name_export = "รายการรับเข้าครุภัณฑ์";
+        $data = DB::table('buys')
+        ->whereBetween('buys.created_at', [$start_date, $end_date]) // Add this line
+        ->where("buys.typeBuy",2)
+        ->leftJoin('categories', 'buys.group_id', '=', 'categories.id')
+        ->leftJoin('materials', 'buys.buy_name', '=', 'materials.id')
+        ->leftJoin('durable_articles', 'buys.buy_name', '=', 'durable_articles.id')
+        ->select('buys.*', 'categories.category_name' , 'materials.material_name',
+         'durable_articles.durableArticles_name')->where("buys.status",'=',  0);
+    $data =  $data->get();
+    $pdf = PDF::loadView('buy.exportPDF',['data' =>  $data, 'date_export' => $date_export ,'name_export' => $name_export]);
+    $pdf->setPaper('a4');
+    return $pdf->stream('exportPDF.pdf');
+
+
+
+
      }
-
-
-   }
+    }
 }
