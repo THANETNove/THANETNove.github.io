@@ -96,12 +96,18 @@ class DurableArticlesController extends Controller
         $thaiYear = ($currentDate->year + 543) % 100;
         $thaiMonth = $currentDate->format('m');
 
-        $countDurable = $thaiMonth . "-" . $thaiYear . "/" . $durable_cont+1;
+
 
 
 
         $random = "dura-" . Str::random(10);
 
+
+
+    $lj = 1;
+    for ($i = 0; $i < $request['durableArticles_number']; $i++) {
+        $countDurable = $thaiMonth . "-" . $thaiYear . "/" . $durable_cont + $lj++;
+        $random = "dura-" . Str::random(10);
 
         $data = new DurableArticles;
         $data->code_DurableArticles = $random;
@@ -111,7 +117,7 @@ class DurableArticlesController extends Controller
         $data->group_count = $countDurable;
         $data->durableArticles_name = $request['durableArticles_name'];
         $data->durableArticles_number = $request['durableArticles_number'];
-       /*  $data->remaining_amount = $request['durableArticles_number']; */
+        $data->remaining_amount = $request['durableArticles_number'];
         $data->name_durableArticles_count = $request['name_durableArticles_count'];
         $data->code_material_storage = $request['code_material_storage'];
         $data->warranty_period = $request['warranty_period'];
@@ -120,7 +126,7 @@ class DurableArticlesController extends Controller
         $data->repair_number = 0;
         $data->status = "on";
         $data->save();
-
+    }
 
 
         return redirect('durable-articles-index')->with('message', "บันทึกสำเร็จ");

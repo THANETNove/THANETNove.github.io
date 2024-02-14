@@ -69,7 +69,7 @@
                                     <input id="durableArticles_number" type="number"
                                         class="form-control @error('durableArticles_number') is-invalid @enderror"
                                         name="durableArticles_number" required placeholder="จำนวนครุภัณฑ์"
-                                        autocomplete="durableArticles_number" value="1" readonly>
+                                        autocomplete="durableArticles_number" value="1">
 
                                     @error('durableArticles_number')
                                         <span class="invalid-feedback" role="alert">
