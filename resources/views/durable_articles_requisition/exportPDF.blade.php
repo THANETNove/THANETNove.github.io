@@ -18,8 +18,15 @@
         <div class="row">
             <div class="col-12 mb-4 order-0">
                 <div class="card">
-                    <h1 class="card-title text-primary ">รายงานการเบิกครุภัณฑ์ ประจำปี
-                        {{ $currentYear + 543 }}</h1>
+                    <h1 class="card-title text-primary td-center">
+                        ศูนย์ปฏิบัติการ อบต.บางเเม่นาง อ.บางใหญ่ จ.นนทบุรี
+                    </h1>
+                    <h1 class="card-title text-primary td-center">
+                        {{ $name_export }}
+                    </h1>
+                    <h1 class="card-title text-primary td-center mt-32">
+                        ณ วันที่ {{ $date_export }}
+                    </h1>
                     <div class="table-responsive text-nowrap">
                         <table class="table">
                             <thead>
@@ -30,10 +37,14 @@
                                     <th>ชื่อวัสดุ</th>
                                     <th>ที่เบิก</th>
 
-                                    @if (Auth::user()->status != '0')
-                                        <th>ชื่อ นามสกุล ผู้เบิก </th>
+                                    @if ($type != 5)
+                                        @if (Auth::user()->status != '0')
+                                            <th>ชื่อ นามสกุล ผู้เบิก </th>
+                                        @endif
                                     @endif
-                                    <th>เเผนก </th>
+                                    @if ($type != 5 && $type != 4 && Auth::user()->status != '0')
+                                        <th>เเผนก </th>
+                                    @endif
                                     <th>ระยะประกัน </th>
                                     <th>วันที่เบิก </th>
 
@@ -52,11 +63,18 @@
                                         <td>{{ $da->durableArticles_name }}</td>
                                         <td>{{ $da->amount_withdraw }} {{ $da->name_durable_articles_count }}</td>
 
-                                        @if (Auth::user()->status != '0')
-                                            <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
+                                        @if ($type != 5)
+                                            @if (Auth::user()->status != '0')
+                                                <td>{{ $da->prefix }} {{ $da->first_name }}
+                                                    {{ $da->last_name }}
+                                                </td>
+                                            @endif
+                                        @endif
+                                        @if ($type != 5 && $type != 4 && Auth::user()->status != '0')
+                                            <td>
+                                                {{ $da->department_name }}
                                             </td>
                                         @endif
-                                        <td>{{ $da->department_name }}</td>
                                         @php
                                             $originalDate = $da->created_at;
                                             $newDate = (new DateTime($originalDate))->modify('+7 days')->format('d/m/Y');

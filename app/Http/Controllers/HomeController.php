@@ -42,10 +42,11 @@ class HomeController extends Controller
     {
         $department_type = DB::table('departments')
         ->get();
+
         $users_type = DB::table('users')
         ->get();
         $categories_type = DB::table('categories')
-        ->where('category_id',  1)
+        ->where('category_id',  2)
         ->get();
 
         return view('export.export_durable',['department_type' => $department_type,
@@ -244,6 +245,7 @@ class HomeController extends Controller
         return $pdf->stream('exportPDF.pdf');
 
     }elseif ($search == 1) {
+
         $name_export = "รายงานครุภัณฑ์หมด";
         $data = DB::table('durable_articles')
         ->whereBetween('durable_articles.created_at', [$start_date, $end_date]) // Add
@@ -277,6 +279,72 @@ class HomeController extends Controller
 
 
 
+     }elseif($search >= 3 && $search <=  6) {
+
+        $start_date = $request["start_date"];
+        $end_date = $request["end_date"];
+        $end_date = Carbon::parse($end_date)->endOfDay()->toDateTimeString();
+        $currentYear =  Carbon::parse($start_date)->year;
+
+        $categories_name = DB::table('categories')
+        ->where('id',$request["categories_type"])
+        ->get();
+
+
+
+        $currentYear = date('Y');
+        $data = DB::table('durable_articles_requisitions')
+        ->whereBetween('durable_articles_requisitions.created_at', [$start_date, $end_date]) // Add this line
+        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->leftJoin('type_categories', 'durable_articles_requisitions.durable_articles_name', '=', 'type_categories.id')
+        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.id')
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->select('durable_articles_requisitions.*','type_categories.type_name', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
+            'durable_articles.durableArticles_name','durable_articles.warranty_period','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+
+        if (Auth::user()->status == "0") {
+               $data =  $data->where('id_user', Auth::user()->id);
+           }
+
+
+
+         if ($search == 3 ) {
+            $categories_name = DB::table('categories')
+            ->where('id',$request["categories_type"])
+            ->get();
+
+            $type = 3;
+
+            $name_export = "รายงานการเบิก".$categories_name[0]->category_name;
+            $data =  $data->where('durable_articles_requisitions.group_id', $request["categories_type"]);
+        }
+         if ($search == 4 ) {
+            $departments_name = DB::table('departments')
+            ->where('id',$request["department_type"])
+            ->get();
+            $type = 4;
+
+            $name_export = "รายงานเบิกวัสดุหน่วยงาน".$departments_name[0]->department_name;
+            $data =  $data->where('users.department_id', $request["department_type"]);
+        }
+        if ($search == 5 ) {
+            $users_name = DB::table('users')
+            ->where('id',$request["users_type"])
+            ->get();
+            $type = 5;
+            $name_export = "รายงานเบิก "." ".$users_name[0]->prefix." ".$users_name[0]->first_name ." ".$users_name[0]->last_name;
+            $data =  $data->where('users.id', $request["users_type"]);
+        }
+        if ($search == 6 ) {
+            $name_export = "รายงานเบิกทั้งหมด";
+            $type = 6;
+        }
+        $data =$data->get();
+           $pdf = PDF::loadView('durable_articles_requisition.exportPDF',['data' =>  $data,'name_export' => $name_export ,'date_export' => $date_export ,'type' => $type]);
+           $pdf->setPaper('a4');
+           return $pdf->stream('exportPDF.pdf');
      }
     }
 }

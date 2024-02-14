@@ -36,14 +36,14 @@
                                                         <input class="form-check-input" type="radio" name="search"
                                                             value="0" id="flexRadioDefault0" checked>
                                                         <label class="form-check-label" for="flexRadioDefault0">
-                                                            รายงานวัสดุคงเหลือ
+                                                            รายงานครุภัณฑ์คงเหลือ
                                                         </label>
                                                     </div>
                                                     <div class="form-check mb-3">
                                                         <input class="form-check-input" type="radio" name="search"
                                                             value="1" id="flexRadioDefault1">
                                                         <label class="form-check-label" for="flexRadioDefault1">
-                                                            รายงานวัสดุหมด
+                                                            รายงานครุภัณฑ์หมด
                                                         </label>
                                                     </div>
                                                     <div class="form-check mb-3">
@@ -57,7 +57,7 @@
                                                         <input class="form-check-input" type="radio" name="search"
                                                             value="3" id="flexRadioDefault3">
                                                         <label class="form-check-label" for="flexRadioDefault3">
-                                                            รายงานเบิกวัสดุแยกตามประเภท
+                                                            รายงานเบิกครุภัณฑ์แยกตามประเภท
                                                         </label>
                                                     </div>
 
@@ -79,7 +79,8 @@
                                                         <input class="form-check-input" type="radio" name="search"
                                                             value="4" id="flexRadioDefault4">
                                                         <label class="form-check-label" for="flexRadioDefault4">
-                                                            รายงานเบิกวัสดุแยกตามหน่วยงาน
+                                                            รายงานเบิกครุภัณฑ์
+                                                            แยกตามหน่วยงาน
                                                         </label>
                                                     </div>
                                                     <div class="form-check mt-3 mb-3" id="department-type">
