@@ -27,12 +27,12 @@
                                                 <th>รหัส</th>
                                                 <th>ประเภทวัสดุ</th>
                                                 <th>ชื่อ</th>
-                                                <th>จำนวนวัสดุ (จ่อหน่วยนับ)</th>
+                                                <th>จำนวนวัสดุ</th>
                                                 {{-- <th>จำนวนวัสดุ เเพค/โหล</th> --}}
                                                 <th>จำนวนที่เหลือ</th>
                                                 <th>หน่วย</th>
 
-                                                <th>ที่จัดเก็บ</th>
+                                                {{--   <th>ที่จัดเก็บ</th> --}}
                                                 <th>date</th>
                                                 <th>Actions</th>
 
@@ -54,8 +54,8 @@
                                                         {{--  <td>{{ $da->material_number_pack_dozen }}</td> --}}
                                                         <td>{{ number_format($da->remaining_amount) }}</td>
                                                         <td>{{ $da->name_material_count }}</td>
-                                                        <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
-                                                            {{ $da->room_name }}</td>
+                                                        {{--     <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
+                                                            {{ $da->room_name }}</td> --}}
                                                         <td>{{ (new Carbon\Carbon($da->created_at))->format('d-m-Y') }}
                                                         </td>
                                                         <td>
@@ -66,6 +66,9 @@
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ url('material-show', $da->id) }}"><i
+                                                                            class='bx bxs-show'></i>View</a>
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('material-edit', $da->id) }}"><i
                                                                             class="bx bx-edit-alt me-1"></i> Edit</a>

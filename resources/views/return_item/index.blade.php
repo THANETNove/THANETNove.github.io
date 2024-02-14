@@ -127,7 +127,8 @@
                                                             </button>
                                                             <div class="dropdown-menu">
                                                                 <a class="dropdown-item"
-                                                                    href="{{ url('durable-articles-requisition-show', $da->id) }}"><i
+                                                                    href="{{ url('durable-articles-requisition-show', $da->id) }}">
+                                                                    <i
                                                                         class='bx bxs-show'></i> View</a>
                                                                 {{--     @if ($da->statusApproval == '0' && $da->status == '0')
                                                                     <a class="dropdown-item"

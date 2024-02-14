@@ -119,6 +119,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('material-edit/{id}', [MaterialController::class, 'edit'])->name('material-edit');
     Route::put('material-update/{id}', [MaterialController::class, 'update'])->name('material-update');
     Route::get('material-export/pdf', [MaterialController::class, 'exportPDF'])->name('material-export/pdf');
+    Route::get('material-show/{id}', [MaterialController::class, 'show'])->name('material-show');
 
 
     Route::get('durable-articles-index', [DurableArticlesController::class, 'index'])->name('durable-articles-index');

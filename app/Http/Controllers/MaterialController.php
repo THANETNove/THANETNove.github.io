@@ -104,7 +104,13 @@ class MaterialController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = DB::table('materials')
+        ->where('materials.id', $id)
+        ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
+        ->select('materials.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->get();
+        return view('material.show',['data' =>   $data ]);
     }
 
     /**
