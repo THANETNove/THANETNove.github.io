@@ -1345,42 +1345,66 @@ const popup4 = document.getElementById("users-type");
 popup4.style.display = "none";
 
 var numberClick;
-$("#flexRadioDefault2").on("click", function () {
-    numberClick = 2;
-    popup2.style.display = "block";
+$("#flexRadioDefault0").on("click", function () {
+    numberClick = 0;
+    popup2.style.display = "none";
     popup3.style.display = "none";
     popup4.style.display = "none";
 });
-
+$("#flexRadioDefault1").on("click", function () {
+    numberClick = 1;
+    popup2.style.display = "none";
+    popup3.style.display = "none";
+    popup4.style.display = "none";
+});
+$("#flexRadioDefault2").on("click", function () {
+    numberClick = 2;
+    popup2.style.display = "none";
+    popup3.style.display = "none";
+    popup4.style.display = "none";
+});
 $("#flexRadioDefault3").on("click", function () {
     numberClick = 3;
-    popup2.style.display = "none";
-    popup3.style.display = "block";
+    popup2.style.display = "block";
+    popup3.style.display = "none";
     popup4.style.display = "none";
 });
 
 $("#flexRadioDefault4").on("click", function () {
     numberClick = 4;
     popup2.style.display = "none";
+    popup3.style.display = "block";
+    popup4.style.display = "none";
+});
+
+$("#flexRadioDefault5").on("click", function () {
+    numberClick = 5;
+    popup2.style.display = "none";
     popup3.style.display = "none";
     popup4.style.display = "block";
+});
+$("#flexRadioDefault6").on("click", function () {
+    numberClick = 6;
+    popup2.style.display = "none";
+    popup3.style.display = "none";
+    popup4.style.display = "none";
 });
 
 $("#exportFrom").submit(function (event) {
     console.log("numberClick", numberClick);
-    if (numberClick == "2") {
+    if (numberClick == "3") {
         if ($("#categories_type").val() === null) {
             alert("กรุณาเลือกประเภท");
             event.preventDefault(); // ยกเลิกการ submit
         }
     }
-    if (numberClick == "3") {
+    if (numberClick == "4") {
         if ($("#department_type").val() === null) {
             alert("กรุณาเลือกหน่วยงาน");
             event.preventDefault(); // ยกเลิกการ submit
         }
     }
-    if (numberClick == "4") {
+    if (numberClick == "5") {
         if ($("#users_type").val() === null) {
             alert("กรุณาเลือกชื่อ");
             event.preventDefault(); // ยกเลิกการ submit

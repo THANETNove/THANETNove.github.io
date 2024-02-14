@@ -34,14 +34,21 @@
                                                     <div class="form-check mb-3">
                                                         <input class="form-check-input" type="radio" name="search"
                                                             value="0" id="flexRadioDefault0" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                        <label class="form-check-label" for="flexRadioDefault0">
                                                             รายงานวัสดุคงเหลือ
                                                         </label>
                                                     </div>
                                                     <div class="form-check mb-3">
                                                         <input class="form-check-input" type="radio" name="search"
-                                                            value="1" id="flexRadioDefault1">
+                                                            value="1" id="flexRadioDefault1" checked>
                                                         <label class="form-check-label" for="flexRadioDefault1">
+                                                            รายงานวัสดุหมด
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="2" id="flexRadioDefault2">
+                                                        <label class="form-check-label" for="flexRadioDefault2">
                                                             รายการรับเข้า
                                                         </label>
                                                     </div>
@@ -49,8 +56,8 @@
 
                                                 <div class="form-check mb-3">
                                                     <input class="form-check-input" type="radio" name="search"
-                                                        value="2" id="flexRadioDefault2">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        value="3" id="flexRadioDefault3">
+                                                    <label class="form-check-label" for="flexRadioDefault3">
                                                         รายงานเบิกวัสดุแยกตามประเภท
                                                     </label>
                                                 </div>
@@ -68,8 +75,8 @@
 
                                                 <div class="form-check mb-3">
                                                     <input class="form-check-input" type="radio" name="search"
-                                                        value="3" id="flexRadioDefault3">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        value="4" id="flexRadioDefault4">
+                                                    <label class="form-check-label" for="flexRadioDefault4">
                                                         รายงานเบิกวัสดุแยกตามหน่วยงาน
                                                     </label>
                                                 </div>
@@ -85,8 +92,8 @@
                                                 </div>
                                                 <div class="form-check mb-3">
                                                     <input class="form-check-input" type="radio" name="search"
-                                                        value="4" id="flexRadioDefault4">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        value="5" id="flexRadioDefault5">
+                                                    <label class="form-check-label" for="flexRadioDefault5">
                                                         รายงานเบิกตามชื่อ
                                                     </label>
                                                 </div>
@@ -105,8 +112,8 @@
                                                 </div>
                                                 <div class="form-check mb-3">
                                                     <input class="form-check-input" type="radio" name="search"
-                                                        value="5" id="flexRadioDefault4">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        value="6" id="flexRadioDefault6">
+                                                    <label class="form-check-label" for="flexRadioDefault6">
                                                         รายงานเบิกทั้งหมด
                                                     </label>
                                                 </div>

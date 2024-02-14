@@ -105,6 +105,7 @@ class HomeController extends Controller
         if ($search == 0) {  //รายงานวัสดุคงเหลือ
             $data = DB::table('materials')
             ->whereBetween('materials.created_at', [$start_date, $end_date]) // Add this line
+            ->where("materials.remaining_amount",'>', 0)
             ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
             ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
             ->select('materials.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
@@ -114,7 +115,19 @@ class HomeController extends Controller
            return $pdf->stream('exportPDF.pdf');
 
 
-        }elseif ($search == 1) { //รายการรับเข้า
+        }elseif ($search == 1) {
+            $data = DB::table('materials')
+            ->whereBetween('materials.created_at', [$start_date, $end_date]) // Add this line
+            ->where("materials.remaining_amount", 0)
+            ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+            ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
+            ->select('materials.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+            ->get();
+            $pdf = PDF::loadView('material.exportPDF',['data' =>  $data, 'currentYear' => $currentYear]);
+            $pdf->setPaper('a4');
+           return $pdf->stream('exportPDF.pdf');
+
+         }elseif ($search == 2) { //รายการรับเข้า
 
             $data = DB::table('buys')
             ->whereBetween('buys.created_at', [$start_date, $end_date]) // Add this line
@@ -152,15 +165,15 @@ class HomeController extends Controller
                 $data =  $data->where('id_user', Auth::user()->id);
             }
 
-          if ($search == 2 ) {
+          if ($search == 3 ) {
                 $data =  $data->where('material_requisitions.id_group', $request["categories_type"]);
             }
-             if ($search == 3 ) {
+             if ($search == 4 ) {
 
                 $data =  $data->where('users.department_id', $request["department_type"]);
             }
-            if ($search == 4 ) {
-
+            if ($search == 5 ) {
+                $name =
                 $data =  $data->where('users.id', $request["users_type"]);
             }
 
