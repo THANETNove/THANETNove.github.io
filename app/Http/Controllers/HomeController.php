@@ -376,6 +376,20 @@ class HomeController extends Controller
         $pdf = PDF::loadView('durable_articles_repair.exportPDF',['data' =>  $data,'name_export' => $name_export,'date_export'=>$date_export]);
         $pdf->setPaper('a4');
        return $pdf->stream('exportPDF.pdf');
+     }elseif($search == 9 ) {
+        $name_export = "ครุภัณฑ์ที่แทงจำหน่าย";
+        $data = DB::table('bet_distributions')
+        ->where('bet_distributions.status', "on")
+        ->where('bet_distributions.statusApproval', "1")
+        ->whereBetween('bet_distributions.created_at', [$start_date, $end_date])
+        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->leftJoin('type_categories', 'bet_distributions.durable_articles_name', '=', 'type_categories.id')
+        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
+        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name')
+        ->get();
+        $pdf = PDF::loadView('bet_distribution.exportPDF',['data' =>  $data, 'name_export' => $name_export,'date_export' => $date_export]);
+        $pdf->setPaper('a4');
+       return $pdf->stream('exportPDF.pdf');
      }
     }
 }
