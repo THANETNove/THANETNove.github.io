@@ -81,7 +81,7 @@
                         <div data-i18n="Notifications">รายงานวัสดุ</div>
                     </a>
                 </li>
-                <li class="menu-item" id="report-durablex">
+                <li class="menu-item" id="report-durable">
                     <a href="{{ url('report-durable') }}" class="menu-link">
                         <div data-i18n="Account">รายงานครุภัณฑ์</div>
                     </a>

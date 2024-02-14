@@ -43,6 +43,7 @@ Route::get('my-profile/{id}', [HomeController::class, 'myProfile'])->name('my-pr
 Route::get('new-password', [HomeController::class, 'newPassword'])->name('new-password');
 Route::put('update-password/{id}', [HomeController::class, 'update'])->name('update-password');
 Route::post('export-material/pdf', [HomeController::class, 'exportMaterialPDF'])->name('export-material/pdf');
+Route::post('export-durable/pdf', [HomeController::class, 'exportDurablePDF'])->name('export-durable/pdf');
 
 Route::get('districts/{id}', [AddressController::class, 'districts'])->name('districts');
 Route::get('subdistrict/{id}', [AddressController::class, 'subdistricts'])->name('subdistrict');

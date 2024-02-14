@@ -216,4 +216,56 @@ class HomeController extends Controller
 
 
    }
+
+   public function exportDurablePDF(Request $request) {
+
+    $start_date = $request["start_date"];
+    $end_date = $request["end_date"];
+    $end_date = Carbon::parse($end_date)->endOfDay()->toDateTimeString();
+    $currentYear =  Carbon::parse($start_date)->year;
+    $date_export = Carbon::parse()->locale('th');
+    $date_export = $date_export->addYears(543)->translatedFormat('d F Y');
+
+    if (Auth::user()->status == "0") {
+        $search = 6;
+    } else {
+        $search = $request["search"];
+    }
+
+
+
+    if ($search == 0) {  //รายงานวัสดุคงเหลือ
+        $name_export = "รายงานครุภัณฑ์คงเหลือ";
+        $data = DB::table('durable_articles')
+        ->whereBetween('durable_articles.created_at', [$start_date, $end_date]) // Add
+        ->where("durable_articles.remaining_amount", '>', 0)
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->get();
+
+        $pdf = PDF::loadView('durable_articles.exportPDF',['data' =>  $data,'name_export' => $name_export ,'date_export' => $date_export]);
+        $pdf->setPaper('a4');
+        return $pdf->stream('exportPDF.pdf');
+
+    }elseif ($search == 1) {
+        $name_export = "รายงานครุภัณฑ์หมด";
+        $data = DB::table('durable_articles')
+        ->whereBetween('durable_articles.created_at', [$start_date, $end_date]) // Add
+        ->where("durable_articles.remaining_amount", 0)
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->get();
+        $pdf = PDF::loadView('durable_articles.exportPDF',['data' =>  $data,'name_export' => $name_export ,'date_export' => $date_export]);
+
+        $pdf->setPaper('a4');
+       return $pdf->stream('exportPDF.pdf');
+
+     }
+
+
+   }
 }

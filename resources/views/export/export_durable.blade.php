@@ -14,7 +14,8 @@
                                 <h1 class="card-title text-primary ">รายงานครุภัณฑ์</h1>
 
                                 <div>
-                                    <form method="POST" action="{{ route('buy-export/pdf') }}" target="_blank">
+                                    <form method="POST" action="{{ route('export-durable/pdf') }}" id="exportFrom"
+                                        target="_blank">
                                         @csrf
                                         <div class="row">
                                             <div class="mb-3 col-6">
@@ -30,32 +31,103 @@
                                                     id="end_date" placeholder="yyyy-mm-dd" required>
                                             </div>
                                             <div class="mb-4 mt-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="category"
-                                                        value="0" id="flexRadioDefault1" checked>
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        ทั้งหมด
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="category"
-                                                        value="1" id="flexRadioDefault2">
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        ประเภทวัสดุ
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="category"
-                                                        value="2" id="flexRadioDefault2">
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        ประเภทครุภัณฑ์
-                                                    </label>
-                                                </div>
-                                            </div>
+                                                @if (Auth::user()->status >= 1)
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="0" id="flexRadioDefault0" checked>
+                                                        <label class="form-check-label" for="flexRadioDefault0">
+                                                            รายงานวัสดุคงเหลือ
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="1" id="flexRadioDefault1">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            รายงานวัสดุหมด
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="2" id="flexRadioDefault2">
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            รายการรับเข้า
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="3" id="flexRadioDefault3">
+                                                        <label class="form-check-label" for="flexRadioDefault3">
+                                                            รายงานเบิกวัสดุแยกตามประเภท
+                                                        </label>
+                                                    </div>
 
+                                                    <div class="form-check mt-3 mb-3" id="categories-type">
+                                                        <select class="form-select" name="categories_type"
+                                                            id="categories_type" aria-label="Default select example"
+                                                            required>
+                                                            <option selected disabled>เลือกประเภท</option>
+                                                            @foreach ($categories_type as $cate)
+                                                                <option value="{{ $cate->id }}">
+                                                                    {{ $cate->category_name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="4" id="flexRadioDefault4">
+                                                        <label class="form-check-label" for="flexRadioDefault4">
+                                                            รายงานเบิกวัสดุแยกตามหน่วยงาน
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check mt-3 mb-3" id="department-type">
+                                                        <select class="form-select" name="department_type"
+                                                            id="department_type" aria-label="Default select example">
+                                                            <option selected disabled>เลือกหน่วยงาน</option>
+                                                            @foreach ($department_type as $dep)
+                                                                <option value="{{ $dep->id }}">
+                                                                    {{ $dep->department_name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="5" id="flexRadioDefault5">
+                                                        <label class="form-check-label" for="flexRadioDefault5">
+                                                            รายงานเบิกตามชื่อ
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check mt-3 mb-3" id="users-type">
+                                                        <select class="form-select" name="users_type" id="users_type"
+                                                            aria-label="Default select example">
+                                                            <option selected disabled>เลือกชื่อ</option>
+
+
+                                                            @foreach ($users_type as $user)
+                                                                <option value="{{ $user->id }}">
+                                                                    {{ $user->prefix }} {{ $user->first_name }}
+                                                                    {{ $user->last_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="6" id="flexRadioDefault6">
+                                                        <label class="form-check-label" for="flexRadioDefault6">
+                                                            รายงานเบิกทั้งหมด
+                                                        </label>
+                                                    </div>
+                                                @endif
+
+                                            </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">รายงาน</button>
                                     </form>
+
                                 </div>
 
                             </div>
