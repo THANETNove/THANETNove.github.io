@@ -12,8 +12,8 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">ข้อมูลครุภัณฑ์</h1>
-                                <a href="{{ url('durable-articles-export/pdf') }}" target="_blank"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลครุภัณฑ์</a>
+                                {{--   <a href="{{ url('durable-articles-export/pdf') }}" target="_blank"
+                                    class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลครุภัณฑ์</a> --}}
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif

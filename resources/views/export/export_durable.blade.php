@@ -30,97 +30,124 @@
                                                 <input type="text" class="form-control date-created_at" name="end_date"
                                                     id="end_date" placeholder="yyyy-mm-dd" required>
                                             </div>
-                                            <div class="mb-4 mt-3">
+                                            <div class="mb-4 mt-3 row">
                                                 @if (Auth::user()->status >= 1)
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="radio" name="search"
-                                                            value="0" id="flexRadioDefault0" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault0">
-                                                            รายงานครุภัณฑ์คงเหลือ
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="radio" name="search"
-                                                            value="1" id="flexRadioDefault1">
-                                                        <label class="form-check-label" for="flexRadioDefault1">
-                                                            รายงานครุภัณฑ์หมด
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="radio" name="search"
-                                                            value="2" id="flexRadioDefault2">
-                                                        <label class="form-check-label" for="flexRadioDefault2">
-                                                            รายการรับเข้า
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="radio" name="search"
-                                                            value="3" id="flexRadioDefault3">
-                                                        <label class="form-check-label" for="flexRadioDefault3">
-                                                            รายงานเบิกครุภัณฑ์แยกตามประเภท
-                                                        </label>
-                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="0" id="flexRadioDefault0" checked>
+                                                            <label class="form-check-label" for="flexRadioDefault0">
+                                                                รายงานครุภัณฑ์คงเหลือ
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="1" id="flexRadioDefault1">
+                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                                รายงานครุภัณฑ์หมด
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="2" id="flexRadioDefault2">
+                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                                รายการรับเข้า
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="3" id="flexRadioDefault3">
+                                                            <label class="form-check-label" for="flexRadioDefault3">
+                                                                รายงานเบิกครุภัณฑ์แยกตามประเภท
+                                                            </label>
+                                                        </div>
 
-                                                    <div class="form-check mt-3 mb-3" id="categories-type">
-                                                        <select class="form-select" name="categories_type"
-                                                            id="categories_type" aria-label="Default select example"
-                                                            required>
-                                                            <option selected disabled>เลือกประเภท</option>
-                                                            @foreach ($categories_type as $cate)
-                                                                <option value="{{ $cate->id }}">
-                                                                    {{ $cate->category_name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="radio" name="search"
-                                                            value="4" id="flexRadioDefault4">
-                                                        <label class="form-check-label" for="flexRadioDefault4">
-                                                            รายงานเบิกครุภัณฑ์
-                                                            แยกตามหน่วยงาน
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check mt-3 mb-3" id="department-type">
-                                                        <select class="form-select" name="department_type"
-                                                            id="department_type" aria-label="Default select example">
-                                                            <option selected disabled>เลือกหน่วยงาน</option>
-                                                            @foreach ($department_type as $dep)
-                                                                <option value="{{ $dep->id }}">
-                                                                    {{ $dep->department_name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="radio" name="search"
-                                                            value="5" id="flexRadioDefault5">
-                                                        <label class="form-check-label" for="flexRadioDefault5">
-                                                            รายงานเบิกตามชื่อ
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check mt-3 mb-3" id="users-type">
-                                                        <select class="form-select" name="users_type" id="users_type"
-                                                            aria-label="Default select example">
-                                                            <option selected disabled>เลือกชื่อ</option>
+                                                        <div class="form-check mt-3 mb-3" id="categories-type">
+                                                            <select class="form-select" name="categories_type"
+                                                                id="categories_type" aria-label="Default select example"
+                                                                required>
+                                                                <option selected disabled>เลือกประเภท</option>
+                                                                @foreach ($categories_type as $cate)
+                                                                    <option value="{{ $cate->id }}">
+                                                                        {{ $cate->category_name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
 
 
-                                                            @foreach ($users_type as $user)
-                                                                <option value="{{ $user->id }}">
-                                                                    {{ $user->prefix }} {{ $user->first_name }}
-                                                                    {{ $user->last_name }}</option>
-                                                            @endforeach
-                                                        </select>
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="4" id="flexRadioDefault4">
+                                                            <label class="form-check-label" for="flexRadioDefault4">
+                                                                รายงานเบิกครุภัณฑ์
+                                                                แยกตามหน่วยงาน
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mt-3 mb-3" id="department-type">
+                                                            <select class="form-select" name="department_type"
+                                                                id="department_type" aria-label="Default select example">
+                                                                <option selected disabled>เลือกหน่วยงาน</option>
+                                                                @foreach ($department_type as $dep)
+                                                                    <option value="{{ $dep->id }}">
+                                                                        {{ $dep->department_name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="5" id="flexRadioDefault5">
+                                                            <label class="form-check-label" for="flexRadioDefault5">
+                                                                รายงานเบิกตามชื่อ
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mt-3 mb-3" id="users-type">
+                                                            <select class="form-select" name="users_type" id="users_type"
+                                                                aria-label="Default select example">
+                                                                <option selected disabled>เลือกชื่อ</option>
+
+
+                                                                @foreach ($users_type as $user)
+                                                                    <option value="{{ $user->id }}">
+                                                                        {{ $user->prefix }} {{ $user->first_name }}
+                                                                        {{ $user->last_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
 
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="radio" name="search"
-                                                            value="6" id="flexRadioDefault6">
-                                                        <label class="form-check-label" for="flexRadioDefault6">
-                                                            รายงานเบิกทั้งหมด
-                                                        </label>
+
+                                                    <div class="col-6">
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="6" id="flexRadioDefault6">
+                                                            <label class="form-check-label" for="flexRadioDefault6">
+                                                                รายงานเบิกทั้งหมด
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="7" id="flexRadioDefault7">
+                                                            <label class="form-check-label" for="flexRadioDefault7">
+                                                                รายงานครุภัณฑ์ที่ชำรุด
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="8" id="flexRadioDefault8">
+                                                            <label class="form-check-label" for="flexRadioDefault8">
+                                                                รายงานครุภัณฑ์ที่ซ่อม
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="9" id="flexRadioDefault9">
+                                                            <label class="form-check-label" for="flexRadioDefault9">
+                                                                รายงานครุภัณฑ์ที่แทงจำหน่าย
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 @endif
 

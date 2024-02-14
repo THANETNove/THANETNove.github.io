@@ -27,15 +27,12 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
-                                                <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>รหัสครุภัณฑ์</th>
+                                                <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
+                                                <th>รายละเอียดครุภัณฑ์ </th>
                                                 <th>จำนวนที่ชำรุด</th>
                                                 <th>หน่วยนับ</th>
-                                                {{--  @if (Auth::user()->status != '0')
-                                                    <th>ชื่อ นามสกุล ผู้แจ้ง </th>
-                                                @endif --}}
-                                                <th>สถานะ </th>
                                                 <th>รายละเอียด</th>
                                                 <th>วันที่สร้าง</th>
                                             </tr>
@@ -47,25 +44,17 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->category_name }}</td>
+
                                                     <td>{{ $da->code_durable_articles }}</td>
+
+                                                    <td>{{ $da->category_name }}</td>
+                                                    <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td class="td-center">{{ $da->amount_damaged }}</td>
-                                                    <td class="td-center">{{ $da->name_durable_articles_count }}</td>
-                                                    {{--  @if (Auth::user()->status != '0')
-                                                        <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
-                                                        </td>
-                                                    @endif --}}
-                                                    <td class="td-center">
-                                                        @if ($da->status == '0')
-                                                            <span class="badge bg-label-success me-1">ชำรุด</span>
-                                                        @elseif ($da->status == '1')
-                                                            <span class="badge bg-label-warning me-1">ยกเลิก</span>
-                                                        @endif
-                                                    </td>
+                                                    <td>{{ $da->amount_damaged }}</td>
+                                                    <td>{{ $da->name_durable_articles_count }}</td>
                                                     <td>{{ $da->damaged_detail }}</td>
-                                                    <td class="td-center">
-                                                        {{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+
                                                 </tr>
                                             @endforeach
                                         </tbody>

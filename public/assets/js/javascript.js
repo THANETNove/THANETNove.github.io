@@ -1396,6 +1396,24 @@ $("#flexRadioDefault6").on("click", function () {
     popup3.style.display = "none";
     popup4.style.display = "none";
 });
+$("#flexRadioDefault7").on("click", function () {
+    numberClick = 7;
+    popup2.style.display = "none";
+    popup3.style.display = "none";
+    popup4.style.display = "none";
+});
+$("#flexRadioDefault8").on("click", function () {
+    numberClick = 8;
+    popup2.style.display = "none";
+    popup3.style.display = "none";
+    popup4.style.display = "none";
+});
+$("#flexRadioDefault9").on("click", function () {
+    numberClick = 9;
+    popup2.style.display = "none";
+    popup3.style.display = "none";
+    popup4.style.display = "none";
+});
 
 $("#exportFrom").submit(function (event) {
     if (numberClick == "3") {

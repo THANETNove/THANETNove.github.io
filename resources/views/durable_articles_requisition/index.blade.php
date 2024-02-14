@@ -11,8 +11,8 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">เบิกครุภัณฑ์</h1>
-                                <button {{-- href="{{ url('durable-articles-requisition-export/pdf') }}" target="_blank" --}} data-bs-toggle="modal" data-bs-target="#exampleModalBuy"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกครุภัณฑ์</button>
+                                {{-- <button href="{{ url('durable-articles-requisition-export/pdf') }}" target="_blank" data-bs-toggle="modal" data-bs-target="#exampleModalBuy"
+                                    class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกครุภัณฑ์</button> --}}
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif

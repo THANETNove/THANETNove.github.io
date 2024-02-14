@@ -12,8 +12,8 @@
 
                             <div class="card-body">
                                 <h1 class="card-title text-primary ">รายการข้อมูลเข้า</h1>
-                                <button {{-- href="{{ url('buy-export/pdf') }}" target="_blank"  --}} data-bs-toggle="modal" data-bs-target="#exampleModalBuy"
-                                    class="btn rounded-pill btn-outline-info mb-3">รายการข้อมูลเข้า</button>
+                                {{--  <button href="{{ url('buy-export/pdf') }}" target="_blank"  data-bs-toggle="modal" data-bs-target="#exampleModalBuy"
+                                    class="btn rounded-pill btn-outline-info mb-3">รายการข้อมูลเข้า</button> --}}
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif
@@ -136,7 +136,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">รายการข้อมูลเข้า</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    {{--    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
                 </div>
                 <div class="modal-body">
                     <form method="POST" action="{{ route('buy-export/pdf') }}" target="_blank">
