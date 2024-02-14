@@ -128,6 +128,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('durable-articles-store', [DurableArticlesController::class, 'store'])->name('durable-articles-store');
     Route::post('durable-articles-index', [DurableArticlesController::class, 'index'])->name('durable-articles-index');
     Route::get('durable-articles-edit/{id}', [DurableArticlesController::class, 'edit'])->name('durable-articles-edit');
+    Route::get('durable-articles-show/{id}', [DurableArticlesController::class, 'show'])->name('durable-articles-show');
     Route::put('durable-articles-update/{id}', [DurableArticlesController::class, 'update'])->name('durable-articles-update');
     Route::get('get-type-categories/{id}', [DurableArticlesController::class, 'getTypeCategories'])->name('get-type-categories');
     Route::get('durable-articles-export/pdf', [DurableArticlesController::class, 'exportPDF'])->name('durable-articles-export/pdf');

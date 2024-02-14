@@ -116,8 +116,8 @@ class DurableArticlesController extends Controller
         $data->description = $request['description'];
         $data->group_count = $countDurable;
         $data->durableArticles_name = $request['durableArticles_name'];
-        $data->durableArticles_number = $request['durableArticles_number'];
-        $data->remaining_amount = $request['durableArticles_number'];
+        $data->durableArticles_number = "1";
+        $data->remaining_amount = "1";
         $data->name_durableArticles_count = $request['name_durableArticles_count'];
         $data->code_material_storage = $request['code_material_storage'];
         $data->warranty_period = $request['warranty_period'];
@@ -137,7 +137,15 @@ class DurableArticlesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = DB::table('durable_articles')
+        ->where('durable_articles.id',$id)
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->get();
+        return view('durable_articles.show',['data' =>   $data ]);
+
     }
 
     /**

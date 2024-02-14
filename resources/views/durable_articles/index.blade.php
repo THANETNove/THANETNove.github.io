@@ -27,14 +27,14 @@
                                                 <th>ประเภทครุภัณฑ์</th>
                                                 <th>ชื่อ</th>
                                                 <th>รายละเอียด</th>
-                                                <th>จำนวน</th>
+                                                {{--  <th>จำนวน</th>
                                                 <th>จำนวนที่เบิกได้</th>
                                                 <th>ชำรุด</th>
                                                 <th>แทงจำหน่าย</th>
                                                 <th>ซ่อม</th>
                                                 <th>ค่าเสื่อม</th>
                                                 <th>หน่วย</th>
-                                                <th>ที่จัดเก็บ</th>
+                                                <th>ที่จัดเก็บ</th> --}}
                                                 <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
 
@@ -53,7 +53,7 @@
                                                         <td>{{ $da->category_name }}</td>
                                                         <td>{{ $da->type_name }}</td>
                                                         <td>{{ $da->durableArticles_name }}</td>
-                                                        <td>{{ number_format($da->durableArticles_number) }}</td>
+                                                        {{--  <td>{{ number_format($da->durableArticles_number) }}</td>
                                                         <td>{{ number_format($da->remaining_amount) }}</td>
                                                         <td>{{ number_format($da->damaged_number) }}</td>
                                                         <td>{{ number_format($da->bet_on_distribution_number) }}</td>
@@ -61,7 +61,7 @@
                                                         <td>{{ number_format($da->depreciation_price) }}</td>
                                                         <td>{{ $da->name_durableArticles_count }}</td>
                                                         <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
-                                                            {{ $da->room_name }}</td>
+                                                            {{ $da->room_name }}</td> --}}
                                                         <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                         <td>
                                                             <div class="dropdown">
@@ -71,6 +71,9 @@
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ url('durable-articles-show', $da->id) }}"><i
+                                                                            class='bx bxs-show'></i>View</a>
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('durable-articles-edit', $da->id) }}">
                                                                         <i class="bx bx-edit-alt me-1"></i> Edit
