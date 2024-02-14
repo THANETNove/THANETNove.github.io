@@ -199,7 +199,7 @@ class HomeController extends Controller
                 $data =  $data->where('users.id', $request["users_type"]);
             }
             if ($search == 6 ) {
-                $name_export = "รายงานเบิกทั้งหมด";
+                $name_export = "รายงานเบิกวัสดุทั้งหมด";
                 $type = 6;
             }
 
@@ -337,7 +337,7 @@ class HomeController extends Controller
             $data =  $data->where('users.id', $request["users_type"]);
         }
         if ($search == 6 ) {
-            $name_export = "รายงานเบิกทั้งหมด";
+            $name_export = "รายงานเบิกครุภัณฑ์ทั้งหมด";
             $type = 6;
         }
         $data =$data->get();
