@@ -49,7 +49,7 @@
                                                         <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                     @endif
                                                 @endif
-                                                @if ($type != 5 && $type != 4)
+                                                @if ($type != 5 && $type != 4 && Auth::user()->status != '0')
                                                     <th>เเผนก </th>
                                                 @endif
                                                 <th>วันที่เบิก </th>
@@ -76,7 +76,7 @@
                                                             </td>
                                                         @endif
                                                     @endif
-                                                    @if ($type != 5 && $type != 4)
+                                                    @if ($type != 5 && $type != 4 && Auth::user()->status != '0')
                                                         <td>
                                                             {{ $da->department_name }}
                                                         </td>

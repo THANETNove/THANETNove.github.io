@@ -72,44 +72,46 @@
                                                     </select>
                                                 </div>
 
+                                                @if (Auth::user()->status >= 1)
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="4" id="flexRadioDefault4">
+                                                        <label class="form-check-label" for="flexRadioDefault4">
+                                                            รายงานเบิกวัสดุแยกตามหน่วยงาน
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check mt-3 mb-3" id="department-type">
+                                                        <select class="form-select" name="department_type"
+                                                            id="department_type" aria-label="Default select example">
+                                                            <option selected disabled>เลือกหน่วยงาน</option>
+                                                            @foreach ($department_type as $dep)
+                                                                <option value="{{ $dep->id }}">
+                                                                    {{ $dep->department_name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="5" id="flexRadioDefault5">
+                                                        <label class="form-check-label" for="flexRadioDefault5">
+                                                            รายงานเบิกตามชื่อ
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check mt-3 mb-3" id="users-type">
+                                                        <select class="form-select" name="users_type" id="users_type"
+                                                            aria-label="Default select example">
+                                                            <option selected disabled>เลือกชื่อ</option>
 
-                                                <div class="form-check mb-3">
-                                                    <input class="form-check-input" type="radio" name="search"
-                                                        value="4" id="flexRadioDefault4">
-                                                    <label class="form-check-label" for="flexRadioDefault4">
-                                                        รายงานเบิกวัสดุแยกตามหน่วยงาน
-                                                    </label>
-                                                </div>
-                                                <div class="form-check mt-3 mb-3" id="department-type">
-                                                    <select class="form-select" name="department_type" id="department_type"
-                                                        aria-label="Default select example">
-                                                        <option selected disabled>เลือกหน่วยงาน</option>
-                                                        @foreach ($department_type as $dep)
-                                                            <option value="{{ $dep->id }}">{{ $dep->department_name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-check mb-3">
-                                                    <input class="form-check-input" type="radio" name="search"
-                                                        value="5" id="flexRadioDefault5">
-                                                    <label class="form-check-label" for="flexRadioDefault5">
-                                                        รายงานเบิกตามชื่อ
-                                                    </label>
-                                                </div>
-                                                <div class="form-check mt-3 mb-3" id="users-type">
-                                                    <select class="form-select" name="users_type" id="users_type"
-                                                        aria-label="Default select example">
-                                                        <option selected disabled>เลือกชื่อ</option>
 
-
-                                                        @foreach ($users_type as $user)
-                                                            <option value="{{ $user->id }}">
-                                                                {{ $user->prefix }} {{ $user->first_name }}
-                                                                {{ $user->last_name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                                            @foreach ($users_type as $user)
+                                                                <option value="{{ $user->id }}">
+                                                                    {{ $user->prefix }} {{ $user->first_name }}
+                                                                    {{ $user->last_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                @endif
                                                 <div class="form-check mb-3">
                                                     <input class="form-check-input" type="radio" name="search"
                                                         value="6" id="flexRadioDefault6">

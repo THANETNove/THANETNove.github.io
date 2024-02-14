@@ -197,7 +197,10 @@ class HomeController extends Controller
                 $name_export = "รายงานเบิก "." ".$users_name[0]->prefix." ".$users_name[0]->first_name ." ".$users_name[0]->last_name;
                 $data =  $data->where('users.id', $request["users_type"]);
             }
-
+            if ($search == 6 ) {
+                $name_export = "รายงานเบิกทั้งหมด";
+                $type = 6;
+            }
 
 
             $pdf = PDF::loadView('material_requisition.exportPDF',['data' =>  $data->get(),'date_export' => $date_export,'name_export' => $name_export ,'type' => $type]);
