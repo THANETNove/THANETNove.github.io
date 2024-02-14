@@ -64,17 +64,18 @@
                                                     </td>
 
                                                     <td>
-                                                        @if ($da->status == 'on')
-                                                            <div class="dropdown">
-                                                                <button type="button"
-                                                                    class="btn p-0 dropdown-toggle hide-arrow"
-                                                                    data-bs-toggle="dropdown">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('material-requisition-show', $da->id) }}"><i
-                                                                            class='bx bxs-show'></i>View</a>
+
+                                                        <div class="dropdown">
+                                                            <button type="button"
+                                                                class="btn p-0 dropdown-toggle hide-arrow"
+                                                                data-bs-toggle="dropdown">
+                                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item"
+                                                                    href="{{ url('material-requisition-show', $da->id) }}"><i
+                                                                        class='bx bxs-show'></i>View</a>
+                                                                @if ($da->status == 'on')
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('material-requisition-edit', $da->id) }}"><i
                                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
@@ -83,10 +84,10 @@
                                                                             href="{{ url('material-requisition-destroy', $da->id) }}"><i
                                                                                 class="bx bx-trash me-1"></i> ยกเลิก</a>
                                                                     @endif
-
-                                                                </div>
+                                                                @endif
                                                             </div>
-                                                        @endif
+                                                        </div>
+
                                                     </td>
                                                 </tr>
                                             @endforeach

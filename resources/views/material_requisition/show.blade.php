@@ -12,27 +12,47 @@
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="prefix" class="form-label">หมวดวัสดุ</label>
-                                <p>{{ $data[0]->category_name }}</p>
+                                <input type="text" class="form-control" value="{{ $data[0]->category_name }}">
+
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="prefix" class="form-label">รหัสวัสดุ</label>
-                                <p>{{ $data[0]->code_requisition }}</p>
+                                <input type="text" class="form-control" value="{{ $data[0]->code_requisition }}">
+
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="prefix" class="form-label">ชื่อ </label>
-                                <p>{{ $data[0]->name }}</p>
+                                <input type="text" class="form-control" value="{{ $data[0]->name }}">
+
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="prefix" class="form-label">จำนวนที่เบิก </label>
-                                <p>{{ number_format($data[0]->amount_withdraw) }}</p>
+                                <input type="text" class="form-control"
+                                    value="{{ number_format($data[0]->amount_withdraw) }}">
+
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="prefix" class="form-label">หน่วยนับ </label>
-                                <p>{{ $data[0]->name_material_count }}</p>
+                                <input type="text" class="form-control" value="{{ $data[0]->name_material_count }}">
+
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="prefix" class="form-label">ชื่อ นามสกุล ผู้เบิก </label>
-                                <p>{{ $data[0]->prefix }} {{ $data[0]->first_name }} {{ $data[0]->last_name }}</p>
+                                <input type="text" class="form-control"
+                                    value="{{ $data[0]->prefix }} {{ $data[0]->first_name }} {{ $data[0]->last_name }}">
+
+                            </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="prefix" class="form-label">ที่จัดเก็บ</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $data[0]->building_name }} &nbsp;{{ $data[0]->floor }} &nbsp;{{ $data[0]->room_name }}</textarea>
+
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="prefix" class="form-label">วันที่สร้าง</label>
+
+                                <input type="text" class="form-control"
+                                    value="{{ (new Carbon\Carbon($data[0]->created_at))->format('d-m-Y') }}">
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="prefix" class="form-label">สถานะ</label>
@@ -44,21 +64,6 @@
                                     @endif
                                 </p>
                             </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="prefix" class="form-label">ที่จัดเก็บ</label>
-                                <p>
-                                <p>{{ $data[0]->building_name }} &nbsp;{{ $data[0]->floor }} &nbsp;
-                                    {{ $data[0]->room_name }}</p>
-                                </p>
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="prefix" class="form-label">วันที่สร้าง</label>
-                                <p>{{ (new Carbon\Carbon($data[0]->created_at))->format('d-m-Y') }}</p>
-                            </div>
-
-
-
-
                         </div>
                     </div>
                 </div>
