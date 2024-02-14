@@ -58,6 +58,7 @@ Route::get('material-requisition-edit/{id}', [MaterialRequisitionController::cla
 Route::put('material-requisition-update/{id}', [MaterialRequisitionController::class, 'update'])->name('material-requisition-update');
 Route::get('material-requisition-destroy/{id}', [MaterialRequisitionController::class, 'destroy'])->name('material-requisition-destroy');
 Route::post('material-requisition-export/pdf', [MaterialRequisitionController::class, 'exportPDF'])->name('material-requisition-export/pdf');
+Route::get('material-requisition-show/{id}', [MaterialRequisitionController::class, 'show'])->name('material-requisition-show');
 
 //ระบบเบิกครุภัณฑ์
 Route::get('durable-articles-requisition-index', [DurableArticlesRequisitionController::class, 'index'])->name('durable-articles-requisition-index');

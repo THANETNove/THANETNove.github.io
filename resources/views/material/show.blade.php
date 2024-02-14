@@ -7,7 +7,7 @@
 
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title text-primary ">รายละเอียดระบบลงทะเบียนวัสดุ</h1>
+                        <h1 class="card-title text-primary mb-5 ">รายละเอียดระบบลงทะเบียนวัสดุ</h1>
 
                         <div class="row">
                             <div class="mb-3 col-md-6">

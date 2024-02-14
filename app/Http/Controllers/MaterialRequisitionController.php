@@ -113,7 +113,18 @@ class MaterialRequisitionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = DB::table('material_requisitions')
+        ->where('material_requisitions.id', $id)
+        ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
+       ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
+         ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
+        ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
+        'materials.material_name as name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->get();
+
+        return view('material_requisition.show',['data' => $data]);
+
     }
 
     /**

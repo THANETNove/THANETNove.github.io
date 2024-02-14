@@ -31,7 +31,7 @@
                                                 @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                 @endif
-                                                <th>ที่เก็บ </th>
+                                                {{-- <th>ที่เก็บ </th> --}}
                                                 <th>สถานะ </th>
                                                 <th>Actions</th>
 
@@ -53,8 +53,8 @@
                                                         <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
                                                         </td>
                                                     @endif
-                                                    <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
-                                                        {{ $da->room_name }}</td>
+                                                    {{--  <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
+                                                        {{ $da->room_name }}</td> --}}
                                                     <td>
                                                         @if ($da->status == 'on')
                                                             <span class="badge bg-label-success me-1">เบิกวัสดุ</span>
@@ -72,7 +72,9 @@
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ url('material-requisition-show', $da->id) }}"><i
+                                                                            class='bx bxs-show'></i>View</a>
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('material-requisition-edit', $da->id) }}"><i
                                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
