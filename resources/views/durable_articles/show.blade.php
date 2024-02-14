@@ -11,31 +11,38 @@
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">รหัส </label>
-                                <p>{{ $data[0]->category_code }}-{{ $data[0]->type_code }}-{{ $data[0]->description }}-{{ $data[0]->group_count }}
-                                </p>
+                                <input type="text" class="form-control"
+                                    value="{{ $data[0]->category_code }}-{{ $data[0]->type_code }}-{{ $data[0]->description }}-{{ $data[0]->group_count }}">
+
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">ประเภทครุภัณฑ์ </label>
-                                <p>{{ $data[0]->category_name }}</p>
+                                <input type="text" class="form-control" value="{{ $data[0]->category_name }}">
+
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">ชื่อ </label>
-                                <p>{{ $data[0]->type_name }}</p>
+                                <input type="text" class="form-control" value="{{ $data[0]->type_name }}">
+
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">หน่วย </label>
-                                <p>{{ $data[0]->name_durableArticles_count }}</p>
+                                <input type="text" class="form-control"
+                                    value="{{ $data[0]->name_durableArticles_count }}">
+
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">ที่จัดเก็บ </label>
-                                <p>{{ $data[0]->building_name }} &nbsp;{{ $data[0]->floor }} &nbsp;
-                                    {{ $data[0]->room_name }}</p>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $data[0]->building_name }} &nbsp;{{ $data[0]->floor }} &nbsp;{{ $data[0]->room_name }}</textarea>
+
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">วันที่สร้าง </label>
                                 <p>{{ date('d-m-Y', strtotime($data[0]->created_at)) }}</p>
+                                <input type="text" class="form-control"
+                                    value="{{ date('d-m-Y', strtotime($data[0]->created_at)) }}">
                             </div>
-                            <div class="table-responsive text-nowrap">
+                            <div class="table-responsive text-nowrap mt-3">
                                 <table class="table">
                                     <thead>
                                         <tr>

@@ -27,17 +27,18 @@
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
                                                 <th>รายละเอียดครุภัณฑ์</th>
-                                                <th>จำนวนที่เบิก</th>
+                                                {{--         <th>จำนวนที่เบิก</th>
                                                 <th>หน่วยนับ </th>
 
                                                 @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                 @endif
-                                                <th>ระยะประกัน </th>
-                                                <th>วันที่เบิก </th>
+                                                <th>ระยะประกัน </th> --}}
+
                                                 <th>การอนุมัติ </th>
                                                 <th>สถานะ </th>
-                                                <th>ที่เก็บ </th>
+                                                {{--   <th>ที่เก็บ </th> --}}
+                                                <th>วันที่เบิก </th>
                                                 <th>Actions</th>
 
                                             </tr>
@@ -53,7 +54,7 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->amount_withdraw }}</td>
+                                                    {{-- <td>{{ $da->amount_withdraw }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
                                                     @if (Auth::user()->status != '0')
                                                         <td>{{ $da->prefix }} {{ $da->first_name }}
@@ -82,8 +83,8 @@
                                                             @endif
                                                         @endif
 
-                                                    </td>
-                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+                                                    </td> --}}
+
                                                     <td>
                                                         @if ($da->status == '0')
                                                             @if ($da->statusApproval == '0')
@@ -107,8 +108,9 @@
                                                             <span class="badge bg-label-primary me-1">คึนครุภัณฑ์</span>
                                                         @endif
                                                     </td>
-                                                    <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
-                                                        {{ $da->room_name }}</td>
+                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+                                                    {{--  <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
+                                                        {{ $da->room_name }}</td> --}}
 
                                                     <td>
 
@@ -131,7 +133,7 @@
                                                                         href="{{ url('durable-articles-requisition-destroy', $da->id) }}"><i
                                                                             class="bx bx-trash me-1"></i> ยกเลิก</a>
                                                                 @endif
-                                                                {{--  @if ($da->statusApproval == '1' && $da->status == '0')
+                                                                @if ($da->statusApproval == '1' && $da->status == '0')
                                                                     @if (Auth::user()->status > '1')
                                                                         <a class="dropdown-item alert-destroy"
                                                                             href="{{ url('durable-articles-requisition-return', $da->id) }}">
@@ -139,7 +141,7 @@
                                                                             <i class='bx bxs-send'></i>
                                                                             คึนครุภัณฑ์</a>
                                                                     @endif
-                                                                @endif --}}
+                                                                @endif
                                                             </div>
                                                         </div>
 
