@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
 use PDF;
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 
@@ -54,6 +56,10 @@ class PersonnelController extends Controller
 
         return view('personnel.index',['data' => $data]);
 
+    }
+
+    public function personnel()  {
+        return view('export.personnel');
     }
 
     /**
@@ -184,9 +190,13 @@ class PersonnelController extends Controller
 
     public function exportPDF()
     {
+        $name_export = "รายงานข้อมูลบุคลากร";
+        $date_export = Carbon::parse()->locale('th');
+        $date_export = $date_export->addYears(543)->translatedFormat('d F Y');
+
 
         $data = DB::table('users')->get();
-        $pdf = PDF::loadView('personnel.exportPDF',['data' =>  $data]);
+        $pdf = PDF::loadView('personnel.exportPDF',['data' =>  $data,'name_export' => $name_export,'date_export' => $date_export]);
         $pdf->setPaper('a4');
        return $pdf->stream('exportPDF.pdf');
 

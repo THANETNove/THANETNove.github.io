@@ -475,6 +475,12 @@ if (targetUrls === "return-item-index") {
 if (targetUrls === "report-material") {
     setActiveClass("report-ex", "report-material");
 }
+if (targetUrls === "personnel-export") {
+    setActiveClass("report-ex", "personnel-export");
+}
+if (targetUrls === "storage-export") {
+    setActiveClass("report-ex", "storage-export");
+}
 if (targetUrls === "report-durable") {
     setActiveClass("report-ex", "report-durable");
 }

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use DB;
 use PDF;
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
 
 class StorageLocationController extends Controller
 {
@@ -46,6 +48,10 @@ class StorageLocationController extends Controller
     public function create()
     {
         return view('storage_location.create');
+    }
+    public function storage()
+    {
+        return view('export.storage');
     }
 
     /**
@@ -122,8 +128,12 @@ class StorageLocationController extends Controller
     }
     public function exportPDF()
     {
+        $name_export = "รายงานสถานที่จัดเก็บ";
+        $date_export = Carbon::parse()->locale('th');
+        $date_export = $date_export->addYears(543)->translatedFormat('d F Y');
+
          $data = DB::table('storage_locations')->get();
-        $pdf = PDF::loadView('storage_location.exportPDF',['data' =>  $data]);
+        $pdf = PDF::loadView('storage_location.exportPDF',['data' =>  $data,'name_export' =>$name_export ,'date_export' => $date_export]);
         $pdf->setPaper('a4');
         return $pdf->stream('exportPDF.pdf');
 

@@ -5,7 +5,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>รายงานข้อมูลสถานที่</title>
+    <title>{{ $name_export }}</title>
     <meta http-equiv="Content-Language" content="th" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -30,12 +30,19 @@
 
                             @endphp
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">รายงานพนักงาน</h1>
-                                {{--  <p class="mt--16">จำนวนผู้เบิก &nbsp; {{ $count0 }} &nbsp; คน</p> --}}
-                                <p class="mt--16">จำนวนหัวหน้าวัสดุ &nbsp; {{ $count2 }} &nbsp; คน</p>
-                                <p class="mt--16">จำนวนเจ้าหน้าที่วัสดุ &nbsp; {{ $count1 }} &nbsp; คน</p>
-                                <p class="mt--16">จำนวนพนักงาน &nbsp; {{ $countOn }} &nbsp; คน</p>
-                                <p class="mt--16">จำนวนพนักงานพ้นสภาพ &nbsp; {{ $countOff }} &nbsp; คน</p>
+                                <h1 class="card-title text-primary td-center">
+                                    ศูนย์ปฏิบัติการ อบต.บางเเม่นาง อ.บางใหญ่ จ.นนทบุรี
+                                </h1>
+                                <h1 class="card-title text-primary td-center">
+                                    {{ $name_export }}
+                                </h1>
+                                <h1 class="card-title text-primary td-center mt-32">
+                                    ณ วันที่ {{ $date_export }}
+                                </h1>
+                                {{--   <p>จำนวนหัวหน้าวัสดุ &nbsp; {{ $count2 }} &nbsp; คน</p>
+                                <p>จำนวนเจ้าหน้าที่วัสดุ &nbsp; {{ $count1 }} &nbsp; คน</p>
+                                <p>จำนวนพนักงาน &nbsp; {{ $countOn }} &nbsp; คน</p>
+                                <p>จำนวนพนักงานพ้นสภาพ &nbsp; {{ $countOff }} &nbsp; คน</p> --}}
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>

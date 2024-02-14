@@ -29,9 +29,15 @@
 
                             @endphp
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">สถานที่จัดเก็บ</h1>
-                                <p class="mt--16">จำนวนสถานะที่เปิดใช้งาน {{ $countOn }}</p>
-                                <p class="mt--16">จำนวนสถานะที่ปิดใช้งาน {{ $countOff }}</p>
+                                <h1 class="card-title text-primary td-center">
+                                    ศูนย์ปฏิบัติการ อบต.บางเเม่นาง อ.บางใหญ่ จ.นนทบุรี
+                                </h1>
+                                <h1 class="card-title text-primary td-center">
+                                    {{ $name_export }}
+                                </h1>
+                                <h1 class="card-title text-primary td-center mt-32">
+                                    ณ วันที่ {{ $date_export }}
+                                </h1>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>

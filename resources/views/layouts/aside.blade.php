@@ -65,6 +65,16 @@
             </a>
             <ul class="menu-sub">
 
+                <li class="menu-item" id="personnel-export">
+                    <a href="{{ url('personnel-export') }}" class="menu-link">
+                        <div data-i18n="Notifications">รายงานข้อมูลบุคลากร</div>
+                    </a>
+                </li>
+                <li class="menu-item" id="storage-export">
+                    <a href="{{ url('storage-export') }}" class="menu-link">
+                        <div data-i18n="Notifications">รายงานสถานที่จัดเก็บ</div>
+                    </a>
+                </li>
                 <li class="menu-item" id="report-material">
                     <a href="{{ url('report-material') }}" class="menu-link">
                         <div data-i18n="Notifications">รายงานวัสดุ</div>

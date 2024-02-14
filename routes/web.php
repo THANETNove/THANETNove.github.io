@@ -95,7 +95,8 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::put('storage-update/{id}', [StorageLocationController::class, 'update'])->name('storage-update');
     Route::get('storage-destroy/{id}', [StorageLocationController::class, 'destroy'])->name('storage-destroy');
     Route::get('storage-update-status/{id}', [StorageLocationController::class, 'updateStatus'])->name('storage-update-status');
-    Route::get('storage-export/pdf', [StorageLocationController::class, 'exportPDF'])->name('export/pdf');
+    Route::get('storage-export/pdf', [StorageLocationController::class, 'exportPDF'])->name('storage-export/pdf');
+    Route::get('storage-export', [StorageLocationController::class, 'storage'])->name('storage-export');
 
 
     Route::get('personnel-index', [PersonnelController::class, 'index'])->name('personnel-index');
@@ -107,6 +108,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::put('personnel-update/{id}', [PersonnelController::class, 'update'])->name('personnel-update');
     Route::get('personnel-destroy/{id}', [PersonnelController::class, 'destroy'])->name('personnel-destroy');
     Route::get('personnel-update-status/{id}', [PersonnelController::class, 'updateStatus'])->name('personnel-update-status');
+    Route::get('personnel-export', [PersonnelController::class, 'personnel'])->name('personnel-export');
     Route::get('personnel-export/pdf', [PersonnelController::class, 'exportPDF'])->name('personnel-export/pdf');
 
     Route::get('material-index', [MaterialController::class, 'index'])->name('material-index');
