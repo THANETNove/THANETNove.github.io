@@ -102,7 +102,13 @@ class HomeController extends Controller
         $date_export = Carbon::parse()->locale('th');
         $date_export = $date_export->addYears(543)->translatedFormat('d F Y');
 
-        $search = $request["search"];
+        if (Auth::user()->status == "0") {
+            $search = 6;
+        } else {
+            $search = $request["search"];
+        }
+
+
 
 
         if ($search == 0) {  //รายงานวัสดุคงเหลือ

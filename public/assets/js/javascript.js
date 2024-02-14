@@ -1364,6 +1364,7 @@ $("#flexRadioDefault2").on("click", function () {
     popup4.style.display = "none";
 });
 $("#flexRadioDefault3").on("click", function () {
+    console.log("aaa");
     numberClick = 3;
     popup2.style.display = "block";
     popup3.style.display = "none";
@@ -1391,7 +1392,6 @@ $("#flexRadioDefault6").on("click", function () {
 });
 
 $("#exportFrom").submit(function (event) {
-    console.log("numberClick", numberClick);
     if (numberClick == "3") {
         if ($("#categories_type").val() === null) {
             alert("กรุณาเลือกประเภท");

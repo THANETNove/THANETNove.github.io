@@ -40,7 +40,7 @@
                                                     </div>
                                                     <div class="form-check mb-3">
                                                         <input class="form-check-input" type="radio" name="search"
-                                                            value="1" id="flexRadioDefault1" checked>
+                                                            value="1" id="flexRadioDefault1">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             รายงานวัสดุหมด
                                                         </label>
@@ -52,27 +52,28 @@
                                                             รายการรับเข้า
                                                         </label>
                                                     </div>
-                                                @endif
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="3" id="flexRadioDefault3">
+                                                        <label class="form-check-label" for="flexRadioDefault3">
+                                                            รายงานเบิกวัสดุแยกตามประเภท
+                                                        </label>
+                                                    </div>
 
-                                                <div class="form-check mb-3">
-                                                    <input class="form-check-input" type="radio" name="search"
-                                                        value="3" id="flexRadioDefault3">
-                                                    <label class="form-check-label" for="flexRadioDefault3">
-                                                        รายงานเบิกวัสดุแยกตามประเภท
-                                                    </label>
-                                                </div>
-                                                <div class="form-check mt-3 mb-3" id="categories-type">
-                                                    <select class="form-select" name="categories_type" id="categories_type"
-                                                        aria-label="Default select example" required>
-                                                        <option selected disabled>เลือกประเภท</option>
-                                                        @foreach ($categories_type as $cate)
-                                                            <option value="{{ $cate->id }}">{{ $cate->category_name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                                    <div class="form-check mt-3 mb-3" id="categories-type">
+                                                        <select class="form-select" name="categories_type"
+                                                            id="categories_type" aria-label="Default select example"
+                                                            required>
+                                                            <option selected disabled>เลือกประเภท</option>
+                                                            @foreach ($categories_type as $cate)
+                                                                <option value="{{ $cate->id }}">
+                                                                    {{ $cate->category_name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
 
-                                                @if (Auth::user()->status >= 1)
+
                                                     <div class="form-check mb-3">
                                                         <input class="form-check-input" type="radio" name="search"
                                                             value="4" id="flexRadioDefault4">
@@ -111,14 +112,15 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
+
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="6" id="flexRadioDefault6">
+                                                        <label class="form-check-label" for="flexRadioDefault6">
+                                                            รายงานเบิกทั้งหมด
+                                                        </label>
+                                                    </div>
                                                 @endif
-                                                <div class="form-check mb-3">
-                                                    <input class="form-check-input" type="radio" name="search"
-                                                        value="6" id="flexRadioDefault6">
-                                                    <label class="form-check-label" for="flexRadioDefault6">
-                                                        รายงานเบิกทั้งหมด
-                                                    </label>
-                                                </div>
 
                                             </div>
                                         </div>
