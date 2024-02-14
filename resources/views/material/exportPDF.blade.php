@@ -5,7 +5,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>รายงานข้อมูลสถานที่</title>
+    <title>{{ $name_export }}</title>
     <meta http-equiv="Content-Language" content="th" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -20,10 +20,15 @@
                     <div class="d-flex align-items-end row">
                         <div class="col-12">
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">
-                                    ศูนย์ปฏิบัติการ อบต
-                                    รายงานวัสดุ ประจำปี
-                                    {{ $currentYear + 543 }}</h1>
+                                <h1 class="card-title text-primary td-center">
+                                    ศูนย์ปฏิบัติการ อบต.บางเเม่นาง อ.บางใหญ่ จ.นนทบุรี
+                                </h1>
+                                <h1 class="card-title text-primary td-center">
+                                    {{ $name_export }}
+                                </h1>
+                                <h1 class="card-title text-primary td-center mt-32">
+                                    ณ วันที่ {{ $date_export }}
+                                </h1>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>

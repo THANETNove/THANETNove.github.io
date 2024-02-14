@@ -65,5 +65,9 @@
             text-align: center;
         }
 
+        .mt-32 {
+            margin-bottom: 32px
+        }
+
         /* } */
     </style>
