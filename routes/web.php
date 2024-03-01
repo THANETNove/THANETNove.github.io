@@ -64,6 +64,7 @@ Route::get('material-requisition-show/{id}', [MaterialRequisitionController::cla
 Route::get('durable-articles-requisition-index', [DurableArticlesRequisitionController::class, 'index'])->name('durable-articles-requisition-index');
 Route::post('durable-articles-requisition-index', [DurableArticlesRequisitionController::class, 'index'])->name('durable-articles-requisition-index');
 Route::get('durable-articles-requisition-create', [DurableArticlesRequisitionController::class, 'create'])->name('durable-articles-requisition-create');
+Route::get('durable-articles-requisition-create-lend', [DurableArticlesRequisitionController::class, 'createLend'])->name('durable-articles-requisition-create-lend');
 Route::post('durable-articles-requisition-store', [DurableArticlesRequisitionController::class, 'store'])->name('durable-articles-requisition-store');
 Route::get('durable-articles-requisition-edit/{id}', [DurableArticlesRequisitionController::class, 'edit'])->name('durable-articles-requisition-edit');
 Route::put('durable-articles-requisition-update/{id}', [DurableArticlesRequisitionController::class, 'update'])->name('durable-articles-requisition-update');

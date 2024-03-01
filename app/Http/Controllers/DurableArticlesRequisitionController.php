@@ -67,7 +67,18 @@ class DurableArticlesRequisitionController extends Controller
     {
         $group = DB::table('categories')
         ->where('category_id', '=', 2)->orderBy('id', 'ASC')->get();
-        return view("durable_articles_requisition.create",['group' =>  $group]);
+        $name_type = "เบิกครุภัณฑ์";
+
+
+        return view("durable_articles_requisition.create",['group' =>  $group,'name_type' => $name_type]);
+    }
+    public function createLend()
+    {
+        $group = DB::table('categories')
+        ->where('category_id', '=', 2)->orderBy('id', 'ASC')->get();
+
+        $name_type = "ยืมครุภัณฑ์";
+        return view("durable_articles_requisition.create",['group' =>  $group, 'name_type' => $name_type]);
     }
 
     public function typeCategories($id) {
@@ -110,6 +121,7 @@ class DurableArticlesRequisitionController extends Controller
         $data->durable_articles_id = $request['durable_articles_id'];
         $data->durable_articles_name = $request['durable_articles_name'];
         $data->amount_withdraw = $request['amount_withdraw'];
+        $data->name_type = $request['name_type'];
         $data->name_durable_articles_count = $request['name_durable_articles_count'];
         $data->statusApproval = "0";
         $data->status = "0";

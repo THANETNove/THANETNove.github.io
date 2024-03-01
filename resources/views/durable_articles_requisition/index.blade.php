@@ -10,7 +10,7 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">เบิกครุภัณฑ์</h1>
+                                <h1 class="card-title text-primary ">เบิก/ยืมครุภัณฑ์</h1>
                                 {{-- <button href="{{ url('durable-articles-requisition-export/pdf') }}" target="_blank" data-bs-toggle="modal" data-bs-target="#exampleModalBuy"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกครุภัณฑ์</button> --}}
                                 @if (session('message'))
@@ -23,6 +23,7 @@
                                             <tr>
                                                 <th>ลำดับ</th>
 
+                                                <th>เบิก/ยืม</th>
                                                 <th>รหัสครุภัณฑ์</th>
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
@@ -50,6 +51,7 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
+                                                    <td>{{ $da->name_type }}</td>
                                                     <td>{{ $da->code_durable_articles }}</td>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>

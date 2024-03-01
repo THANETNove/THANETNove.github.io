@@ -282,6 +282,11 @@
                         <div data-i18n="Basic">เบิกครุภัณฑ์</div>
                     </a>
                 </li>
+                <li class="menu-item" id="durable-articles-requisition-create-lend">
+                    <a href="{{ url('durable-articles-requisition-create-lend') }}" class="menu-link">
+                        <div data-i18n="Basic">ยืมครุภัณฑ์</div>
+                    </a>
+                </li>
             </ul>
         </li>
 

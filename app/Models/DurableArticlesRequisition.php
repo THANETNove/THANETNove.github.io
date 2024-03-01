@@ -16,6 +16,7 @@ class DurableArticlesRequisition extends Model
         'durable_articles_name', // ชื่อ
         'amount_withdraw', // จำนวนที่เบิก
         'name_durable_articles_count', // ชื่อเรียก
+        'name_type',
         'statusApproval', // สถานะการอนุมัติ
         'commentApproval', // รายละเอียดการอนุมัติ
         'status', //สถานะ on/ off

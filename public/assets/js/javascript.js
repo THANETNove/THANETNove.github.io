@@ -415,6 +415,12 @@ if (targetUrls === "durable-articles-requisition-create") {
         "durable-articles-requisition-create"
     );
 }
+if (targetUrls === "durable-articles-requisition-create-lend") {
+    setActiveClass(
+        "durable-articles-requisition",
+        "durable-articles-requisition-create-lend"
+    );
+}
 
 //ครุภัณฑ์ชำรุด
 if (

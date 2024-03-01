@@ -7,7 +7,7 @@
 
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title text-primary ">เบิกครุภัณฑ์</h1>
+                        <h1 class="card-title text-primary ">{{ $name_type }}</h1>
                         <form method="POST" action="{{ route('durable-articles-requisition-store') }}">
                             @csrf
                             <div class="row">
@@ -57,6 +57,11 @@
                                     <input type="text" class="form-control" id="durable_articles_id"
                                         name="durable_articles_id" placeholder="รหัสครุภัณฑ์" required />
                                 </div>
+                                <div class="mb-3 col-md-6" style="display: none">
+                                    <label for="prefix" class="form-label">name_type</label>
+                                    <input type="text" class="form-control" name="name_type" placeholder="name_type"
+                                        value="{{ $name_type }}" required />
+                                </div>
 
 
 
@@ -75,11 +80,11 @@
 
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">จำนวนที่ต้องการเบิก</label>
+                                    <label for="prefix" class="form-label">จำนวนที่ต้องการ{{ $name_type }}</label>
                                     <input type="number"
                                         class="form-control @error('amount_withdraw') is-invalid @enderror"
-                                        id="amount_withdraw" name="amount_withdraw" placeholder="จำนวนที่ต้องการเบิก"
-                                        min="1" required />
+                                        id="amount_withdraw" name="amount_withdraw"
+                                        placeholder="จำนวนที่ต้องการ{{ $name_type }}" min="1" required />
                                     @error('amount_withdraw')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

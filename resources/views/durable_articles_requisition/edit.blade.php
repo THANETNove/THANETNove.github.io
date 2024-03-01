@@ -7,7 +7,7 @@
 
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title text-primary ">เเก้ไขเบิกครุภัณฑ์ </h1>
+                        <h1 class="card-title text-primary ">เเก้ไข{{ $data[0]->name_type }}ครุภัณฑ์ </h1>
                         <form method="POST" action="{{ route('durable-articles-requisition-update', $data[0]->id) }}">
                             @csrf
                             @method('PUT')
@@ -67,11 +67,12 @@
 
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">จำนวนที่ต้องการเบิก
+                                    <label for="prefix" class="form-label">จำนวนที่ต้องการ{{ $data[0]->name_type }}
                                     </label>
                                     <input type="number"
                                         class="form-control @error('amount_withdraw') is-invalid @enderror"
-                                        id="amount_withdraw" name="amount_withdraw" placeholder="จำนวนที่ต้องการเบิก"
+                                        id="amount_withdraw" name="amount_withdraw"
+                                        placeholder="จำนวนที่ต้องการ{{ $data[0]->name_type }}"
                                         value="{{ $data[0]->amount_withdraw }}" min="1"
                                         max="{{ $data[0]->amount_withdraw + $data[0]->remaining_amount }}" required />
                                     @error('amount_withdraw')
