@@ -82,25 +82,33 @@ class BuyController extends Controller
             ->where('group_id', '=', $id)
             ->orderBy('material_name', 'ASC')
             ->get();
+            $dataCount = 0;
+            return response()->json([$data,  $dataCount] );
         }else{
 
-            $data = DB::table('durable_articles')
+            $data2 = DB::table('durable_articles')
             ->where('durable_articles.group_class', '=', $cate[0]->id)
-            ->where('durable_articles.remaining_amount', '=',0)
+            ->where('durable_articles.durableArticles_number', '=',0)
             ->leftJoin('buys', 'durable_articles.id', '=', 'buys.buy_name')
             ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
             ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
             ->whereRaw('buys.buy_name IS NULL OR durable_articles.id != buys.buy_name') // เพิ่มเงื่อนไขนี้
-            ->select('durable_articles.*','categories.category_code','type_categories.type_code')
-            ->orderBy('durable_articles.id', 'ASC')
+            ->select('durable_articles.*','categories.category_code','type_categories.type_code');
+
+
+            $data =  $data2->orderBy('durable_articles.id', 'ASC')
             ->groupBy('durable_articles.description')
             ->get();
+            $dataCount =  $data2->orderBy('durable_articles.id', 'ASC')
+            ->count();
 
+
+            return response()->json([$data, $dataCount]);
 
         }
 
 
-        return response()->json($data);
+
     }
 
 
@@ -163,19 +171,19 @@ class BuyController extends Controller
             ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
             ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
             ->where("durable_articles.description",'=',  $dura[0]->description)
-            ->where("durable_articles.remaining_amount",'=',  0)
+            ->where("durable_articles.durableArticles_number",'=',  0)
             ->select('durable_articles.*','categories.category_code','type_categories.type_code')
             ->orderBy('id', 'ASC');
 
             $duCount = $du->count();
             $duArray = $du->get();
 
-            for ($i = 0; $i < $duCount; $i++) {
+            for ($i = 0; $i < $number; $i++) {
 
                 $affected = DB::table('durable_articles')
                     ->where('id', $duArray[$i]->id) // แก้ไขจาก description เป็น id
-                    ->where('remaining_amount', 0)
-                    ->update(['remaining_amount' => 1]);
+                    ->where('durableArticles_number', 0)
+                    ->update(['remaining_amount' => 1,'durableArticles_number' => 1,]);
 
                     $data = new Buy;
                     $data->typeBuy = $request['type'];

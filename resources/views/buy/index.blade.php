@@ -73,7 +73,8 @@
                                                             {{ $da->durableArticles_name }}
                                                         </td>
                                                     @endif
-                                                    <td>{{ number_format($da->quantity) }} {{ $da->counting_unit }}</td>
+                                                    <td>{{ number_format($da->quantity) }} &nbsp;{{ $da->counting_unit }}
+                                                    </td>
 
                                                     <td>{{ number_format($da->price_per_piece) }} </td>
                                                     <td>{{ number_format($da->total_price) }}</td>

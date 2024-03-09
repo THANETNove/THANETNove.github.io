@@ -44,7 +44,7 @@
                                             $i = 1;
                                         @endphp
                                         <tbody class="table-border-bottom-0">
-                                            @foreach ($data->groupBy('group_class') as $groupedData)
+                                            @foreach ($data->groupBy('id') as $groupedData)
                                                 @foreach ($groupedData->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
                                                     <tr>
                                                         <th scope="row">{{ $i++ }}</th>

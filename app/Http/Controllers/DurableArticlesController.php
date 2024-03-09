@@ -44,13 +44,14 @@ class DurableArticlesController extends Controller
         }
 
         $data = $data
-        ->orderBy('durable_articles.group_class','ASC')
-        ->orderBy('durable_articles.type_durableArticles','ASC')
-        ->orderBy('durable_articles.description','ASC')
-        ->orderBy('durable_articles.group_count','ASC')
-        ->orderBy('categories.category_name','ASC')
-        ->orderBy('type_categories.type_name', 'ASC')
-        ->orderBy('durable_articles.durableArticles_name','ASC')
+        ->orderBy('durable_articles.id','DESC') // เรียงตาม id
+      /*   ->orderBy('durable_articles.id','DESC') // เรียงตามตัวอักษร
+        ->orderBy('durable_articles.type_durableArticles','DESC')
+        ->orderBy('durable_articles.description','DESC')
+        ->orderBy('durable_articles.group_count','DESC')
+        ->orderBy('categories.category_name','DESC')
+        ->orderBy('type_categories.type_name', 'DESC')
+        ->orderBy('durable_articles.durableArticles_name','DESC') */
         ->paginate(100);
 
 
@@ -116,7 +117,7 @@ class DurableArticlesController extends Controller
         $data->description = $request['description'];
         $data->group_count = $countDurable;
         $data->durableArticles_name = $request['durableArticles_name'];
-        $data->durableArticles_number = "1";
+        $data->durableArticles_number = "0";
         $data->remaining_amount = "0";
         $data->name_durableArticles_count = $request['name_durableArticles_count'];
         $data->code_material_storage = $request['code_material_storage'];

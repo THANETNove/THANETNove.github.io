@@ -509,6 +509,7 @@ function myFunction(selectedValue) {
 }
 
 var globalRes; // สร้างตัวแปร global เพื่อเก็บค่า res
+var globalCount;
 var globalResType; // สร้างตัวแปร global เพื่อเก็บค่า res
 
 function getCategories(selectedValue) {
@@ -582,15 +583,15 @@ function getCategories(selectedValue) {
 }
 
 function getGroup(selectedValue) {
-    console.log("5555", selectedValue);
     $.ajax({
         url: "get-categoriesData/" + selectedValue,
         type: "GET",
         success: function (res) {
             console.log("res", res);
-            globalRes = res;
-            var groupSelect = $("#buy_name");
 
+            globalRes = res[0];
+            globalCount = res[1];
+            var groupSelect = $("#buy_name");
             // Clear existing options (optional, depending on your use case)
             groupSelect.empty();
 
@@ -607,7 +608,7 @@ function getGroup(selectedValue) {
                 })
             );
 
-            $.each(res, function (index, data) {
+            $.each(res[0], function (index, data) {
                 groupSelect.append(
                     $("<option>", {
                         value: data.id,
@@ -629,6 +630,7 @@ $("#buy_name").on("change", function () {
     var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
 
     // ใช้ globalRes ที่เก็บค่า res จาก getGroup
+
     var foundItem = globalRes.find(function (item) {
         return item.id == selectedValue;
     });
@@ -651,8 +653,10 @@ $("#buy_name").on("change", function () {
         );
 
         if (globalResType == 2) {
-            $("#quantity").val(foundItem.durableArticles_number);
-            $("#quantity").attr("readonly", true);
+            $("#quantity").val(globalCount);
+            document
+                .getElementById("quantity")
+                .setAttribute("max", globalCount);
         } else {
             $("#quantity").attr("readonly", false);
         }
