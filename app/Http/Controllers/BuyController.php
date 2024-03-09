@@ -88,17 +88,17 @@ class BuyController extends Controller
 
             $data2 = DB::table('durable_articles')
             ->where('durable_articles.group_class', '=', $cate[0]->id)
-            ->where('durable_articles.durableArticles_number', '=',0)
             ->leftJoin('buys', 'durable_articles.id', '=', 'buys.buy_name')
             ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
             ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
-            ->whereRaw('buys.buy_name IS NULL OR durable_articles.id != buys.buy_name') // เพิ่มเงื่อนไขนี้
+           /*  ->whereRaw('buys.buy_name IS NULL OR durable_articles.id != buys.buy_name') */ // เพิ่มเงื่อนไขนี้
             ->select('durable_articles.*','categories.category_code','type_categories.type_code');
 
 
             $data =  $data2->orderBy('durable_articles.id', 'ASC')
             ->groupBy('durable_articles.description')
             ->get();
+
             $dataCount =  $data2->orderBy('durable_articles.id', 'ASC')
             ->count();
 
@@ -167,6 +167,9 @@ class BuyController extends Controller
 
 
             $number = $request['quantity'];
+
+
+
             $du = DB::table('durable_articles')
             ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
             ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
@@ -175,12 +178,36 @@ class BuyController extends Controller
             ->select('durable_articles.*','categories.category_code','type_categories.type_code')
             ->orderBy('id', 'ASC');
 
+            $du2 =  DB::table('durable_articles')
+            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+            ->where("durable_articles.description",'=',  $dura[0]->description)
+            ->where("durable_articles.durableArticles_number",'=',  1)
+            ->select('durable_articles.*','categories.category_code','type_categories.type_code')
+            ->orderBy('id', 'ASC');
+
+            $du3 =  DB::table('durable_articles')
+            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+            ->where("durable_articles.description",'=',  $dura[0]->description)
+            ->select('durable_articles.*','categories.category_code','type_categories.type_code')
+            ->orderBy('id', 'ASC');
+
             $duCount = $du->count();
+            $duCount2 = $du2->count();
             $duArray = $du->get();
+            $duArray2 = $du2->get();
+            $duArray3 = $du3->get();
+
+            $currentDate = Carbon::now();
+            $thaiYear = ($currentDate->year + 543) % 100;
+            $thaiMonth = $currentDate->format('m');
 
 
-            for ($i = 0; $i < $number; $i++) {
 
+          $num =   $number - $duCount;
+            for ($i = 0; $i < $number ; $i++) { //รับเข้าครั้งเเรก
+                if ($i < $duCount) {
                 $affected = DB::table('durable_articles')
                     ->where('id', $duArray[$i]->id) // แก้ไขจาก description เป็น id
                     ->where('durableArticles_number', 0)
@@ -200,10 +227,52 @@ class BuyController extends Controller
                     $data->date_enter = $request['date_enter'];
                     $data->status = "0";
                     $data->save();
+                }else{
+
+                    $countDurable = $thaiMonth . "-" . $thaiYear . "/" . $duCount2+$i+1;
+
+                    $dataArt = new DurableArticles;
+                    $dataArt->code_DurableArticles =   $duArray3[0]->code_DurableArticles;
+                    $dataArt->group_class = $duArray3[0]->group_class;
+                    $dataArt->type_durableArticles = $duArray3[0]->type_durableArticles;
+                    $dataArt->description = $duArray3[0]->description;
+                    $dataArt->group_count = $countDurable;
+                    $dataArt->durableArticles_name = $duArray3[0]->durableArticles_name;
+                    $dataArt->durableArticles_number = "1";
+                    $dataArt->remaining_amount = "1";
+                    $dataArt->name_durableArticles_count = $duArray3[0]->name_durableArticles_count;
+                    $dataArt->code_material_storage = $duArray3[0]->code_material_storage;
+                    $dataArt->warranty_period = $duArray3[0]->warranty_period;
+                    $dataArt->damaged_number = 0;
+                    $dataArt->bet_on_distribution_number = 0;
+                    $dataArt->repair_number = 0;
+                    $dataArt->status = "on";
+                    $dataArt->save();
+
+
+                    $data = new Buy;
+                    $data->typeBuy = $request['type'];
+                    $data->group_id = $request['group_id'];
+                    $data->buy_name =  $dataArt->id;
+                    $data->code_buy = $duArray3[0]->category_code . '-' . $duArray3[0]->type_code . '-' . $duArray3[0]->description;
+                    $data->code_number =  $countDurable;
+                    $data->quantity =  1;
+                    $data->counting_unit = $request['counting_unit'];
+                    $data->price_per_piece = $request['price_per_piece'];
+                    $data->total_price = $request['total_price'];
+                    $data->details = $request['details'];
+                    $data->date_enter = $request['date_enter'];
+                    $data->status = "0";
+                    $data->save();
+
+                }
             }
-
-
         }
+
+
+
+
+
 
 
 

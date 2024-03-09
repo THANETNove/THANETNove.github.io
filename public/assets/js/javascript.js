@@ -654,9 +654,9 @@ $("#buy_name").on("change", function () {
 
         if (globalResType == 2) {
             $("#quantity").val(globalCount);
-            document
+            /* document
                 .getElementById("quantity")
-                .setAttribute("max", globalCount);
+                .setAttribute("max", globalCount); */
         } else {
             $("#quantity").attr("readonly", false);
         }

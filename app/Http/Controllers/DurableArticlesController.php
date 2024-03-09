@@ -45,6 +45,7 @@ class DurableArticlesController extends Controller
 
         $data = $data
         ->orderBy('durable_articles.id','DESC') // เรียงตาม id
+       /*  ->groupBy('durable_articles.description') */
         ->paginate(100);
 
       /*   $data = DB::table('durable_articles')->join('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')

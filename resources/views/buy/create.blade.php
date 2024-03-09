@@ -67,9 +67,8 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label for="quantity" class="form-label">จำนวน</label>
-                                    <input id="quantity" type="number"
-                                        class="form-control @error('quantity') is-invalid @enderror" name="quantity"
-                                        placeholder="จำนวน" autocomplete="quantity" min="0">
+                                    <input type="number" class="form-control @error('quantity') is-invalid @enderror"
+                                        name="quantity" placeholder="จำนวน" autocomplete="quantity" min="0">
 
                                     @error('quantity')
                                         <span class="invalid-feedback" role="alert">
