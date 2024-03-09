@@ -44,16 +44,15 @@
                                             $i = 1;
                                         @endphp
                                         <tbody class="table-border-bottom-0">
-                                            @foreach ($data->groupBy('id') as $groupedData)
-                                                @foreach ($groupedData->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
-                                                    <tr>
-                                                        <th scope="row">{{ $i++ }}</th>
-                                                        <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}-{{ $da->group_count }}
-                                                        </td>
-                                                        <td>{{ $da->category_name }}</td>
-                                                        <td>{{ $da->type_name }}</td>
-                                                        <td>{{ $da->durableArticles_name }}</td>
-                                                        {{--  <td>{{ number_format($da->durableArticles_number) }}</td>
+                                            @foreach ($data->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
+                                                <tr>
+                                                    <th scope="row">{{ $i++ }}</th>
+                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}-{{ $da->group_count }}
+                                                    </td>
+                                                    <td>{{ $da->category_name }}</td>
+                                                    <td>{{ $da->type_name }}</td>
+                                                    <td>{{ $da->durableArticles_name }}</td>
+                                                    {{--  <td>{{ number_format($da->durableArticles_number) }}</td>
                                                         <td>{{ number_format($da->remaining_amount) }}</td>
                                                         <td>{{ number_format($da->damaged_number) }}</td>
                                                         <td>{{ number_format($da->bet_on_distribution_number) }}</td>
@@ -62,28 +61,28 @@
                                                         <td>{{ $da->name_durableArticles_count }}</td>
                                                         <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
                                                             {{ $da->room_name }}</td> --}}
-                                                        <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <button type="button"
-                                                                    class="btn p-0 dropdown-toggle hide-arrow"
-                                                                    data-bs-toggle="dropdown">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('durable-articles-show', $da->id) }}"><i
-                                                                            class='bx bxs-show'></i>View</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('durable-articles-edit', $da->id) }}">
-                                                                        <i class="bx bx-edit-alt me-1"></i> Edit
-                                                                    </a>
-                                                                </div>
+                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button type="button"
+                                                                class="btn p-0 dropdown-toggle hide-arrow"
+                                                                data-bs-toggle="dropdown">
+                                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item"
+                                                                    href="{{ url('durable-articles-show', $da->id) }}"><i
+                                                                        class='bx bxs-show'></i>View</a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ url('durable-articles-edit', $da->id) }}">
+                                                                    <i class="bx bx-edit-alt me-1"></i> Edit
+                                                                </a>
                                                             </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             @endforeach
+
                                         </tbody>
 
                                     </table>

@@ -45,15 +45,7 @@ class DurableArticlesController extends Controller
 
         $data = $data
         ->orderBy('durable_articles.id','DESC') // เรียงตาม id
-      /*   ->orderBy('durable_articles.id','DESC') // เรียงตามตัวอักษร
-        ->orderBy('durable_articles.type_durableArticles','DESC')
-        ->orderBy('durable_articles.description','DESC')
-        ->orderBy('durable_articles.group_count','DESC')
-        ->orderBy('categories.category_name','DESC')
-        ->orderBy('type_categories.type_name', 'DESC')
-        ->orderBy('durable_articles.durableArticles_name','DESC') */
         ->paginate(100);
-
 
       /*   $data = DB::table('durable_articles')->join('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->orderBy('durable_articles.id', 'DESC')
@@ -108,7 +100,7 @@ class DurableArticlesController extends Controller
     $lj = 1;
     for ($i = 0; $i < $request['durableArticles_number']; $i++) {
         $countDurable = $thaiMonth . "-" . $thaiYear . "/" . $durable_cont + $lj++;
-        $random = "dura-" . Str::random(10);
+
 
         $data = new DurableArticles;
         $data->code_DurableArticles = $random;
