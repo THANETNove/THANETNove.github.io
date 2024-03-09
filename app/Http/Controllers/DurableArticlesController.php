@@ -27,7 +27,7 @@ class DurableArticlesController extends Controller
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-        ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+        ->select('durable_articles.*','type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
         if ($search) {
             $data = $data->where(function ($query) use ($search) {
                 $query->where('categories.category_name', 'LIKE', "%$search%")
@@ -45,8 +45,9 @@ class DurableArticlesController extends Controller
 
         $data = $data
         ->orderBy('durable_articles.id','DESC') // เรียงตาม id
-       /*  ->groupBy('durable_articles.description') */
+        ->groupBy('durable_articles.code_DurableArticles')
         ->paginate(100);
+
 
       /*   $data = DB::table('durable_articles')->join('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->orderBy('durable_articles.id', 'DESC')
@@ -158,18 +159,36 @@ class DurableArticlesController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
+
     {
-        $data =  DurableArticles::find($id);
-        $data->group_class = $request['group_class'];
-        $data->type_durableArticles = $request['type_durableArticles'];
-        $data->description = $request['description'];
-        $data->durableArticles_name = $request['durableArticles_name'];
-        $data->durableArticles_number = $request['durableArticles_number'];
-        $data->remaining_amount = $request['durableArticles_number'];
-        $data->name_durableArticles_count = $request['name_durableArticles_count'];
-        $data->code_material_storage = $request['code_material_storage'];
-        $data->warranty_period = $request['warranty_period'];
-        $data->save();
+
+        $du=  DB::table('durable_articles')
+        ->where("id",'=',  $id)
+        ->orderBy('id', 'ASC');
+       $daArr =  $du->get();
+
+       $du2 =  DB::table('durable_articles')
+        ->where("code_DurableArticles",'=',  $daArr[0]->code_DurableArticles)
+        ->orderBy('id', 'ASC');
+       $du2 = $du2->get();
+
+       $daCount =  $du2->count();
+
+        for ($i = 0; $i < $daCount ; $i++) {
+            $data =  DurableArticles::find($du2[$i]->id);
+            $data->group_class = $request['group_class'];
+            $data->type_durableArticles = $request['type_durableArticles'];
+            $data->description = $request['description'];
+            $data->durableArticles_name = $request['durableArticles_name'];
+            $data->durableArticles_number = $request['durableArticles_number'];
+            $data->remaining_amount = $request['durableArticles_number'];
+            $data->name_durableArticles_count = $request['name_durableArticles_count'];
+            $data->code_material_storage = $request['code_material_storage'];
+            $data->warranty_period = $request['warranty_period'];
+            $data->save();
+        }
+
+
 
         return redirect('durable-articles-index')->with('message', "บันทึกสำเร็จ");
     }
