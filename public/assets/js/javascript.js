@@ -636,9 +636,9 @@ $("#buy_name").on("change", function () {
         $("#categories_id").val(
             globalResType == 1
                 ? foundItem.code_material
-                : foundItem.group_class +
+                : foundItem.category_code +
                       "-" +
-                      foundItem.type_durableArticles +
+                      foundItem.type_code +
                       "-" +
                       foundItem.description +
                       "-" +
@@ -854,6 +854,8 @@ function groupMaterial(selectedValue) {
 
 $("#material-name").on("change", function () {
     var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+
+    console.log("materialRes", materialRes);
 
     // ใช้ globalRes ที่เก็บค่า res จาก getGroup
     var foundItem = materialRes.find(function (item) {
@@ -1161,9 +1163,9 @@ $("#calculate-id").on("change", function () {
     if (foundItem) {
         $("#articles_id").val(foundItem.id);
         $("#categories_id").val(
-            foundItem.group_class +
+            foundItem.category_code +
                 "-" +
-                foundItem.type_durableArticles +
+                foundItem.type_code +
                 "-" +
                 foundItem.description
         );

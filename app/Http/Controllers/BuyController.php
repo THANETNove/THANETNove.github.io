@@ -86,10 +86,14 @@ class BuyController extends Controller
 
             $data = DB::table('durable_articles')
             ->where('durable_articles.group_class', '=', $cate[0]->id)
+            ->where('durable_articles.remaining_amount', '=',0)
             ->leftJoin('buys', 'durable_articles.id', '=', 'buys.buy_name')
+            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
             ->whereRaw('buys.buy_name IS NULL OR durable_articles.id != buys.buy_name') // เพิ่มเงื่อนไขนี้
-            ->select('durable_articles.*')
+            ->select('durable_articles.*','categories.category_code','type_categories.type_code')
             ->orderBy('durable_articles.id', 'ASC')
+            ->groupBy('durable_articles.description')
             ->get();
 
 
@@ -127,39 +131,71 @@ class BuyController extends Controller
             $mat->remaining_amount =  $amount;
             $mat->save();
 
+            $data = new Buy;
+            $data->typeBuy = $request['type'];
+            $data->group_id = $request['group_id'];
+            $data->buy_name = $request['buy_name'];
+            $data->code_buy = $request['categories_id'];
+            $data->quantity =  $request['quantity'];
+            $data->counting_unit = $request['counting_unit'];
+            $data->price_per_piece = $request['price_per_piece'];
+            $data->total_price = $request['total_price'];
+            $data->details = $request['details'];
+            $data->date_enter = $request['date_enter'];
+            $data->status = "0";
+            $data->save();
+
 
         }else{
 
-            $parts = explode('-', $request['categories_id']);
+
+
 
             $dura = DB::table('durable_articles')
-            ->where("group_class",'=',  $parts[0])
-            ->where("type_durableArticles",'=', $parts[1])
-            ->where("description",'=', $parts[2])
+            ->where("durable_articles.id",'=',  $request['buy_name'])
             ->orderBy('id', 'ASC')
             ->get();
 
+
+
             $number = $request['quantity'];
-            $dur =  DurableArticles::find($dura[0]->id);
-            /* $dur->durableArticles_number =  $number; */
-            $dur->remaining_amount =  $number;
-            $dur->save();
+            $du = DB::table('durable_articles')
+            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+            ->where("durable_articles.description",'=',  $dura[0]->description)
+            ->where("durable_articles.remaining_amount",'=',  0)
+            ->select('durable_articles.*','categories.category_code','type_categories.type_code')
+            ->orderBy('id', 'ASC');
+
+            $duCount = $du->count();
+            $duArray = $du->get();
+
+            for ($i = 0; $i < $duCount; $i++) {
+
+                $affected = DB::table('durable_articles')
+                    ->where('id', $duArray[$i]->id) // แก้ไขจาก description เป็น id
+                    ->where('remaining_amount', 0)
+                    ->update(['remaining_amount' => 1]);
+
+                    $data = new Buy;
+                    $data->typeBuy = $request['type'];
+                    $data->group_id = $request['group_id'];
+                    $data->buy_name = $request['buy_name'];
+                    $data->code_buy = $duArray[$i]->category_code . '-' . $duArray[$i]->type_code . '-' . $duArray[$i]->description . '-' . $duArray[$i]->group_count;
+                    $data->quantity =  $request['quantity'];
+                    $data->counting_unit = $request['counting_unit'];
+                    $data->price_per_piece = $request['price_per_piece'];
+                    $data->total_price = $request['total_price'];
+                    $data->details = $request['details'];
+                    $data->date_enter = $request['date_enter'];
+                    $data->status = "0";
+                    $data->save();
+            }
+
+
         }
 
 
-        $data = new Buy;
-        $data->typeBuy = $request['type'];
-        $data->group_id = $request['group_id'];
-        $data->buy_name = $request['buy_name'];
-        $data->code_buy = $request['categories_id'];
-        $data->quantity =  $request['quantity'];
-        $data->counting_unit = $request['counting_unit'];
-        $data->price_per_piece = $request['price_per_piece'];
-        $data->total_price = $request['total_price'];
-        $data->details = $request['details'];
-        $data->date_enter = $request['date_enter'];
-        $data->status = "0";
-        $data->save();
 
         return redirect('buy-index')->with('message', "บันทึกสำเร็จ");
     }
@@ -303,5 +339,5 @@ class BuyController extends Controller
         return redirect('buy-index')->with('message', "ซื้อสำเร็จ");
     }
 
- 
+
 }

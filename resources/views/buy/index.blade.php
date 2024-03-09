@@ -23,16 +23,15 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
+                                                <th>รหัส</th>
                                                 <th>ประเภท</th>
                                                 <th>ชื่อประเภท</th>
                                                 <th>ชื่อ</th>
                                                 <th>รายละเอียด</th>
                                                 <th>จำนวน</th>
-                                                <th>หน่วยนับ</th>
+
                                                 <th>ราคา ต่อชิ้น</th>
                                                 <th>ราคา รวม</th>
-                                                <th>รายละเอียด</th>
-                                                <th>สถานะ</th>
                                                 <th>วันรับเข้า</th>
                                                 <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
@@ -48,12 +47,16 @@
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>
+                                                        {{ $da->code_buy }}
+                                                    </td>
+                                                    <td>
                                                         @if ($da->typeBuy == 1)
                                                             ประเภทวัสดุ
                                                         @else
                                                             ประเภทครุภัณฑ์
                                                         @endif
                                                     </td>
+
                                                     <td>{{ $da->category_name }}</td>
                                                     @if ($da->typeBuy == 1)
                                                         <td>
@@ -70,18 +73,12 @@
                                                             {{ $da->durableArticles_name }}
                                                         </td>
                                                     @endif
-                                                    <td>{{ number_format($da->quantity) }}</td>
-                                                    <td>{{ $da->counting_unit }}</td>
+                                                    <td>{{ number_format($da->quantity) }} {{ $da->counting_unit }}</td>
+
                                                     <td>{{ number_format($da->price_per_piece) }} </td>
                                                     <td>{{ number_format($da->total_price) }}</td>
-                                                    <td>{{ $da->details }}</td>
-                                                    <td>
-                                                        @if ($da->status == 0)
-                                                            <span class="badge bg-label-info me-1">เพิ่มรายการ</span>
-                                                        @else
-                                                            <span class="badge bg-label-warning me-1">ยกเลิกรายการ</span>
-                                                        @endif
-                                                    </td>
+
+
                                                     <td>{{ $da->date_enter }}</td>
 
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
