@@ -17,6 +17,10 @@
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif
+                                @if (session('errorMessage'))
+                                    <p class="message-text text-center mt-4" style="color: red">
+                                        {{ session('errorMessage') }}</p>
+                                @endif
 
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
@@ -47,7 +51,7 @@
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>
-                                                        {{ $da->code_buy }}
+                                                        {{ $da->code_buy }}-{{ $da->code_number }}
                                                     </td>
                                                     <td>
                                                         @if ($da->typeBuy == 1)

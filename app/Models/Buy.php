@@ -12,6 +12,7 @@ class Buy extends Model
         'code_buy',//รหัสครุภัณฑ์
         'group_id',//รหัสครุภัณฑ์
         'typeBuy', // กลุ่ม/ประเภท
+        'code_number',
         'buy_name', // ชื่อ
         'quantity', // จำนวน
         'counting_unit',//หน่วนับ

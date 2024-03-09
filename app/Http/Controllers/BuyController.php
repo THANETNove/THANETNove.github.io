@@ -178,6 +178,7 @@ class BuyController extends Controller
             $duCount = $du->count();
             $duArray = $du->get();
 
+
             for ($i = 0; $i < $number; $i++) {
 
                 $affected = DB::table('durable_articles')
@@ -188,9 +189,10 @@ class BuyController extends Controller
                     $data = new Buy;
                     $data->typeBuy = $request['type'];
                     $data->group_id = $request['group_id'];
-                    $data->buy_name = $request['buy_name'];
-                    $data->code_buy = $duArray[$i]->category_code . '-' . $duArray[$i]->type_code . '-' . $duArray[$i]->description . '-' . $duArray[$i]->group_count;
-                    $data->quantity =  $request['quantity'];
+                    $data->buy_name =  $duArray[$i]->id;
+                    $data->code_buy = $duArray[$i]->category_code . '-' . $duArray[$i]->type_code . '-' . $duArray[$i]->description;
+                    $data->code_number =  $duArray[$i]->group_count;
+                    $data->quantity =  1;
                     $data->counting_unit = $request['counting_unit'];
                     $data->price_per_piece = $request['price_per_piece'];
                     $data->total_price = $request['total_price'];
@@ -261,27 +263,9 @@ class BuyController extends Controller
             $mat->save();
 
 
-        }else{
-
-            $parts = explode('-',  $data->code_buy);
-
-            $dura = DB::table('durable_articles')
-            ->where("group_class",'=',  $parts[0])
-            ->where("type_durableArticles",'=', $parts[1])
-            ->where("description",'=', $parts[2])
-            ->orderBy('id', 'ASC')
-            ->get();
-
-            $number = ($dura[0]->durableArticles_number -  $data->quantity) + $request['quantity'] ;
-            $amount = ($dura[0]->remaining_amount -  $data->quantity) + $request['quantity'] ;
-            $dur =  DurableArticles::find($dura[0]->id);
-            $dur->durableArticles_number =  $number;
-            $dur->remaining_amount =  $amount;
-            $dur->save();
         }
 
 
-        $data->quantity = $request['quantity'];
         $data->counting_unit = $request['counting_unit'];
         $data->price_per_piece = $request['price_per_piece'];
         $data->total_price = $request['total_price'];
@@ -316,27 +300,38 @@ class BuyController extends Controller
 
         }else{
 
+
             $parts = explode('-',  $data->code_buy);
+            $deleted = Buy::find($id);
+
 
             $dura = DB::table('durable_articles')
-            ->where("group_class",'=',  $parts[0])
-            ->where("type_durableArticles",'=', $parts[1])
-            ->where("description",'=', $parts[2])
-            ->orderBy('id', 'ASC')
-            ->get();
+            ->where("id",'=',  $deleted->buy_name)
+            ->where("damaged_number",0)
+            ->where("bet_on_distribution_number",0)
+            ->where("repair_number",0);
+            $dura= $dura->get();
+            $duraCount = $dura->count();
 
-            $number = ($dura[0]->durableArticles_number -  $data->quantity);
-            $dur =  DurableArticles::find($dura[0]->id);
-            $dur->durableArticles_number =  $number;
-            $dur->save();
+
+
+            if ($duraCount > 0) {
+                $dur =  DurableArticles::find($dura[0]->id);
+                $dur->durableArticles_number =  0;
+                $dur->save();
+
+                $deleted->delete();
+                return redirect('buy-index')->with('message', "ยกเลิกสำเร็จ");
+            }else{
+                return redirect('buy-index')->with('errorMessage', "ยกเลิกไม่สำเร็จ");
+            }
+
         }
 
 
 
-        $data->status = "2";
-        $data->save();
 
-        return redirect('buy-index')->with('message', "ยกเลิกสำเร็จ");
+
     }
     public function statusBuy(string $id)
     {

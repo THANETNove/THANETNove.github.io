@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('buys', function (Blueprint $table) {
             $table->id();
             $table->string('code_buy')->nullable()->comment('รหัสซื้อ');
+            $table->string('code_number')->nullable()->comment('รหัสซื้อ');
             $table->string('group_id')->nullable()->comment('id ประเภทหมวดหมู่');            $table->string('typeBuy')->nullable()->comment('ประเภท');
             $table->string('buy_name')->nullable()->comment('ชื่อ');
             $table->string('quantity')->nullable()->comment('จำนวน');

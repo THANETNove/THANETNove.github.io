@@ -16,7 +16,7 @@
                                 <div class="mb-3 col-md-6">
                                     <label for="description" class="form-label">ประเภทการซื้อ</label>
                                     <select class="form-select  @error('typeBuy') is-invalid @enderror" name="typeBuy"
-                                        aria-label="Default select example" required>
+                                        aria-label="Default select example" required disabled>
                                         @if ($buy[0]->typeBuy == '1')
                                             <option value="{{ $buy[0]->typeBuy }}">วัสดุ</option>
                                         @else
@@ -34,7 +34,21 @@
                                     <input id="id_name" type="text"
                                         class="form-control @error('id_name') is-invalid @enderror" name="id_name"
                                         value="{{ $buy[0]->code_buy }}" required placeholder="ชื่อวัสดุ"
-                                        autocomplete="id_name">
+                                        autocomplete="id_name" disabled>
+
+                                    @error('id_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="id_name" class="form-label">ด/ป/ลำดับ</label>
+                                    <input id="id_name" type="text"
+                                        class="form-control @error('id_name') is-invalid @enderror" name="id_name"
+                                        value="{{ $buy[0]->code_number }}" required placeholder="ชื่อวัสดุ"
+                                        autocomplete="id_name" disabled>
 
                                     @error('id_name')
                                         <span class="invalid-feedback" role="alert">
@@ -48,7 +62,7 @@
                                     <input id="buy_name" type="text"
                                         class="form-control @error('buy_name') is-invalid @enderror" name="buy_name"
                                         value="@if ($buy[0]->typeBuy == 1) {{ $buy[0]->material_name }} @else {{ $buy[0]->durableArticles_name }} @endif"
-                                        required placeholder="ชื่อวัสดุ" autocomplete="buy_name">
+                                        required placeholder="ชื่อวัสดุ" autocomplete="buy_name" disabled>
 
                                     @error('buy_name')
                                         <span class="invalid-feedback" role="alert">
@@ -60,9 +74,9 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label for="quantity" class="form-label">จำนวน</label>
-                                    <input id="quantity" type="number" value="{{ $buy[0]->quantity }}"
+                                    <input id="quantity" type="number" value="1"
                                         class="form-control @error('quantity') is-invalid @enderror" name="quantity"
-                                        placeholder="จำนวน" autocomplete="quantity">
+                                        placeholder="จำนวน" autocomplete="quantity" disabled>
 
                                     @error('quantity')
                                         <span class="invalid-feedback" role="alert">
