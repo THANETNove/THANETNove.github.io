@@ -27,14 +27,11 @@
                                                 <th>ประเภทครุภัณฑ์</th>
                                                 <th>ชื่อ</th>
                                                 <th>รายละเอียด</th>
-                                                {{--  <th>จำนวน</th>
-                                                <th>จำนวนที่เบิกได้</th>
+                                                <th>จำนวน</th>
+                                                <th>เหลือ</th>
                                                 <th>ชำรุด</th>
                                                 <th>แทงจำหน่าย</th>
                                                 <th>ซ่อม</th>
-                                                <th>ค่าเสื่อม</th>
-                                                <th>หน่วย</th>
-                                                <th>ที่จัดเก็บ</th> --}}
                                                 <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
 
@@ -47,20 +44,17 @@
                                             @foreach ($data->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}-{{ $da->group_count }}
+                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}
                                                     </td>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    {{--  <td>{{ number_format($da->durableArticles_number) }}</td>
-                                                        <td>{{ number_format($da->remaining_amount) }}</td>
-                                                        <td>{{ number_format($da->damaged_number) }}</td>
-                                                        <td>{{ number_format($da->bet_on_distribution_number) }}</td>
-                                                        <td>{{ number_format($da->repair_number) }}</td>
-                                                        <td>{{ number_format($da->depreciation_price) }}</td>
-                                                        <td>{{ $da->name_durableArticles_count }}</td>
-                                                        <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
-                                                            {{ $da->room_name }}</td> --}}
+
+                                                    <td>{{ number_format($da->codeDurableArticlesCount) }}</td>
+                                                    <td>{{ number_format($da->remainingAmountCount) }}</td>
+                                                    <td>{{ number_format($da->damagedNumberCount) }}</td>
+                                                    <td>{{ number_format($da->betDistributionNumberCount) }}</td>
+                                                    <td>{{ number_format($da->repairNumberCount) }}</td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                     <td>
                                                         <div class="dropdown">

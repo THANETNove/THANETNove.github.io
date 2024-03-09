@@ -44,7 +44,12 @@ class DurableArticlesController extends Controller
         }
 
         $data = $data
-        ->orderBy('durable_articles.id','DESC') // เรียงตาม id
+        ->selectRaw('count(durable_articles.code_DurableArticles) as codeDurableArticlesCount')
+        ->selectRaw('sum(durable_articles.remaining_amount = 1) as remainingAmountCount')
+        ->selectRaw('sum(durable_articles.damaged_number = 1) as damagedNumberCount')
+        ->selectRaw('sum(durable_articles.bet_on_distribution_number = 1) as betDistributionNumberCount')
+        ->selectRaw('sum(durable_articles.repair_number = 1) as repairNumberCount')
+        ->orderBy('durable_articles.id', 'DESC') // เรียงตาม id
         ->groupBy('durable_articles.code_DurableArticles')
         ->paginate(100);
 
