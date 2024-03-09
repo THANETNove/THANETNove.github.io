@@ -101,6 +101,7 @@ class DurableArticlesRequisitionController extends Controller
         ->select('durable_articles.*','categories.category_code','type_categories.type_code')
         ->orderBy('durable_articles.durableArticles_name','ASC')
         ->where('type_durableArticles',$id)
+        ->where('durable_articles.remaining_amount',1)
         ->orderBy('durable_articles.durableArticles_name','ASC')
         ->get();
 
