@@ -238,8 +238,8 @@ class DurableArticlesRequisitionController extends Controller
         ->where('durable_articles_requisitions.status', "0")
         ->where('durable_articles_requisitions.statusApproval', "0")
         ->leftJoin('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
-        ->leftJoin('type_categories', 'durable_articles_requisitions.durable_articles_name', '=', 'type_categories.type_code')
-        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.category_code')
+        ->leftJoin('type_categories', 'durable_articles_requisitions.durable_articles_name', '=', 'type_categories.id')
+        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.id')
         ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
         ->select('durable_articles_requisitions.*','categories.category_name','type_categories.type_name',
          'durable_articles.durableArticles_name','users.prefix', 'users.first_name',
