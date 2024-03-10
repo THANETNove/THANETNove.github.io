@@ -41,7 +41,7 @@
                                             $i = 1;
                                         @endphp
                                         <tbody class="table-border-bottom-0">
-                                            @foreach ($data->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
+                                            @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}
@@ -49,7 +49,7 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-
+                                                    ก
                                                     <td>{{ number_format($da->codeDurableArticlesCount) }}</td>
                                                     <td>{{ number_format($da->remainingAmountCount) }}</td>
                                                     <td>{{ number_format($da->damagedNumberCount) }}</td>

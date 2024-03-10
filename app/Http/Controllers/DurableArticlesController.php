@@ -49,8 +49,9 @@ class DurableArticlesController extends Controller
         ->selectRaw('sum(durable_articles.damaged_number = 1) as damagedNumberCount')
         ->selectRaw('sum(durable_articles.bet_on_distribution_number = 1) as betDistributionNumberCount')
         ->selectRaw('sum(durable_articles.repair_number = 1) as repairNumberCount')
-        ->orderBy('durable_articles.id', 'DESC') // เรียงตาม id
+        // เรียงตาม id
         ->groupBy('durable_articles.code_DurableArticles')
+        ->orderBy('durable_articles.id', 'DESC')
         ->paginate(100);
 
 
@@ -137,13 +138,17 @@ class DurableArticlesController extends Controller
      */
     public function show(string $id)
     {
-        $data = DB::table('durable_articles')
-        ->where('durable_articles.id',$id)
+
+
+        $dataCode =  DB::table('durable_articles')->where('id',$id)->get();
+
+        $data  =  DB::table('durable_articles')->where('durable_articles.code_DurableArticles',$dataCode[0]->code_DurableArticles)
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
         ->get();
+    
         return view('durable_articles.show',['data' =>   $data ]);
 
     }
