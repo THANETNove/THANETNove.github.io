@@ -22,23 +22,14 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
-
                                                 <th>เบิก/ยืม</th>
                                                 <th>รหัสครุภัณฑ์</th>
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
                                                 <th>รายละเอียดครุภัณฑ์</th>
-                                                {{--         <th>จำนวนที่เบิก</th>
-                                                <th>หน่วยนับ </th>
-
-                                                @if (Auth::user()->status != '0')
-                                                    <th>ชื่อ นามสกุล ผู้เบิก </th>
-                                                @endif
-                                                <th>ระยะประกัน </th> --}}
-
+                                                <th>จำนวน</th>
                                                 <th>การอนุมัติ </th>
                                                 <th>สถานะ </th>
-                                                {{--   <th>ที่เก็บ </th> --}}
                                                 <th>วันที่เบิก </th>
                                                 <th>Actions</th>
 
@@ -51,41 +42,12 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->name_type }}</td>
+                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}
                                                     <td>{{ $da->code_durable_articles }}</td>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    {{-- <td>{{ $da->amount_withdraw }}</td>
-                                                    <td>{{ $da->name_durable_articles_count }}</td>
-                                                    @if (Auth::user()->status != '0')
-                                                        <td>{{ $da->prefix }} {{ $da->first_name }}
-                                                            {{ $da->last_name }}
-                                                        </td>
-                                                    @endif
-                                                    @php
-                                                        $originalDate = $da->warranty_period;
-                                                        $newDate = (new DateTime($originalDate))->format('d/m/Y');
-                                                        $newDate2 = new DateTime($originalDate);
-                                                        $targetDate = $newDate2;
-                                                        $now = new DateTime();
-
-                                                        $daysRemaining = $now > $targetDate ? 0 : $now->diff($targetDate)->format('%a') + 1;
-                                                    @endphp
-                                                    <td>{{ $newDate }}
-                                                        @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
-                                                            <span
-                                                                class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
-                                                        @else
-                                                            @if ($daysRemaining > 0)
-                                                                <span class="badge bg-label-primary me-1">เหลือเวลา
-                                                                    {{ $daysRemaining }} วัน</span>
-                                                            @else
-                                                                <span class="badge bg-label-warning me-1">หมดประกัน</span>
-                                                            @endif
-                                                        @endif
-
-                                                    </td> --}}
+                                                    <td>{{ $da->remainingAmountCount }}</td>
 
                                                     <td>
                                                         @if ($da->status == '0')

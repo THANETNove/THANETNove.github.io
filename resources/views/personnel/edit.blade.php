@@ -70,9 +70,11 @@
                                                 <option>ไม่มีเเผนก</option>
                                                 @foreach ($depart as $dep)
                                                     @if ($dep->id == $data['department_id'])
-                                                        <option selected>เเผนก {{ $dep->department_name }}</option>
+                                                        <option value="{{ $dep->id }}" selected>เเผนก
+                                                            {{ $dep->department_name }}</option>
                                                     @else
-                                                        <option>เเผนก {{ $dep->department_name }}</option>
+                                                        <option value="{{ $dep->id }}">เเผนก
+                                                            {{ $dep->department_name }}</option>
                                                     @endif
                                                 @endforeach
                                             </select>
@@ -101,7 +103,8 @@
                                                             {{ $provinces->name_th }}</option>
                                                     @else
                                                         @if (Auth::user()->status == '2')
-                                                            <option value="{{ $provinces->id }}">{{ $provinces->name_th }}
+                                                            <option value="{{ $provinces->id }}">
+                                                                {{ $provinces->name_th }}
                                                             </option>
                                                         @endif
                                                     @endif

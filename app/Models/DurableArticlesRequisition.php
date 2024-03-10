@@ -13,7 +13,7 @@ class DurableArticlesRequisition extends Model
         'group_id',
         'durable_articles_id',//รหัสครุภัณฑ์
         'code_durable_articles', // กลุ่ม/ประเภท type
-        'durable_articles_name', // ชื่อ
+        'group_withdraw', // group การเบิก
         'amount_withdraw', // จำนวนที่เบิก
         'name_durable_articles_count', // ชื่อเรียก
         'name_type',

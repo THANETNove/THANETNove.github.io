@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('durable_articles_id')->nullable()->comment('รหัสครุภัณฑ์');
             $table->string('code_durable_articles')->nullable()->comment('กลุ่ม/ประเภท type');
             $table->string('group_id')->nullable()->comment('id ประเภท ครุภัณฑ์');
-            $table->string('durable_articles_name')->nullable()->comment('ชื่อ');
+            $table->string('group_withdraw')->nullable()->comment('group การเบิก');
             $table->string('amount_withdraw')->nullable()->comment('จำนวนที่เบิก');
             $table->string('name_type')->nullable()->comment('name_type');
             $table->string('name_durable_articles_count')->nullable()->comment('ชื่อเรียก');

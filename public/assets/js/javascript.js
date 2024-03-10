@@ -994,17 +994,15 @@ $("#details-name").on("change", function () {
 
         document
             .getElementById("amount_withdraw")
-            .setAttribute("max", foundItem.remaining_amount);
+            .setAttribute("max", foundItem.remainingAmountCount);
         $("#code_durable_articles").val(
             foundItem.category_code +
                 "-" +
                 foundItem.type_code +
                 "-" +
-                foundItem.description +
-                "-" +
-                foundItem.group_count
+                foundItem.description
         );
-        $("#remaining-amount").val(foundItem.remaining_amount);
+        $("#remaining-amount").val(foundItem.remainingAmountCount);
         $("#name-durable_articles-count").val(
             foundItem.name_durableArticles_count
         );
