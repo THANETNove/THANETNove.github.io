@@ -145,20 +145,13 @@ class DurableArticlesRequisitionController extends Controller
                 $data->statusApproval = "0";
                 $data->status = "0";
                 $data->save();
+
+                DurableArticles::where('id', $dur_array[$i]->id)->update([
+                    'remaining_amount' => "0",
+                ]);
             }
         }
-       /*
 
-
-
-        $withdraw =  $request['amount_withdraw'];
-        $remaining = $request['remaining_amount'];
-
-      $amount =  $remaining - $withdraw;
-
-      DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
-            'remaining_amount' => "0",
-        ]); */
 
         return redirect('durable-articles-requisition-index')->with('message', "บันทึกสำเร็จ");
     }
