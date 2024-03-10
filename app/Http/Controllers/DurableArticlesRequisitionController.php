@@ -31,8 +31,8 @@ class DurableArticlesRequisitionController extends Controller
          ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
-        ->select('durable_articles_requisitions.*','type_categories.type_name', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
-    'durable_articles.durableArticles_name','durable_articles.warranty_period','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+        ->select('durable_articles_requisitions.*','type_categories.type_name', 'type_categories.type_code','users.prefix', 'users.first_name','users.last_name','departments.department_name',
+    'durable_articles.durableArticles_name','durable_articles.description','durable_articles.warranty_period','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
 
 
 
@@ -53,8 +53,8 @@ class DurableArticlesRequisitionController extends Controller
 
 
        $data = $data->orderBy('durable_articles_requisitions.id','DESC')
-
-       ->selectRaw('sum(durable_articles_requisitions.group_withdraw = 0) as remainingAmountCount')
+       ->groupBy('durable_articles_requisitions.group_withdraw')
+       ->selectRaw('count(durable_articles_requisitions.group_withdraw) as groupWithdrawCount')
        ->paginate(100);
 
        $department = DB::table('departments')

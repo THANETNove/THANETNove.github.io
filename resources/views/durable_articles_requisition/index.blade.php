@@ -42,12 +42,13 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
+                                                    <td>{{ $da->name_type }}</td>
                                                     <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}
-                                                    <td>{{ $da->code_durable_articles }}</td>
+                                                    </td>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->remainingAmountCount }}</td>
+                                                    <td>{{ $da->groupWithdrawCount }}</td>
 
                                                     <td>
                                                         @if ($da->status == '0')
