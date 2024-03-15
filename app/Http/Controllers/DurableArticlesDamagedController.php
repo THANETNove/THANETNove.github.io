@@ -28,7 +28,7 @@ class DurableArticlesDamagedController extends Controller
         ->where('durable_articles_damageds.status', '<', 2)
         ->join('users', 'durable_articles_damageds.id_user', '=', 'users.id')
         ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
-        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.id')
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->leftJoin('type_categories', 'durable_articles_damageds.durable_articles_name', '=', 'type_categories.id')
         ->leftJoin('categories', 'durable_articles_damageds.group_id', '=', 'categories.id')
