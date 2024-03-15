@@ -448,8 +448,6 @@ class DurableArticlesRequisitionController extends Controller
     public function exportPDF(Request $request)
     {
 
-
-
         $start_date = $request["start_date"];
         $end_date = $request["end_date"];
         $end_date = Carbon::parse($end_date)->endOfDay()->toDateTimeString();

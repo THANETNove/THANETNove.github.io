@@ -55,7 +55,7 @@
                                                 @foreach ($groupedData->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
                                                     <tr>
                                                         <th scope="row">{{ $i++ }}</th>
-                                                        <td>{{ $da->group_class }}-{{ $da->type_durableArticles }}-{{ $da->description }}
+                                                        <td>{{ $da->group_class }}-{{ $da->type_durableArticles }}-{{ $da->description }}-{{ $da->group_count }}
                                                         </td>
                                                         <td>{{ $da->category_name }}</td>
                                                         <td>{{ $da->durableArticles_name }}</td>
