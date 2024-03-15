@@ -903,6 +903,7 @@ function groupDurableArticles(selectedValue) {
             durableArticlesRes = res;
             console.log("res", res);
             var groupName = $("#durable_articles_name");
+            var groupName = $("#durable_articles_name2");
 
             // Clear existing options (optional, depending on your use case)
             groupName.empty();
@@ -974,6 +975,73 @@ $("#durable_articles_name").on("change", function () {
     });
 });
 
+$("#durable_articles_name2").on("change", function () {
+    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+
+    // ใช้ globalRes ที่เก็บค่า res จาก getGroup
+    $.ajax({
+        url: "get-articlesRes-damaged/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            details_name = res;
+
+            var groupName = $("#details-name");
+            var groupName2 = $("#details-name2");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+            groupName2.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "รายละเอียดรุภัณฑ์",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+            groupName2.append(
+                $("<option>", {
+                    value: "",
+                    text: "รายละเอียดรุภัณฑ์",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.durableArticles_name,
+                    })
+                );
+            });
+            $.each(res, function (index, data) {
+                groupName2.append(
+                    $("<option>", {
+                        value: data.id,
+                        text:
+                            data.durableArticles_name +
+                            `   ` +
+                            data.category_code +
+                            "-" +
+                            data.type_code +
+                            "-" +
+                            data.description +
+                            "-" +
+                            data.group_count,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+});
+
 $("#details-name").on("change", function () {
     const selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
     var foundItem = details_name.find(function (item) {
@@ -1010,6 +1078,46 @@ $("#details-name").on("change", function () {
             foundItem.name_durableArticles_count
         );
         $("#durable_articles_id").val(foundItem.code_DurableArticles);
+    }
+});
+$("#details-name2").on("change", function () {
+    const selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+    var foundItem = details_name.find(function (item) {
+        return item.id == selectedValue;
+    });
+
+    if (foundItem) {
+        if (
+            foundItem.remaining_amount == 0 ||
+            foundItem.remaining_amount == null
+        ) {
+            document.getElementById("out-stock").textContent =
+                "ไม่สามารถลงทะเบียนได้";
+            var popup = document.getElementById("submit");
+            popup.style.display = "none";
+        } else {
+            document.getElementById("out-stock").textContent = "";
+            var popup = document.getElementById("submit");
+            popup.style.display = "block";
+        }
+
+        document
+            .getElementById("amount_withdraw")
+            .setAttribute("max", foundItem.remaining_amount);
+        $("#code_durable_articles").val(
+            foundItem.category_code +
+                "-" +
+                foundItem.type_code +
+                "-" +
+                foundItem.description +
+                "-" +
+                foundItem.group_count
+        );
+        $("#remaining-amount").val(foundItem.remaining_amount);
+        $("#name-durable_articles-count").val(
+            foundItem.name_durableArticles_count
+        );
+        $("#durable_articles_id").val(foundItem.id);
     }
 });
 

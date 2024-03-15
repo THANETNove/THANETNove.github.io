@@ -117,6 +117,23 @@ class DurableArticlesRequisitionController extends Controller
         return response()->json($data);
     }
 
+
+    public function articlesResDamaged($id) {
+
+        $data = DB::table('durable_articles')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->select('durable_articles.*','categories.category_code','type_categories.type_code')
+        ->orderBy('durable_articles.durableArticles_name','ASC')
+        ->where('type_durableArticles',$id)
+        ->where('durable_articles.durableArticles_number',1)
+        ->where('durable_articles.remaining_amount',1)
+        ->orderBy('durable_articles.durableArticles_name','ASC')
+        ->get();
+
+        return response()->json($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

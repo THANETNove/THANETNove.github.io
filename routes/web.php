@@ -76,6 +76,7 @@ Route::get('durable-articles-requisition-show/{id}', [DurableArticlesRequisition
 Route::post('durable-articles-requisition-export/pdf', [DurableArticlesRequisitionController::class, 'exportPDF'])->name('durable-articles-requisition-export/pdf');
 Route::get('get-articlesRes/{id}', [DurableArticlesRequisitionController::class, 'durableRequisition'])->name('get-articlesRes');
 Route::get('get-typeCategories/{id}', [DurableArticlesRequisitionController::class, 'typeCategories'])->name('get-typeCategories');
+Route::get('get-articlesRes-damaged/{id}', [DurableArticlesRequisitionController::class, 'articlesResDamaged'])->name('get-articlesRes');
 
 
 // is_drawer ผู้เบิก

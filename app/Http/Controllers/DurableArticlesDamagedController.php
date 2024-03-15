@@ -93,8 +93,8 @@ class DurableArticlesDamagedController extends Controller
         ->get();
 
         DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
-            'remaining_amount' =>   $amount_damaged[0]->remaining_amount -  $damaged,
-            'damaged_number' => $amount_damaged[0]->damaged_number + $damaged,
+            'remaining_amount' =>  0,
+            'damaged_number' => 1,
         ]);
 
 

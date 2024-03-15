@@ -22,15 +22,13 @@
                                         @foreach ($group as $gro)
                                             <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
                                         @endforeach
-
-
                                     </select>
 
                                 </div>
 
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
                                     <label for="prefix" class="form-label">ชื่อ</label>
-                                    <select class="form-select" name="durable_articles_name" id="durable_articles_name"
+                                    <select class="form-select" name="durable_articles_name" id="durable_articles_name2"
                                         aria-label="Default select example">
                                         <option selected disabled>เลือกครุภัณฑ์</option>
 
@@ -39,7 +37,7 @@
 
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
                                     <label for="prefix" class="form-label">รายละเอียดรุภัณฑ์</label>
-                                    <select class="form-select" name="details_name" id="details-name"
+                                    <select class="form-select" name="details_name" id="details-name2"
                                         aria-label="Default select example">
                                         <option selected disabled>รายละเอียดรุภัณฑ์</option>
 
