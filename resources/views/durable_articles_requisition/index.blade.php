@@ -70,6 +70,9 @@
                                                             <span
                                                                 class="badge bg-label-warning me-1">ยกเลิกเบิกครุภัณฑ์</span>
                                                         @elseif ($da->status == '2')
+                                                            <span
+                                                                class="badge bg-label-info me-1">รอการอนุมัติคึนครุภัณฑ์</span>
+                                                        @elseif ($da->status == '3')
                                                             <span class="badge bg-label-primary me-1">คึนครุภัณฑ์</span>
                                                         @endif
                                                     </td>

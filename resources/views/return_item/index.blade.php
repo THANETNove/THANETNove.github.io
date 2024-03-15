@@ -33,9 +33,7 @@
                                                 @endif
                                                 <th>ระยะประกัน </th>
                                                 <th>วันที่เบิก </th>
-                                                <th>การอนุมัติ </th>
                                                 <th>สถานะ </th>
-                                                <th>ที่เก็บ </th>
                                                 <th>Actions</th>
 
                                             </tr>
@@ -48,9 +46,10 @@
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->category_name }}</td>
-                                                    <td>{{ $da->code_durable_articles }}</td>
+                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}
+                                                    </td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->amount_withdraw }}</td>
+                                                    <td>{{ $da->groupWithdrawCount }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
                                                     @if (Auth::user()->status != '0')
                                                         <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
@@ -58,12 +57,17 @@
                                                     @endif
                                                     @php
                                                         $originalDate = $da->created_at;
-                                                        $newDate = (new DateTime($originalDate))->modify('+7 days')->format('d/m/Y');
+                                                        $newDate = (new DateTime($originalDate))
+                                                            ->modify('+7 days')
+                                                            ->format('d/m/Y');
                                                         $newDate2 = (new DateTime($originalDate))->modify('+7 days');
                                                         $targetDate = $newDate2;
                                                         $now = new DateTime();
 
-                                                        $daysRemaining = $now > $targetDate ? 0 : $now->diff($targetDate)->format('%a') + 1;
+                                                        $daysRemaining =
+                                                            $now > $targetDate
+                                                                ? 0
+                                                                : $now->diff($targetDate)->format('%a') + 1;
                                                     @endphp
                                                     <td>{{ $newDate }}
                                                         @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
@@ -82,40 +86,13 @@
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
 
                                                     <td>
-                                                        @if ($da->status == '0')
-                                                            @if ($da->statusApproval == '0')
-                                                                <span class="badge bg-label-info me-1">รอการอนุมัติ</span>
-                                                            @elseif ($da->statusApproval == '1')
-                                                                <span class="badge bg-label-success me-1">อนุมัติ</span>
-                                                            @else
-                                                                <span class="badge bg-label-warning me-1">ไม่อนุมัติ</span>
-                                                            @endif
-                                                        @endif
 
+                                                        <span
+                                                            class="badge bg-label-info me-1">รอการอนุมัติคึนครุภัณฑ์</span>
                                                     </td>
 
-                                                    <td>
-                                                        @if ($da->status == '0')
-                                                            <span class="badge bg-label-success me-1">เบิกครุภัณฑ์</span>
-                                                        @elseif ($da->status == '1')
-                                                            <span
-                                                                class="badge bg-label-warning me-1">ยกเลิกเบิกครุภัณฑ์</span>
-                                                        @else
-                                                            <span class="badge bg-label-primary me-1">คึนครุภัณฑ์</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
-                                                        {{ $da->room_name }}</td>
 
-                                                    @if ($da->statusApproval == '1' && $da->status == '0')
-                                                        @if (Auth::user()->status > '1')
-                                                            <td> <a href="{{ url('durable-articles-requisition-return', $da->id) }}"
-                                                                    class="alert-destroy">
-                                                                    <button type="button"
-                                                                        class="btn btn-info">คึนครุภัณฑ์</button>
-                                                                </a></td>
-                                                        @endif
-                                                    @endif
+
 
                                                     <td>
 
@@ -127,27 +104,14 @@
                                                             </button>
                                                             <div class="dropdown-menu">
                                                                 <a class="dropdown-item"
-                                                                    href="{{ url('durable-articles-requisition-show', $da->id) }}">
-                                                                    <i
-                                                                        class='bx bxs-show'></i> View</a>
-                                                                {{--     @if ($da->statusApproval == '0' && $da->status == '0')
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('durable-articles-requisition-edit', $da->id) }}"><i
-                                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                    href="{{ url('return-item-show', $da->id) }}">
+                                                                    <i class='bx bxs-show'></i> View</a>
 
-                                                                    <a class="dropdown-item alert-destroy"
-                                                                        href="{{ url('durable-articles-requisition-destroy', $da->id) }}"><i
-                                                                            class="bx bx-trash me-1"></i> ยกเลิก</a>
-                                                                @endif --}}
-                                                                {{--  @if ($da->statusApproval == '1' && $da->status == '0')
-                                                                    @if (Auth::user()->status > '1')
-                                                                        <a class="dropdown-item alert-destroy"
-                                                                            href="{{ url('durable-articles-requisition-return', $da->id) }}">
+                                                                <a class="dropdown-item alert-destroy"
+                                                                    href="{{ url('return-item-approval', $da->id) }}">
+                                                                    <i class='bx bxs-send'></i> อนุมัติคึนครุภัณฑ์</a>
 
-                                                                            <i class='bx bxs-send'></i>
-                                                                            คึนครุภัณฑ์</a>
-                                                                    @endif
-                                                                @endif --}}
+
                                                             </div>
                                                         </div>
 
