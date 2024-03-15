@@ -122,7 +122,7 @@ class DurableArticlesRepairController extends Controller
 
 
 
-        DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
+        DurableArticles::where('id', $request['durable_articles_id'])->update([
             'repair_number' => 1,
             'damaged_number' => 0,
         ]);
