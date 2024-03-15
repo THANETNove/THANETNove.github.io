@@ -26,7 +26,7 @@ class DurableArticlesRepairController extends Controller
         $search =  $request['search'];
 
         $data = DB::table('durable_articles_repairs')
-        ->leftJoin('durable_articles', 'durable_articles_repairs.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->leftJoin('durable_articles', 'durable_articles_repairs.durable_articles_id', '=', 'durable_articles.id')
         ->leftJoin('type_categories', 'durable_articles_repairs.durable_articles_name', '=', 'type_categories.id')
         ->leftJoin('categories', 'durable_articles_repairs.group_id', '=', 'categories.id')
         ->select('durable_articles_repairs.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
@@ -86,7 +86,7 @@ class DurableArticlesRepairController extends Controller
         $data = DB::table('durable_articles_damageds')
         ->where('durable_articles_damageds.status',0)
         ->where('durable_articles_damageds.durable_articles_name', $id)
-        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.id')
         ->select('durable_articles_damageds.*','durable_articles.durableArticles_name')
         ->orderBy('durable_articles.durableArticles_name', 'ASC')
         ->get();
@@ -123,9 +123,11 @@ class DurableArticlesRepairController extends Controller
 
 
         DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
-            'repair_number' => $amount_repair[0]->repair_number + $repair,
-            'damaged_number' => $amount_repair[0]->damaged_number - $repair,
+            'repair_number' => 1,
+            'damaged_number' => 0,
         ]);
+
+
         DurableArticlesDamaged::where('durable_articles_id', $request['durable_articles_id'])->update([
             'status' => "3", // ส่งซ่อม
         ]);

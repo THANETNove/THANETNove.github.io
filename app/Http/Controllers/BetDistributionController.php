@@ -21,7 +21,7 @@ class BetDistributionController extends Controller
         $search =  $request['search'];
 
         $data = DB::table('bet_distributions')
-        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
+        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
         ->leftJoin('type_categories', 'bet_distributions.durable_articles_name', '=', 'type_categories.id')
         ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
         ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
@@ -144,8 +144,8 @@ class BetDistributionController extends Controller
 
 
         DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
-            'bet_on_distribution_number' => $amount_repair[0]->repair_number + $repair,
-            'damaged_number' => $amount_repair[0]->damaged_number - $repair,
+            'bet_on_distribution_number' => 1,
+            'damaged_number' => 0,
             /* 'durableArticles_number' => $amount_repair[0]->durableArticles_number - $data->amount_bet_distribution, */
         ]);
         DurableArticlesDamaged::where('durable_articles_id', $request['durable_articles_id'])->update([
@@ -207,9 +207,10 @@ class BetDistributionController extends Controller
         $dataArt = DB::table('durable_articles')
         ->where('code_DurableArticles', $data->durable_articles_id)
         ->get();
-        DurableArticles::where('code_DurableArticles', $data->durable_articles_id)->update([
+        DurableArticles::where('id', $data->durable_articles_id)->update([
 
-            'durableArticles_number' => $dataArt[0]->durableArticles_number - $data->amount_bet_distribution
+            'damaged_number' => 0,
+            'bet_on_distribution_number' => 1
         ]);
 
 
@@ -252,15 +253,9 @@ class BetDistributionController extends Controller
 
 
         $data =  BetDistribution::find($id);
-        $dataArt   = DB::table('durable_articles')
-        ->where('code_DurableArticles', $data->durable_articles_id)
-        ->get();
         $data->status = "off";
 
-        DurableArticles::where('code_DurableArticles', $data->durable_articles_id)->update([
-            'bet_on_distribution_number' => $dataArt[0]->bet_on_distribution_number - $data->amount_bet_distribution,
-            'damaged_number' => $dataArt[0]->damaged_number + $data->amount_bet_distribution,
-        ]);
+
 
         DurableArticlesDamaged::where('durable_articles_id', $data->durable_articles_id)->update([
             'status' => "0", // เเทงจำหน่าย
