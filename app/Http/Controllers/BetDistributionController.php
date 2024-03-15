@@ -224,19 +224,8 @@ class BetDistributionController extends Controller
         $data =  BetDistribution::find($request["id"]);
         $data->statusApproval = "2";
         $data->commentApproval = $request['commentApproval'];;
-        $data->save();
-
-
-
-        $dataArt   = DB::table('durable_articles')
-        ->where('code_DurableArticles', $data->durable_articles_id)
-        ->get();
         $data->status = "off";
-
-        DurableArticles::where('code_DurableArticles', $data->durable_articles_id)->update([
-            'bet_on_distribution_number' => $dataArt[0]->bet_on_distribution_number - $data->amount_bet_distribution,
-            'damaged_number' => $dataArt[0]->damaged_number + $data->amount_bet_distribution,
-        ]);
+         $data->save();
 
         DurableArticlesDamaged::where('durable_articles_id', $data->durable_articles_id)->update([
             'status' => "0", // เเทงจำหน่าย
