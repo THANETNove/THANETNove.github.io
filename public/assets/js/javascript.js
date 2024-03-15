@@ -476,6 +476,9 @@ if (targetUrls === "bet-distribution-indexApproval") {
 if (targetUrls === "return-item-index") {
     setActiveClass("return-item", "return-item-index");
 }
+if (targetUrls === "return-item-show") {
+    setActiveClass("return-item", "return-item-index");
+}
 //รายงาน
 
 if (targetUrls === "report-material") {
