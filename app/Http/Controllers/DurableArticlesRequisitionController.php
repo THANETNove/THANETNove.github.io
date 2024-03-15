@@ -163,21 +163,26 @@ class DurableArticlesRequisitionController extends Controller
     {
 
 
-        $data = DB::table('durable_articles_requisitions')
+        $dataId = DB::table('durable_articles_requisitions')
         ->where('durable_articles_requisitions.id', $id)
-        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
-        ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
-        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
-        ->leftJoin('type_categories', 'durable_articles_requisitions.durable_articles_name', '=', 'type_categories.id')
-        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.id')
-        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
-        ->select('durable_articles_requisitions.*','type_categories.type_name', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
-    'durable_articles.durableArticles_name','durable_articles.warranty_period','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->get();
+
+    $data = DB::table('durable_articles_requisitions')
+    ->where('durable_articles_requisitions.group_withdraw', $dataId[0]->group_withdraw)
+  ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+   ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+     ->leftJoin('durable_articles', 'durable_articles_requisitions.group_id', '=', 'durable_articles.id')
+     ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+      ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+    ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+    ->select('durable_articles_requisitions.*','type_categories.type_name','type_categories.type_code', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
+    'durable_articles.durableArticles_name','durable_articles.warranty_period','durable_articles.description','durable_articles.group_count','durable_articles.durableArticles_number','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
     ->get();
 
 
 
-        return view('durable_articles_requisition.show',['data' =>$data]);
+
+    return view('durable_articles_requisition.show',['data' =>$data]);
     }
 
     /**

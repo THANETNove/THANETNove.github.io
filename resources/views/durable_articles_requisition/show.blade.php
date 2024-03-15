@@ -16,7 +16,8 @@
                                 <label for="prefix" class="form-label">รหัสครุภัณฑ์ </label>
                                 <input type="text" class="form-control" id="code_durable_articles"
                                     name="code_durable_articles" placeholder="รหัสครุภัณฑ์"
-                                    value="{{ $data[0]->code_durable_articles }}" required />
+                                    value="{{ $data[0]->category_code }}-{{ $data[0]->type_code }}-{{ $data[0]->description }}"
+                                    required />
                             </div>
                             <div class="mb-3 col-md-6">
 
@@ -25,24 +26,27 @@
                                     name="code_durable_articles" placeholder="รหัสครุภัณฑ์"
                                     value="{{ $data[0]->category_name }}" required />
                             </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="prefix" class="form-label">ชื่อครุภัณฑ์ </label>
-                                <input type="text" class="form-control" value="{{ $data[0]->durableArticles_name }}">
-                            </div>
                             <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
-                                <label for="prefix" class="form-label">รายละเอียดครุภัณฑ์</label>
+                                <label for="prefix" class="form-label"> ชื่อครุภัณฑ์</label>
                                 <input type="text" class="form-control" name="durable_articles_name" placeholder="ชื่อ"
                                     value={{ $data[0]->type_name }} required />
                                 <div id="popup-durable" style="display: none;" class="mt-2">
                                     <!-- Content of the popup goes here -->
                                 </div>
                             </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="prefix" class="form-label">รายละเอียดครุภัณฑ์ </label>
+                                <input type="text" class="form-control" value="{{ $data[0]->durableArticles_name }}">
+                            </div>
+                            @php
+                                $countData = $data->count();
+                            @endphp
 
                             <div class="mb-3 col-md-6">
                                 <label for="prefix" class="form-label">จำนวนที่ต้องการเบิก</label>
                                 <input type="number" class="form-control @error('amount_withdraw') is-invalid @enderror"
                                     id="amount_withdraw" name="amount_withdraw" placeholder="จำนวนที่ต้องการเบิก"
-                                    value="{{ $data[0]->amount_withdraw }}" required />
+                                    value="{{ $countData }}" required />
 
                             </div>
                             <div class="mb-3 col-md-6">
@@ -61,7 +65,8 @@
                                     <label for="name_durable_articles_count" class="form-label">ชื่อ นามสกุล ผู้เบิก
                                     </label>
                                     @php
-                                        $name = $data[0]->prefix . ' ' . $data[0]->first_name . ' ' . $data[0]->last_name;
+                                        $name =
+                                            $data[0]->prefix . ' ' . $data[0]->first_name . ' ' . $data[0]->last_name;
                                     @endphp
                                     <input type="text"
                                         class="form-control @error('name_durable_articles_count') is-invalid @enderror"
@@ -85,34 +90,7 @@
                                 </label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $data[0]->building_name }} &nbsp;{{ $data[0]->floor }} &nbsp;{{ $data[0]->room_name }}</textarea>
                             </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="name_durable_articles_count" class="form-label">ระยะประกัน
 
-                                </label>
-                                @php
-                                    $originalDate = $data[0]->warranty_period;
-                                    $newDate = (new DateTime($originalDate))->format('d/m/Y');
-                                    $newDate2 = new DateTime($originalDate);
-                                    $targetDate = $newDate2;
-                                    $now = new DateTime();
-
-                                    $daysRemaining = $now > $targetDate ? 0 : $now->diff($targetDate)->format('%a') + 1;
-                                @endphp
-                                <div>
-                                    {{ $newDate }}
-                                    @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
-                                        <span class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
-                                    @else
-                                        @if ($daysRemaining > 0)
-                                            <span class="badge bg-label-primary me-1">เหลือเวลา
-                                                {{ $daysRemaining }} วัน</span>
-                                        @else
-                                            <span class="badge bg-label-warning me-1">หมดประกัน</span>
-                                        @endif
-                                    @endif
-                                </div>
-
-                            </div>
                             @if ($data[0]->status == 'on')
                                 <div class="mb-3 col-md-6">
                                     <label for="name_durable_articles_count" class="form-label">การอนุมัติ
@@ -153,7 +131,7 @@
                                 </label>
                                 @php
                                     $dateOriginal = $data[0]->created_at;
-                                    $newFormatDate = (new DateTime($originalDate))->format('d/m/Y');
+                                    $newFormatDate = (new DateTime($dateOriginal))->format('d/m/Y');
 
                                 @endphp
                                 <div>
@@ -162,6 +140,60 @@
                                         {{ $newFormatDate }} </span>
                                 </div>
 
+                            </div>
+                            <div class="table-responsive text-nowrap mt-3">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>รหัส</th>
+                                            <th>จำนวน</th>
+                                            <th>ระยะประกัน</th>
+                                        </tr>
+                                    </thead>
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    <tbody class="table-border-bottom-0">
+                                        @foreach ($data as $da)
+                                            @php
+                                                $originalDate = $da->warranty_period;
+                                                $newDate = (new DateTime($originalDate))->format('d/m/Y');
+                                                $newDate2 = new DateTime($originalDate);
+                                                $targetDate = $newDate2;
+                                                $now = new DateTime();
+
+                                                $daysRemaining =
+                                                    $now > $targetDate ? 0 : $now->diff($targetDate)->format('%a') + 1;
+                                            @endphp
+
+
+                                            <tr>
+                                                <td>{{ $i++ }}</td>
+                                                <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}-{{ $da->group_count }}
+                                                </td>
+                                                <td>{{ number_format($da->durableArticles_number) }}</td>
+                                                <td>
+                                                    <div>
+                                                        {{ $newDate }}
+                                                        @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
+                                                            <span
+                                                                class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
+                                                        @else
+                                                            @if ($daysRemaining > 0)
+                                                                <span class="badge bg-label-primary me-1">เหลือเวลา
+                                                                    {{ $daysRemaining }} วัน</span>
+                                                            @else
+                                                                <span class="badge bg-label-warning me-1">หมดประกัน</span>
+                                                            @endif
+                                                        @endif
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
 
                         </div>
