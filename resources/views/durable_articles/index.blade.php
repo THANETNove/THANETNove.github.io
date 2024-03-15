@@ -27,7 +27,7 @@
                                                 <th>ประเภทครุภัณฑ์</th>
                                                 <th>ชื่อ</th>
                                                 <th>รายละเอียด</th>
-                                                <th>จำนวน</th>
+                                                <th>จำนวนเต็ม</th>
                                                 <th>เหลือ</th>
                                                 <th>ชำรุด</th>
                                                 <th>แทงจำหน่าย</th>
@@ -49,7 +49,7 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    ก
+
                                                     <td>{{ number_format($da->codeDurableArticlesCount) }}</td>
                                                     <td>{{ number_format($da->remainingAmountCount) }}</td>
                                                     <td>{{ number_format($da->damagedNumberCount) }}</td>

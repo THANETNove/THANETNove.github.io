@@ -162,6 +162,7 @@ class DurableArticlesRepairController extends Controller
     public function destroy($id)
     {
 
+
         $data =  DurableArticlesRepair::find($id);
         $dataArt  = DB::table('durable_articles')
         ->where('code_DurableArticles', $data->durable_articles_id)
@@ -174,9 +175,9 @@ class DurableArticlesRepairController extends Controller
             'status' =>  "0",
 
         ]);
-        DurableArticles::where('code_DurableArticles',  $data->durable_articles_id)->update([
-            'repair_number' =>   $dataArt[0]->repair_number - $data->amount_repair,
-            'damaged_number' =>   $dataArt[0]->damaged_number + $data->amount_repair,
+        DurableArticles::where('id',  $data->durable_articles_id)->update([
+            'repair_number' =>  0,
+            'damaged_number' =>   1,
 
         ]);
 
@@ -206,9 +207,9 @@ class DurableArticlesRepairController extends Controller
             'status' =>  "3",
 
         ]);
-        DurableArticles::where('code_DurableArticles',  $data->durable_articles_id)->update([
-            'repair_number' =>   $dataArt[0]->repair_number - $data->amount_repair,
-            'remaining_amount' =>   $dataArt[0]->remaining_amount + $data->amount_repair,
+        DurableArticles::where('id',  $data->durable_articles_id)->update([
+            'repair_number' =>   0,
+            'remaining_amount' =>   1,
 
         ]);
 
