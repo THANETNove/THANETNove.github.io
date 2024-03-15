@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DurableArticlesRequisition;
 use App\Models\DurableArticles;
+use App\Models\Buy;
 use DB;
 use Auth;
 use PDF;
@@ -169,11 +170,11 @@ class DurableArticlesRequisitionController extends Controller
 
     $data = DB::table('durable_articles_requisitions')
     ->where('durable_articles_requisitions.group_withdraw', $dataId[0]->group_withdraw)
-  ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
-   ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
-     ->leftJoin('durable_articles', 'durable_articles_requisitions.group_id', '=', 'durable_articles.id')
-     ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-      ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+    ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+    ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+    ->leftJoin('durable_articles', 'durable_articles_requisitions.group_id', '=', 'durable_articles.id')
+    ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+    ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
     ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
     ->select('durable_articles_requisitions.*','type_categories.type_name','type_categories.type_code', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
     'durable_articles.durableArticles_name','durable_articles.warranty_period','durable_articles.description','durable_articles.group_count','durable_articles.durableArticles_number','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
@@ -191,20 +192,47 @@ class DurableArticlesRequisitionController extends Controller
     public function edit(string $id)
     {
 
-        $data = DB::table('durable_articles_requisitions')
+        $dataId = DB::table('durable_articles_requisitions')
         ->where('durable_articles_requisitions.id', $id)
+        ->get();
+        $data = DB::table('durable_articles_requisitions')
+        ->where('durable_articles_requisitions.group_withdraw', $dataId[0]->group_withdraw)
         ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
-        ->leftJoin('type_categories', 'durable_articles_requisitions.durable_articles_name', '=', 'type_categories.type_code')
-        ->leftJoin('durable_articles', 'durable_articles_requisitions.durable_articles_id', '=', 'durable_articles.code_DurableArticles')
-        ->leftJoin('categories', 'durable_articles_requisitions.group_id', '=', 'categories.category_code')
+        ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+        ->leftJoin('durable_articles', 'durable_articles_requisitions.group_id', '=', 'durable_articles.id')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
-        ->select('durable_articles_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
-    'durable_articles.durableArticles_name','type_categories.type_name','durable_articles.remaining_amount','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
-    ->get();
+        ->selectRaw('count(durable_articles_requisitions.group_withdraw) as groupWithdrawCount,
+        durable_articles_requisitions.*,
+        type_categories.type_name,
+        type_categories.type_code,
+        users.prefix,
+        users.first_name,
+        users.last_name,
+        departments.department_name,
+        durable_articles.durableArticles_name,
+        durable_articles.warranty_period,
+        durable_articles.description,
+        durable_articles.remaining_amount,
+        durable_articles.group_count,
+        durable_articles.durableArticles_number,
+        categories.category_name,
+        categories.category_code,
+        storage_locations.building_name,
+        storage_locations.floor,
+        storage_locations.room_name')
+        ->get();
+
+
+        $countData = DB::table('durable_articles')
+        ->where('code_DurableArticles', $dataId[0]->durable_articles_id)
+        ->where('remaining_amount', 1)
+        ->count();
 
 
 
-        return view('durable_articles_requisition.edit',['data' =>$data]);
+        return view('durable_articles_requisition.edit',['data' =>$data,'countData' => $countData]);
     }
 
     /**
@@ -213,19 +241,70 @@ class DurableArticlesRequisitionController extends Controller
     public function update(Request $request, string $id)
     {
 
-
         $data = DurableArticlesRequisition::find($id);
 
-        $amount = $data["amount_withdraw"] +  $request["remaining_amount"];
-        $amount_wit =  $amount - $request["amount_withdraw"];
 
-        DurableArticles::where('id', $data['durable_articles_name'])->update([
-            'remaining_amount' =>  $amount_wit,
-        ]);
+        $dataRequisitions = DB::table('durable_articles_requisitions')
+        ->where('durable_articles_requisitions.group_withdraw', $data->group_withdraw)
+        ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+        ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+        ->leftJoin('durable_articles', 'durable_articles_requisitions.group_id', '=', 'durable_articles.id')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->select('durable_articles_requisitions.*','type_categories.type_name','type_categories.type_code', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
+        'durable_articles.durableArticles_name','durable_articles.warranty_period','durable_articles.description','durable_articles.group_count','durable_articles.durableArticles_number','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->orderBy('durable_articles_requisitions.id','DESC')
+        ->get();
 
-        DurableArticlesRequisition::where('id', $id)->update([
-            'amount_withdraw' =>  $request["amount_withdraw"],
-        ]);
+        if ( $request->amount_withdraw <  $request->previous_amount_withdraw) {// ลบค่าการเบิก
+
+           $number =    $request->previous_amount_withdraw  - $request->amount_withdraw;
+           for ($i = 0; $i < $number ; $i++) { //รับเข้าครั้งเเรก
+            $requisition = DurableArticlesRequisition::find($dataRequisitions[$i]->id);
+            $requisition->delete();
+            DurableArticles::where('id', $dataRequisitions[$i]->group_id)->update([
+                'remaining_amount' =>  1,
+              ]);
+            }
+
+        }
+
+
+        if ( $request->amount_withdraw > $request->previous_amount_withdraw  ) { //เพิ่มค่า การเบิก
+            $number =  $request->amount_withdraw - $request->previous_amount_withdraw;
+            $dataArticles= DB::table('durable_articles')
+            ->where('code_DurableArticles',$dataRequisitions[0]->durable_articles_id)
+            ->where('remaining_amount',1)
+            ->orderBy('durable_articles.id','ASC')
+            ->get();
+
+
+
+            for ($i = 0; $i < $number ; $i++) {
+                $data = new DurableArticlesRequisition;
+                $data->id_user = $dataRequisitions[0]->id_user;
+                $data->group_id = $dataArticles[$i]->id;
+                $data->code_durable_articles = $request['code_durable_articles'] . '-' . $dataArticles[$i]->group_count;
+                $data->durable_articles_id = $dataRequisitions[0]->durable_articles_id;
+                $data->group_withdraw = $dataRequisitions[0]->group_withdraw;
+                $data->amount_withdraw = 1;
+                $data->name_type = $dataRequisitions[0]->name_type;
+                $data->name_durable_articles_count = $request['name_durable_articles_count'];
+                $data->statusApproval = "0";
+                $data->status = "0";
+                $data->save();
+
+                DurableArticles::where('id',  $dataArticles[$i]->id)->update([
+                    'remaining_amount' =>  0,
+                  ]);
+            }
+
+
+
+
+
+        }
 
         return redirect('durable-articles-requisition-index')->with('message', "บันทึกสำเร็จ");
     }

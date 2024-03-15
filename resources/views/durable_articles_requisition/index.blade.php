@@ -90,9 +90,9 @@
                                                                     href="{{ url('durable-articles-requisition-show', $da->id) }}"><i
                                                                         class='bx bxs-show'></i> View</a>
                                                                 @if ($da->statusApproval == '0' && $da->status == '0')
-                                                                    {{--  <a class="dropdown-item"
+                                                                    <a class="dropdown-item"
                                                                         href="{{ url('durable-articles-requisition-edit', $da->id) }}"><i
-                                                                            class="bx bx-edit-alt me-1"></i> Edit</a> --}}
+                                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
 
                                                                     <a class="dropdown-item alert-destroy"
                                                                         href="{{ url('durable-articles-requisition-destroy', $da->id) }}"><i

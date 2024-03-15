@@ -37,7 +37,8 @@
                                     <label for="prefix" class="form-label">รหัสครุภัณฑ์ </label>
                                     <input type="text" class="form-control" id="code_durable_articles"
                                         name="code_durable_articles" placeholder="รหัสครุภัณฑ์"
-                                        value="{{ $data[0]->code_durable_articles }}" required readonly />
+                                        value="{{ $data[0]->category_code }}-{{ $data[0]->type_code }}-{{ $data[0]->description }}"
+                                        required readonly />
 
                                 </div>
 
@@ -56,7 +57,7 @@
                                     <label for="prefix" class="form-label">ครุภัณฑ์ที่เหลือ</label>
                                     <input type="text"
                                         class="form-control  @error('remaining_amount') is-invalid @enderror"
-                                        id="remaining-amount" name="remaining_amount" value={{ $data[0]->remaining_amount }}
+                                        id="remaining-amount" name="remaining_amount" value={{ $countData }}
                                         placeholder="ครุภัณฑ์ที่เหลือ" required readonly />
                                     @error('remaining_amount')
                                         <span class="invalid-feedback" role="alert">
@@ -71,10 +72,22 @@
                                     </label>
                                     <input type="number"
                                         class="form-control @error('amount_withdraw') is-invalid @enderror"
-                                        id="amount_withdraw" name="amount_withdraw"
-                                        placeholder="จำนวนที่ต้องการ{{ $data[0]->name_type }}"
-                                        value="{{ $data[0]->amount_withdraw }}" min="1"
-                                        max="{{ $data[0]->amount_withdraw + $data[0]->remaining_amount }}" required />
+                                        id="amount_withdraw" name="amount_withdraw" placeholder="จำนวนที่ต้องการ"
+                                        value="{{ $data[0]->groupWithdrawCount }}" min="1"
+                                        max="{{ $data[0]->groupWithdrawCount + $countData }}" required />
+                                    @error('amount_withdraw')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6" style="display: none">
+                                    <label for="prefix" class="form-label">จำนวนเบิกก่อนหน้า
+                                    </label>
+                                    <input type="number"
+                                        class="form-control @error('amount_withdraw') is-invalid @enderror"
+                                        id="amount_withdraw" name="previous_amount_withdraw" placeholder="จำนวนที่ต้องการ"
+                                        value="{{ $data[0]->groupWithdrawCount }}" required />
                                     @error('amount_withdraw')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
