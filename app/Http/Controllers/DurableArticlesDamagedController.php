@@ -83,16 +83,10 @@ class DurableArticlesDamagedController extends Controller
         $data->save();
 
 
-        $damaged =  $request['amount_withdraw'];
-        $remaining = $request['remaining_amount'];
 
-        $amount =  $remaining - $damaged;
 
-        $amount_damaged = DB::table('durable_articles')
-        ->where('code_DurableArticles', $request['durable_articles_id'])
-        ->get();
 
-        DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
+        DurableArticles::where('id', $request['durable_articles_id'])->update([
             'remaining_amount' =>  0,
             'damaged_number' => 1,
         ]);

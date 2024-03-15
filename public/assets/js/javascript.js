@@ -903,10 +903,11 @@ function groupDurableArticles(selectedValue) {
             durableArticlesRes = res;
             console.log("res", res);
             var groupName = $("#durable_articles_name");
-            var groupName = $("#durable_articles_name2");
+            var groupName2 = $("#durable_articles_name2");
 
             // Clear existing options (optional, depending on your use case)
             groupName.empty();
+            groupName2.empty();
 
             // Loop through each element in the 'res' array
             groupName.append(
@@ -917,9 +918,25 @@ function groupDurableArticles(selectedValue) {
                     disabled: true, // or use .prop('selected', true)
                 })
             );
+            groupName2.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกครุภัณฑ์",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
 
             $.each(res, function (index, data) {
                 groupName.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.type_name,
+                    })
+                );
+            });
+            $.each(res, function (index, data) {
+                groupName2.append(
                     $("<option>", {
                         value: data.id,
                         text: data.type_name,
