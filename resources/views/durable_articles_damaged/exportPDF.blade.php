@@ -53,7 +53,6 @@
                                                     <th scope="row">{{ $i++ }}</th>
 
                                                     <td>{{ $da->code_durable_articles }}</td>
-
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
