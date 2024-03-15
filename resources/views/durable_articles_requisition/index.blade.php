@@ -64,12 +64,12 @@
                                                     </td>
 
                                                     <td>
-                                                        @if ($da->status == '0')
+                                                        @if ($da->status == '0' && $da->statusApproval != '2')
                                                             <span class="badge bg-label-success me-1">เบิกครุภัณฑ์</span>
                                                         @elseif ($da->status == '1')
                                                             <span
                                                                 class="badge bg-label-warning me-1">ยกเลิกเบิกครุภัณฑ์</span>
-                                                        @else
+                                                        @elseif ($da->status == '2')
                                                             <span class="badge bg-label-primary me-1">คึนครุภัณฑ์</span>
                                                         @endif
                                                     </td>
