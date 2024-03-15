@@ -151,16 +151,13 @@ class DurableArticlesDamagedController extends Controller
      */
     public function destroy(string $id)
     {
+
+
         $data_damaged = DurableArticlesDamaged::find($id);
-        $data = DB::table('durable_articles')
-        ->where('code_DurableArticles', $data_damaged->durable_articles_id)
-        ->get();
-       /*  $data = DurableArticles::find($data_damaged->durable_articles_name); */
 
-
-        DurableArticles::where('code_DurableArticles', $data_damaged->durable_articles_id)->update([
-            'remaining_amount' =>  $data[0]->remaining_amount + $data_damaged->amount_damaged,
-            'damaged_number' => $data[0]->damaged_number - $data_damaged->amount_damaged,
+        DurableArticles::where('id', $data_damaged->durable_articles_id)->update([
+            'remaining_amount' => 1,
+            'damaged_number' => 0,
         ]);
 
         DurableArticlesDamaged::where('id', $id)->update([
