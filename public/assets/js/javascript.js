@@ -1040,15 +1040,7 @@ $("#durable_articles_name2").on("change", function () {
                     $("<option>", {
                         value: data.id,
                         text:
-                            data.durableArticles_name +
-                            `   ` +
-                            data.category_code +
-                            "-" +
-                            data.type_code +
-                            "-" +
-                            data.description +
-                            "-" +
-                            data.group_count,
+                            data.durableArticles_name + " " + data.group_count,
                     })
                 );
             });
@@ -1260,7 +1252,7 @@ function calculateGroup(selectedValue) {
             groupName.append(
                 $("<option>", {
                     value: "",
-                    text: "เลือกวัสดุ",
+                    text: "เลือกครุภัณฑ์",
                     selected: true,
                     disabled: true, // or use .prop('selected', true)
                 })
@@ -1270,7 +1262,8 @@ function calculateGroup(selectedValue) {
                 groupName.append(
                     $("<option>", {
                         value: data.id,
-                        text: data.durableArticles_name,
+                        text:
+                            data.durableArticles_name + " " + data.group_count,
                     })
                 );
             });
@@ -1283,7 +1276,7 @@ function calculateGroup(selectedValue) {
 
 $("#calculate-id").on("change", function () {
     var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
-    console.log("6666");
+
     // ใช้ globalRes ที่เก็บค่า res จาก getGroup
     var foundItem = calculateRes.find(function (item) {
         return item.id == selectedValue;

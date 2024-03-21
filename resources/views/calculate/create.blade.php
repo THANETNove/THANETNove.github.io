@@ -31,13 +31,13 @@
                                     </select>
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="buy_name" class="form-label">ชื่อวัสดุ</label>
+                                    <label for="buy_name" class="form-label">ชื่อครุภัณฑ์</label>
                                     {{--  <input id="buy_name" type="text"
                                         class="form-control @error('buy_name') is-invalid @enderror" name="buy_name"
                                         required placeholder="ชื่อวัสดุ" autocomplete="buy_name" readonly> --}}
                                     <select class="form-select" name="buy_name" id="calculate-id"
                                         aria-label="Default select example">
-                                        <option selected>เลือกชื่อวัสดุ</option>
+                                        <option selected>เลือกครุภัณฑ์</option>
                                     </select>
                                     @error('buy_name')
                                         <span class="invalid-feedback" role="alert">

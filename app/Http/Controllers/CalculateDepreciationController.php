@@ -37,20 +37,20 @@ class CalculateDepreciationController extends Controller
 
 
         $data = DB::table('durable_articles')
-        ->where('durable_articles.group_id', '=', $id)
+        ->where('durable_articles.group_class', '=', $id)
         ->where(function ($query) use ($currentYear) {
             $query->whereYear('durable_articles.depreciation_date', '<>', $currentYear)
                   ->orWhereNull('durable_articles.depreciation_date');
         })
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->leftJoin('buys', 'durable_articles.id', '=', 'buys.buy_name')
         ->leftJoin('bet_distributions', 'durable_articles.id', '=', 'bet_distributions.durable_articles_name')
         ->whereRaw('durable_articles.id = buys.buy_name') // Corrected the condition
-        ->select('durable_articles.*','buys.price_per_piece','bet_distributions.salvage_price','bet_distributions.statusApproval')
+        ->select('durable_articles.*','buys.price_per_piece','bet_distributions.salvage_price',
+        'bet_distributions.statusApproval','categories.category_code','type_categories.type_code')
         ->orderBy('durable_articles.id', 'ASC')
         ->get();
-
-
-
         return response()->json($data);
     }
 
@@ -68,7 +68,7 @@ class CalculateDepreciationController extends Controller
         $data->depreciation_price = $numberWithoutComma;
         $data->depreciation_date =  $date;
         $data->save();
-        
+
         return redirect('calculator-create')->with('message', "บันทึกสำเร็จ");
     }
 
