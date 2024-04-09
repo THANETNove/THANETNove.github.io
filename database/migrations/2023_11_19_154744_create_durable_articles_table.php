@@ -28,6 +28,9 @@ return new class extends Migration
             $table->string('repair_number')->nullable()->comment('จำนวนการซ่อม');
             $table->string('warranty_period')->nullable()->comment('ระยะเวลาประกัน');
             $table->string('status')->nullable()->comment('สถานะ on/ off');
+            $table->string('price_per')->nullable()->comment('สถานะ on/ off');
+            $table->string('total_price')->nullable()->comment('สถานะ on/ off');
+            $table->string('details')->nullable()->comment('สถานะ on/ off');
             $table->timestamps();
         });
     }

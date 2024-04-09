@@ -23,5 +23,8 @@ class DurableArticles extends Model
         'bet_on_distribution_number',//แทงจำหน่ายครุภัณฑ์
         'repair_number',//การซ่อม
         'status', //สถานะ on/ off
+        'price_per', //สถานะ on/ off
+        'total_price', //สถานะ on/ off
+        'details', //สถานะ on/ off
     ];
 }
