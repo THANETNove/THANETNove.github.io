@@ -514,6 +514,7 @@ function myFunction(selectedValue) {
 var globalRes; // สร้างตัวแปร global เพื่อเก็บค่า res
 var globalCount;
 var globalResType; // สร้างตัวแปร global เพื่อเก็บค่า res
+var globalStorage; // ที่เก็บของ
 
 function getCategories(selectedValue) {
     globalResType = selectedValue;
@@ -594,6 +595,7 @@ function getGroup(selectedValue) {
 
             globalRes = res[0];
             globalCount = res[1];
+            globalStorage = res[2];
             var groupSelect = $("#buy_name");
             // Clear existing options (optional, depending on your use case)
             groupSelect.empty();
@@ -637,7 +639,44 @@ $("#buy_name").on("change", function () {
     var foundItem = globalRes.find(function (item) {
         return item.id == selectedValue;
     });
+    var foundStorage = globalStorage.find(function (item) {
+        return item.code_storage == foundItem.code_material_storage;
+    });
+    console.log("foundItem", foundItem);
+    console.log("globalStorage", globalStorage);
+    console.log("foundStorage", foundStorage.code_storage);
     if (foundItem) {
+        var groupSelect = $("#code_material_storage");
+        // Clear existing options (optional, depending on your use case)
+        groupSelect.empty();
+
+        // Loop through each element in the 'res' array
+        groupSelect.append(
+            $("<option>", {
+                value: "",
+                text: globalResType == 1 ? "ที่เก็บวัสดุ" : "ที่เก็บครุภัณฑ์",
+                selected: true,
+                disabled: true, // or use .prop('selected', true)
+            })
+        );
+
+        $.each(globalStorage, function (index, data) {
+            groupSelect.append(
+                $("<option>", {
+                    value: globalStorage[index].code_storage,
+                    text:
+                        globalStorage[index].building_name +
+                        " " +
+                        globalStorage[index].floor +
+                        " " +
+                        globalStorage[index].room_name,
+                    selected:
+                        foundStorage.code_storage ==
+                            globalStorage[index].code_storage && true,
+                })
+            );
+        });
+
         $("#categories_id").val(
             globalResType == 1
                 ? foundItem.code_material
@@ -657,6 +696,7 @@ $("#buy_name").on("change", function () {
 
         if (globalResType == 2) {
             $("#quantity").val(globalCount);
+            $("#code-id").val(foundItem.code_DurableArticles);
             /* document
                 .getElementById("quantity")
                 .setAttribute("max", globalCount); */

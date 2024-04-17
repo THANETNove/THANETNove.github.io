@@ -103,7 +103,11 @@ class BuyController extends Controller
             ->count();
 
 
-            return response()->json([$data, $dataCount]);
+            $dataStorage =  DB::table('storage_locations')
+            ->get();
+
+
+            return response()->json([$data, $dataCount,$dataStorage]);
 
         }
 
@@ -119,164 +123,56 @@ class BuyController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'type' => ['required', 'string', 'max:255'],
-        ]);
+
+
+        $durable_cont = DB::table('durable_articles')
+        ->where('code_DurableArticles',$request['code_id'])
+        ->count();
+
+        $durable_name = DB::table('durable_articles')
+        ->where('code_DurableArticles',$request['code_id'])
+        ->get();
+
+        $item_name =   $durable_name[0];
+
+
+        $currentDate = Carbon::now();
+        $thaiYear = ($currentDate->year + 543) % 100;
+        $thaiMonth = $currentDate->format('m');
 
 
 
-        if ($request['type'] == 1) {
-            $mate = DB::table('materials')
-            ->where("code_material",'=',$request['categories_id'])
-            ->orderBy('id', 'ASC')
-            ->get();
-
-            $number = $request['quantity'] + $mate[0]->material_number;
-            $amount = $request['quantity'] + $mate[0]->remaining_amount;
-
-            $mat =  Material::find($mate[0]->id);
-            $mat->material_number =  $number;
-            $mat->remaining_amount =  $amount;
-            $mat->save();
-
-            $data = new Buy;
-            $data->typeBuy = $request['type'];
-            $data->group_id = $request['group_id'];
-            $data->buy_name = $request['buy_name'];
-            $data->code_buy = $request['categories_id'];
-            $data->quantity =  $request['quantity'];
-            $data->counting_unit = $request['counting_unit'];
-            $data->price_per_piece = $request['price_per_piece'];
-            $data->total_price = $request['total_price'];
-            $data->details = $request['details'];
-            $data->date_enter = $request['date_enter'];
-            $data->status = "0";
-            $data->save();
+    $lj = 1;
+    for ($i = 0; $i < $request['quantity']; $i++) {
+        $countDurable = $thaiMonth . "-" . $thaiYear . "/" . $durable_cont + $lj++;
 
 
-        }else{
+        $data = new DurableArticles;
+        $data->code_DurableArticles = $request['code_id'];
+        $data->group_class = $item_name->group_class;
+        $data->type_durableArticles = $item_name->type_durableArticles;
+        $data->description = $item_name->description;
+        $data->group_count = $countDurable;
+        $data->durableArticles_name = $item_name->durableArticles_name;
+        $data->durableArticles_number = 1;
+        $data->remaining_amount = 1;
+        $data->name_durableArticles_count = $item_name->name_durableArticles_count;
+        $data->code_material_storage = $request['code_material_storage'];
+        $data->warranty_period = $request['warranty_period'];
+        $data->price_per = $request['price_per'];
+        $data->total_price = $request['total_price'];
+        $data->details = $request['details'];
+        $data->damaged_number = 0;
+        $data->bet_on_distribution_number = 0;
+        $data->repair_number = 0;
+        $data->status = "on";
+        $data->save();
+    }
 
 
+        return redirect('durable-articles-index')->with('message', "บันทึกสำเร็จ");
 
 
-            $dura = DB::table('durable_articles')
-            ->where("durable_articles.id",'=',  $request['buy_name'])
-            ->orderBy('id', 'ASC')
-            ->get();
-
-
-
-            $number = $request['quantity'];
-
-
-
-            $du = DB::table('durable_articles')
-            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
-            ->where("durable_articles.description",'=',  $dura[0]->description)
-            ->where("durable_articles.durableArticles_number",'=',  0)
-            ->select('durable_articles.*','categories.category_code','type_categories.type_code')
-            ->orderBy('id', 'ASC');
-
-            $du2 =  DB::table('durable_articles')
-            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
-            ->where("durable_articles.description",'=',  $dura[0]->description)
-            ->where("durable_articles.durableArticles_number",'=',  1)
-            ->select('durable_articles.*','categories.category_code','type_categories.type_code')
-            ->orderBy('id', 'ASC');
-
-            $du3 =  DB::table('durable_articles')
-            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
-            ->where("durable_articles.description",'=',  $dura[0]->description)
-            ->select('durable_articles.*','categories.category_code','type_categories.type_code')
-            ->orderBy('id', 'ASC');
-
-            $duCount = $du->count();
-            $duCount2 = $du2->count();
-            $duArray = $du->get();
-            $duArray2 = $du2->get();
-            $duArray3 = $du3->get();
-
-            $currentDate = Carbon::now();
-            $thaiYear = ($currentDate->year + 543) % 100;
-            $thaiMonth = $currentDate->format('m');
-
-
-
-          $num =   $number - $duCount;
-            for ($i = 0; $i < $number ; $i++) { //รับเข้าครั้งเเรก
-                if ($i < $duCount) {
-                $affected = DB::table('durable_articles')
-                    ->where('id', $duArray[$i]->id) // แก้ไขจาก description เป็น id
-                    ->where('durableArticles_number', 0)
-                    ->update(['remaining_amount' => 1,'durableArticles_number' => 1,]);
-
-                    $data = new Buy;
-                    $data->typeBuy = $request['type'];
-                    $data->group_id = $request['group_id'];
-                    $data->buy_name =  $duArray[$i]->id;
-                    $data->code_buy = $duArray[$i]->category_code . '-' . $duArray[$i]->type_code . '-' . $duArray[$i]->description;
-                    $data->code_number =  $duArray[$i]->group_count;
-                    $data->quantity =  1;
-                    $data->counting_unit = $request['counting_unit'];
-                    $data->price_per_piece = $request['price_per_piece'];
-                    $data->total_price = $request['total_price'];
-                    $data->details = $request['details'];
-                    $data->date_enter = $request['date_enter'];
-                    $data->status = "0";
-                    $data->save();
-                }else{
-
-                    $countDurable = $thaiMonth . "-" . $thaiYear . "/" . $duCount2+$i+1;
-
-                    $dataArt = new DurableArticles;
-                    $dataArt->code_DurableArticles =   $duArray3[0]->code_DurableArticles;
-                    $dataArt->group_class = $duArray3[0]->group_class;
-                    $dataArt->type_durableArticles = $duArray3[0]->type_durableArticles;
-                    $dataArt->description = $duArray3[0]->description;
-                    $dataArt->group_count = $countDurable;
-                    $dataArt->durableArticles_name = $duArray3[0]->durableArticles_name;
-                    $dataArt->durableArticles_number = "1";
-                    $dataArt->remaining_amount = "1";
-                    $dataArt->name_durableArticles_count = $duArray3[0]->name_durableArticles_count;
-                    $dataArt->code_material_storage = $duArray3[0]->code_material_storage;
-                    $dataArt->warranty_period = $duArray3[0]->warranty_period;
-                    $dataArt->damaged_number = 0;
-                    $dataArt->bet_on_distribution_number = 0;
-                    $dataArt->repair_number = 0;
-                    $dataArt->status = "on";
-                    $dataArt->save();
-
-
-                    $data = new Buy;
-                    $data->typeBuy = $request['type'];
-                    $data->group_id = $request['group_id'];
-                    $data->buy_name =  $dataArt->id;
-                    $data->code_buy = $duArray3[0]->category_code . '-' . $duArray3[0]->type_code . '-' . $duArray3[0]->description;
-                    $data->code_number =  $countDurable;
-                    $data->quantity =  1;
-                    $data->counting_unit = $request['counting_unit'];
-                    $data->price_per_piece = $request['price_per_piece'];
-                    $data->total_price = $request['total_price'];
-                    $data->details = $request['details'];
-                    $data->date_enter = $request['date_enter'];
-                    $data->status = "0";
-                    $data->save();
-
-                }
-            }
-        }
-
-
-
-
-
-
-
-
-        return redirect('buy-index')->with('message', "บันทึกสำเร็จ");
     }
 
     /**

@@ -6,7 +6,6 @@
             <select class="form-select  @error('type') is-invalid @enderror" onchange="getCategories(this.value)"
                 name="type" aria-label="Default select example" required>
                 <option selected disabled>เลือกหมวดหมู่</option>
-                <option value="1">วัสดุ</option>
                 <option value="2">ครุภัณฑ์</option>
 
             </select>
@@ -50,6 +49,18 @@
             @enderror
 
         </div>
+        <div class="mb-3 col-md-6" style="display: none">
+            <label for="categories_id" class="form-label" id="id-group">code-id</label>
+            <input id="code-id" type="text" class="form-control @error('code-id') is-invalid @enderror"
+                name="code_id" required placeholder="id" autocomplete="code-id" readonly>
+
+            @error('categories_id')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+
+        </div>
 
         <div class="mb-3 col-md-6">
             <label for="quantity" class="form-label">จำนวน</label>
@@ -76,12 +87,11 @@
 
         </div>
         <div class="mb-3 col-md-6">
-            <label for="price_per_piece" class="form-label">ราคาต่อ (ชิ้น,หน่วย,อื่นๆ)</label>
-            <input id="price_per_piece" type="number"
-                class="form-control @error('price_per_piece') is-invalid @enderror" name="price_per_piece"
-                placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" min="1" required autocomplete="price_per_piece">
+            <label for="price_per" class="form-label">ราคาต่อ (ชิ้น,หน่วย,อื่นๆ)</label>
+            <input id="price_per" type="number" class="form-control @error('price_per') is-invalid @enderror"
+                name="price_per" placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" min="1" required autocomplete="price_per">
 
-            @error('price_per_piece')
+            @error('price_per')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -102,9 +112,9 @@
 
         </div>
         <div class="mb-3 col-md-6">
-            <label for="total_price" class="form-label">วันรับเข้า</label>
+            <label for="total_price" class="form-label">ระยะเวลประกัน</label>
 
-            <input class="date form-control" type="text" name="date_enter" placeholder="dd-mm-yyyy">
+            <input class="date form-control" type="text" name="warranty_period" placeholder="dd-mm-yyyy">
 
             @error('total_price')
                 <span class="invalid-feedback" role="alert">
@@ -113,8 +123,15 @@
             @enderror
 
         </div>
+        <div class="mb-3 col-md-6">
+            <label for="code_material_storage" class="form-label">ที่เก็บครุภัณฑ์</label>
+            <select class="form-select" aria-label="Default select example" id="code_material_storage"
+                name="code_material_storage" required>
+
+            </select>
+        </div>
         <div class="mb-3 col-md-12">
-            <label for="total_price" class="form-label">รายละเอียด</label>
+            <label for="details" class="form-label">รายละเอียด</label>
             <textarea class="form-control" name="details" id="exampleFormControlTextarea1" rows="3"></textarea>
 
         </div>
