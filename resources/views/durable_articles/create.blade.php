@@ -125,10 +125,10 @@
                                             </select>
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label for="price_per_piece" class="form-label">ราคาต่อ
+                                            <label for="price_per" class="form-label">ราคาต่อ
                                                 (ชิ้น,หน่วย,อื่นๆ)</label>
                                             <input id="price_per" type="number"
-                                                class="form-control @error('price_per_piece') is-invalid @enderror"
+                                                class="form-control @error('price_per') is-invalid @enderror"
                                                 name="price_per" placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" min="1"
                                                 required autocomplete="price_per">
 
@@ -154,7 +154,7 @@
 
                                         </div>
                                         <div class="mb-3 col-md-12">
-                                            <label for="total_price" class="form-label">รายละเอียด</label>
+                                            <label for="details" class="form-label">รายละเอียด</label>
                                             <textarea class="form-control" name="details" id="exampleFormControlTextarea1" rows="3"></textarea>
                                         </div>
                                     </div>

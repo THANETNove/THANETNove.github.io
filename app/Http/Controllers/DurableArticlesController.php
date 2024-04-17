@@ -117,11 +117,14 @@ class DurableArticlesController extends Controller
         $data->description = $request['description'];
         $data->group_count = $countDurable;
         $data->durableArticles_name = $request['durableArticles_name'];
-        $data->durableArticles_number = "0";
-        $data->remaining_amount = "0";
+        $data->durableArticles_number = 1;
+        $data->remaining_amount = 1;
         $data->name_durableArticles_count = $request['name_durableArticles_count'];
         $data->code_material_storage = $request['code_material_storage'];
         $data->warranty_period = $request['warranty_period'];
+        $data->price_per = $request['price_per'];
+        $data->total_price = $request['total_price'];
+        $data->details = $request['details'];
         $data->damaged_number = 0;
         $data->bet_on_distribution_number = 0;
         $data->repair_number = 0;
@@ -148,7 +151,7 @@ class DurableArticlesController extends Controller
         ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
         ->get();
-    
+
         return view('durable_articles.show',['data' =>   $data ]);
 
     }
