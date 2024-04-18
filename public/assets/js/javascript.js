@@ -1607,3 +1607,15 @@ $("#exportFrom").submit(function (event) {
     }
     // ตรวจสอบว่ามีการเลือกประเภทหรือไม่
 });
+
+// ทำการคำนวณราคารวมที่นี่
+
+function calculateTotalPrice() {
+    const quantity = document.getElementById("quantity").value; // จำนวน
+    const price_per = document.getElementById("price_per").value; // ราคาต่อชิ้น
+
+    if (quantity && price_per) {
+        const sum = quantity * price_per;
+        $("#total_price").val(sum);
+    }
+}

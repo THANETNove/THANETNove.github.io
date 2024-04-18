@@ -64,7 +64,8 @@
 
         <div class="mb-3 col-md-6">
             <label for="quantity" class="form-label">จำนวน</label>
-            <input type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity"
+            <input type="number" oninput="calculateTotalPrice()"
+                class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity"
                 placeholder="จำนวน" autocomplete="quantity" min="0">
 
             @error('quantity')
@@ -88,8 +89,9 @@
         </div>
         <div class="mb-3 col-md-6">
             <label for="price_per" class="form-label">ราคาต่อ (ชิ้น,หน่วย,อื่นๆ)</label>
-            <input id="price_per" type="number" class="form-control @error('price_per') is-invalid @enderror"
-                name="price_per" placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" min="1" required autocomplete="price_per">
+            <input id="price_per" oninput="calculateTotalPrice()" type="number"
+                class="form-control @error('price_per') is-invalid @enderror" name="price_per"
+                placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" min="1" required autocomplete="price_per">
 
             @error('price_per')
                 <span class="invalid-feedback" role="alert">
@@ -112,11 +114,11 @@
 
         </div>
         <div class="mb-3 col-md-6">
-            <label for="total_price" class="form-label">ระยะเวลประกัน</label>
+            <label for="warranty_period" class="form-label">ระยะเวลประกัน</label>
 
             <input class="date form-control" type="text" name="warranty_period" placeholder="dd-mm-yyyy">
 
-            @error('total_price')
+            @error('warranty_period')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
