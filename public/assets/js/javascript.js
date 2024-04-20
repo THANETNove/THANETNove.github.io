@@ -1181,6 +1181,64 @@ function groupDurableArticlesRepair(selectedValue) {
             durableArticlesRepairRes = res;
             console.log("res", res);
             var groupName = $("#durable_articles_repair_name");
+            var groupName2 = $("#durable_articles_repair_name2");
+
+            // Clear existing options (optional, depending on your use case)
+            groupName.empty();
+            groupName2.empty();
+
+            // Loop through each element in the 'res' array
+            groupName.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกครุภัณฑ์",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+            groupName2.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกครุภัณฑ์",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+            $.each(res, function (index, data) {
+                groupName.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.type_name,
+                    })
+                );
+            });
+            $.each(res, function (index, data) {
+                groupName2.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.type_name,
+                    })
+                );
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+}
+
+var detailsRepairNameRes;
+$("#durable_articles_repair_name").on("change", function () {
+    var selectedValue = $(this).val();
+
+    $.ajax({
+        url: "get-details_repair_name/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            detailsRepairNameRes = res;
+            console.log("res", res);
+            var groupName = $("#details_repair_name");
 
             // Clear existing options (optional, depending on your use case)
             groupName.empty();
@@ -1198,8 +1256,9 @@ function groupDurableArticlesRepair(selectedValue) {
             $.each(res, function (index, data) {
                 groupName.append(
                     $("<option>", {
-                        value: data.id,
-                        text: data.type_name,
+                        value: data.durable_articles_id,
+                        text:
+                            data.durableArticles_name + " " + data.group_count,
                     })
                 );
             });
@@ -1208,10 +1267,8 @@ function groupDurableArticlesRepair(selectedValue) {
             console.error(error);
         },
     });
-}
-
-var detailsRepairNameRes;
-$("#durable_articles_repair_name").on("change", function () {
+});
+$("#durable_articles_repair_name2").on("change", function () {
     var selectedValue = $(this).val();
 
     $.ajax({
@@ -1270,6 +1327,10 @@ $("#details_repair_name").on("change", function () {
                 "-" +
                 foundItem.group_count
         );
+        /*  $("#amount_withdraw").val(foundItem.amount_damaged); */
+        /*  $("#name-durable_articles-count").val(
+            foundItem.name_durable_articles_count
+        ); */
         $("#durable_articles_id").val(foundItem.durable_articles_id);
         $("#durable_articles_name").val(foundItem.durable_articles_name);
     }
@@ -1635,7 +1696,11 @@ function durableArticlesCode() {
         success: function (res) {
             console.log("res", res);
             if (res.length > 0 && res.length < 2) {
-                if (res[0].damaged_number == 0) {
+                if (
+                    res[0].damaged_number == 0 &&
+                    res[0].bet_on_distribution_number == 0 &&
+                    res[0].repair_number == 0
+                ) {
                     $("#damaged_number_error").text("");
                     $("#durable_id").val(res[0].id);
                     $("#durable_group").val(res[0].category_name);
