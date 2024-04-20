@@ -22,7 +22,7 @@ class BetDistributionController extends Controller
 
         $data = DB::table('bet_distributions')
         ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
-        ->leftJoin('type_categories', 'bet_distributions.durable_articles_name', '=', 'type_categories.id')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
         ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
 
@@ -50,9 +50,10 @@ class BetDistributionController extends Controller
         $data = DB::table('bet_distributions')
         ->where('bet_distributions.status', '=', "on")
         ->where('bet_distributions.statusApproval', '=', "0")
-        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_name', '=', 'durable_articles.id')
+        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
         ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
-        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name');
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
 
 
        if ($search) {

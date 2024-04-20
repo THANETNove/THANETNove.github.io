@@ -21,8 +21,7 @@
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
                                                 <th>รายละเอียดครุภัณฑ์</th>
-                                                <th>จำนวนที่จำหน่าย</th>
-                                                <th>หน่วยนับ</th>
+
                                                 <th>ราคาซาก</th>
                                                 <th>สถานะ </th>
                                                 <th>สถานะการอนุมัติ </th>
@@ -43,8 +42,8 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ number_format($da->amount_bet_distribution) }}</td>
-                                                    <td>{{ $da->name_durable_articles_count }}</td>
+
+
                                                     <td>{{ number_format($da->salvage_price) }}</td>
 
                                                     <td>

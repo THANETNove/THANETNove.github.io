@@ -1032,7 +1032,7 @@ $("#durable_articles_name").on("change", function () {
     });
 });
 
-$("#durable_articles_name2").on("change", function () {
+/* $("#durable_articles_name2").on("change", function () {
     var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
 
     // ใช้ globalRes ที่เก็บค่า res จาก getGroup
@@ -1089,7 +1089,7 @@ $("#durable_articles_name2").on("change", function () {
             console.error(error);
         },
     });
-});
+}); */
 
 $("#details-name").on("change", function () {
     const selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
@@ -1272,11 +1272,11 @@ $("#durable_articles_repair_name2").on("change", function () {
     var selectedValue = $(this).val();
 
     $.ajax({
-        url: "get-details_repair_name/" + selectedValue,
+        url: "get-details_repair_name2/" + selectedValue,
         type: "GET",
         success: function (res) {
             detailsRepairNameRes = res;
-            console.log("res", res);
+            console.log("res 555", res);
             var groupName = $("#details_repair_name");
 
             // Clear existing options (optional, depending on your use case)

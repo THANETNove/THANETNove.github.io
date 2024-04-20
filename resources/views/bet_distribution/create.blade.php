@@ -38,7 +38,7 @@
 
                                 <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
                                     <label for="prefix" class="form-label">ชื่อครุภัณฑ์</label>
-                                    <select class="form-select" id="durable_articles_repair_name"
+                                    <select class="form-select" id="durable_articles_repair_name2"
                                         aria-label="Default select example">
                                         <option selected disabled>เลือกครุภัณฑ์</option>
 
@@ -62,32 +62,6 @@
                                 </div>
 
 
-
-
-                                <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">จำนวนที่จำหน่าย</label>
-                                    <input type="number" class="form-control @error('amount_repair') is-invalid @enderror"
-                                        id="amount_withdraw" name="amount_repair" placeholder="จำนวนที่ชำรุด" min="1"
-                                        required readonly />
-                                    @error('amount_repair')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="name_durable_articles_count" class="form-label">ชื่อเรียกจำนวนนับครุภัณฑ์
-                                    </label>
-                                    <input type="text"
-                                        class="form-control @error('name_durable_articles_count') is-invalid @enderror"
-                                        id="name-durable_articles-count" name="name_durable_articles_count"
-                                        placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์" required readonly />
-                                    @error('name_durable_articles_count')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รายละเอียดการซ่อม</label>
                                     <textarea class="form-control" id="exampleFormControlTextarea1" name="repair_detail" rows="3"></textarea>
