@@ -18,6 +18,7 @@
                                     <input type="text" class="form-control" id="durable_id" name="durable_articles_id"
                                         placeholder="id ครุภัณฑ์ชำรุด" required />
                                 </div>
+                                <p style="color:red; font-size: 18px;" id="damaged_number_error"></p>
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รหัสครุภัณฑ์</label>
                                     <input type="text" class="form-control" id="durable_articles_code"

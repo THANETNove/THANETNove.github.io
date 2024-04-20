@@ -1633,15 +1633,23 @@ function durableArticlesCode() {
         success: function (res) {
             console.log("res", res);
             if (res.length > 0 && res.length < 2) {
-                $("#durable_id").val(res[0].id);
-                $("#durable_group").val(res[0].category_name);
-                $("#durable_name").val(res[0].type_name);
-                $("#durable_description").val(res[0].durableArticles_name);
+                if (res[0].damaged_number == 0) {
+                    $("#damaged_number_error").text("");
+                    $("#durable_id").val(res[0].id);
+                    $("#durable_group").val(res[0].category_name);
+                    $("#durable_name").val(res[0].type_name);
+                    $("#durable_description").val(res[0].durableArticles_name);
+                } else {
+                    $("#damaged_number_error").text(
+                        "ครุภัณฑ์ลงทะเบียนชำรุดเเล้ว"
+                    );
+                }
             } else {
                 $("#durable_id").val("");
                 $("#durable_group").val("");
                 $("#durable_name").val("");
                 $("#durable_description").val("");
+                $("#damaged_number_error").text("");
             }
         },
         error: function (xhr, status, error) {
