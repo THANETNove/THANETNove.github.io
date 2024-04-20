@@ -65,6 +65,68 @@ class DurableArticlesDamagedController extends Controller
         return view("durable_articles_damaged.create",['group' =>$group]);
     }
 
+    public function durableArticlesData(Request $request)
+    {
+        // "7110-006-0002-04-67/2"
+        $code = $request['quantity'];
+
+        if ($code == null) {
+            return response()->json([]);
+        }
+
+        $parts = explode('-', $code);
+
+
+        if (!empty($parts[0])) {
+            $combinedPart_0 = $parts[0];
+        } else {
+            $combinedPart_0 =  null;
+        }
+        if (!empty($parts[1])) {
+            $combinedPart_1 = $parts[1];
+        } else {
+            $combinedPart_1 =  null;
+        }
+        if (!empty($parts[2])) {
+            $combinedPart_2 = $parts[2];
+        } else {
+            $combinedPart_2 =  null;
+        }
+
+        if (!empty($parts[3]) && !empty($parts[4])) {
+            $combinedPart = $parts[3] . '-' . $parts[4]; // e.g., "04-67"
+        } else {
+            $combinedPart =  null;
+        }
+
+
+        $data = DB::table('durable_articles')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+            ->where(function($query) use ($combinedPart_0,$combinedPart_1,$combinedPart_2, $combinedPart) {
+                $query->where('category_code', 'LIKE', "%$combinedPart_0%")
+                      ->where('type_code', 'LIKE', "%$combinedPart_1%")
+                      ->where('description', 'LIKE', "%$combinedPart_2%")
+                      ->where('durable_articles.group_count', 'LIKE', "%$combinedPart%");
+            })
+
+
+            ->select(
+                'durable_articles.*',
+                'categories.category_code',
+                'categories.category_name',
+                'type_categories.type_code',
+                'type_categories.type_name'
+            )
+            ->get();
+            if ($data->isEmpty()) {
+                return response()->json([]);
+            } else {
+                return response()->json($data);
+            }
+
+    }
+
     public function store(Request $request)
     {
 

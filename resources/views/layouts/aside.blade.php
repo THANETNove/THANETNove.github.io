@@ -227,7 +227,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="menu-item" id="buy">
+            {{--             <li class="menu-item" id="buy">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-cart-add'></i>
                     <div data-i18n="Account Settings">ระบบการรับเข้า</div>
@@ -244,7 +244,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
         @endif
 
         <li class="menu-item" id="material-requisition">

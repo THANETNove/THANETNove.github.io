@@ -1619,3 +1619,34 @@ function calculateTotalPrice() {
         $("#total_price").val(sum);
     }
 }
+
+function durableArticlesCode() {
+    const quantity = document.getElementById("durable_articles_code").value; // จำนวน
+
+    $.ajax({
+        url: "/post-durableArticles/",
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Fetch the CSRF token
+        },
+        data: { quantity },
+        success: function (res) {
+            console.log("res", res);
+            if (res.length > 0 && res.length < 2) {
+                $("#durable_id").val(res[0].id);
+                $("#durable_group").val(res[0].category_name);
+                $("#durable_name").val(res[0].type_name);
+                $("#durable_description").val(res[0].durableArticles_name);
+            } else {
+                $("#durable_id").val("");
+                $("#durable_group").val("");
+                $("#durable_name").val("");
+                $("#durable_description").val("");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+    console.log("5555");
+}

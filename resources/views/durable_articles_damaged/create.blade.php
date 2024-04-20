@@ -13,90 +13,54 @@
                             <div class="row">
                                 <p style="color: red" id="out-stock"></p>
 
-                                <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">หมวดหมู่</label>
-
-                                    <select class="form-select" onchange="groupDurableArticles(this.value)" id="id-group"
-                                        name="group_id" aria-label="Default select example">
-                                        <option selected disabled>เลือกหมวดหมู่</option>
-                                        @foreach ($group as $gro)
-                                            <option value="{{ $gro->id }}">{{ $gro->category_name }}</option>
-                                        @endforeach
-                                    </select>
-
+                                <div class="mb-3 col-md-6" style="display: none">
+                                    <label for="prefix" class="form-label">id ครุภัณฑ์ชำรุด</label>
+                                    <input type="text" class="form-control" id="durable_id" name="durable_articles_id"
+                                        placeholder="id ครุภัณฑ์ชำรุด" required />
                                 </div>
-
-                                <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
-                                    <label for="prefix" class="form-label">ชื่อ</label>
-                                    <select class="form-select" name="durable_articles_name" id="durable_articles_name2"
-                                        aria-label="Default select example">
-                                        <option selected disabled>เลือกครุภัณฑ์</option>
-
-                                    </select>
-                                </div>
-
-                                <div class="mb-3 col-md-6" {{-- style="display:none" --}}>
-                                    <label for="prefix" class="form-label">รายละเอียดรุภัณฑ์</label>
-                                    <select class="form-select" name="details_name" id="details-name2"
-                                        aria-label="Default select example">
-                                        <option selected disabled>รายละเอียดรุภัณฑ์</option>
-
-                                    </select>
-                                </div>
-
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รหัสครุภัณฑ์</label>
-                                    <input type="text" class="form-control" id="code_durable_articles"
-                                        name="code_durable_articles" placeholder="รหัสครุภัณฑ์" required />
-
-                                </div>
-                                <div class="mb-3 col-md-6" style="display: none">
-                                    <label for="prefix" class="form-label">durable_articles_id</label>
-                                    <input type="text" class="form-control" id="durable_articles_id"
-                                        name="durable_articles_id" placeholder="รหัสครุภัณฑ์" required />
-                                </div>
-
-
-
-                                <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">ครุภัณฑ์ที่เหลือ</label>
-                                    <input type="text"
-                                        class="form-control  @error('remaining_amount') is-invalid @enderror"
-                                        id="remaining-amount" name="remaining_amount" placeholder="ครุภัณฑ์ที่เหลือ"
-                                        required readonly />
-                                    @error('remaining_amount')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-
-                                <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">จำนวนที่ชำรุด</label>
-                                    <input type="number"
-                                        class="form-control @error('amount_withdraw') is-invalid @enderror"
-                                        id="amount_withdraw" name="amount_withdraw" placeholder="จำนวนที่ชำรุด"
-                                        min="1" required />
-                                    @error('amount_withdraw')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input type="text" class="form-control" id="durable_articles_code"
+                                        name="durable_articles_code" oninput="durableArticlesCode()"
+                                        placeholder="รหัสครุภัณฑ์" required />
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="name_durable_articles_count" class="form-label">ชื่อเรียกจำนวนนับครุภัณฑ์
-                                    </label>
-                                    <input type="text"
-                                        class="form-control @error('name_durable_articles_count') is-invalid @enderror"
-                                        id="name-durable_articles-count" name="name_durable_articles_count"
-                                        placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์" required readonly />
-                                    @error('name_durable_articles_count')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <label for="prefix" class="form-label">หมวดหมู่ครุภัณฑ์</label>
+                                    <input type="text" class="form-control" id="durable_group"
+                                        name="durable_articles_name" placeholder="ชื่อครุภัณฑ์ชำรุด" required />
                                 </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">ชื่อครุภัณฑ์</label>
+                                    <input type="text" class="form-control" id="durable_name"
+                                        name="durable_articles_name" placeholder="ชื่อครุภัณฑ์ชำรุด" required />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">รายละเอียดครุภัณฑ์</label>
+                                    <input type="text" class="form-control" id="durable_description"
+                                        name="durable_articles_name" placeholder="ชื่อครุภัณฑ์ชำรุด" required />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">รายละเอียดครุภัณฑ์ชำรุด</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" name="details_damaged" rows="3"></textarea>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">สถานะการชำรุด</label>
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="radio" value="0" name="status_damaged"
+                                            id="flexRadioDefault1" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            ซ่อมได้
+                                        </label>
+                                    </div>
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="radio" value="1" name="status_damaged"
+                                            id="flexRadioDefault2">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            ซ่อมไม่ได้
+                                        </label>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="mt-2">
                                 <button type="submit" id="submit" class="btn btn-primary me-2">บักทึก</button>
