@@ -1239,7 +1239,8 @@ $("#durable_articles_repair_name").on("change", function () {
                 groupName.append(
                     $("<option>", {
                         value: data.durable_articles_id,
-                        text: data.durableArticles_name,
+                        text:
+                            data.durableArticles_name + " " + data.group_count,
                     })
                 );
             });
@@ -1260,13 +1261,14 @@ $("#details_repair_name").on("change", function () {
     console.log("foundItem", foundItem);
 
     if (foundItem) {
-        document
-            .getElementById("amount_withdraw")
-            .setAttribute("max", foundItem.durableArticles_number);
-        $("#code_durable_articles").val(foundItem.code_durable_articles);
-        $("#amount_withdraw").val(foundItem.amount_damaged);
-        $("#name-durable_articles-count").val(
-            foundItem.name_durable_articles_count
+        $("#code_durable_articles").val(
+            foundItem.category_code +
+                "-" +
+                foundItem.type_code +
+                "-" +
+                foundItem.description +
+                "-" +
+                foundItem.group_count
         );
         $("#durable_articles_id").val(foundItem.durable_articles_id);
         $("#durable_articles_name").val(foundItem.durable_articles_name);
