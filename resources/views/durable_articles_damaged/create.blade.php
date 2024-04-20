@@ -26,13 +26,13 @@
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">หมวดหมู่ครุภัณฑ์</label>
-                                    <input type="text" class="form-control" id="durable_group"
-                                        name="durable_articles_name" placeholder="ชื่อครุภัณฑ์ชำรุด" required />
+                                    <input type="text" class="form-control" id="durable_group" name="durable_group"
+                                        placeholder="ชื่อครุภัณฑ์ชำรุด" required />
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">ชื่อครุภัณฑ์</label>
-                                    <input type="text" class="form-control" id="durable_name"
-                                        name="durable_articles_name" placeholder="ชื่อครุภัณฑ์ชำรุด" required />
+                                    <input type="text" class="form-control" id="durable_name" name="durable_name"
+                                        placeholder="ชื่อครุภัณฑ์ชำรุด" required />
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รายละเอียดครุภัณฑ์</label>

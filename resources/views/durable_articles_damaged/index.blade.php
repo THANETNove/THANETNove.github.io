@@ -22,8 +22,8 @@
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
                                                 <th>รายละเอียดครุภัณฑ์</th>
-                                                <th>จำนวนที่ชำรุด</th>
-                                                <th>หน่วยนับ</th>
+                                                <th>สถานะการชำรุด</th>
+
                                                 {{--  @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้แจ้ง </th>
                                                 @endif --}}
@@ -41,13 +41,22 @@
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
 
-                                                    <td>{{ $da->code_durable_articles }}</td>
+                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}-{{ $da->group_count }}
+                                                    </td>
 
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->amount_damaged }}</td>
-                                                    <td>{{ $da->name_durable_articles_count }}</td>
+
+                                                    <td>
+                                                        @if ($da->status_damaged == 0)
+                                                            <span class="badge bg-label-success me-1">ซ่อมได้</span>
+                                                        @else
+                                                            <span class="badge bg-label-warning me-1">ซ่อมไม่ได้</span>
+                                                        @endif
+
+                                                    </td>
+
                                                     {{--  @if (Auth::user()->status != '0')
                                                         <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
                                                         </td>
