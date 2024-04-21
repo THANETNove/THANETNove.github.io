@@ -75,6 +75,8 @@ class BuyController extends Controller
         ->where('id', '=', $id)
         ->orderBy('id', 'ASC')
         ->get();
+        $dataStorage =  DB::table('storage_locations')
+        ->get();
 
 
         if ($cate[0]->category_id == 1) {
@@ -83,7 +85,7 @@ class BuyController extends Controller
             ->orderBy('material_name', 'ASC')
             ->get();
             $dataCount = 0;
-            return response()->json([$data,  $dataCount] );
+            return response()->json([$data,  $dataCount,$dataStorage] );
         }else{
 
             $data2 = DB::table('durable_articles')
@@ -103,8 +105,6 @@ class BuyController extends Controller
             ->count();
 
 
-            $dataStorage =  DB::table('storage_locations')
-            ->get();
 
 
             return response()->json([$data, $dataCount,$dataStorage]);

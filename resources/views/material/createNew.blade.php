@@ -6,7 +6,7 @@
             <select class="form-select  @error('type') is-invalid @enderror" onchange="getCategories(this.value)"
                 name="type" aria-label="Default select example" required>
                 <option selected disabled>เลือกหมวดหมู่</option>
-                <option value="2">ครุภัณฑ์</option>
+                <option value="1">วัสดุ</option>
 
             </select>
             @error('type')
@@ -23,12 +23,12 @@
             </select>
         </div>
         <div class="mb-3 col-md-6">
-            <label for="buy_name" class="form-label">ชื่อครุภัณฑ์</label>
+            <label for="buy_name" class="form-label">ชื่อวัสดุ</label>
             {{--  <input id="buy_name" type="text"
                 class="form-control @error('buy_name') is-invalid @enderror" name="buy_name"
                 required placeholder="ชื่อวัสดุ" autocomplete="buy_name" readonly> --}}
             <select class="form-select" name="buy_name" id="buy_name" aria-label="Default select example">
-                <option selected>เลือกชื่อครุภัณฑ์</option>
+                <option selected>เลือกชื่อวัสดุ</option>
             </select>
             @error('buy_name')
                 <span class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
         <div class="mb-3 col-md-6">
             <label for="quantity" class="form-label">จำนวน</label>
             <input type="number" oninput="calculateTotalPrice()"
-                class="form-control quantity @error('quantity') is-invalid @enderror" name="quantity"
+                class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity"
                 placeholder="จำนวน" autocomplete="quantity" min="0">
 
             @error('quantity')
@@ -89,8 +89,8 @@
         </div>
         <div class="mb-3 col-md-6">
             <label for="price_per" class="form-label">ราคาต่อ (ชิ้น,หน่วย,อื่นๆ)</label>
-            <input oninput="calculateTotalPrice()" type="number"
-                class="form-control price_per @error('price_per') is-invalid @enderror" name="price_per"
+            <input id="price_per" oninput="calculateTotalPrice()" type="number"
+                class="form-control @error('price_per') is-invalid @enderror" name="price_per"
                 placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" min="1" required autocomplete="price_per">
 
             @error('price_per')

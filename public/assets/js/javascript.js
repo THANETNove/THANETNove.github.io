@@ -591,7 +591,7 @@ function getGroup(selectedValue) {
         url: "get-categoriesData/" + selectedValue,
         type: "GET",
         success: function (res) {
-            console.log("res", res);
+            console.log("res 555", res);
 
             globalRes = res[0];
             globalCount = res[1];
@@ -639,12 +639,16 @@ $("#buy_name").on("change", function () {
     var foundItem = globalRes.find(function (item) {
         return item.id == selectedValue;
     });
-    var foundStorage = globalStorage.find(function (item) {
-        return item.code_storage == foundItem.code_material_storage;
-    });
-    console.log("foundItem", foundItem);
-    console.log("globalStorage", globalStorage);
-    console.log("foundStorage", foundStorage.code_storage);
+
+    if (globalResType == 1) {
+        var foundStorage = globalStorage.find(function (item) {
+            return item.code_storage == foundItem.code_material;
+        });
+    } else {
+        var foundStorage = globalStorage.find(function (item) {
+            return item.code_storage == foundItem.code_material_storage;
+        });
+    }
     if (foundItem) {
         var groupSelect = $("#code_material_storage");
         // Clear existing options (optional, depending on your use case)
@@ -695,13 +699,13 @@ $("#buy_name").on("change", function () {
         );
 
         if (globalResType == 2) {
-            $("#quantity").val(globalCount);
+            //  $("#quantity").val(globalCount);
             $("#code-id").val(foundItem.code_DurableArticles);
             /* document
                 .getElementById("quantity")
                 .setAttribute("max", globalCount); */
         } else {
-            $("#quantity").attr("readonly", false);
+            // $("#quantity").attr("readonly", false);
         }
     }
 });
@@ -1396,7 +1400,7 @@ $("#calculate-id").on("change", function () {
                 foundItem.description
         );
 
-        $("#quantity").val(foundItem.durableArticles_number);
+        //   $("#quantity").val(foundItem.durableArticles_number);
         $("#counting_unit").val(foundItem.name_durableArticles_count);
         $("#price_per_piece").val(
             Number(foundItem.price_per_piece).toLocaleString()
@@ -1674,12 +1678,19 @@ $("#exportFrom").submit(function (event) {
 // ทำการคำนวณราคารวมที่นี่
 
 function calculateTotalPrice() {
-    const quantity = document.getElementById("quantity").value; // จำนวน
-    const price_per = document.getElementById("price_per").value; // ราคาต่อชิ้น
+    const quantity = document.querySelector(".quantity").value;
+    const price_per = document.querySelector(".price_per").value; // ราคาต่อชิ้น
+
+    const quantity2 = document.querySelector(".quantity2").value;
+    const price_pe2 = document.querySelector(".price_per2").value; // ราคาต่อชิ้น
 
     if (quantity && price_per) {
         const sum = quantity * price_per;
         $("#total_price").val(sum);
+    }
+    if (quantity2 && price_pe2) {
+        const sum = quantity2 * price_pe2;
+        $("#total_price2").val(sum);
     }
 }
 

@@ -14,12 +14,12 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                    aria-selected="true">ระบบลงทะเบียนที่มีอยู่</button>
+                                    aria-selected="true">ลงทะเบียนที่มีอยู่</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-profile" type="button" role="tab"
-                                    aria-controls="pills-profile" aria-selected="false">ระบบลงทะเบียนใหม่</button>
+                                    aria-controls="pills-profile" aria-selected="false">ลงทะเบียนใหม่</button>
                             </li>
 
                         </ul>
@@ -80,11 +80,10 @@
 
                                         <div class="mb-3 col-md-6">
                                             <label for="durableArticles_number" class="form-label">จำนวนครุภัณฑ์</label>
-                                            <input id="durableArticles_number" type="number"
-                                                oninput="calculateTotalPrice()"
-                                                class="form-control @error('durableArticles_number') is-invalid @enderror"
+                                            <input type="number" oninput="calculateTotalPrice()"
+                                                class="form-control quantity2 @error('durableArticles_number') is-invalid @enderror"
                                                 name="durableArticles_number" required placeholder="จำนวนครุภัณฑ์"
-                                                autocomplete="durableArticles_number" value="1">
+                                                autocomplete="durableArticles_number">
 
                                             @error('durableArticles_number')
                                                 <span class="invalid-feedback" role="alert">
@@ -107,6 +106,36 @@
                                                 autocomplete="name_durableArticles_count">
                                         </div>
 
+
+                                        <div class="mb-3 col-md-6">
+                                            <label for="price_per" class="form-label">ราคาต่อ
+                                                (ชิ้น,หน่วย,อื่นๆ)</label>
+                                            <input type="number" oninput="calculateTotalPrice()"
+                                                class="form-control price_per2 @error('price_per') is-invalid @enderror"
+                                                name="price_per" placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" required
+                                                autocomplete="price_per">
+
+                                            @error('price_per')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="total_price" class="form-label">ราคารวม</label>
+                                            <input id="total_price2" type="number"
+                                                class="form-control @error('total_price') is-invalid @enderror"
+                                                name="total_price" required placeholder="ชื่อเรียกจำนวนนับวัสดุ"
+                                                min="1" autocomplete="total_price">
+
+                                            @error('total_price')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
+                                        </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="name_durableArticles_count"
                                                 class="form-label">ระยะเวลประกัน</label>
@@ -124,35 +153,6 @@
                                                         {{ $lo->floor }} {{ $lo->room_name }}</option>
                                                 @endforeach
                                             </select>
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label for="price_per" class="form-label">ราคาต่อ
-                                                (ชิ้น,หน่วย,อื่นๆ)</label>
-                                            <input id="price_per" type="number" oninput="calculateTotalPrice()"
-                                                class="form-control @error('price_per') is-invalid @enderror"
-                                                name="price_per" placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" min="1"
-                                                required autocomplete="price_per">
-
-                                            @error('price_per')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label for="total_price" class="form-label">ราคารวม</label>
-                                            <input id="total_price" type="number"
-                                                class="form-control @error('total_price') is-invalid @enderror"
-                                                name="total_price" required placeholder="ชื่อเรียกจำนวนนับวัสดุ"
-                                                min="1" autocomplete="total_price">
-
-                                            @error('total_price')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-
                                         </div>
                                         <div class="mb-3 col-md-12">
                                             <label for="details" class="form-label">รายละเอียด</label>
