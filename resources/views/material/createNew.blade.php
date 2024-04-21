@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('buy-store') }}">
+<form method="POST" action="{{ route('material-update-item') }}">
     @csrf
     <div class="row">
         <div class="mb-3 col-md-6">
@@ -49,7 +49,7 @@
             @enderror
 
         </div>
-        <div class="mb-3 col-md-6" {{-- style="display: none" --}}>
+        <div class="mb-3 col-md-6" style="display: none">
             <label for="categories_id" class="form-label" id="id-group">code-id</label>
             <input id="code-id" type="text" class="form-control @error('code-id') is-invalid @enderror"
                 name="code_id" required placeholder="id" autocomplete="code-id" readonly>
@@ -87,7 +87,7 @@
             @enderror
 
         </div>
-        <div class="mb-3 col-md-6">
+        {{--  <div class="mb-3 col-md-6">
             <label for="price_per" class="form-label">ราคาต่อ (ชิ้น,หน่วย,อื่นๆ)</label>
             <input id="price_per" oninput="calculateTotalPrice()" type="number"
                 class="form-control @error('price_per') is-invalid @enderror" name="price_per"
@@ -99,8 +99,8 @@
                 </span>
             @enderror
 
-        </div>
-        <div class="mb-3 col-md-6">
+        </div> --}}
+        {{-- <div class="mb-3 col-md-6">
             <label for="total_price" class="form-label">ราคารวม</label>
             <input id="total_price" type="number" class="form-control @error('total_price') is-invalid @enderror"
                 name="total_price" required placeholder="ชื่อเรียกจำนวนนับวัสดุ" min="1"
@@ -112,8 +112,8 @@
                 </span>
             @enderror
 
-        </div>
-        <div class="mb-3 col-md-6">
+        </div> --}}
+        {{--       <div class="mb-3 col-md-6">
             <label for="warranty_period" class="form-label">ระยะเวลประกัน</label>
 
             <input class="date form-control" type="text" name="warranty_period" placeholder="dd-mm-yyyy">
@@ -124,7 +124,7 @@
                 </span>
             @enderror
 
-        </div>
+        </div> --}}
         <div class="mb-3 col-md-6">
             <label for="code_material_storage" class="form-label">ที่เก็บวัสดุ</label>
             <select class="form-select" aria-label="Default select example" id="code_material_storage"

@@ -146,6 +146,19 @@ class MaterialController extends Controller
         return redirect('material-index')->with('message', "บันทึกสำเร็จ");
     }
 
+
+    public function materialUpdate(Request $request)
+    {
+        $materialsData = DB::table('materials')->where('id',$request->code_id)->get();
+        $id = $request->code_id;
+        $data =  Material::find($id);
+        $data->material_number = $materialsData[0]->material_number + $request['quantity'];
+        $data->remaining_amount = $materialsData[0]->remaining_amount + $request['quantity'];
+        $data->save();
+
+        return redirect('material-index')->with('message', "บันทึกสำเร็จ");
+    }
+
     /**
      * Remove the specified resource from storage.
      */

@@ -121,6 +121,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('material-store', [MaterialController::class, 'store'])->name('material-store');
     Route::get('material-edit/{id}', [MaterialController::class, 'edit'])->name('material-edit');
     Route::put('material-update/{id}', [MaterialController::class, 'update'])->name('material-update');
+    Route::post('material-update-item', [MaterialController::class, 'materialUpdate'])->name('material-update-item');
     Route::get('material-export/pdf', [MaterialController::class, 'exportPDF'])->name('material-export/pdf');
     Route::get('material-show/{id}', [MaterialController::class, 'show'])->name('material-show');
 
