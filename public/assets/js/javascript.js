@@ -639,18 +639,15 @@ $("#buy_name").on("change", function () {
     var foundItem = globalRes.find(function (item) {
         return item.id == selectedValue;
     });
+    var foundStorage = globalStorage.find(function (item) {
+        return item.code_storage == foundItem.code_material_storage;
+    });
 
-    if (globalResType == 1) {
-        var foundStorage = globalStorage.find(function (item) {
-            return item.code_storage == foundItem.code_material;
-        });
-    } else {
-        var foundStorage = globalStorage.find(function (item) {
-            return item.code_storage == foundItem.code_material_storage;
-        });
-    }
     if (foundItem) {
+        $("#categories_id2").val(foundItem.code_material);
+
         var groupSelect = $("#code_material_storage");
+
         // Clear existing options (optional, depending on your use case)
         groupSelect.empty();
 
@@ -681,31 +678,20 @@ $("#buy_name").on("change", function () {
             );
         });
 
-        $("#categories_id").val(
-            globalResType == 1
-                ? foundItem.code_material
-                : foundItem.category_code +
-                      "-" +
-                      foundItem.type_code +
-                      "-" +
-                      foundItem.description +
-                      "-" +
-                      foundItem.group_count
-        );
-        $("#counting_unit").val(
-            globalResType == 1
-                ? foundItem.name_material_count
-                : foundItem.name_durableArticles_count
-        );
-
         if (globalResType == 2) {
-            //  $("#quantity").val(globalCount);
             $("#code-id").val(foundItem.code_DurableArticles);
-            /* document
-                .getElementById("quantity")
-                .setAttribute("max", globalCount); */
+            $("#categories_id").val(
+                foundItem.category_code +
+                    "-" +
+                    foundItem.type_code +
+                    "-" +
+                    foundItem.description +
+                    "-" +
+                    foundItem.group_count
+            );
         } else {
-            // $("#quantity").attr("readonly", false);
+            $("#code-id").val(foundItem.id);
+            $("#counting_unit").val(foundItem.name_material_count);
         }
     }
 });

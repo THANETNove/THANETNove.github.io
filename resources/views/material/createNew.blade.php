@@ -38,8 +38,8 @@
 
         </div>
         <div class="mb-3 col-md-6">
-            <label for="categories_id" class="form-label" id="id-group">id</label>
-            <input id="categories_id" type="text" class="form-control @error('categories_id') is-invalid @enderror"
+            <label for="categories_id" class="form-label">รหัสวัสดุ</label>
+            <input id="categories_id2" type="text" class="form-control @error('categories_id') is-invalid @enderror"
                 name="categories_id" required placeholder="id" autocomplete="categories_id" readonly>
 
             @error('categories_id')
@@ -49,7 +49,7 @@
             @enderror
 
         </div>
-        <div class="mb-3 col-md-6" style="display: none">
+        <div class="mb-3 col-md-6" {{-- style="display: none" --}}>
             <label for="categories_id" class="form-label" id="id-group">code-id</label>
             <input id="code-id" type="text" class="form-control @error('code-id') is-invalid @enderror"
                 name="code_id" required placeholder="id" autocomplete="code-id" readonly>
@@ -126,17 +126,13 @@
 
         </div>
         <div class="mb-3 col-md-6">
-            <label for="code_material_storage" class="form-label">ที่เก็บครุภัณฑ์</label>
+            <label for="code_material_storage" class="form-label">ที่เก็บวัสดุ</label>
             <select class="form-select" aria-label="Default select example" id="code_material_storage"
                 name="code_material_storage" required>
 
             </select>
         </div>
-        <div class="mb-3 col-md-12">
-            <label for="details" class="form-label">รายละเอียด</label>
-            <textarea class="form-control" name="details" id="exampleFormControlTextarea1" rows="3"></textarea>
 
-        </div>
     </div>
     <div class="mt-2">
         <button type="submit" class="btn btn-primary me-2">บักทึก</button>
