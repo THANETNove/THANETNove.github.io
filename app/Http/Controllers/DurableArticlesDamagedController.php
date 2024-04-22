@@ -67,6 +67,8 @@ class DurableArticlesDamagedController extends Controller
 
     public function durableArticlesData(Request $request)
     {
+
+
         // "7110-006-0002-04-67/2"
         $code = $request['quantity'];
 

@@ -82,12 +82,15 @@ class DurableArticlesRepairController extends Controller
     public function detailsRepairName($id)
     {
 
+
+
         $data = DB::table('durable_articles')
         ->rightJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->rightJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->rightJoin('durable_articles_damageds', 'durable_articles.id', '=', 'durable_articles_damageds.durable_articles_id')
         ->select('durable_articles_damageds.*','durable_articles.durableArticles_name','durable_articles.description','durable_articles.group_count',
         'type_categories.type_code','categories.category_code')
+        ->where('type_durableArticles',$id)
         ->where('status_damaged', 0)
         ->where('durable_articles_damageds.status', 0)
         ->groupBy('durable_articles_id')
