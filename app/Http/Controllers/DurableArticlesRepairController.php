@@ -56,8 +56,10 @@ class DurableArticlesRepairController extends Controller
         ->groupBy('categories.id')
         ->orderBy('categories.id', 'ASC')
         ->where('category_id', '=', 2)
+        ->where('durable_articles_damageds.status_damaged', '=', 0)
         ->select('durable_articles_damageds.*','categories.category_name','categories.category_code')
         ->get();
+
 
 
         return view("durable_articles_repair.create",['group' => $group]);

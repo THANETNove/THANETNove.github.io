@@ -78,7 +78,7 @@ class BetDistributionController extends Controller
      */
     public function create()
     {
-
+/*
         $group = DB::table('durable_articles')
         ->where('category_id', '=', 2)
         ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
@@ -87,7 +87,16 @@ class BetDistributionController extends Controller
         ->orderBy('categories.id', 'ASC')
         ->select('categories.*')
         ->get();
-
+ */
+        $group = DB::table('durable_articles_damageds')
+        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.id')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->groupBy('categories.id')
+        ->orderBy('categories.id', 'ASC')
+        ->where('category_id', '=', 2)
+        ->where('status_damaged', '=', 1)
+        ->select('durable_articles_damageds.*','categories.category_name','categories.category_code')
+        ->get();
 
 
         return view("bet_distribution.create",['group' => $group]);
