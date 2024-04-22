@@ -63,8 +63,8 @@
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="material_number" class="form-label">จำนวนวัสดุ (ต่อหน่วยนับ)</label>
-                                            <input id="material_number" type="number" value="1"
-                                                class="form-control @error('material_number') is-invalid @enderror"
+                                            <input id="material_number" type="number" oninput="calculateTotalPrice2()"
+                                                class="form-control quantityBuy2 @error('material_number') is-invalid @enderror"
                                                 name="material_number" placeholder="จำนวนวัสดุ ชิ้น"
                                                 autocomplete="material_number">
 
@@ -88,6 +88,34 @@
                                                 autocomplete="name_material_count">
 
                                             @error('name_material_count')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="price_per" class="form-label">ราคาต่อ (ชิ้น,หน่วย,อื่นๆ)</label>
+                                            <input id="price_perBuy" oninput="calculateTotalPrice2()" type="number"
+                                                class="form-control price_perBuy2 @error('price_per') is-invalid @enderror"
+                                                name="price_per" placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" min="1" required
+                                                autocomplete="price_per">
+
+                                            @error('price_per')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="total_price" class="form-label">ราคารวม</label>
+                                            <input id="total_priceBuy2" type="number"
+                                                class="form-control @error('total_price') is-invalid @enderror"
+                                                name="total_price" required placeholder="ชื่อเรียกจำนวนนับวัสดุ"
+                                                min="1" autocomplete="total_price">
+
+                                            @error('total_price')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

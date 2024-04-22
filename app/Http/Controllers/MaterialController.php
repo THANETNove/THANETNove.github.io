@@ -7,6 +7,7 @@ use DB;
 use PDF;
 use Illuminate\Support\Str;
 use App\Models\Material;
+use App\Models\Buy;
 
 
 
@@ -155,6 +156,14 @@ class MaterialController extends Controller
         $data->material_number = $materialsData[0]->material_number + $request['quantity'];
         $data->remaining_amount = $materialsData[0]->remaining_amount + $request['quantity'];
         $data->save();
+
+
+        $dataBuy =  new Buy;
+        $dataBuy->code_buy = $request->code_id;
+        $dataBuy->price_per_piece = $request['price_per'];
+        $dataBuy->total_price = $request['total_price'];
+        $dataBuy->save();
+
 
         return redirect('material-index')->with('message', "บันทึกสำเร็จ");
     }

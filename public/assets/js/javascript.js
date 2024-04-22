@@ -1670,6 +1670,10 @@ function calculateTotalPrice() {
     const quantity2 = document.querySelector(".quantity2").value;
     const price_pe2 = document.querySelector(".price_per2").value; // ราคาต่อชิ้น
 
+    /* const quantityBuy = document.querySelector(".quantityBuy").value; // ราคาต่อชิ้น
+    const price_perBuy = document.querySelector(".price_perBuy").value; */
+
+    /*     console.log(price_perBuy, quantityBuy); */
     if (quantity && price_per) {
         const sum = quantity * price_per;
         $("#total_price").val(sum);
@@ -1677,6 +1681,27 @@ function calculateTotalPrice() {
     if (quantity2 && price_pe2) {
         const sum = quantity2 * price_pe2;
         $("#total_price2").val(sum);
+    }
+    /*     if (price_perBuy && quantityBuy) {
+        const sum = quantityBuy * quantityBuy;
+        $("#total_priceBuy").val(sum);
+    } */
+}
+
+function calculateTotalPrice2() {
+    const quantityBuy = document.querySelector(".quantityBuy").value; // ราคาต่อชิ้น
+    const price_perBuy = document.querySelector(".price_perBuy").value;
+    const quantityBuy2 = document.querySelector(".quantityBuy2").value; // ราคาต่อชิ้น
+    const price_perBuy2 = document.querySelector(".price_perBuy2").value;
+
+    console.log(quantityBuy2, price_perBuy2);
+    if (quantityBuy && price_perBuy) {
+        const sum = quantityBuy * price_perBuy;
+        $("#total_priceBuy").val(sum);
+    }
+    if (quantityBuy2 && price_perBuy2) {
+        const sum = quantityBuy2 * price_perBuy2;
+        $("#total_priceBuy2").val(sum);
     }
 }
 
