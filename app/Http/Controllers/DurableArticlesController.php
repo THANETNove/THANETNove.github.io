@@ -173,7 +173,9 @@ class DurableArticlesController extends Controller
      */
     public function edit(string $id)
     {
-        $dueArt =  DurableArticles::find($id);
+        $dueArt = DurableArticles::leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->select('durable_articles.*', 'type_categories.type_code','type_categories.type_name')
+        ->find($id);
         $data = DB::table('storage_locations')->where('status','on')->get();
         $group = DB::table('categories')
         ->where('category_id', '=', 2)->orderBy('id', 'DESC')->get();

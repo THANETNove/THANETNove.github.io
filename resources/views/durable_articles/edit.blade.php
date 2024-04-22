@@ -41,12 +41,20 @@
 
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="type_durableArticles" class="form-label">ครุภัณฑ์</label>
+                                    <label for="type_durableArticles" class="form-label">รหัสครุภัณฑ์</label>
 
-                                    <select class="form-select" name="type_durableArticles"
-                                        id="durable-articles-type-durableArticles" aria-label="Default select example">
-                                        <option selected disabled>เลือกครุภัณฑ์</option>
-                                    </select>
+
+                                    <input id="type_code" type="text" class="form-control" name="type_categories_code"
+                                        value="{{ $dueArt['type_code'] }}">
+
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="type_name" class="form-label">ชื่อครุภัณฑ์</label>
+
+
+                                    <input id="type-articles" type="text" name="type_categories_name"
+                                        class="form-control" value="{{ $dueArt['type_name'] }}">
+
                                 </div>
 
                                 <input id="type-articles" type="text" class="form-control" style="display: none"
