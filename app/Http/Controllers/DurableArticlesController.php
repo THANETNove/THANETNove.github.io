@@ -8,6 +8,8 @@ use DB;
 use PDF;
 use Illuminate\Support\Str;
 use App\Models\DurableArticles;
+use App\Models\TypeCategory;
+
 
 class DurableArticlesController extends Controller
 {
@@ -88,6 +90,14 @@ class DurableArticlesController extends Controller
     public function store(Request $request)
     {
 
+        $typeData = new TypeCategory;
+        $typeData->type_id = $request['group_class'];
+        $typeData->type_code = $request['type_categories_code'];
+        $typeData->type_name = $request['type_categories_name'];
+        $typeData->save();
+
+
+
         $durable_cont = DB::table('durable_articles')
         ->where('group_class',$request['group_class'])
         ->where('type_durableArticles', $request['type_durableArticles'])
@@ -113,7 +123,7 @@ class DurableArticlesController extends Controller
         $data = new DurableArticles;
         $data->code_DurableArticles = $random;
         $data->group_class = $request['group_class'];
-        $data->type_durableArticles = $request['type_durableArticles'];
+        $data->type_durableArticles = $typeData->id;
         $data->description = $request['description'];
         $data->group_count = $countDurable;
         $data->durableArticles_name = $request['durableArticles_name'];
@@ -131,6 +141,8 @@ class DurableArticlesController extends Controller
         $data->status = "on";
         $data->save();
     }
+
+
 
 
         return redirect('durable-articles-index')->with('message', "บันทึกสำเร็จ");

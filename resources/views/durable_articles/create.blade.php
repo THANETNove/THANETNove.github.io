@@ -46,14 +46,21 @@
 
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label for="type_durableArticles" class="form-label">ครุภัณฑ์</label>
+                                            <label for="type_durableArticles" class="form-label">รหัสครุภัณฑ์</label>
+                                            <input id="type_categories_code" type="number"
+                                                class="form-control @error('type_categories_code') is-invalid @enderror"
+                                                name="type_categories_code" required placeholder="รหัสครุภัณฑ์"
+                                                autocomplete="type_categories_code">
 
-                                            <select class="form-select" name="type_durableArticles"
-                                                id="durable-articles-type-durableArticles"
-                                                aria-label="Default select example">
-                                                <option selected disabled>เลือกครุภัณฑ์</option>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="type_durableArticles" class="form-label">ชื่อครุภัณฑ์</label>
+                                            <input id="type_categories_name" type="text"
+                                                class="form-control @error('type_categories_name') is-invalid @enderror"
+                                                name="type_categories_name" required placeholder="ชื่อครุภัณฑ์"
+                                                autocomplete="type_categories_name">
 
-                                            </select>
+
 
                                         </div>
                                         <div class="mb-3 col-md-6">
@@ -78,6 +85,20 @@
 
                                         </div>
 
+
+                                        <div class="mb-3 col-md-6">
+                                            <label for="name_durableArticles_count"
+                                                class="form-label">ชื่อเรียกจำนวนนับครุภัณฑ์
+                                                (เช่น
+                                                เตียง คัน เครื่อง
+                                                อื่น ๆ
+                                                )</label>
+                                            <input id="name_durableArticles_count" type="text"
+                                                class="form-control @error('name_durableArticles_count') is-invalid @enderror"
+                                                name="name_durableArticles_count" required
+                                                placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์"
+                                                autocomplete="name_durableArticles_count">
+                                        </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="durableArticles_number" class="form-label">จำนวนครุภัณฑ์</label>
                                             <input type="number" oninput="calculateTotalPrice()"
@@ -91,19 +112,6 @@
                                                 </span>
                                             @enderror
 
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label for="name_durableArticles_count"
-                                                class="form-label">ชื่อเรียกจำนวนนับครุภัณฑ์
-                                                (เช่น
-                                                เตียง คัน เครื่อง
-                                                อื่น ๆ
-                                                )</label>
-                                            <input id="name_durableArticles_count" type="text"
-                                                class="form-control @error('name_durableArticles_count') is-invalid @enderror"
-                                                name="name_durableArticles_count" required
-                                                placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์"
-                                                autocomplete="name_durableArticles_count">
                                         </div>
 
 

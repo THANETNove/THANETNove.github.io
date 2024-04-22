@@ -171,7 +171,7 @@
 
                 </ul>
             </li>
-            <li class="menu-item" id="typeCategory">
+            {{--  <li class="menu-item" id="typeCategory">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bx-grid-alt'></i>
                     <div data-i18n="Account Settings">ลงทะเบียนชื่อครุภัณฑ์</div>
@@ -188,7 +188,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
 
             <li class="menu-item" id="material">
