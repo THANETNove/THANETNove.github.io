@@ -1383,14 +1383,14 @@ $("#calculate-id").on("change", function () {
                 "-" +
                 foundItem.type_code +
                 "-" +
-                foundItem.description
+                foundItem.description +
+                "-" +
+                foundItem.group_count
         );
 
-        //   $("#quantity").val(foundItem.durableArticles_number);
+        $("#quantity").val(1);
         $("#counting_unit").val(foundItem.name_durableArticles_count);
-        $("#price_per_piece").val(
-            Number(foundItem.price_per_piece).toLocaleString()
-        );
+        $("#price_per_piece").val(Number(foundItem.price_per).toLocaleString());
 
         const salvagePrice =
             foundItem.salvage_price !== null
@@ -1418,13 +1418,12 @@ $("#calculate-id").on("change", function () {
 
         if (foundItem.salvage_price == 0) {
             // คำนวณค่าเสื่อม (ราคา * ค่าเสื่อม/100) / ปี (กรณีที่ยังไม่ได้จำหน่าย)
-            let price = (foundItem.price_per_piece * 20) / 100 / ageMultiplier;
+            let price = (foundItem.price_per * 20) / 100 / ageMultiplier;
             $("#calulate-depreciation").val(price.toLocaleString());
         } else {
             // คำนวณค่าเสื่อม (ราคา - ราคาซาก) / ปี (กรณีที่จำหน่าย)
             let price =
-                (foundItem.price_per_piece - foundItem.salvage_price) /
-                ageMultiplier;
+                (foundItem.price_per - foundItem.salvage_price) / ageMultiplier;
             $("#calulate-depreciation").val(price.toLocaleString());
         }
     }
