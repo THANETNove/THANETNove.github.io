@@ -47,7 +47,7 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->amount_withdraw }}</td>
+                                                    <td>{{ $da->groupWithdrawCount }}</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
                                                     @if (Auth::user()->status != '0')
                                                         <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}

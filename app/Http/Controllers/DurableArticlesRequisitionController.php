@@ -380,6 +380,8 @@ class DurableArticlesRequisitionController extends Controller
         ->select('durable_articles_requisitions.*','categories.category_name','type_categories.type_name',
          'durable_articles.durableArticles_name','users.prefix', 'users.first_name',
          'users.last_name')
+
+         ->groupBy('durable_articles_requisitions.group_withdraw')
          ->selectRaw('count(durable_articles_requisitions.group_withdraw) as groupWithdrawCount')
          ->orderBy('durable_articles_requisitions.id','DESC')->paginate(100);
 
