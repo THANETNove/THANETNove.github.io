@@ -65,7 +65,7 @@
                                             <label for="material_number" class="form-label">จำนวนวัสดุ (ต่อหน่วยนับ)</label>
                                             <input id="material_number" type="number" oninput="calculateTotalPrice2()"
                                                 class="form-control quantityBuy2 @error('material_number') is-invalid @enderror"
-                                                name="material_number" placeholder="จำนวนวัสดุ ชิ้น"
+                                                name="quantity" placeholder="จำนวนวัสดุ ชิ้น"
                                                 autocomplete="material_number">
 
                                             @error('material_number')

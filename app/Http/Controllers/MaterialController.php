@@ -87,13 +87,26 @@ class MaterialController extends Controller
         $data->description = $request['description']; */
         $data->material_name = $request['material_name'];
         $data->group_id = $request['group_id'];
-        $data->material_number = $request['material_number'];
-        $data->remaining_amount = $request['material_number'];
+        $data->material_number = $request['quantity'];
+        $data->remaining_amount = $request['quantity'];
         /* $data->material_number_pack_dozen = $request['material_number_pack_dozen']; */
         $data->name_material_count = $request['name_material_count'];
         $data->code_material_storage = $request['code_material_storage'];
         $data->status = "on";
         $data->save();
+
+
+
+
+        for ($i = 0; $i < $request['quantity']; $i++) {
+            $dataBuy =  new Buy;
+            $dataBuy->code_buy =  $data->id;
+            $dataBuy->price_per_piece = $request['price_per'];
+            $dataBuy->total_price = $request['total_price'];
+            $dataBuy->save();
+        }
+
+
 
         return redirect('material-index')->with('message', "บันทึกสำเร็จ");
 
@@ -158,12 +171,14 @@ class MaterialController extends Controller
         $data->save();
 
 
+
+        for ($i = 0; $i < $request['quantity']; $i++) {
         $dataBuy =  new Buy;
         $dataBuy->code_buy = $request->code_id;
         $dataBuy->price_per_piece = $request['price_per'];
         $dataBuy->total_price = $request['total_price'];
         $dataBuy->save();
-
+        }
 
         return redirect('material-index')->with('message', "บันทึกสำเร็จ");
     }
