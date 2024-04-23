@@ -266,16 +266,17 @@ class HomeController extends Controller
 
     }elseif ($search == 2) {
         $name_export = "รายการรับเข้าครุภัณฑ์";
-        $data = DB::table('buys')
-        ->whereBetween('buys.created_at', [$start_date, $end_date]) // Add this line
-        ->where("buys.typeBuy",2)
-        ->leftJoin('categories', 'buys.group_id', '=', 'categories.id')
-        ->leftJoin('materials', 'buys.buy_name', '=', 'materials.id')
-        ->leftJoin('durable_articles', 'buys.buy_name', '=', 'durable_articles.id')
-        ->select('buys.*', 'categories.category_name' , 'materials.material_name',
-         'durable_articles.durableArticles_name')->where("buys.status",'=',  0);
+        $data = DB::table('durable_articles')
+        ->whereBetween('durable_articles.created_at', [$start_date, $end_date]) // Add this line
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->select('durable_articles.*', 'categories.category_name','categories.category_code' , 'type_categories.type_name','type_categories.type_code')
+        ->selectRaw('COUNT(durable_articles.code_DurableArticles) as numberCount')
+        ->groupBy('durable_articles.code_DurableArticles', 'categories.category_name', 'categories.category_code', 'type_categories.type_name', 'type_categories.type_code');
     $data =  $data->get();
-    $pdf = PDF::loadView('buy.exportPDF',['data' =>  $data, 'date_export' => $date_export ,'name_export' => $name_export]);
+
+
+    $pdf = PDF::loadView('buy.exportPDF_Du',['data' =>  $data, 'date_export' => $date_export ,'name_export' => $name_export]);
     $pdf->setPaper('a4');
     return $pdf->stream('exportPDF.pdf');
 
