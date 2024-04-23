@@ -59,22 +59,24 @@
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>
-                                                        @if ($da->typeBuy == 1)
+                                                        วัสดุ
+                                                        {{--  @if ($da->typeBuy == 1)
                                                             วัสดุ
                                                         @else
                                                             ครุภัณฑ์
-                                                        @endif
+                                                        @endif --}}
                                                     </td>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>
-                                                        @if ($da->typeBuy == 1)
+                                                        {{ $da->material_name }}
+                                                        {{--   @if ($da->typeBuy == 1)
                                                             {{ $da->material_name }}
                                                         @else
                                                             {{ $da->durableArticles_name }}
-                                                        @endif
+                                                        @endif --}}
                                                     </td>
-                                                    <td class="td-center">{{ number_format($da->quantity) }} &nbsp;
-                                                        {{ $da->counting_unit }}</td>
+                                                    {{--  <td class="td-center">{{ number_format($da->quantity) }} &nbsp;
+                                                        {{ $da->counting_unit }}</td> --}}
 
                                                     <td class="td-center">{{ number_format($da->price_per_piece) }}
                                                     </td>

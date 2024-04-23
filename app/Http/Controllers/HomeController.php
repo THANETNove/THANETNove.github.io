@@ -143,14 +143,15 @@ class HomeController extends Controller
             $name_export = "รายการรับเข้าวัสดุ";
             $data = DB::table('buys')
             ->whereBetween('buys.created_at', [$start_date, $end_date]) // Add this line
-            ->where("buys.typeBuy",1)
-            ->leftJoin('categories', 'buys.group_id', '=', 'categories.id')
-            ->leftJoin('materials', 'buys.buy_name', '=', 'materials.id')
-            ->leftJoin('durable_articles', 'buys.buy_name', '=', 'durable_articles.id')
-            ->select('buys.*', 'categories.category_name' , 'materials.material_name',
-             'durable_articles.durableArticles_name')->where("buys.status",'=',  0);
+            ->leftJoin('materials', 'buys.code_buy', '=', 'materials.id')
+            ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
+
+            ->select('materials.*', 'categories.category_name' ,'buys.price_per_piece','buys.total_price','buys.quantity');
+
 
         $data =  $data->get();
+
+
         $pdf = PDF::loadView('buy.exportPDF',['data' =>  $data, 'date_export' => $date_export ,'name_export' => $name_export]);
         $pdf->setPaper('a4');
         return $pdf->stream('exportPDF.pdf');
