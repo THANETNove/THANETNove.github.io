@@ -238,7 +238,7 @@ class HomeController extends Controller
         ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
-        ->selectRaw('COUNT(durable_articles.remaining_amount) as numberCount')
+        ->selectRaw('sum(durable_articles.remaining_amount = 1) as numberCount')
         ->groupBy('durable_articles.code_DurableArticles', 'categories.category_name', 'categories.category_code', 'type_categories.type_name', 'type_categories.type_code')
         ->get();
 
@@ -252,11 +252,12 @@ class HomeController extends Controller
         $name_export = "รายงานครุภัณฑ์หมด";
         $data = DB::table('durable_articles')
         ->whereBetween('durable_articles.created_at', [$start_date, $end_date]) // Add
-        ->where("durable_articles.remaining_amount", 0)
         ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
         ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->selectRaw('sum(durable_articles.remaining_amount) as numberCount')
+        ->groupBy('durable_articles.code_DurableArticles', 'categories.category_name', 'categories.category_code', 'type_categories.type_name', 'type_categories.type_code')
         ->get();
 
 
