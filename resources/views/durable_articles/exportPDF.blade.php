@@ -38,11 +38,11 @@
                                                 <th>ประเภทครุภัณฑ์</th>
                                                 <th>ชื่อ</th>
                                                 <th>จำนวน</th>
-                                                <th>ที่เบิกได้</th>
+                                                {{--      <th>ที่เบิกได้</th>
                                                 <th>ชำรุด</th>
                                                 <th>จำหน่าย</th>
                                                 <th>ซ่อม</th>
-                                                <th>ค่าเสื่อม</th>
+                                                <th>ค่าเสื่อม</th> --}}
                                                 <th>หน่วย</th>
                                                 <th>ที่เก็บ</th>
                                             </tr>
@@ -59,19 +59,19 @@
                                                         </td>
                                                         <td>{{ $da->category_name }}</td>
                                                         <td>{{ $da->durableArticles_name }}</td>
+                                                        {{--  <td class="td-center">
+                                                            {{ number_format($da->durableArticles_number) }}</td> --}}
                                                         <td class="td-center">
-                                                            {{ number_format($da->durableArticles_number) }}</td>
-                                                        <td class="td-center">
-                                                            {{ number_format($da->remaining_amount) }}
+                                                            {{ number_format($da->numberCount) }}
                                                         </td>
-                                                        <td class="td-center">{{ number_format($da->damaged_number) }}
+                                                        {{--  <td class="td-center">{{ number_format($da->damaged_number) }}
                                                         </td>
                                                         <td class="td-center">
                                                             {{ number_format($da->bet_on_distribution_number) }}</td>
                                                         <td class="td-center">{{ number_format($da->repair_number) }}
                                                         </td>
                                                         <td class="td-center">
-                                                            {{ number_format($da->depreciation_price) }}</td>
+                                                            {{ number_format($da->depreciation_price) }}</td> --}}
                                                         <td class="td-center">{{ $da->name_durableArticles_count }}
                                                         </td>
                                                         <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;

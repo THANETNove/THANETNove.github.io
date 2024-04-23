@@ -238,6 +238,8 @@ class HomeController extends Controller
         ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->selectRaw('COUNT(durable_articles.remaining_amount) as numberCount')
+        ->groupBy('durable_articles.code_DurableArticles', 'categories.category_name', 'categories.category_code', 'type_categories.type_name', 'type_categories.type_code')
         ->get();
 
 
