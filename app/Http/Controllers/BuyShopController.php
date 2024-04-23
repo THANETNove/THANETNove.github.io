@@ -21,7 +21,8 @@ class BuyShopController extends Controller
         ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
         ->join('buy_shops', 'materials.id', '=', 'buy_shops.buy_id')
         ->select('materials.*', 'categories.category_name','storage_locations.building_name',
-        'storage_locations.floor','storage_locations.room_name','buy_shops.status_buy','buy_shops.required_quantity')
+        'storage_locations.floor','storage_locations.room_name','buy_shops.status_buy','buy_shops.required_quantity','buy_shops.id as buy_id')
+        ->where('status_buy', '=', 0)
         ->paginate(100);
         return view('buy_shop.index',['data' => $data,'group' => $group ]);
     }
@@ -81,6 +82,11 @@ class BuyShopController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+
+        $data =  BuyShop::find($id);
+        $data->status_buy = "2";
+        $data->save();
+        return redirect('buy-shop')->with('message', "บันทึกสำเร็จ");
     }
 }

@@ -228,6 +228,7 @@ Route::group(['middleware' => ['is_admin']], function () {
 
     Route::get('buy-shop', [BuyShopController::class, 'index'])->name('buy-shop');
     Route::post('buy-shop-store', [BuyShopController::class, 'store'])->name('buy-shop-store');
+    Route::get('buy-shop-destroy/{id}', [BuyShopController::class, 'destroy'])->name('buy-shop-destroy');
 
 });
 

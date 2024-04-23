@@ -58,14 +58,12 @@
                                                                 </button>
                                                                 <div class="dropdown-menu">
                                                                     <a class="dropdown-item"
-                                                                        href="{{ url('material-show', $da->id) }}">
-                                                                        <i class='bx bx-cart'></i> สั่งซื้อ</a>
+                                                                        href="{{ url('material-show', $da->buy_id) }}">
+                                                                        <i class='bx bx-check-square'></i> สั่งซื้อเเล้ว</a>
                                                                     <a class="dropdown-item"
-                                                                        href="{{ url('material-show', $da->id) }}"><i
-                                                                            class='bx bxs-show'></i> View</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('material-edit', $da->id) }}"><i
-                                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                        href="{{ url('buy-shop-destroy', $da->buy_id) }}"><i
+                                                                            class='bx bx-trash'></i> ยกเลิกการสั่งซื้อ</a>
+
 
                                                                 </div>
                                                             </div>

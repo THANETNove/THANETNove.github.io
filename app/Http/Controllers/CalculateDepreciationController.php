@@ -101,6 +101,7 @@ class CalculateDepreciationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+
     }
 }
