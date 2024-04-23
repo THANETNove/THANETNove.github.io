@@ -75,8 +75,7 @@
                                                             {{ $da->durableArticles_name }}
                                                         @endif --}}
                                                     </td>
-                                                    {{--  <td class="td-center">{{ number_format($da->quantity) }} &nbsp;
-                                                        {{ $da->counting_unit }}</td> --}}
+                                                    <td class="td-center">{{ number_format($da->quantity) }} </td>
 
                                                     <td class="td-center">{{ number_format($da->price_per_piece) }}
                                                     </td>
