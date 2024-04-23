@@ -34,7 +34,7 @@ class HomeController extends Controller
 
             return redirect('material-requisition-index');
         }else{
-            return redirect('buy-index');
+            return redirect('durable-articles-index');
         }
 
     }
