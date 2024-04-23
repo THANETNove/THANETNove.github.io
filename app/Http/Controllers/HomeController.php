@@ -202,6 +202,22 @@ class HomeController extends Controller
                 $name_export = "รายงานเบิกวัสดุทั้งหมด";
                 $type = 6;
             }
+            if ($search == 7 ) {
+                $name_export = "รายงานเบิกวัสดุทั้งหมด";
+                $type = 7;
+
+                $data = DB::table('materials')
+                ->whereBetween('materials.created_at', [$start_date, $end_date]) // Add t
+                ->join('buy_shops', 'materials.id', '=', 'buy_shops.buy_id')
+                ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
+                ->select('materials.*', 'buy_shops.required_quantity','buy_shops.amount_received',
+                'categories.category_name')
+                ->get();
+
+                $pdf = PDF::loadView('material_requisition.exportPDF_shop',['data' =>  $data,'date_export' => $date_export,'name_export' => $name_export ,'type' => $type]);
+                $pdf->setPaper('a4');
+                return $pdf->stream('exportPDF.pdf');
+            }
 
 
             $pdf = PDF::loadView('material_requisition.exportPDF',['data' =>  $data->get(),'date_export' => $date_export,'name_export' => $name_export ,'type' => $type]);

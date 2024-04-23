@@ -120,6 +120,13 @@
                                                             รายงานเบิกทั้งหมด
                                                         </label>
                                                     </div>
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="search"
+                                                            value="7" id="flexRadioDefault7">
+                                                        <label class="form-check-label" for="flexRadioDefault7">
+                                                            รายงานการซื้อ
+                                                        </label>
+                                                    </div>
                                                 @endif
 
                                             </div>
