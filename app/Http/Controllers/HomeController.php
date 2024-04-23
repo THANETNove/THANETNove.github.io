@@ -130,7 +130,6 @@ class HomeController extends Controller
             $name_export = "รายงานวัสดุหมด";
             $data = DB::table('materials')
             ->whereBetween('materials.created_at', [$start_date, $end_date]) // Add this line
-            ->where("materials.remaining_amount", 0)
             ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
             ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
             ->select('materials.*', 'categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
