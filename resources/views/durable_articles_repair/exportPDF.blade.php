@@ -40,7 +40,6 @@
                                                 <th>รายละเอียดครุภัณฑ์</th>
                                                 <th>จำนวนที่ซ่อม</th>
                                                 <th>หน่วยนับ</th>
-                                                <th>สถานะ </th>
                                                 <th>ค่าซ่อม </th>
                                                 <th>รายละเอียด</th>
                                                 <th>วันที่สร้าง</th>
@@ -58,17 +57,8 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ number_format($da->amount_repair) }}</td>
-                                                    <td>{{ $da->name_durable_articles_count }}</td>
-                                                    <td>
-                                                        @if ($da->status == '0')
-                                                            <span class="badge bg-label-success me-1">ซ่อม</span>
-                                                        @elseif ($da->status == '1')
-                                                            <span class="badge bg-label-warning me-1">ยกเลิก</span>
-                                                        @else
-                                                            <span class="badge bg-label-primary me-1">ซ่อมสำเร็จ</span>
-                                                        @endif
-                                                    </td>
+                                                    <td>1</td>
+                                                    <td>{{ $da->name_durableArticles_count }}</td>
                                                     <td>{{ number_format($da->repair_price) }}</td>
                                                     <td>{{ $da->repair_detail }}</td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
