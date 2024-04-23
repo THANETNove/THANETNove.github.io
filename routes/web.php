@@ -17,6 +17,7 @@ use App\Http\Controllers\BetDistributionController;
 use App\Http\Controllers\CalculateDepreciationController;
 use App\Http\Controllers\ReturnItemController;
 use App\Http\Controllers\TypeCategoryController;
+use App\Http\Controllers\BuyShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -224,6 +225,9 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('typeCategory-store', [TypeCategoryController::class, 'store'])->name('typeCategory-store');
     Route::get('typeCategory-edit/{id}', [TypeCategoryController::class, 'edit'])->name('typeCategory-edit');
     Route::put('typeCategory-update/{id}', [TypeCategoryController::class, 'update'])->name('typeCategory-update');
+
+    Route::get('buy-shop', [BuyShopController::class, 'index'])->name('buy-shop');
+    Route::post('buy-shop-store', [BuyShopController::class, 'store'])->name('buy-shop-store');
 
 });
 

@@ -60,10 +60,16 @@
                                         name="code_durable_articles" placeholder="รหัสครุภัณฑ์" required readonly />
 
                                 </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">ราคาเเทงจำหน่าย</label>
+                                    <input type="number" class="form-control" id="salvage_price" name="salvage_price"
+                                        placeholder="ราคาเเทงจำหน่าย" min="1" />
+
+                                </div>
 
 
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">รายละเอียดการซ่อม</label>
+                                    <label for="prefix" class="form-label">รายละเอียดเเทงจำหน่าย</label>
                                     <textarea class="form-control" id="exampleFormControlTextarea1" name="repair_detail" rows="3"></textarea>
                                 </div>
                             </div>

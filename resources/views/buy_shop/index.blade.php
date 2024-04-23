@@ -24,16 +24,10 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
-                                                <th>รหัส</th>
                                                 <th>ประเภทวัสดุ</th>
                                                 <th>ชื่อ</th>
-                                                <th></th>
-                                                <th>จำนวนวัสดุ</th>
-                                                {{-- <th>จำนวนวัสดุ เเพค/โหล</th> --}}
-                                                <th>จำนวนที่เหลือ</th>
+                                                <th>จำนวนที่ต้องการซื้อ</th>
                                                 <th>หน่วย</th>
-
-                                                {{--   <th>ที่จัดเก็บ</th> --}}
                                                 <th>date</th>
                                                 <th>Actions</th>
 
@@ -47,25 +41,11 @@
                                                 @foreach ($groupedData->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
                                                     <tr>
                                                         <th scope="row">{{ $i++ }}</th>
-                                                        <td>{{ $da->code_material }}
-                                                        </td>
+
                                                         <td>{{ $da->category_name }}</td>
                                                         <td>{{ $da->material_name }}</td>
-                                                        @php
 
-                                                            $percent_of_A = number_format($da->material_number) * 0.2;
-
-                                                            $percent_of_A_int = round($percent_of_A);
-
-                                                        @endphp
-                                                        <td>
-                                                            @if (number_format($da->remaining_amount) < $percent_of_A_int)
-                                                                <span
-                                                                    class="badge bg-label-warning me-1">วัสดุใกล้หมด</span>
-                                                            @endif
-                                                        </td>
-                                                        <td>{{ number_format($da->material_number) }}</td>
-                                                        <td>{{ number_format($da->remaining_amount) }}</td>
+                                                        <td>{{ number_format($da->required_quantity) }}</td>
                                                         <td>{{ $da->name_material_count }}</td>
                                                         <td>{{ (new Carbon\Carbon($da->created_at))->format('d-m-Y') }}
                                                         </td>
@@ -77,12 +57,9 @@
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" data-bs-toggle="modal"
-                                                                        onclick="setId('{{ $da->id }}')"
-                                                                        data-bs-target="#modalCenter">
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ url('material-show', $da->id) }}">
                                                                         <i class='bx bx-cart'></i> สั่งซื้อ</a>
-
-
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('material-show', $da->id) }}"><i
                                                                             class='bx bxs-show'></i> View</a>
@@ -113,48 +90,6 @@
             </div>
         </div>
     </div>
-
-
-    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalCenterTitle">จำนวนที่ต้องซื้อ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="user" id="myForm" method="POST" action="{{ route('buy-shop-store') }}">
-                        @csrf
-
-                        <input type="text" name="buy_id" id="rejectedId" value="" style="display: none;">
-                        <div class="row">
-                            <div class="col mb-3">
-
-                                <div class="input-group input-group-merge">
-                                    <span id="basic-icon-default-message2" class="input-group-text"><i
-                                            class="bx bx-cart"></i></span>
-                                    <input type="text" name="required_quantity" class="form-control" id="rejectedId"
-                                        required>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="submit" class="btn btn-primary">บันทึก</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function setId(id) {
-            $('#rejectedId').val(id);
-        }
-    </script>
 
     <!-- / Layout wrapper -->
 @endsection
