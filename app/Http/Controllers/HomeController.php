@@ -382,8 +382,8 @@ class HomeController extends Controller
         ->where('durable_articles_repairs.status', 0)
         ->whereBetween('durable_articles_repairs.created_at', [$start_date, $end_date])
         ->leftJoin('durable_articles', 'durable_articles_repairs.durable_articles_id', '=', 'durable_articles.id')
-        ->leftJoin('type_categories', 'durable_articles_repairs.durable_articles_name', '=', 'type_categories.id')
-        ->leftJoin('categories', 'durable_articles_repairs.group_id', '=', 'categories.id')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->select('durable_articles_repairs.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name')
         ->get();
         $pdf = PDF::loadView('durable_articles_repair.exportPDF',['data' =>  $data,'name_export' => $name_export,'date_export'=>$date_export]);
@@ -396,9 +396,10 @@ class HomeController extends Controller
         ->where('bet_distributions.statusApproval', "1")
         ->whereBetween('bet_distributions.created_at', [$start_date, $end_date])
          ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
-        ->leftJoin('type_categories', 'bet_distributions.durable_articles_name', '=', 'type_categories.id')
-        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
-        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name')
+         ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+         ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->select('bet_distributions.*','durable_articles.name_durableArticles_count','durable_articles.durableArticles_name',
+        'categories.category_name','type_categories.type_name')
         ->get();
 
 

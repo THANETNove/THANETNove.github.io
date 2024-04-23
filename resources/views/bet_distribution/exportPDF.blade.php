@@ -34,9 +34,10 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ </th>
+                                                <th>รหัสครุภัณฑ์ </th>
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
-                                                <th>รหัสครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
+                                                <th>ชื่อย่อครุภัณฑ์</th>
                                                 <th>จำหน่าย</th>
                                                 <th>หน่วยนับ</th>
                                                 <th>ราคาซาก</th>
@@ -54,12 +55,13 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->category_name }}</td>
                                                     <td class="td-center">{{ $da->code_durable_articles }}</td>
+                                                    <td>{{ $da->category_name }}</td>
+                                                    <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
                                                     <td class="td-center">
-                                                        {{ number_format($da->amount_bet_distribution) }}</td>
-                                                    <td class="td-center">{{ $da->name_durable_articles_count }}</td>
+                                                        1</td>
+                                                    <td class="td-center">{{ $da->name_durableArticles_count }}</td>
                                                     <td class="td-center">{{ number_format($da->salvage_price) }}</td>
 
 
