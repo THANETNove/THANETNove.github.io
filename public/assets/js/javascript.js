@@ -500,6 +500,9 @@ console.log("targetUrls", targetUrls);
 if (targetUrls === "approval-update") {
     setActiveClass("approval", "approval-update");
 }
+if (targetUrls === "buy-shop") {
+    setActiveClass("buy-shop", "buy-shop-index");
+}
 console.log("targetUrls", targetUrls);
 
 function myFunction(selectedValue) {

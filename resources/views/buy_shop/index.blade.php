@@ -11,7 +11,7 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">ข้อมูลวัสดุ</h1>
+                                <h1 class="card-title text-primary ">ข้อมูลวัสดุที่สั่งซื้อ</h1>
                                 {{--  <a href="{{ url('material-export/pdf') }}" target="_blank"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลวัสดุ</a> --}}
                                 @if (session('message'))

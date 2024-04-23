@@ -266,14 +266,14 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item" id="material-requisition">
+        <li class="menu-item" id="buy-shop">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
 
                 <i class='menu-icon tf-icons bx bx-cart'></i>
                 <div data-i18n="Authentications">รายวัสดุสั่งซื้อ</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item" id="material-requisition-index">
+                <li class="menu-item" id="buy-shop-index">
                     <a href="{{ url('buy-shop') }}" class="menu-link">
                         <div data-i18n="Basic">รายวัสดุสั่งซื้อ</div>
                     </a>
