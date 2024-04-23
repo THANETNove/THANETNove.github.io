@@ -72,9 +72,15 @@ class BuyShopController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+
+
+        $data =  BuyShop::find($request['buy_id']);
+        $data->status_buy = "1";
+        $data->amount_received = $request['amount_received'];
+        $data->save();
+        return redirect('buy-shop')->with('message', "บันทึกสำเร็จ");
     }
 
     /**

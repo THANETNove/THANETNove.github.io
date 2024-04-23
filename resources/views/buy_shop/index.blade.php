@@ -57,8 +57,9 @@
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('material-show', $da->buy_id) }}">
+                                                                    <a class="dropdown-item" data-bs-toggle="modal"
+                                                                        onclick="setId('{{ $da->buy_id }}')"
+                                                                        data-bs-target="#modalCenter">
                                                                         <i class='bx bx-check-square'></i> สั่งซื้อเเล้ว</a>
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('buy-shop-destroy', $da->buy_id) }}"><i
@@ -88,6 +89,47 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">จำนวนที่ซื้อ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="user" id="myForm" method="POST" action="{{ route('buy-shop-update') }}">
+                        @csrf
+
+                        <input type="text" name="buy_id" id="rejectedId" value="" style="display: none;">
+                        <div class="row">
+                            <div class="col mb-3">
+
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-message2" class="input-group-text"><i
+                                            class="bx bx-cart"></i></span>
+                                    <input type="text" name="amount_received" class="form-control" id="rejectedId"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setId(id) {
+            $('#rejectedId').val(id);
+        }
+    </script>
 
     <!-- / Layout wrapper -->
 @endsection
