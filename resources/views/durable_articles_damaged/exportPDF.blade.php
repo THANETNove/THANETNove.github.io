@@ -52,11 +52,12 @@
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
 
-                                                    <td>{{ $da->code_durable_articles }}</td>
+                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}-{{ $da->group_count }}
+                                                    </td>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
                                                     <td>{{ $da->durableArticles_name }}</td>
-                                                    <td>{{ $da->amount_damaged }}</td>
+                                                    <td>1</td>
                                                     <td>{{ $da->name_durable_articles_count }}</td>
                                                     <td>{{ $da->damaged_detail }}</td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
