@@ -77,7 +77,8 @@
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" data-bs-toggle="modal"
+                                                                    <a class="dropdown-item" href="#"
+                                                                        data-bs-toggle="modal"
                                                                         onclick="setId('{{ $da->id }}')"
                                                                         data-bs-target="#modalCenter">
                                                                         <i class='bx bx-cart'></i> สั่งซื้อ</a>

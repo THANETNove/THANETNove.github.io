@@ -57,10 +57,10 @@
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" data-bs-toggle="modal"
+                                                                    {{--  <a class="dropdown-item" data-bs-toggle="modal"
                                                                         onclick="setId('{{ $da->buy_id }}')"
                                                                         data-bs-target="#modalCenter">
-                                                                        <i class='bx bx-check-square'></i> สั่งซื้อเเล้ว</a>
+                                                                        <i class='bx bx-check-square '></i> ซื้อเเล้ว</a> --}}
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('buy-shop-destroy', $da->buy_id) }}"><i
                                                                             class='bx bx-trash'></i> ยกเลิกการสั่งซื้อ</a>
