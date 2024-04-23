@@ -8,6 +8,7 @@ use PDF;
 use Illuminate\Support\Str;
 use App\Models\Material;
 use App\Models\Buy;
+use App\Models\BuyShop;
 
 
 
@@ -173,7 +174,7 @@ class MaterialController extends Controller
         $data =  Material::find($id);
         $data->material_number = $materialsData[0]->material_number + $request['quantity'];
         $data->remaining_amount = $materialsData[0]->remaining_amount + $request['quantity'];
-        $data->save();
+       // $data->save();
 
 
 
@@ -182,7 +183,29 @@ class MaterialController extends Controller
         $dataBuy->code_buy = $request->code_id;
         $dataBuy->price_per_piece = $request['price_per'];
         $dataBuy->total_price = $request['total_price'];
-        $dataBuy->save();
+       // $dataBuy->save();
+        }
+
+
+
+        $buyShop = DB::table('buy_shops')
+         ->where('buy_id',$request->code_id)
+        ->where('status_buy',0);
+
+
+        $buyShopCount =  $buyShop->count();
+        $buyShopData =  $buyShop->get();
+
+
+
+
+        if ($buyShopCount > 0) {
+            // มีข้อมูลอยู่จริง ดำเนินการต่อ
+           $data = BuyShop::find($buyShopData[0]->id);
+            $data->status_buy = "1";
+            $data->amount_received = $request['quantity'];
+            $data->save();
+
         }
 
         return redirect('material-index')->with('message', "บันทึกสำเร็จ");
