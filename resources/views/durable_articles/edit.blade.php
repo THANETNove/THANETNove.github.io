@@ -27,7 +27,7 @@
                                     <label for="material_name" class="form-label">หมวดหมู่ครุภัณฑ์</label>
 
                                     <select class="form-select" name="group_class" id="durable-articles-group-id"
-                                        aria-label="Default select example">
+                                        aria-label="Default select example" disabled>
                                         <option selected disabled>หมวดหมู่ครุภัณฑ์ </option>
                                         @foreach ($group as $gro)
                                             @if ($dueArt['group_class'] == $gro->id)
@@ -45,7 +45,7 @@
 
 
                                     <input id="type_code" type="text" class="form-control" name="type_categories_code"
-                                        value="{{ $dueArt['type_code'] }}">
+                                        value="{{ $dueArt['type_code'] }}" disabled>
 
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -53,7 +53,7 @@
 
 
                                     <input id="type-articles" type="text" name="type_categories_name"
-                                        class="form-control" value="{{ $dueArt['type_name'] }}">
+                                        class="form-control" value="{{ $dueArt['type_name'] }}" disabled>
 
                                 </div>
 
@@ -66,7 +66,7 @@
                                     <input id="description" type="number"
                                         class="form-control @error('description') is-invalid @enderror" name="description"
                                         required placeholder="รายละเอียด" value="{{ $dueArt['description'] }}"
-                                        autocomplete="description">
+                                        autocomplete="description" disabled>
 
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
@@ -88,7 +88,7 @@
                                     <input id="durableArticles_number" type="number"
                                         class="form-control @error('durableArticles_number') is-invalid @enderror"
                                         name="durableArticles_number" required placeholder="จำนวนครุภัณฑ์"
-                                        autocomplete="durableArticles_number" value="1" readonly>
+                                        autocomplete="durableArticles_number" value="1" readonly disabled>
 
                                     @error('durableArticles_number')
                                         <span class="invalid-feedback" role="alert">
@@ -107,13 +107,14 @@
                                         class="form-control @error('name_durableArticles_count') is-invalid @enderror"
                                         name="name_durableArticles_count"
                                         value="{{ $dueArt['name_durableArticles_count'] }}" required
-                                        placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์" autocomplete="name_durableArticles_count">
+                                        placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์" autocomplete="name_durableArticles_count"
+                                        disabled>
                                 </div>
 
                                 <div class="mb-3 col-md-6">
                                     <label for="name_durableArticles_count" class="form-label">ระยะเวลประกัน
-                                        {{ $dueArt['warranty_period'] }}</label>
-                                    <input id="warranty_period" type="text" class="date form-control "
+                                    </label>
+                                    <input id="warranty_period" type="text" class="dateMin form-control "
                                         name="warranty_period" required value="{{ $dueArt['warranty_period'] }}"
                                         placeholder="dd-mm-yyyy" autocomplete="warranty_period">
                                 </div>
