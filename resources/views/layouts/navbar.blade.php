@@ -14,9 +14,80 @@
         <!-- /Search -->
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
+            @php
+                $dataDuAc = DB::table('durable_articles_requisitions')
+                    ->where('durable_articles_requisitions.status', '0')
+                    ->where('durable_articles_requisitions.statusApproval', '0')
+                    ->leftJoin('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+                    ->leftJoin('durable_articles', 'durable_articles_requisitions.group_id', '=', 'durable_articles.id')
+                    ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+                    ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+                    ->select(
+                        'durable_articles_requisitions.*',
+                        'categories.category_name',
+                        'type_categories.type_name',
+                        'durable_articles.durableArticles_name',
+                        'users.prefix',
+                        'users.first_name',
+                        'users.last_name',
+                    )
+
+                    ->groupBy('durable_articles_requisitions.group_withdraw')
+                    ->selectRaw('count(durable_articles_requisitions.group_withdraw) as groupWithdrawCount')
+                    ->orderBy('durable_articles_requisitions.id', 'DESC')
+                    ->get();
+
+                $dataBet = DB::table('bet_distributions')
+                    ->where('bet_distributions.status', '=', 'on')
+                    ->where('bet_distributions.statusApproval', '=', '0')
+                    ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
+                    ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
+                    ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+                    ->select(
+                        'bet_distributions.*',
+                        'durable_articles.durableArticles_name',
+                        'categories.category_name',
+                        'type_categories.type_name',
+                    )
+                    ->orderBy('bet_distributions.id', 'DESC')
+                    ->get();
+
+                $countData = $dataDuAc->count() + $dataBet->count();
+
+            @endphp
             <!-- Place this tag where you want the button to render. -->
 
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
 
+                    <div class="avatar">
+                        <samp class="warn"> {{ $countData }}</samp>
+                        <i class='bx bx-bell' style='font-size: 32px;'> </i>
+
+                    </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item" href="{{ url('approval-update') }}">
+                            <i class='bx warn-2'>{{ $dataDuAc->count() }}</i>
+                            <span class="align-middle col-8">อนุมัติครุภัณฑ์</span>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ url('bet-distribution-indexApproval') }}">
+
+                            <i class='bx warn-2'>{{ $dataBet->count() }}</i>
+                            <span class="align-middle">อนุมัติครุภัณฑ์จำหน่าย</span>
+                        </a>
+                    </li>
+
+
+
+                </ul>
+            </li>
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">

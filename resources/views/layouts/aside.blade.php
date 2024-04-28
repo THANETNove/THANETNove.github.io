@@ -94,21 +94,24 @@
                 <li class="menu-item" id="approval">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class='menu-icon tf-icons bx bxs-select-multiple'></i>
-                        <div data-i18n="Account Settings">อนุมัติครุภัณฑ์</div>
+                        <div data-i18n="Account Settings">อนุมัติครุภัณฑ์ </div>
+
                     </a>
+
                     <ul class="menu-sub">
                         <li class="menu-item" id="approval-update">
                             <a href="{{ url('approval-update') }}" class="menu-link">
                                 <div data-i18n="Notifications">อนุมัติครุภัณฑ์</div>
                             </a>
+
                         </li>
                     </ul>
                 </li>
                 <li class="menu-item" id="index-approval">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class='menu-icon tf-icons bx bxs-check-circle'></i>
-                        <div data-i18n="Account Settings">อนุมัติครุภัณฑ์จำหน่าย
-                        </div>
+                        <div data-i18n="Account Settings">อนุมัติครุภัณฑ์จำหน่าย</div>
+
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item" id="bet-distribution-indexApproval">
