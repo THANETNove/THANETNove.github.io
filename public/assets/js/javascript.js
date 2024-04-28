@@ -1467,19 +1467,23 @@ $("#calculate-id").on("change", function () {
                 (365.25 * 24 * 60 * 60 * 1000)
         );
 
-        let ageMultiplier = ageInYears + 1; //ปี
+        let ageMultiplier = foundItem.service_life; //ปี
 
-        $("#service_life").val(ageMultiplier);
+        $("#service_life").val(Number(foundItem.service_life));
+        $("#period_use").val(ageInYears + 1);
 
         if (foundItem.salvage_price == 0) {
             // คำนวณค่าเสื่อม (ราคา * ค่าเสื่อม/100) / ปี (กรณีที่ยังไม่ได้จำหน่าย)
             let price = (foundItem.price_per * 20) / 100 / ageMultiplier;
-            $("#calulate-depreciation").val(price.toLocaleString());
+            let priceDepreciation = foundItem.price_per - price;
+            $("#calulate-depreciation").val(priceDepreciation.toLocaleString());
         } else {
             // คำนวณค่าเสื่อม (ราคา - ราคาซาก) / ปี (กรณีที่จำหน่าย)
             let price =
                 (foundItem.price_per - foundItem.salvage_price) / ageMultiplier;
-            $("#calulate-depreciation").val(price.toLocaleString());
+            let priceDepreciation = Number(foundItem.price_per) - Number(price);
+
+            $("#calulate-depreciation").val(priceDepreciation.toLocaleString());
         }
     }
 });
@@ -1763,7 +1767,7 @@ function durableArticlesCode() {
     const quantity = document.getElementById("durable_articles_code").value; // จำนวน
 
     $.ajax({
-        url: "/post-durableArticles/",
+        url: "/post-durableArticles",
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Fetch the CSRF token
@@ -1793,6 +1797,7 @@ function durableArticlesCode() {
                 $("#durable_name").val("");
                 $("#durable_description").val("");
                 $("#damaged_number_error").text("");
+                $("#damaged_number_error").text("ไม่พบครุภัณฑ์ลงทะเบียน");
             }
         },
         error: function (xhr, status, error) {

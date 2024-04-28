@@ -106,10 +106,10 @@ class DurableArticlesDamagedController extends Controller
             ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
             ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
             ->where(function($query) use ($combinedPart_0,$combinedPart_1,$combinedPart_2, $combinedPart) {
-                $query->where('category_code', 'LIKE', "%$combinedPart_0%")
-                      ->where('type_code', 'LIKE', "%$combinedPart_1%")
-                      ->where('description', 'LIKE', "%$combinedPart_2%")
-                      ->where('durable_articles.group_count', 'LIKE', "%$combinedPart%");
+                $query->where('category_code', $combinedPart_0)
+                      ->where('type_code', $combinedPart_1)
+                      ->where('description', $combinedPart_2)
+                      ->where('durable_articles.group_count', $combinedPart);
             })
 
 
@@ -121,6 +121,8 @@ class DurableArticlesDamagedController extends Controller
                 'type_categories.type_name'
             )
             ->get();
+
+
             if ($data->isEmpty()) {
                 return response()->json([]);
             } else {
