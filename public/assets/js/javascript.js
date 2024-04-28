@@ -1478,15 +1478,19 @@ $("#calculate-id").on("change", function () {
         if (foundItem.salvage_price == 0) {
             // คำนวณค่าเสื่อม (ราคา * ค่าเสื่อม/100) / ปี (กรณีที่ยังไม่ได้จำหน่าย)
             let price = (foundItem.price_per * 20) / 100 / ageMultiplier;
-            let priceDepreciation = foundItem.price_per - price;
-            $("#calulate-depreciation").val(priceDepreciation.toLocaleString());
+            let priceDepreciation = Number(foundItem.price_per) - Number(price);
+            $("#calulate-depreciation").val(
+                Math.ceil(priceDepreciation.toLocaleString())
+            );
         } else {
             // คำนวณค่าเสื่อม (ราคา - ราคาซาก) / ปี (กรณีที่จำหน่าย)
             let price =
                 (foundItem.price_per - foundItem.salvage_price) / ageMultiplier;
             let priceDepreciation = Number(foundItem.price_per) - Number(price);
 
-            $("#calulate-depreciation").val(priceDepreciation.toLocaleString());
+            $("#calulate-depreciation").val(
+                Math.ceil(priceDepreciation.toLocaleString())
+            );
         }
     }
 });
