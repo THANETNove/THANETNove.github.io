@@ -172,7 +172,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('durable-articles-damaged-create', [DurableArticlesDamagedController::class, 'create'])->name('durable-articles-damaged-create');
     Route::post('durable-articles-damaged-store', [DurableArticlesDamagedController::class, 'store'])->name('durable-articles-damaged-store');
     Route::get('durable-articles-damaged-edit/{id}', [DurableArticlesDamagedController::class, 'edit'])->name('durable-articles-damaged-edit');
-    Route::post('post-durableArticles', [DurableArticlesDamagedController::class, 'durableArticlesData'])->name('durable-articles-damaged-edit');
+    Route::post('post-durableArticles', [DurableArticlesDamagedController::class, 'durableArticlesData'])->name('post-durableArticles');
     Route::put('durable-articles-damaged-update/{id}', [DurableArticlesDamagedController::class, 'update'])->name('durable-articles-damaged-update');
     Route::get('durable-articles-damaged-destroy/{id}', [DurableArticlesDamagedController::class, 'destroy'])->name('durable-articles-damaged-destroy');
     Route::get('durable-articles-damaged-export/pdf', [DurableArticlesDamagedController::class, 'exportPDF'])->name('durable-articles-damaged-export/pdf');
