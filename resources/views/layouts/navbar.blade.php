@@ -62,7 +62,8 @@
 
                     <div class="avatar">
                         <samp class="warn"> {{ $countData }}</samp>
-                        <i class='bx bx-bell' style='font-size: 32px;'> </i>
+
+                        <i class='bx bxs-bell-ring' style='font-size: 32px;'></i>
 
                     </div>
                 </a>
