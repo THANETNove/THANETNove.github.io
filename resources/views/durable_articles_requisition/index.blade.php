@@ -22,13 +22,12 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
-                                                <th>เบิก/ยืม</th>
                                                 <th>รหัสครุภัณฑ์</th>
                                                 <th>หมวดหมู่ครุภัณฑ์</th>
                                                 <th>ชื่อครุภัณฑ์</th>
                                                 <th>รายละเอียดครุภัณฑ์</th>
                                                 <th>จำนวน</th>
-                                                <th>การอนุมัติ </th>
+
                                                 <th>สถานะ </th>
                                                 <th>วันที่เบิก </th>
                                                 <th>Actions</th>
@@ -42,7 +41,6 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->name_type }}</td>
                                                     <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}
                                                     </td>
                                                     <td>{{ $da->category_name }}</td>

@@ -20,7 +20,6 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
-                                                <th>เบิก/ยืม</th>
                                                 <th>รหัสครุภัณฑ์</th>
                                                 <th>หมวดหมู่</th>
                                                 <th>ชื่อครุภัณฑ์</th>
@@ -42,7 +41,6 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->name_type }}</td>
                                                     <td>{{ $da->code_durable_articles }}</td>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
