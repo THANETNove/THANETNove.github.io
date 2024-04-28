@@ -185,8 +185,8 @@
     height: 20px !important;
     border-radius: 100%;
     position: absolute;
-    top: -8px !important;
-    right: 0px !important;
+    top: -6px !important;
+    right: 8px !important;
 }
 
 .warn-2 {

@@ -11,7 +11,7 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">ข้อมูลวัสดุที่สั่งซื้อ</h1>
+                                <h1 class="card-title text-primary ">ข้อมูลวัสดุรอสั่งซื้อ</h1>
                                 {{--  <a href="{{ url('material-export/pdf') }}" target="_blank"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานข้อมูลวัสดุ</a> --}}
                                 @if (session('message'))
@@ -57,10 +57,11 @@
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    {{--  <a class="dropdown-item" data-bs-toggle="modal"
-                                                                        onclick="setId('{{ $da->buy_id }}')"
+                                                                    <a class="dropdown-item" href="#"
+                                                                        data-bs-toggle="modal"
+                                                                        onclick="setId('{{ $da->buy_id }}','{{ $da->required_quantity }}')"
                                                                         data-bs-target="#modalCenter">
-                                                                        <i class='bx bx-check-square '></i> ซื้อเเล้ว</a> --}}
+                                                                        <i class='bx bx-check-square '></i> ซื้อเเล้ว</a>
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('buy-shop-destroy', $da->buy_id) }}"><i
                                                                             class='bx bx-trash'></i> ยกเลิกการสั่งซื้อ</a>
@@ -108,7 +109,7 @@
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-message2" class="input-group-text"><i
                                             class="bx bx-cart"></i></span>
-                                    <input type="text" name="amount_received" class="form-control" id="rejectedId"
+                                    <input type="text" name="amount_received" class="form-control" id="rejectedAmount"
                                         required>
                                 </div>
                             </div>
@@ -126,8 +127,9 @@
     </div>
 
     <script>
-        function setId(id) {
+        function setId(id, quantity) {
             $('#rejectedId').val(id);
+            $('#rejectedAmount').val(quantity);
         }
     </script>
 
