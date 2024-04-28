@@ -127,16 +127,7 @@
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ url('my-profile', Auth::user()->id) }}">
-                            <i class="bx bx-user me-2"></i>
-                            <span class="align-middle">My Profile</span>
-                        </a>
-                    </li>
 
-                    <li>
-                        <div class="dropdown-divider"></div>
-                    </li>
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
