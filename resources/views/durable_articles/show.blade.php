@@ -28,7 +28,6 @@
                             <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">รายละเอียด </label>
                                 <input type="text" class="form-control" value="{{ $data[0]->durableArticles_name }}">
-
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">หน่วย </label>
@@ -41,11 +40,11 @@
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $data[0]->building_name }} &nbsp;{{ $data[0]->floor }} &nbsp;{{ $data[0]->room_name }}</textarea>
 
                             </div>
-                            <div class="mb-3 col-md-6">
+                            {{--  <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">อายุการใช้งาน </label>
                                 <input type="text" class="form-control" value="{{ $data[0]->service_life }} ปี">
 
-                            </div>
+                            </div> --}}
                             <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">วันที่สร้าง </label>
 
@@ -64,6 +63,7 @@
                                             <th>แทงจำหน่าย</th>
                                             <th>ซ่อม</th>
                                             <th>ค่าเสื่อม</th>
+                                            <th>อายุการใช้งาน</th>
                                         </tr>
                                     </thead>
                                     @php
@@ -81,6 +81,11 @@
                                                 <td>{{ number_format($da->bet_on_distribution_number) }}</td>
                                                 <td>{{ number_format($da->repair_number) }}</td>
                                                 <td>{{ number_format($da->depreciation_price) }}</td>
+                                                <td>
+                                                    @if ($da->service_life)
+                                                        {{ number_format($da->service_life) }} &nbsp;ปี
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
