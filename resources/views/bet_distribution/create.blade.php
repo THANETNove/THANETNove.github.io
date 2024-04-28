@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">ราคาเเทงจำหน่าย</label>
-                                    <input type="number" class="form-control" id="salvage_price" name="salvage_price"
+                                    <input type="number" class="form-control" id="depreciation_price" name="salvage_price"
                                         placeholder="ราคาเเทงจำหน่าย" min="1" />
 
                                 </div>

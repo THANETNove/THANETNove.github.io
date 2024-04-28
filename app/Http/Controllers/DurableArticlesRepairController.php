@@ -90,7 +90,7 @@ class DurableArticlesRepairController extends Controller
         ->rightJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->rightJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->rightJoin('durable_articles_damageds', 'durable_articles.id', '=', 'durable_articles_damageds.durable_articles_id')
-        ->select('durable_articles_damageds.*','durable_articles.durableArticles_name','durable_articles.description','durable_articles.group_count',
+        ->select('durable_articles_damageds.*','durable_articles.durableArticles_name','durable_articles.depreciation_price','durable_articles.description','durable_articles.group_count',
         'type_categories.type_code','categories.category_code')
         ->where('type_durableArticles',$id)
         ->where('status_damaged', 0)
@@ -110,7 +110,7 @@ class DurableArticlesRepairController extends Controller
         ->rightJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->rightJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->rightJoin('durable_articles_damageds', 'durable_articles.id', '=', 'durable_articles_damageds.durable_articles_id')
-        ->select('durable_articles_damageds.*','durable_articles.durableArticles_name','durable_articles.description','durable_articles.group_count',
+        ->select('durable_articles_damageds.*','durable_articles.durableArticles_name','durable_articles.depreciation_price','durable_articles.description','durable_articles.group_count',
         'type_categories.type_code','categories.category_code')
         ->where('status_damaged', 1)
         ->where('durable_articles_damageds.status', 0)

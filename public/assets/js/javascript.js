@@ -1360,7 +1360,7 @@ $("#details_repair_name").on("change", function () {
     var foundItem = detailsRepairNameRes.find(function (item) {
         return item.durable_articles_id == selectedValue;
     });
-    console.log("foundItem", foundItem);
+    
 
     if (foundItem) {
         $("#code_durable_articles").val(
@@ -1378,6 +1378,7 @@ $("#details_repair_name").on("change", function () {
         ); */
         $("#durable_articles_id").val(foundItem.durable_articles_id);
         $("#durable_articles_name").val(foundItem.durable_articles_name);
+        $("#depreciation_price").val(foundItem.depreciation_price);
     }
 });
 
