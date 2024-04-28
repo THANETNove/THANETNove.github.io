@@ -139,6 +139,7 @@ class HomeController extends Controller
            return $pdf->stream('exportPDF.pdf');
 
          }elseif ($search == 2) { //รายการรับเข้า
+
             $name_export = "รายการรับเข้าวัสดุ";
             $data = DB::table('buys')
             ->whereBetween('buys.created_at', [$start_date, $end_date]) // Add this line

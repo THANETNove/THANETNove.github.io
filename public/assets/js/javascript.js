@@ -664,6 +664,8 @@ $("#buy_name").on("change", function () {
             })
         );
 
+        console.log("foundItem", foundItem);
+
         $.each(globalStorage, function (index, data) {
             groupSelect.append(
                 $("<option>", {
@@ -693,6 +695,7 @@ $("#buy_name").on("change", function () {
                     foundItem.group_count
             );
             $("#service_life-buy").val(foundItem.service_life);
+            $("#counting_unit").val(foundItem.name_durableArticles_count);
         } else {
             $("#code-id").val(foundItem.id);
             $("#counting_unit").val(foundItem.name_material_count);
@@ -1360,7 +1363,6 @@ $("#details_repair_name").on("change", function () {
     var foundItem = detailsRepairNameRes.find(function (item) {
         return item.durable_articles_id == selectedValue;
     });
-    
 
     if (foundItem) {
         $("#code_durable_articles").val(

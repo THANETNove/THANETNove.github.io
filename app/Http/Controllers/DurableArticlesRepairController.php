@@ -113,6 +113,7 @@ class DurableArticlesRepairController extends Controller
         ->select('durable_articles_damageds.*','durable_articles.durableArticles_name','durable_articles.depreciation_price','durable_articles.description','durable_articles.group_count',
         'type_categories.type_code','categories.category_code')
         ->where('status_damaged', 1)
+        ->where('type_durableArticles',$id)
         ->where('durable_articles_damageds.status', 0)
         ->groupBy('durable_articles_id')
         ->get();

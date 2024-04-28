@@ -102,13 +102,13 @@ class MaterialController extends Controller
 
 
 
-        for ($i = 0; $i < $request['quantity']; $i++) {
+      /*   for ($i = 0; $i < $request['quantity']; $i++) { */
             $dataBuy =  new Buy;
             $dataBuy->code_buy =  $data->id;
             $dataBuy->price_per_piece = $request['price_per'];
             $dataBuy->total_price = $request['total_price'];
             $dataBuy->save();
-        }
+  /*       } */
 
 
 

@@ -55,6 +55,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
@@ -69,11 +70,6 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>
                                                         {{ $da->material_name }}
-                                                        {{--   @if ($da->typeBuy == 1)
-                                                            {{ $da->material_name }}
-                                                        @else
-                                                            {{ $da->durableArticles_name }}
-                                                        @endif --}}
                                                     </td>
                                                     <td class="td-center">{{ number_format($da->quantity) }} </td>
 
