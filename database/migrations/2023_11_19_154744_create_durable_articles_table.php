@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('price_per')->nullable()->comment('สถานะ on/ off');
             $table->string('total_price')->nullable()->comment('สถานะ on/ off');
             $table->string('details')->nullable()->comment('สถานะ on/ off');
+            $table->string('service_life')->nullable()->comment('อายุการใช้งาน');
             $table->timestamps();
         });
     }

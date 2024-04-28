@@ -26,5 +26,7 @@ class DurableArticles extends Model
         'price_per', //สถานะ on/ off
         'total_price', //สถานะ on/ off
         'details', //สถานะ on/ off
+        'details', //สถานะ on/ off
+        'service_life'
     ];
 }

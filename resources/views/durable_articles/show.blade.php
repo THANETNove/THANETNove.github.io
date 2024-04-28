@@ -42,6 +42,11 @@
 
                             </div>
                             <div class="mb-3 col-md-6">
+                                <label for="material_name" class="form-label">อายุการใช้งาน </label>
+                                <input type="text" class="form-control" value="{{ $data[0]->service_life }} ปี">
+
+                            </div>
+                            <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">วันที่สร้าง </label>
 
                                 <input type="text" class="form-control"
@@ -68,7 +73,7 @@
                                         @foreach ($data as $da)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
-                                                <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}-{{$da->group_count}}
+                                                <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}-{{ $da->group_count }}
                                                 </td>
                                                 <td>{{ number_format($da->durableArticles_number) }}</td>
                                                 <td>{{ number_format($da->remaining_amount) }}</td>

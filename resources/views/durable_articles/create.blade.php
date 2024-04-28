@@ -145,6 +145,12 @@
 
                                         </div>
                                         <div class="mb-3 col-md-6">
+                                            <label for="name_durableArticles_count" class="form-label">อายุการใช้
+                                                /ปี</label>
+                                            <input id="service_life" type="text" class=" form-control "
+                                                name="service_life" required autocomplete="service_life" placeholder="5">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
                                             <label for="name_durableArticles_count"
                                                 class="form-label">ระยะเวลประกัน</label>
                                             <input id="warranty_period" type="text" class="date form-control "

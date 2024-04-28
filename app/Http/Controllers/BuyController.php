@@ -161,6 +161,7 @@ class BuyController extends Controller
         $data->warranty_period = $request['warranty_period'];
         $data->price_per = $request['price_per'];
         $data->total_price = $request['total_price'];
+        $data->service_life = $request['service_life'];
         $data->details = $request['details'];
         $data->damaged_number = 0;
         $data->bet_on_distribution_number = 0;

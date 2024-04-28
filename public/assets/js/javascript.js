@@ -692,6 +692,7 @@ $("#buy_name").on("change", function () {
                     "-" +
                     foundItem.group_count
             );
+            $("#service_life-buy").val(foundItem.service_life);
         } else {
             $("#code-id").val(foundItem.id);
             $("#counting_unit").val(foundItem.name_material_count);
