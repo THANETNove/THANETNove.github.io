@@ -110,7 +110,13 @@
                                         placeholder="ชื่อเรียกจำนวนนับครุภัณฑ์" autocomplete="name_durableArticles_count"
                                         disabled>
                                 </div>
-
+                                <div class="mb-3 col-md-6">
+                                    <label for="name_durableArticles_count" class="form-label">อายุการใช้
+                                        /ปี</label>
+                                    <input type="text" class=" form-control " name="service_life" placeholder="5"
+                                        value="{{ $dueArt['service_life'] }}" required autocomplete="service_life"
+                                        disabled>
+                                </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="name_durableArticles_count" class="form-label">ระยะเวลประกัน
                                     </label>
