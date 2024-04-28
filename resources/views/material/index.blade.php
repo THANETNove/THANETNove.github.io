@@ -28,7 +28,7 @@
                                                 <th>ประเภทวัสดุ</th>
                                                 <th>ชื่อ</th>
                                                 <th></th>
-                                                <th>จำนวนวัสดุ</th>
+                                                {{--  <th>จำนวนวัสดุ</th> --}}
                                                 {{-- <th>จำนวนวัสดุ เเพค/โหล</th> --}}
                                                 <th>จำนวนที่เหลือ</th>
                                                 <th>หน่วย</th>
@@ -64,7 +64,7 @@
                                                                     class="badge bg-label-warning me-1">วัสดุใกล้หมด</span>
                                                             @endif
                                                         </td>
-                                                        <td>{{ number_format($da->material_number) }}</td>
+                                                        {{--  <td>{{ number_format($da->material_number) }}</td> --}}
                                                         <td>{{ number_format($da->remaining_amount) }}</td>
                                                         <td>{{ $da->name_material_count }}</td>
                                                         <td>{{ (new Carbon\Carbon($da->created_at))->format('d-m-Y') }}

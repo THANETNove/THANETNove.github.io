@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BuyShop;
+use App\Models\Material;
+use App\Models\Buy;
 use DB;
 
 
@@ -77,9 +79,25 @@ class BuyShopController extends Controller
 
 
         $data =  BuyShop::find($request['buy_id']);
+
         $data->status_buy = "1";
         $data->amount_received = $request['amount_received'];
         $data->save();
+
+
+
+        $dataMaterial =  Material::find($data['buy_id']);
+        $dataMaterial->material_number = $dataMaterial->material_number + $request['amount_received'];
+        $dataMaterial->remaining_amount = $dataMaterial->remaining_amount + $request['amount_received'];
+        $dataMaterial->save();
+
+
+        $dataBuy =  new Buy;
+        $dataBuy->code_buy = $data['buy_id'];
+        $dataBuy->price_per_piece = $request['price'];
+        $dataBuy->total_price = $request['total_price'];
+        $dataBuy->quantity = $request['amount_received'];
+        $dataBuy->save();
         return redirect('buy-shop')->with('message', "บันทึกสำเร็จ");
     }
 

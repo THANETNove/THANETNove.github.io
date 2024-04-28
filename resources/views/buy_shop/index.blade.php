@@ -95,7 +95,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalCenterTitle">จำนวนที่ซื้อ</h5>
+                    <h5 class="modal-title" id="modalCenterTitle">รายละเอียดการซื้อ</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -104,14 +104,26 @@
 
                         <input type="text" name="buy_id" id="rejectedId" value="" style="display: none;">
                         <div class="row">
-                            <div class="col mb-3">
-
+                            <div class="col-6 mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">จำนวนที่ซื้อ</label>
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-message2" class="input-group-text"><i
                                             class="bx bx-cart"></i></span>
-                                    <input type="text" name="amount_received" class="form-control" id="rejectedAmount"
-                                        required>
+                                    <input type="text" name="amount_received" oninput="calculateTotalPrice3()"
+                                        class="form-control rejectedAmount" id="rejectedAmount" required>
                                 </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">ราคา</label>
+                                <input type="number" class="form-control price-shop" oninput="calculateTotalPrice3()"
+                                    name="price" id="price-shop" placeholder="ราคา">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">ราคารวม</label>
+                                <input type="number" class="form-control" name="total_price" id="total-price-shop"
+                                    placeholder="ราคา">
                             </div>
                         </div>
                 </div>
@@ -130,6 +142,20 @@
         function setId(id, quantity) {
             $('#rejectedId').val(id);
             $('#rejectedAmount').val(quantity);
+        }
+
+        function calculateTotalPrice3() {
+
+            const rejectedAmount = document.querySelector(".rejectedAmount").value; // ราคาต่อชิ้น
+            const price = document.querySelector(".price-shop").value;
+
+
+            if (rejectedAmount && price) {
+                const sum = rejectedAmount * price;
+                $("#total-price-shop").val(sum);
+            }
+
+
         }
     </script>
 

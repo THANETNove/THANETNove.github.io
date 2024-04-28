@@ -37,7 +37,7 @@
                                                 <th>รหัส</th>
                                                 <th>ประเภทวัสดุ</th>
                                                 <th>ชื่อ</th>
-                                                <th>จำนวนวัสดุ</th>
+                                                {{--  <th>จำนวนวัสดุ</th> --}}
                                                 <th>จำนวนที่เหลือ</th>
                                                 <th>หน่วย</th>
                                                 <th>ที่จัดเก็บ</th>
@@ -55,7 +55,7 @@
                                                         </td>
                                                         <td>{{ $da->category_name }}</td>
                                                         <td class="td-center">{{ $da->material_name }}</td>
-                                                        <td class="td-center">{{ number_format($da->material_number) }}
+                                                        {{-- <td class="td-center">{{ number_format($da->material_number) }} --}}
                                                         </td>
                                                         <td class="td-center">{{ number_format($da->remaining_amount) }}
                                                         </td>
