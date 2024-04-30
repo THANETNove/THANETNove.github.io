@@ -24,9 +24,10 @@
 
                                                 <th>ราคาซาก</th>
                                                 <th>สถานะ </th>
-                                                <th>สถานะการอนุมัติ </th>
+
                                                 <th>รายละเอียด</th>
                                                 <th>รายละเอียดการอนุมัติ</th>
+                                                <th>PDF </th>
                                                 <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -53,18 +54,26 @@
                                                             <span class="badge bg-label-primary me-1">อนุมัติ</span>
                                                         @elseif ($da->statusApproval == '2' && $da->status == 'on')
                                                             <span class="badge bg-label-warning me-1">ไม่อนุมัติ</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($da->status == 'on')
-                                                            <span class="badge bg-label-success me-1">เเทงจำหน่าย</span>
-                                                        @else
+                                                        @elseif ($da->status == 'off')
                                                             <span class="badge bg-label-warning me-1">ยกเลิก</span>
                                                         @endif
                                                     </td>
+
                                                     <td>{{ $da->repair_detail }}</td>
+
                                                     <td>{{ $da->commentApproval }}</td>
+                                                    <td>
+
+                                                        @if ($da->url_pdf)
+                                                            <a href="{{ asset('pdf/' . $da->url_pdf) }}" target="_blank">
+                                                                <i class='bx bxs-file-pdf'
+                                                                    style="font-size: 24px;cursor: pointer;"></i></a>
+                                                        @endif
+
+
+                                                    </td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+
                                                     @if ($da->status == 'on' && $da->statusApproval == '0')
                                                         <td>
                                                             <div class="dropdown">

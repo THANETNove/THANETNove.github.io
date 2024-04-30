@@ -20,11 +20,12 @@
                                                 <th>รหัส</th>
                                                 <th>หมวดหมู่</th>
                                                 <th>ชื่อครุภัณฑ์</th>
-                                                <th>รายละเอียด/th>
+                                                <th>รายละเอียด</th>
                                                 <th>จำนวน</th>
                                                 <th>ราคาซาก</th>
                                                 <th>สถานะการอนุมัติ </th>
                                                 <th>รายละเอียด</th>
+                                                <th>PDF</th>
                                                 <th>วันที่สร้าง</th>
                                                 <th>การอนุมัติ </th>
                                             </tr>
@@ -55,6 +56,14 @@
                                                     </td>
 
                                                     <td>{{ $da->repair_detail }}</td>
+                                                    <td>
+                                                        @if ($da->url_pdf)
+                                                            <a href="{{ asset('pdf/' . $da->url_pdf) }}" target="_blank">
+                                                                <i class='bx bxs-file-pdf'
+                                                                    style="font-size: 24px;cursor: pointer;"></i></a>
+                                                        @endif
+
+                                                    </td>
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                     <td>
                                                         <a href="{{ url('approved_bet_distribution', $da->id) }}"

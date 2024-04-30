@@ -8,7 +8,7 @@
                 <div class="card ">
                     <div class="card-body">
                         <h1 class="card-title text-primary ">ลงทะเบียนเเทงจำหน่ายครุภัณฑ์</h1>
-                        <form method="POST" action="{{ route('bet-distribution-store') }}">
+                        <form method="POST" action="{{ route('bet-distribution-store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">
@@ -71,6 +71,13 @@
                                 <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">รายละเอียดเเทงจำหน่าย</label>
                                     <textarea class="form-control" id="exampleFormControlTextarea1" name="repair_detail" rows="3"></textarea>
+                                </div>
+                                <div class="mb-5 col-md-6">
+                                    <label for="pdf_file">Choose PDF file:</label>
+                                    <input type="file" class="form-control-file" id="pdf_file" name="pdf_file">
+                                    @error('pdf_file')
+                                        <div style="color: red;font-size: 16px;margin-top: 8px;">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mt-2">

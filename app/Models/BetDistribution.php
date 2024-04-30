@@ -21,5 +21,6 @@ class BetDistribution extends Model
         'statusApproval', //สถานะ on/ off
         'commentApproval', //สถานะ on/ off
         'salvage_price', //สถานะ on/ off
+        'url_pdf',
     ];
 }

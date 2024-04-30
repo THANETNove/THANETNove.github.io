@@ -23,7 +23,7 @@ class BetDistributionController extends Controller
         $data = DB::table('bet_distributions')
         ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
         ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
 
 
@@ -51,7 +51,7 @@ class BetDistributionController extends Controller
         ->where('bet_distributions.status', '=', "on")
         ->where('bet_distributions.statusApproval', '=', "0")
         ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
-        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
         ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
         ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
 
@@ -127,6 +127,9 @@ class BetDistributionController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'pdf_file' => ['required', 'file', 'mimes:pdf'],
+        ]);
 
         $data = new BetDistribution;
         $data->id_user = Auth::user()->id;
@@ -140,6 +143,18 @@ class BetDistributionController extends Controller
         $data->repair_detail = $request['repair_detail'];
         $data->status = "on";
         $data->statusApproval = "0";
+
+
+        if($request->hasFile('pdf_file')) {
+            $pdfFile = $request->file('pdf_file');
+            $extension = $pdfFile->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+
+         $pdfFile->move(public_path().'/pdf', $fileName);
+
+               $data->url_pdf = $fileName;
+        }
+
         $data->save();
 
         $repair =  $request['amount_repair'];
@@ -153,10 +168,14 @@ class BetDistributionController extends Controller
 
 
 
+
+
+
+
         DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
             'bet_on_distribution_number' => 1,
             'damaged_number' => 0,
-            /* 'durableArticles_number' => $amount_repair[0]->durableArticles_number - $data->amount_bet_distribution, */
+
         ]);
         DurableArticlesDamaged::where('durable_articles_id', $request['durable_articles_id'])->update([
             'status' => "4", // เเทงจำหน่าย

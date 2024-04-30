@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('statusApproval')->nullable()->comment('สถานะการอนุมัติ 0 = รอการอนุมัติ 1 = อนุมัติ 2 = ไม่อนุมัติ');
             $table->string('commentApproval')->nullable()->comment('รายละเอียดการไม่อนุมัติ');
             $table->string('salvage_price')->nullable()->comment('ราคาซาก');
+            $table->string('url_pdf')->nullable()->comment('url_pdf');
             $table->timestamps();
         });
     }
