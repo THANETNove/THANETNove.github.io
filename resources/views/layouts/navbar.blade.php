@@ -94,58 +94,56 @@
             @endphp
             <!-- Place this tag where you want the button to render. -->
 
-            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+            @if (Auth::user()->status == '2')
+                <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
 
-                    <div class="avatar">
-                        <samp class="warn"> {{ $countData }}</samp>
+                        <div class="avatar">
+                            <samp class="warn"> {{ $countData }}</samp>
 
-                        <i class='bx bxs-bell-ring'
-                            style='font-size: 32px;display: flex;margin-top: 8px;margin-left: -10px;'></i>
+                            <i class='bx bxs-bell-ring'
+                                style='font-size: 32px;display: flex;margin-top: 8px;margin-left: -10px;'></i>
 
-                    </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
 
-                    @if ($dataDuAc->count() > 0)
-                        <li>
-                            <a class="dropdown-item" href="{{ url('approval-update') }}">
-                                <i class='bx warn-2'>{{ $dataDuAc->count() }}</i>
-                                <span class="align-middle col-8">อนุมัติครุภัณฑ์</span>
-                            </a>
-                        </li>
-                    @endif
-                    @if ($dataBet->count() > 0)
-                        <li>
-                            <div class="dropdown-divider"></div>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ url('bet-distribution-indexApproval') }}">
+                        @if ($dataDuAc->count() > 0)
+                            <li>
+                                <a class="dropdown-item" href="{{ url('approval-update') }}">
+                                    <i class='bx warn-2'>{{ $dataDuAc->count() }}</i>
+                                    <span class="align-middle col-8">อนุมัติครุภัณฑ์</span>
+                                </a>
+                            </li>
+                        @endif
+                        @if ($dataBet->count() > 0)
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('bet-distribution-indexApproval') }}">
 
-                                <i class='bx warn-2'>{{ $dataBet->count() }}</i>
-                                <span class="align-middle">อนุมัติครุภัณฑ์จำหน่าย</span>
-                            </a>
-                        </li>
-                    @endif
-                    @if ($dataReq->count() > 0)
-                        <li>
-                            <div class="dropdown-divider"></div>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ url('return-item-index') }}">
+                                    <i class='bx warn-2'>{{ $dataBet->count() }}</i>
+                                    <span class="align-middle">อนุมัติครุภัณฑ์จำหน่าย</span>
+                                </a>
+                            </li>
+                        @endif
+                        @if ($dataReq->count() > 0)
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('return-item-index') }}">
 
-                                <i class='bx warn-2'>{{ $dataReq->count() }}</i>
-                                <span class="align-middle">คึนครุภัณฑ์</span>
-                            </a>
-                        </li>
-                    @endif
+                                    <i class='bx warn-2'>{{ $dataReq->count() }}</i>
+                                    <span class="align-middle">คึนครุภัณฑ์</span>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </li>
+            @endif
 
-
-
-
-
-                </ul>
-            </li>
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
