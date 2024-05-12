@@ -106,7 +106,7 @@ class DurableArticlesController extends Controller
         $typeData->type_name = $request['type_categories_name'];
         if ($countDu == 0) {
             $typeData->save();
-            $type_categories =  $request['type_categories_code'];
+            $type_categories =   $typeData->id;
         }else{
            $type_categories =  $dataDu[0]->id;
         }
