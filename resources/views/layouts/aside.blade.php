@@ -58,84 +58,8 @@
                 </ul>
             </li>
         @endif
-        <li class="menu-item" id="report-ex">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class='menu-icon tf-icons bx bxs-report'></i>
-                <div data-i18n="Account Settings">รายงาน </div>
-            </a>
-            <ul class="menu-sub">
-                @if (Auth::user()->status > 0)
-                    <li class="menu-item" id="personnel-export">
-                        <a href="{{ url('personnel-export') }}" class="menu-link">
-                            <div data-i18n="Notifications">รายงานข้อมูลบุคลากร</div>
-                        </a>
-                    </li>
-                    <li class="menu-item" id="storage-export">
-                        <a href="{{ url('storage-export') }}" class="menu-link">
-                            <div data-i18n="Notifications">รายงานสถานที่จัดเก็บ</div>
-                        </a>
-                    </li>
-                @endif
-                <li class="menu-item" id="report-material">
-                    <a href="{{ url('report-material') }}" class="menu-link">
-                        <div data-i18n="Notifications">รายงานวัสดุ</div>
-                    </a>
-                </li>
-                <li class="menu-item" id="report-durable">
-                    <a href="{{ url('report-durable') }}" class="menu-link">
-                        <div data-i18n="Account">รายงานครุภัณฑ์</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+
         @if (Auth::user()->status > 0)
-
-            @if (Auth::user()->status == 2)
-                <li class="menu-item" id="approval">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class='menu-icon tf-icons bx bxs-select-multiple'></i>
-                        <div data-i18n="Account Settings">อนุมัติครุภัณฑ์ </div>
-
-                    </a>
-
-                    <ul class="menu-sub">
-                        <li class="menu-item" id="approval-update">
-                            <a href="{{ url('approval-update') }}" class="menu-link">
-                                <div data-i18n="Notifications">อนุมัติครุภัณฑ์</div>
-                            </a>
-
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item" id="index-approval">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class='menu-icon tf-icons bx bxs-check-circle'></i>
-                        <div data-i18n="Account Settings">อนุมัติครุภัณฑ์จำหน่าย</div>
-
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item" id="bet-distribution-indexApproval">
-                            <a href="{{ url('bet-distribution-indexApproval') }}" class="menu-link">
-                                <div data-i18n="Notifications">อนุมัติครุภัณฑ์จำหน่าย
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item" id="return-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class='menu-icon tf-icons bx bx-redo'></i>
-                        <div data-i18n="Account Settings">คึนครุภัณฑ์</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item" id="return-item-index">
-                            <a href="{{ url('return-item-index') }}" class="menu-link">
-                                <div data-i18n="Notifications">คึนครุภัณฑ์</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            @endif
             <li class="menu-item" id="storage">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-buildings'></i>
@@ -174,30 +98,13 @@
 
                 </ul>
             </li>
-            {{--  <li class="menu-item" id="typeCategory">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class='menu-icon tf-icons bx bx-grid-alt'></i>
-                    <div data-i18n="Account Settings">ลงทะเบียนชื่อครุภัณฑ์</div>
-                </a>
-                <ul class="menu-sub">
-                    <li class="menu-item" id="typeCategory-index">
-                        <a href="{{ url('typeCategory-index') }}" class="menu-link">
-                            <div data-i18n="Account">ชื่อครุภัณฑ์</div>
-                        </a>
-                    </li>
-                    <li class="menu-item" id="typeCategory-create">
-                        <a href="{{ url('typeCategory-create') }}" class="menu-link">
-                            <div data-i18n="Notifications">ลงทะเบียนชื่อครุภัณฑ์</div>
-                        </a>
-                    </li>
-                </ul>
-            </li> --}}
+
 
 
             <li class="menu-item" id="material">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-add-to-queue'></i>
-                    <div data-i18n="Account Settings">ระบบลงทะเบียนวัสดุ</div>
+                    <div data-i18n="Account Settings">ระบบลงทะเบียน</div>
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item" id="material-index">
@@ -210,14 +117,7 @@
                             <div data-i18n="Notifications">ลงทะเบียนวัสดุ</div>
                         </a>
                     </li>
-                </ul>
-            </li>
-            <li class="menu-item" id="durable-articles">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class='menu-icon tf-icons bx bx-add-to-queue'></i>
-                    <div data-i18n="Account Settings">ระบบลงทะเบียนครุภัณฑ์</div>
-                </a>
-                <ul class="menu-sub">
+
                     <li class="menu-item" id="durable-articles-index">
                         <a href="{{ url('durable-articles-index') }}" class="menu-link">
                             <div data-i18n="Account">ครุภัณฑ์</div>
@@ -228,33 +128,16 @@
                             <div data-i18n="Notifications">ลงทะเบียนครุภัณฑ์</div>
                         </a>
                     </li>
+
                 </ul>
             </li>
-            {{--             <li class="menu-item" id="buy">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class='menu-icon tf-icons bx bxs-cart-add'></i>
-                    <div data-i18n="Account Settings">ระบบการรับเข้า</div>
-                </a>
-                <ul class="menu-sub">
-                    <li class="menu-item" id="buy-index">
-                        <a href="{{ url('buy-index') }}" class="menu-link">
-                            <div data-i18n="Account">รับเข้า</div>
-                        </a>
-                    </li>
-                    <li class="menu-item" id="buy-create">
-                        <a href="{{ url('buy-create') }}" class="menu-link">
-                            <div data-i18n="Notifications">ลงทะเบียนรับเข้า</div>
-                        </a>
-                    </li>
-                </ul>
-            </li> --}}
         @endif
 
         <li class="menu-item" id="material-requisition">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
 
                 <i class='menu-icon tf-icons bx bxs-blanket'></i>
-                <div data-i18n="Authentications">ระบบเบิกวัสดุ</div>
+                <div data-i18n="Authentications">ระบบเบิก</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item" id="material-requisition-index">
@@ -267,28 +150,6 @@
                         <div data-i18n="Basic">เบิกวัสดุอุปกรณ์</div>
                     </a>
                 </li>
-            </ul>
-        </li>
-        <li class="menu-item" id="buy-shop">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-
-                <i class='menu-icon tf-icons bx bx-cart'></i>
-                <div data-i18n="Authentications">รายการวัสดุรอสั่งซื้อ</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item" id="buy-shop-index">
-                    <a href="{{ url('buy-shop') }}" class="menu-link">
-                        <div data-i18n="Basic">รายการวัสดุรอสั่งซื้อ</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="menu-item" id="durable-articles-requisition">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class='menu-icon tf-icons bx bxs-baby-carriage'></i>
-                <div data-i18n="Authentications">ระบบเบิกครุภัณฑ์</div>
-            </a>
-            <ul class="menu-sub">
                 <li class="menu-item" id="durable-articles-requisition-index">
                     <a href="{{ url('durable-articles-requisition-index') }}" class="menu-link">
                         <div data-i18n="Basic">ครุภัณฑ์</div>
@@ -306,8 +167,40 @@
                 </li>
             </ul>
         </li>
+        @if (Auth::user()->status == 2)
+            <li class="menu-item" id="return-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class='menu-icon tf-icons bx bx-redo'></i>
+                    <div data-i18n="Account Settings">คึนครุภัณฑ์</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="return-item-index">
+                        <a href="{{ url('return-item-index') }}" class="menu-link">
+                            <div data-i18n="Notifications">คึนครุภัณฑ์</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+
 
         @if (Auth::user()->status > 0)
+            <li class="menu-item" id="buy-shop">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+
+                    <i class='menu-icon tf-icons bx bx-cart'></i>
+                    <div data-i18n="Authentications">รายการวัสดุรอสั่งซื้อ</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="buy-shop-index">
+                        <a href="{{ url('buy-shop') }}" class="menu-link">
+                            <div data-i18n="Basic">รายการวัสดุรอสั่งซื้อ</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="menu-item" id="durable-articles-damaged">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-layer-plus'></i>
@@ -372,7 +265,7 @@
 
                 </ul>
             </li>
-            <li class="menu-item  mb-10" id="calculator">
+            <li class="menu-item  " id="calculator">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-calculator'></i>
                     <div data-i18n="Authentications">ระบบการคำนวณค่าเสื่อม</div>
@@ -385,7 +278,66 @@
                     </li>
                 </ul>
             </li>
+
+
+            @if (Auth::user()->status == 2)
+                <li class="menu-item" id="approval">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class='menu-icon tf-icons bx bxs-select-multiple'></i>
+                        <div data-i18n="Account Settings">อนุมัติ</div>
+
+                    </a>
+
+                    <ul class="menu-sub">
+                        <li class="menu-item" id="approval-update">
+                            <a href="{{ url('approval-update') }}" class="menu-link">
+                                <div data-i18n="Notifications">อนุมัติครุภัณฑ์</div>
+                            </a>
+                        </li>
+                        <li class="menu-item" id="bet-distribution-indexApproval">
+                            <a href="{{ url('bet-distribution-indexApproval') }}" class="menu-link">
+                                <div data-i18n="Notifications">อนุมัติครุภัณฑ์จำหน่าย
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
         @endif
 
+
+        <li class="menu-item mb-10" id="report-ex">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class='menu-icon tf-icons bx bxs-report'></i>
+                <div data-i18n="Account Settings">รายงาน </div>
+            </a>
+            <ul class="menu-sub">
+                @if (Auth::user()->status > 0)
+                    <li class="menu-item" id="personnel-export">
+                        <a href="{{ url('personnel-export') }}" class="menu-link">
+                            <div data-i18n="Notifications">รายงานข้อมูลบุคลากร</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="storage-export">
+                        <a href="{{ url('storage-export') }}" class="menu-link">
+                            <div data-i18n="Notifications">รายงานสถานที่จัดเก็บ</div>
+                        </a>
+                    </li>
+                @endif
+                <li class="menu-item" id="report-material">
+                    <a href="{{ url('report-material') }}" class="menu-link">
+                        <div data-i18n="Notifications">รายงานวัสดุ</div>
+                    </a>
+                </li>
+                <li class="menu-item" id="report-durable">
+                    <a href="{{ url('report-durable') }}" class="menu-link">
+                        <div data-i18n="Account">รายงานครุภัณฑ์</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
     </ul>
+
 </aside>

@@ -362,10 +362,10 @@ if (
     targetUrls === "durable-articles-index" ||
     targetUrls === "durable-articles-edit"
 ) {
-    setActiveClass("durable-articles", "durable-articles-index");
+    setActiveClass("material", "durable-articles-index");
 }
 if (targetUrls === "durable-articles-create") {
-    setActiveClass("durable-articles", "durable-articles-create");
+    setActiveClass("material", "durable-articles-create");
 }
 // ระบบจัดซื้อ
 if (targetUrls === "buy-index" || targetUrls === "buy-edit") {
@@ -405,19 +405,19 @@ if (
     targetUrls === "durable-articles-requisition-show"
 ) {
     setActiveClass(
-        "durable-articles-requisition",
+        "material-requisition",
         "durable-articles-requisition-index"
     );
 }
 if (targetUrls === "durable-articles-requisition-create") {
     setActiveClass(
-        "durable-articles-requisition",
+        "material-requisition",
         "durable-articles-requisition-create"
     );
 }
 if (targetUrls === "durable-articles-requisition-create-lend") {
     setActiveClass(
-        "durable-articles-requisition",
+        "material-requisition",
         "durable-articles-requisition-create-lend"
     );
 }
@@ -469,7 +469,7 @@ if (targetUrls === "calculator-create") {
 //อนุมัติเเทงจำหน่ายครุภัณฑ์
 
 if (targetUrls === "bet-distribution-indexApproval") {
-    setActiveClass("index-approval", "bet-distribution-indexApproval");
+    setActiveClass("approval", "bet-distribution-indexApproval");
 }
 //คึนครุภัณฑ์
 
