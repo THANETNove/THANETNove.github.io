@@ -90,19 +90,40 @@ class DurableArticlesController extends Controller
     public function store(Request $request)
     {
 
+
+        $durable_cont = DB::table('type_categories')
+        ->where('type_id',$request['group_class'])
+        ->where('type_code', $request['type_categories_code'])
+        ->where('type_name', $request['type_categories_name']);
+
+       $countDu =  $durable_cont->count();
+       $dataDu = $durable_cont->get();
+   
+
         $typeData = new TypeCategory;
         $typeData->type_id = $request['group_class'];
         $typeData->type_code = $request['type_categories_code'];
         $typeData->type_name = $request['type_categories_name'];
-        $typeData->save();
+        if ($countDu == 0) {
+            $typeData->save();
+            $type_categories =  $request['type_categories_code'];
+        }else{
+           $type_categories =  $dataDu[0]->id;
+        }
+        
+        
+
 
 
 
         $durable_cont = DB::table('durable_articles')
         ->where('group_class',$request['group_class'])
-        ->where('type_durableArticles', $request['type_durableArticles'])
+        ->where('type_durableArticles', $request['type_categories_code'])
         ->where('description', $request['description'])
         ->count();
+
+
+        
         $currentDate = Carbon::now();
         $thaiYear = ($currentDate->year + 543) % 100;
         $thaiMonth = $currentDate->format('m');
@@ -123,7 +144,7 @@ class DurableArticlesController extends Controller
         $data = new DurableArticles;
         $data->code_DurableArticles = $random;
         $data->group_class = $request['group_class'];
-        $data->type_durableArticles = $typeData->id;
+        $data->type_durableArticles = $type_categories;
         $data->description = $request['description'];
         $data->group_count = $countDurable;
         $data->durableArticles_name = $request['durableArticles_name'];
