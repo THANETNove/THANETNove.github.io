@@ -27,9 +27,9 @@ class DurableArticlesRepairController extends Controller
 
         $data = DB::table('durable_articles_repairs')
         ->leftJoin('durable_articles', 'durable_articles_repairs.durable_articles_id', '=', 'durable_articles.id')
-        ->leftJoin('type_categories', 'durable_articles_repairs.durable_articles_name', '=', 'type_categories.id')
-        ->leftJoin('categories', 'durable_articles_repairs.group_id', '=', 'categories.id')
-        ->select('durable_articles_repairs.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->select('durable_articles_repairs.*','durable_articles.durableArticles_name','durable_articles.name_durableArticles_count', 'categories.category_name','type_categories.type_name');
 
        if ($search) {
         $data =  $data
