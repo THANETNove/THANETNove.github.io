@@ -600,11 +600,24 @@ function getGroup(selectedValue) {
             globalCount = res[1];
             globalStorage = res[2];
             var groupSelect = $("#buy_name");
+            var groupSelect2 = $("#buy_durable_name");
             // Clear existing options (optional, depending on your use case)
             groupSelect.empty();
+            groupSelect2.empty();
 
             // Loop through each element in the 'res' array
             groupSelect.append(
+                $("<option>", {
+                    value: "",
+                    text:
+                        globalResType == 1
+                            ? "เลือกชื่อวัสดุ"
+                            : "เลือกชื่อครุภัณฑ์",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+            groupSelect2.append(
                 $("<option>", {
                     value: "",
                     text:
@@ -623,7 +636,16 @@ function getGroup(selectedValue) {
                         text:
                             globalResType == 1
                                 ? data.material_name
-                                : data.durableArticles_name,
+                                : data.type_name,
+                    })
+                );
+                groupSelect2.append(
+                    $("<option>", {
+                        value: data.id,
+                        text:
+                            globalResType == 1
+                                ? data.material_name
+                                : data.type_name,
                     })
                 );
             });
@@ -664,7 +686,6 @@ $("#buy_name").on("change", function () {
             })
         );
 
-        console.log("foundItem", foundItem);
 
         $.each(globalStorage, function (index, data) {
             groupSelect.append(
@@ -678,29 +699,82 @@ $("#buy_name").on("change", function () {
                         globalStorage[index].room_name,
                     selected:
                         foundStorage.code_storage ==
-                            globalStorage[index].code_storage && true,
+                        globalStorage[index].code_storage && true,
                 })
             );
         });
 
-        if (globalResType == 2) {
-            $("#code-id").val(foundItem.code_DurableArticles);
-            $("#categories_id").val(
-                foundItem.category_code +
-                    "-" +
-                    foundItem.type_code +
-                    "-" +
-                    foundItem.description +
-                    "-" +
-                    foundItem.group_count
-            );
-            $("#service_life-buy").val(foundItem.service_life);
-            $("#counting_unit").val(foundItem.name_durableArticles_count);
-        } else {
-            $("#code-id").val(foundItem.id);
-            $("#counting_unit").val(foundItem.name_material_count);
-        }
+
+
+        $("#code-id").val(foundItem.id);
+        $("#counting_unit").val(foundItem.name_material_count);
+
     }
+});
+
+var resData;
+$("#buy_durable_name").on("change", function () {
+    var selectedValue = $(this).val(); // รับค่าที่ถูกเลือก
+    $.ajax({
+        url: "get-categoriesDataName/" + selectedValue,
+        type: "GET",
+        success: function (res) {
+            console.log("res 555", res);
+
+            resData = res;
+            var groupSelect = $("#durableArticles_name");
+            // Clear existing options (optional, depending on your use case)
+            groupSelect.empty();
+
+
+            // Loop through each element in the 'res' array
+            groupSelect.append(
+                $("<option>", {
+                    value: "",
+                    text: "เลือกชื่อครุภัณฑ์",
+                    selected: true,
+                    disabled: true, // or use .prop('selected', true)
+                })
+            );
+
+
+            $.each(res, function (index, data) {
+                console.log('data', data);
+                groupSelect.append(
+                    $("<option>", {
+                        value: data.id,
+                        text: data.durableArticles_name,
+                    })
+                );
+
+            });
+
+
+        },
+
+        error: function (xhr, status, error) {
+            console.error(error);
+        },
+    });
+
+
+
+
+
+});
+
+$("#durableArticles_name").on("change", function () {
+    var selectedValue = $(this).val();
+
+
+    console.log("selectedValue", selectedValue);
+    var foundItem = resData.find(function (item) {
+        return item.id == selectedValue;
+    });
+
+    $("#counting_unit").val(foundItem.name_durableArticles_count);
+
+
 });
 
 $(".date").datepicker({
@@ -1165,10 +1239,10 @@ $("#details-name").on("change", function () {
             .setAttribute("max", foundItem.remainingAmountCount);
         $("#code_durable_articles").val(
             foundItem.category_code +
-                "-" +
-                foundItem.type_code +
-                "-" +
-                foundItem.description
+            "-" +
+            foundItem.type_code +
+            "-" +
+            foundItem.description
         );
         $("#remaining-amount").val(foundItem.remainingAmountCount);
         $("#name-durable_articles-count").val(
@@ -1203,12 +1277,12 @@ $("#details-name2").on("change", function () {
             .setAttribute("max", foundItem.remaining_amount);
         $("#code_durable_articles").val(
             foundItem.category_code +
-                "-" +
-                foundItem.type_code +
-                "-" +
-                foundItem.description +
-                "-" +
-                foundItem.group_count
+            "-" +
+            foundItem.type_code +
+            "-" +
+            foundItem.description +
+            "-" +
+            foundItem.group_count
         );
         $("#remaining-amount").val(foundItem.remaining_amount);
         $("#name-durable_articles-count").val(
@@ -1367,12 +1441,12 @@ $("#details_repair_name").on("change", function () {
     if (foundItem) {
         $("#code_durable_articles").val(
             foundItem.category_code +
-                "-" +
-                foundItem.type_code +
-                "-" +
-                foundItem.description +
-                "-" +
-                foundItem.group_count
+            "-" +
+            foundItem.type_code +
+            "-" +
+            foundItem.description +
+            "-" +
+            foundItem.group_count
         );
         /*  $("#amount_withdraw").val(foundItem.amount_damaged); */
         /*  $("#name-durable_articles-count").val(
@@ -1438,12 +1512,12 @@ $("#calculate-id").on("change", function () {
         $("#articles_id").val(foundItem.id);
         $("#categories_id").val(
             foundItem.category_code +
-                "-" +
-                foundItem.type_code +
-                "-" +
-                foundItem.description +
-                "-" +
-                foundItem.group_count
+            "-" +
+            foundItem.type_code +
+            "-" +
+            foundItem.description +
+            "-" +
+            foundItem.group_count
         );
 
         $("#quantity").val(1);
@@ -1467,7 +1541,7 @@ $("#calculate-id").on("change", function () {
         // คำนวณอายุการใช้งาน (ปี)
         const ageInYears = Math.floor(
             (currentDateMillis - createdAtMillis) /
-                (365.25 * 24 * 60 * 60 * 1000)
+            (365.25 * 24 * 60 * 60 * 1000)
         );
 
         let ageMultiplier = foundItem.service_life; //ปี

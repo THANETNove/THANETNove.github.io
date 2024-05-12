@@ -78,9 +78,9 @@
                                         </div>
 
                                         <div class="mb-3 col-md-6">
-                                            <label for="material_name" class="form-label">ชื่อครุภัณฑ์ย่อ</label>
+                                            <label for="material_name" class="form-label">รายละเอียดชื่อครุภัณฑ์</label>
                                             <input id="durableArticles_name" type="text" class="form-control"
-                                                name="durableArticles_name" required placeholder="ชื่อครุภัณฑ์ย่อ"
+                                                name="durableArticles_name" required placeholder="รายละเอียดชื่อครุภัณฑ์"
                                                 autocomplete="durableArticles_name">
 
                                         </div>

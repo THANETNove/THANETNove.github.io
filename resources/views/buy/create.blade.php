@@ -24,10 +24,9 @@
         </div>
         <div class="mb-3 col-md-6">
             <label for="buy_name" class="form-label">ชื่อครุภัณฑ์</label>
-            {{--  <input id="buy_name" type="text"
-                class="form-control @error('buy_name') is-invalid @enderror" name="buy_name"
-                required placeholder="ชื่อวัสดุ" autocomplete="buy_name" readonly> --}}
-            <select class="form-select" name="buy_name" id="buy_name" aria-label="Default select example">
+
+            <select class="form-select" name="buy_durable_name" id="buy_durable_name"
+                aria-label="Default select example">
                 <option selected>เลือกชื่อครุภัณฑ์</option>
             </select>
             @error('buy_name')
@@ -38,6 +37,16 @@
 
         </div>
         <div class="mb-3 col-md-6">
+            <label for="buy_name" class="form-label">รายละเอียดชื่อครุภัณฑ์</label>
+
+            <select class="form-select" name="durableArticles_name" id="durableArticles_name"
+                aria-label="Default select example">
+                <option selected>เลือกครุภัณฑ์</option>
+            </select>
+
+
+        </div>
+        {{--   <div class="mb-3 col-md-6">
             <label for="categories_id" class="form-label" id="id-group">id</label>
             <input id="categories_id" type="text" class="form-control @error('categories_id') is-invalid @enderror"
                 name="categories_id" required placeholder="id" autocomplete="categories_id" readonly>
@@ -48,7 +57,7 @@
                 </span>
             @enderror
 
-        </div>
+        </div> --}}
         <div class="mb-3 col-md-6" style="display: none">
             <label for="categories_id" class="form-label" id="id-group">code-id</label>
             <input id="code-id" type="text" class="form-control @error('code-id') is-invalid @enderror"
@@ -131,11 +140,21 @@
             @enderror
 
         </div>
+
+        @php
+            $dataStorage = DB::table('storage_locations')->get();
+
+        @endphp
         <div class="mb-3 col-md-6">
             <label for="code_material_storage" class="form-label">ที่เก็บครุภัณฑ์</label>
             <select class="form-select" aria-label="Default select example" id="code_material_storage"
-                name="code_material_storage" required>
+                name="code_material_storage disabled" required>
+                <option selected disabled>ที่เก็บครุภัณฑ์</option>
 
+                @foreach ($dataStorage as $storage)
+                    <option value="{{ $storage->id }}">{{ $storage->building_name }}
+                        {{ $storage->floor }} {{ $storage->room_name }}</option>
+                @endforeach
             </select>
         </div>
 

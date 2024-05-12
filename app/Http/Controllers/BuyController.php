@@ -50,6 +50,8 @@ class BuyController extends Controller
      */
     public function create()
     {
+       
+    
         return view('buy.create');
     }
 
@@ -88,23 +90,14 @@ class BuyController extends Controller
             return response()->json([$data,  $dataCount,$dataStorage] );
         }else{
 
-            $data2 = DB::table('durable_articles')
-            ->where('durable_articles.group_class', '=', $cate[0]->id)
-            ->leftJoin('buys', 'durable_articles.id', '=', 'buys.buy_name')
-            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
-           /*  ->whereRaw('buys.buy_name IS NULL OR durable_articles.id != buys.buy_name') */ // เพิ่มเงื่อนไขนี้
-            ->select('durable_articles.*','categories.category_code','type_categories.type_code');
+       
+            $data = DB::table('type_categories')
+            ->where('type_categories.type_id', '=', $cate[0]->id)
+            ->select('type_categories.*')
+            ->orderBy('type_categories.id', 'ASC')
+            ->get(); 
 
-
-            $data =  $data2->orderBy('durable_articles.id', 'ASC')
-            ->groupBy('durable_articles.description')
-            ->get();
-
-            $dataCount =  $data2->orderBy('durable_articles.id', 'ASC')
-            ->count();
-
-
+            $dataCount = 0;
 
 
             return response()->json([$data, $dataCount,$dataStorage]);
@@ -116,6 +109,25 @@ class BuyController extends Controller
     }
 
 
+    public function categoriesDataName($id) {
+
+        $data2 = DB::table('durable_articles')
+            ->where('durable_articles.type_durableArticles', $id)
+            ->select('durable_articles.*');
+
+
+            $data =  $data2->orderBy('durable_articles.id', 'ASC')
+            ->groupBy('durable_articles.code_DurableArticles')
+            ->get();
+            
+     
+
+
+
+            return response()->json($data);
+
+    }
+
 
 
     /**
@@ -125,16 +137,20 @@ class BuyController extends Controller
     {
 
 
-        $durable_cont = DB::table('durable_articles')
-        ->where('code_DurableArticles',$request['code_id'])
-        ->count();
+      
 
         $durable_name = DB::table('durable_articles')
-        ->where('code_DurableArticles',$request['code_id'])
+        ->where('id',$request['durableArticles_name'])
         ->get();
-
         $item_name =   $durable_name[0];
 
+        $durable_cont = DB::table('durable_articles')
+        ->where('code_DurableArticles',$item_name->code_DurableArticles)
+        ->count();
+
+      
+
+        
 
         $currentDate = Carbon::now();
         $thaiYear = ($currentDate->year + 543) % 100;
@@ -148,7 +164,7 @@ class BuyController extends Controller
 
 
         $data = new DurableArticles;
-        $data->code_DurableArticles = $request['code_id'];
+        $data->code_DurableArticles = $item_name->code_DurableArticles;
         $data->group_class = $item_name->group_class;
         $data->type_durableArticles = $item_name->type_durableArticles;
         $data->description = $item_name->description;
