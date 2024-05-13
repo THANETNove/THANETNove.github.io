@@ -10,7 +10,7 @@
                         <div class="col-12">
 
                             <div class="card-body">
-                                <h1 class="card-title text-primary ">คึนครุภัณฑ์</h1>
+                                <h1 class="card-title text-primary ">คืนครุภัณฑ์</h1>
                                 {{--   <a href="{{ url('durable-articles-requisition-export/pdf') }}" target="_blank"
                                     class="btn rounded-pill btn-outline-info mb-3">รายงานการเบิกครุภัณฑ์</a> --}}
                                 @if (session('message'))
@@ -88,7 +88,7 @@
                                                     <td>
 
                                                         <span
-                                                            class="badge bg-label-info me-1">รอการอนุมัติคึนครุภัณฑ์</span>
+                                                            class="badge bg-label-info me-1">รอการอนุมัติคืนครุภัณฑ์</span>
                                                     </td>
 
 
@@ -109,7 +109,7 @@
 
                                                                 <a class="dropdown-item alert-destroy"
                                                                     href="{{ url('return-item-approval', $da->id) }}">
-                                                                    <i class='bx bxs-send'></i> อนุมัติคึนครุภัณฑ์</a>
+                                                                    <i class='bx bxs-send'></i> อนุมัติคืนครุภัณฑ์</a>
 
 
                                                             </div>

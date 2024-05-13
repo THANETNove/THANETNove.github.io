@@ -108,7 +108,7 @@ class ReturnItemController extends Controller
             }
 
 
-        return redirect('durable-articles-requisition-index')->with('message', "รอการอนุมัติคึนครุภัณฑ์");
+        return redirect('durable-articles-requisition-index')->with('message', "รอการอนุมัติคืนครุภัณฑ์");
     }
 
     public function durableRequisitionReturnApproval(string $id)
@@ -144,7 +144,7 @@ class ReturnItemController extends Controller
             }
 
 
-        return redirect('return-item-index')->with('message', "อนุมัติคึนครุภัณฑ์");
+        return redirect('return-item-index')->with('message', "อนุมัติคืนครุภัณฑ์");
     }
 
 }

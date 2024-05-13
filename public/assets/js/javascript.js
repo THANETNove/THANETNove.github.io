@@ -471,7 +471,7 @@ if (targetUrls === "calculator-create") {
 if (targetUrls === "bet-distribution-indexApproval") {
     setActiveClass("approval", "bet-distribution-indexApproval");
 }
-//คึนครุภัณฑ์
+//คืนครุภัณฑ์
 
 if (targetUrls === "return-item-index") {
     setActiveClass("return-item", "return-item-index");

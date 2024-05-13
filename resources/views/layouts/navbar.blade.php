@@ -139,7 +139,7 @@
                                 <a class="dropdown-item" href="{{ url('return-item-index') }}">
 
                                     <i class='bx warn-2'>{{ $dataReq->count() }}</i>
-                                    <span class="align-middle">คึนครุภัณฑ์</span>
+                                    <span class="align-middle">คืนครุภัณฑ์</span>
                                 </a>
                             </li>
                         @endif

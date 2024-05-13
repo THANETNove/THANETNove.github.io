@@ -171,12 +171,12 @@
             <li class="menu-item" id="return-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bx-redo'></i>
-                    <div data-i18n="Account Settings">คึนครุภัณฑ์</div>
+                    <div data-i18n="Account Settings">คืนครุภัณฑ์</div>
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item" id="return-item-index">
                         <a href="{{ url('return-item-index') }}" class="menu-link">
-                            <div data-i18n="Notifications">คึนครุภัณฑ์</div>
+                            <div data-i18n="Notifications">คืนครุภัณฑ์</div>
                         </a>
                     </li>
                 </ul>

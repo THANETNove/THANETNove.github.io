@@ -212,7 +212,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('get-calculate/{id}', [CalculateDepreciationController::class, 'calculate'])->name('get-calculate');
     Route::post('calculator-store', [CalculateDepreciationController::class, 'store'])->name('calculator-store');
 
- //ระบบคึน
+ //ระบบคืน
 
     Route::get('return-item-index', [ReturnItemController::class, 'index'])->name('return-item-index');
     Route::get('return-item-show/{id}', [ReturnItemController::class, 'show'])->name('return-item-show');

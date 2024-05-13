@@ -148,6 +148,13 @@
                                                                 รายงานครุภัณฑ์ที่แทงจำหน่าย
                                                             </label>
                                                         </div>
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="10" id="flexRadioDefault10">
+                                                            <label class="form-check-label" for="flexRadioDefault10">
+                                                                รายงานคืนครุภัณฑ์
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 @endif
 
