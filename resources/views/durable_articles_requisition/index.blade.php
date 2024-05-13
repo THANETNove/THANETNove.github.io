@@ -41,7 +41,7 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}-{{ $da->group_count }}
+                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}
                                                     </td>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
