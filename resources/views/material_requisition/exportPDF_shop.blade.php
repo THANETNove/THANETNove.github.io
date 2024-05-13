@@ -23,7 +23,7 @@
                         <div class="col-12">
                             <div class="card-body">
                                 <h1 class="card-title text-primary td-center">
-                                    ศูนย์ปฏิบัติการ อบต.บางเเม่นาง อ.บางใหญ่ จ.นนทบุรี
+                                    องค์การบริหารส่วน ตำบลบางแม่นาง อำเภอบางใหญ่ จังหวัดนนทบุรี
                                 </h1>
                                 <h1 class="card-title text-primary td-center">
                                     {{ $name_export }}

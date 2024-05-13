@@ -19,7 +19,7 @@
             <div class="col-12 mb-4 order-0">
                 <div class="card">
                     <h1 class="card-title text-primary td-center">
-                        ศูนย์ปฏิบัติการ อบต.บางเเม่นาง อ.บางใหญ่ จ.นนทบุรี
+                        องค์การบริหารส่วน ตำบลบางแม่นาง อำเภอบางใหญ่ จังหวัดนนทบุรี
                     </h1>
                     <h1 class="card-title text-primary td-center">
                         {{ $name_export }}
@@ -77,12 +77,15 @@
                                         @endif
                                         @php
                                             $originalDate = $da->created_at;
-                                            $newDate = (new DateTime($originalDate))->modify('+7 days')->format('d/m/Y');
+                                            $newDate = (new DateTime($originalDate))
+                                                ->modify('+7 days')
+                                                ->format('d/m/Y');
                                             $newDate2 = (new DateTime($originalDate))->modify('+7 days');
                                             $targetDate = $newDate2;
                                             $now = new DateTime();
 
-                                            $daysRemaining = $now > $targetDate ? 0 : $now->diff($targetDate)->format('%a') + 1;
+                                            $daysRemaining =
+                                                $now > $targetDate ? 0 : $now->diff($targetDate)->format('%a') + 1;
                                         @endphp
                                         <td>{{ $newDate }}
                                         </td>
