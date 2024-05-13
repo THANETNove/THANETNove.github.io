@@ -41,7 +41,7 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}
+                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}-{{ $da->group_count }}
                                                     </td>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->type_name }}</td>
@@ -57,13 +57,6 @@
                                                             @else
                                                                 <span class="badge bg-label-warning me-1">ไม่อนุมัติ</span>
                                                             @endif
-                                                        @endif
-
-                                                    </td>
-
-                                                    <td>
-                                                        @if ($da->status == '0' && $da->statusApproval != '2')
-                                                            <span class="badge bg-label-success me-1">เบิกครุภัณฑ์</span>
                                                         @elseif ($da->status == '1')
                                                             <span
                                                                 class="badge bg-label-warning me-1">ยกเลิกเบิกครุภัณฑ์</span>
@@ -73,7 +66,10 @@
                                                         @elseif ($da->status == '3')
                                                             <span class="badge bg-label-primary me-1">คึนครุภัณฑ์</span>
                                                         @endif
+
                                                     </td>
+
+
                                                     <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                     {{--  <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
                                                         {{ $da->room_name }}</td> --}}
