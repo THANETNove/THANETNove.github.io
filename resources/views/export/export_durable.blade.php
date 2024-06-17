@@ -155,6 +155,13 @@
                                                                 รายงานคืนครุภัณฑ์
                                                             </label>
                                                         </div>
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="search"
+                                                                value="11" id="flexRadioDefault11">
+                                                            <label class="form-check-label" for="flexRadioDefault11">
+                                                                รายงานค่าเสื่อมครุภัณฑ์
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 @endif
 

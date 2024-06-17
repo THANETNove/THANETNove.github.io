@@ -23,16 +23,13 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
-                                                <th>รหัส</th>
-                                                <th>ประเภทครุภัณฑ์</th>
+
                                                 <th>ชื่อ</th>
-                                                <th>รายละเอียด</th>
                                                 <th>จำนวนเต็ม</th>
                                                 <th>เหลือ</th>
                                                 <th>ชำรุด</th>
                                                 <th>แทงจำหน่าย</th>
                                                 <th>ซ่อม</th>
-                                                <th>วันที่สร้าง</th>
                                                 <th>Actions</th>
 
                                             </tr>
@@ -44,10 +41,7 @@
                                             @foreach ($data as $da)
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}
-                                                    </td>
-                                                    <td>{{ $da->category_name }}</td>
-                                                    <td>{{ $da->type_name }}</td>
+
                                                     <td>{{ $da->durableArticles_name }}</td>
 
                                                     <td>{{ number_format($da->codeDurableArticlesCount) }}</td>
@@ -55,7 +49,6 @@
                                                     <td>{{ number_format($da->damagedNumberCount) }}</td>
                                                     <td>{{ number_format($da->betDistributionNumberCount) }}</td>
                                                     <td>{{ number_format($da->repairNumberCount) }}</td>
-                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
                                                     <td>
                                                         <div class="dropdown">
                                                             <button type="button"

@@ -444,6 +444,49 @@ class HomeController extends Controller
         $pdf = PDF::loadView('bet_distribution.exportPDF_2',['data' =>  $data, 'name_export' => $name_export,'date_export' => $date_export]);
         $pdf->setPaper('a4');
        return $pdf->stream('exportPDF.pdf');
+     }elseif($search == 11 ) {
+        
+        $name_export = "รายงานค่าเสื่อมครุภัณฑ์";
+       /*  $data = DB::table('durable_articles')
+        ->whereBetween('durable_articles.created_at', [$start_date, $end_date]) // Add
+        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
+        ->select('durable_articles.*','durable_articles.group_class', 'type_categories.type_name','type_categories.type_code','categories.category_name','categories.category_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
+        ->selectRaw('sum(durable_articles.remaining_amount) as numberCount')
+        ->groupBy('durable_articles.code_DurableArticles', 'categories.category_name', 'categories.category_code', 'type_categories.type_name', 'type_categories.type_code')
+        ->get();
+        dd($data); */
+        $data = DB::table('durable_articles')
+    ->whereBetween('durable_articles.created_at', [$start_date, $end_date])
+    ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+    ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+    ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+    ->leftJoin('bet_distributions', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
+    ->select(
+        'durable_articles.*', // Selecting all columns from durable_articles
+        'categories.category_name',
+        'categories.category_code',
+        'type_categories.type_name',
+        'type_categories.type_code',
+        'storage_locations.building_name',
+        'storage_locations.floor',
+        'storage_locations.room_name',
+        'bet_distributions.salvage_price'
+    )
+    ->selectRaw('sum(durable_articles.remaining_amount) as numberCount') // Summing remaining_amount
+    ->groupBy(
+        'durable_articles.code_DurableArticles'
+    )
+    ->get();
+
+
+
+        $pdf = PDF::loadView('durable_articles.exportPDF_2',['data' =>  $data,'name_export' => $name_export ,'date_export' => $date_export]);
+
+        $pdf->setPaper('a4');
+       return $pdf->stream('exportPDF.pdf');
      }
     }
 }
