@@ -245,12 +245,18 @@ class HomeController extends Controller
     public function exportDurablePDF(Request $request)
     {
 
-        $start_date = $request["start_date"];
-        $end_date = $request["end_date"];
-        $end_date = Carbon::parse($end_date)->endOfDay()->toDateTimeString();
-        $currentYear =  Carbon::parse($start_date)->year;
-        $date_export = Carbon::parse()->locale('th');
-        $date_export = $date_export->addYears(543)->translatedFormat('d F Y');
+        $start_date = Carbon::parse($request["start_date"]);
+        $end_date = Carbon::parse($request["end_date"])->endOfDay();
+
+        $currentYear = $start_date->year;
+
+        $start_date->locale('th');
+        $end_date->locale('th');
+
+        $start_date_translated = $start_date->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $start_date->year;
+        $end_date_translated = $end_date->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $end_date->year;
+
+        $date_export = $start_date_translated . " ถึง " . $end_date_translated;
 
         if (Auth::user()->status == "0") {
             $search = 6;
