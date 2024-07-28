@@ -74,11 +74,17 @@ class PersonnelController extends Controller
     public function store(Request $request)
     {
 
-        $validated = $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone_number' => ['required', 'string', 'regex:/^[0-9]+$/'],
-        ]);
+        $validated = $request->validate(
+            [
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[\w\.\-]+@[\w\-]+\.[\w\-]+(\.[\w\-]+)*$/'],
+                'password' => ['required', 'string',  'max:11', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', 'confirmed'],
+                'phone_number' => ['required', 'string', 'regex:/^[0-9]+$/'],
+            ],
+            [
+                'password' => 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 - 11 ตัวอักษร เเละ พิมพ์เล็ก พิมพ์ใหญ่ เเละตัวเลข',
+
+            ]
+        );
 
 
 
