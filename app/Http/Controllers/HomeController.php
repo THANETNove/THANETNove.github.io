@@ -34,7 +34,11 @@ class HomeController extends Controller
 
             return redirect('material-requisition-index');
         } else {
-            return redirect('durable-articles-index');
+            if (Auth::user()->status == 3) {
+                return redirect('personnel-index');
+            } else {
+                return redirect('durable-articles-index');
+            }
         }
     }
     public function reportDurable()

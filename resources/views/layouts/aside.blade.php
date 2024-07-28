@@ -16,9 +16,29 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
+        @if (Auth::user()->status == 3)
+            <li class="menu-item" id="personnel">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    {{--  <i class="menu-icon tf-icons bx bx-dock-top"></i> --}}
+                    <i class='menu-icon tf-icons bx bx-user'></i>
+                    <div data-i18n="Account Settings">ระบบบุคลากร </div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="personnel-index">
+                        <a href="{{ url('personnel-index') }}" class="menu-link">
+                            <div data-i18n="Account">ดูบุคลากร</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="personnel-create">
+                        <a href="{{ url('personnel-create') }}" class="menu-link">
+                            <div data-i18n="Notifications">เพิ่มบุคลากร</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
 
-
-        @if (Auth::user()->status > 0)
+        @if (Auth::user()->status > 0 && Auth::user()->status < 3)
             <li class="menu-item" id="department">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-widget'></i>
@@ -59,7 +79,7 @@
             </li>
         @endif
 
-        @if (Auth::user()->status > 0)
+        @if (Auth::user()->status > 0 && Auth::user()->status < 3)
             <li class="menu-item" id="storage">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-buildings'></i>
@@ -132,41 +152,42 @@
                 </ul>
             </li>
         @endif
+        @if (Auth::user()->status == 0)
+            <li class="menu-item" id="material-requisition">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
 
-        <li class="menu-item" id="material-requisition">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-
-                <i class='menu-icon tf-icons bx bxs-blanket'></i>
-                <div data-i18n="Authentications">ระบบเบิก</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item" id="material-requisition-index">
-                    <a href="{{ url('material-requisition-index') }}" class="menu-link">
-                        <div data-i18n="Basic">วัสดุอุปกรณ์</div>
-                    </a>
-                </li>
-                <li class="menu-item" id="material-requisition-create">
-                    <a href="{{ url('material-requisition-create') }}" class="menu-link">
-                        <div data-i18n="Basic">เบิกวัสดุอุปกรณ์</div>
-                    </a>
-                </li>
-                <li class="menu-item" id="durable-articles-requisition-index">
-                    <a href="{{ url('durable-articles-requisition-index') }}" class="menu-link">
-                        <div data-i18n="Basic">ครุภัณฑ์</div>
-                    </a>
-                </li>
-                <li class="menu-item" id="durable-articles-requisition-create">
-                    <a href="{{ url('durable-articles-requisition-create') }}" class="menu-link">
-                        <div data-i18n="Basic">เบิกครุภัณฑ์</div>
-                    </a>
-                </li>
-                <li class="menu-item" id="durable-articles-requisition-create-lend">
-                    <a href="{{ url('durable-articles-requisition-create-lend') }}" class="menu-link">
-                        <div data-i18n="Basic">ยืมครุภัณฑ์</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+                    <i class='menu-icon tf-icons bx bxs-blanket'></i>
+                    <div data-i18n="Authentications">ระบบเบิก</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" id="material-requisition-index">
+                        <a href="{{ url('material-requisition-index') }}" class="menu-link">
+                            <div data-i18n="Basic">วัสดุอุปกรณ์</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="material-requisition-create">
+                        <a href="{{ url('material-requisition-create') }}" class="menu-link">
+                            <div data-i18n="Basic">เบิกวัสดุอุปกรณ์</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="durable-articles-requisition-index">
+                        <a href="{{ url('durable-articles-requisition-index') }}" class="menu-link">
+                            <div data-i18n="Basic">ครุภัณฑ์</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="durable-articles-requisition-create">
+                        <a href="{{ url('durable-articles-requisition-create') }}" class="menu-link">
+                            <div data-i18n="Basic">เบิกครุภัณฑ์</div>
+                        </a>
+                    </li>
+                    <li class="menu-item" id="durable-articles-requisition-create-lend">
+                        <a href="{{ url('durable-articles-requisition-create-lend') }}" class="menu-link">
+                            <div data-i18n="Basic">ยืมครุภัณฑ์</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
         @if (Auth::user()->status == 2)
             <li class="menu-item" id="return-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -185,7 +206,7 @@
 
 
 
-        @if (Auth::user()->status > 0)
+        @if (Auth::user()->status > 0 && Auth::user()->status < 3)
             <li class="menu-item" id="buy-shop">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
 
@@ -280,7 +301,7 @@
             </li>
 
 
-            @if (Auth::user()->status == 2)
+            @if (Auth::user()->status == 2 && Auth::user()->status < 3)
                 <li class="menu-item" id="approval">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class='menu-icon tf-icons bx bxs-select-multiple'></i>
@@ -304,40 +325,40 @@
                 </li>
             @endif
         @endif
+        @if (Auth::user()->status < 3)
 
-
-        <li class="menu-item mb-10" id="report-ex">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class='menu-icon tf-icons bx bxs-report'></i>
-                <div data-i18n="Account Settings">รายงาน </div>
-            </a>
-            <ul class="menu-sub">
-                @if (Auth::user()->status > 0)
-                    <li class="menu-item" id="personnel-export">
-                        <a href="{{ url('personnel-export') }}" class="menu-link">
-                            <div data-i18n="Notifications">รายงานข้อมูลบุคลากร</div>
+            <li class="menu-item mb-10" id="report-ex">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class='menu-icon tf-icons bx bxs-report'></i>
+                    <div data-i18n="Account Settings">รายงาน </div>
+                </a>
+                <ul class="menu-sub">
+                    @if (Auth::user()->status > 0)
+                        <li class="menu-item" id="personnel-export">
+                            <a href="{{ url('personnel-export') }}" class="menu-link">
+                                <div data-i18n="Notifications">รายงานข้อมูลบุคลากร</div>
+                            </a>
+                        </li>
+                        <li class="menu-item" id="storage-export">
+                            <a href="{{ url('storage-export') }}" class="menu-link">
+                                <div data-i18n="Notifications">รายงานสถานที่จัดเก็บ</div>
+                            </a>
+                        </li>
+                    @endif
+                    <li class="menu-item" id="report-material">
+                        <a href="{{ url('report-material') }}" class="menu-link">
+                            <div data-i18n="Notifications">รายงานวัสดุ</div>
                         </a>
                     </li>
-                    <li class="menu-item" id="storage-export">
-                        <a href="{{ url('storage-export') }}" class="menu-link">
-                            <div data-i18n="Notifications">รายงานสถานที่จัดเก็บ</div>
+                    <li class="menu-item" id="report-durable">
+                        <a href="{{ url('report-durable') }}" class="menu-link">
+                            <div data-i18n="Account">รายงานครุภัณฑ์</div>
                         </a>
                     </li>
-                @endif
-                <li class="menu-item" id="report-material">
-                    <a href="{{ url('report-material') }}" class="menu-link">
-                        <div data-i18n="Notifications">รายงานวัสดุ</div>
-                    </a>
-                </li>
-                <li class="menu-item" id="report-durable">
-                    <a href="{{ url('report-durable') }}" class="menu-link">
-                        <div data-i18n="Account">รายงานครุภัณฑ์</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+                </ul>
+            </li>
 
-
+        @endif
     </ul>
 
 </aside>
