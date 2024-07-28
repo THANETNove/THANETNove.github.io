@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DurableArticlesDamaged;
 use App\Models\DurableArticles;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use PDF;
 
@@ -17,52 +17,66 @@ class DurableArticlesDamagedController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    */
+     * Display a listing of the resource.
+     */
     public function index(Request $request)
     {
         $search =  $request['search'];
 
 
         $data = DB::table('durable_articles_damageds')
-        ->where('durable_articles_damageds.status', '<', 2)
-        ->join('users', 'durable_articles_damageds.id_user', '=', 'users.id')
-        ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
-        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.id')
-        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
-        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
-        ->select('durable_articles_damageds.*', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
-    'durable_articles.durableArticles_name','durable_articles.description','durable_articles.group_count','categories.category_name','categories.category_code','type_categories.type_name','type_categories.type_code','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+            ->where('durable_articles_damageds.status', '<', 2)
+            ->join('users', 'durable_articles_damageds.id_user', '=', 'users.id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.id')
+            ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+            ->select(
+                'durable_articles_damageds.*',
+                'users.prefix',
+                'users.first_name',
+                'users.last_name',
+                'departments.department_name',
+                'durable_articles.durableArticles_name',
+                'durable_articles.description',
+                'durable_articles.group_count',
+                'categories.category_name',
+                'categories.category_code',
+                'type_categories.type_name',
+                'type_categories.type_code',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name'
+            );
 
 
-       if ($search) {
-        $data =  $data
-            ->where('categories.category_name', 'LIKE', "%$search%")
-            ->orWhere('type_categories.type_name', 'LIKE', "%$search%")
-            ->orWhere('durable_articles.durableArticles_name', 'LIKE', "%$search%");
-
+        if ($search) {
+            $data =  $data
+                ->where('categories.category_name', 'LIKE', "%$search%")
+                ->orWhere('type_categories.type_name', 'LIKE', "%$search%")
+                ->orWhere('durable_articles.durableArticles_name', 'LIKE', "%$search%");
         }
 
-       /*  if (Auth::user()->status == "0") {
+        /*  if (Auth::user()->status == "0") {
             $data = $data->where('durable_articles_damageds.id_user', Auth::user()->id);
         } */
 
-        $data = $data->orderBy('durable_articles_damageds.id','DESC')->paginate(100);
+        $data = $data->orderBy('durable_articles_damageds.id', 'DESC')->paginate(100);
 
-        return view("durable_articles_damaged.index",['data' => $data]);
+        return view("durable_articles_damaged.index", ['data' => $data]);
     }
 
     /**
-    * Show the form for creating a new resource.
-    */
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
 
         $group = DB::table('categories')
-        ->where('category_id', '=', 2)->orderBy('id', 'ASC')->get();
+            ->where('category_id', '=', 2)->orderBy('id', 'ASC')->get();
 
-        return view("durable_articles_damaged.create",['group' =>$group]);
+        return view("durable_articles_damaged.create", ['group' => $group]);
     }
 
     public function durableArticlesData(Request $request)
@@ -105,11 +119,11 @@ class DurableArticlesDamagedController extends Controller
         $data = DB::table('durable_articles')
             ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
             ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-            ->where(function($query) use ($combinedPart_0,$combinedPart_1,$combinedPart_2, $combinedPart) {
+            ->where(function ($query) use ($combinedPart_0, $combinedPart_1, $combinedPart_2, $combinedPart) {
                 $query->where('category_code', $combinedPart_0)
-                      ->where('type_code', $combinedPart_1)
-                      ->where('description', $combinedPart_2)
-                      ->where('durable_articles.group_count', $combinedPart);
+                    ->where('type_code', $combinedPart_1)
+                    ->where('description', $combinedPart_2)
+                    ->where('durable_articles.group_count', $combinedPart);
             })
 
 
@@ -123,12 +137,11 @@ class DurableArticlesDamagedController extends Controller
             ->get();
 
 
-            if ($data->isEmpty()) {
-                return response()->json([]);
-            } else {
-                return response()->json($data);
-            }
-
+        if ($data->isEmpty()) {
+            return response()->json([]);
+        } else {
+            return response()->json($data);
+        }
     }
 
     public function store(Request $request)
@@ -168,16 +181,24 @@ class DurableArticlesDamagedController extends Controller
     {
         $data =   DB::table('durable_articles_damageds')
 
-        ->where('durable_articles_damageds.id', $id)
-        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
-        ->leftJoin('categories', 'durable_articles_damageds.group_id', '=', 'categories.id')
-        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
-        ->select('durable_articles_damageds.*','durable_articles.durableArticles_name',
-        'durable_articles.remaining_amount','durable_articles.durableArticles_number','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
-    ->get();
+            ->where('durable_articles_damageds.id', $id)
+            ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
+            ->leftJoin('categories', 'durable_articles_damageds.group_id', '=', 'categories.id')
+            ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+            ->select(
+                'durable_articles_damageds.*',
+                'durable_articles.durableArticles_name',
+                'durable_articles.remaining_amount',
+                'durable_articles.durableArticles_number',
+                'categories.category_name',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name'
+            )
+            ->get();
 
 
-        return view('durable_articles_damaged.edit',['data' =>$data]);
+        return view('durable_articles_damaged.edit', ['data' => $data]);
     }
 
     /**
@@ -192,19 +213,19 @@ class DurableArticlesDamagedController extends Controller
         $dataArt = DurableArticles::find($data->durable_articles_name);
 
 
-            if ($data["amount_damaged"] !=  $request["remaining_amount"]) {
-                $amount = ($data["amount_damaged"] +  $dataArt["remaining_amount"]) - $request["amount_damaged"];
-                DurableArticles::where('id', $data->durable_articles_name)->update([
-                    'remaining_amount' =>  $amount,
-                    'damaged_number' =>  ($dataArt->damaged_number - $data->amount_damaged) +  $request["amount_damaged"],
+        if ($data["amount_damaged"] !=  $request["remaining_amount"]) {
+            $amount = ($data["amount_damaged"] +  $dataArt["remaining_amount"]) - $request["amount_damaged"];
+            DurableArticles::where('id', $data->durable_articles_name)->update([
+                'remaining_amount' =>  $amount,
+                'damaged_number' => ($dataArt->damaged_number - $data->amount_damaged) +  $request["amount_damaged"],
 
-                ]);
-            }
-
-            DurableArticlesDamaged::where('id', $id)->update([
-                'amount_damaged' =>   $request["amount_damaged"],
-                'damaged_detail' =>   $request["damaged_detail"],
             ]);
+        }
+
+        DurableArticlesDamaged::where('id', $id)->update([
+            'amount_damaged' =>   $request["amount_damaged"],
+            'damaged_detail' =>   $request["damaged_detail"],
+        ]);
 
 
 
@@ -238,18 +259,28 @@ class DurableArticlesDamagedController extends Controller
         $currentYear = date('Y');
 
         $data = DB::table('durable_articles_damageds')
-        ->where('durable_articles_damageds.status', '=', 0)
-        ->whereYear('durable_articles_damageds.created_at', $currentYear)
-        ->join('users', 'durable_articles_damageds.id_user', '=', 'users.id')
-        ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
-        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
-        ->leftJoin('categories', 'durable_articles_damageds.group_id', '=', 'categories.id')
-        ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
-        ->select('durable_articles_damageds.*', 'users.prefix', 'users.first_name','users.last_name','departments.department_name',
-    'durable_articles.durableArticles_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
-        ->get();
-        $pdf = PDF::loadView('durable_articles_damaged.exportPDF',['data' =>  $data,'currentYear' => $currentYear]);
+            ->where('durable_articles_damageds.status', '=', 0)
+            ->whereYear('durable_articles_damageds.created_at', $currentYear)
+            ->join('users', 'durable_articles_damageds.id_user', '=', 'users.id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
+            ->leftJoin('categories', 'durable_articles_damageds.group_id', '=', 'categories.id')
+            ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+            ->select(
+                'durable_articles_damageds.*',
+                'users.prefix',
+                'users.first_name',
+                'users.last_name',
+                'departments.department_name',
+                'durable_articles.durableArticles_name',
+                'categories.category_name',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name'
+            )
+            ->get();
+        $pdf = PDF::loadView('durable_articles_damaged.exportPDF', ['data' =>  $data, 'currentYear' => $currentYear]);
         $pdf->setPaper('a4');
-       return $pdf->stream('exportPDF.pdf');
+        return $pdf->stream('exportPDF.pdf');
     }
 }

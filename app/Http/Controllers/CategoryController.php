@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -22,15 +22,15 @@ class CategoryController extends Controller
         $data = DB::table('categories')->orderBy('category_name', 'ASC');
         if ($search && $search != 3) {
             $data =  $data->where('category_id', 'LIKE', "%$search%")
-            ->paginate(100);
+                ->paginate(100);
             $id_search = $search;
-        }else{
+        } else {
             $data =  $data
-            ->paginate(100);
+                ->paginate(100);
             $id_search = 3;
         }
 
-        return view('category.index',['data' => $data,"id_search" => $id_search]);
+        return view('category.index', ['data' => $data, "id_search" => $id_search]);
     }
 
     /**
@@ -38,7 +38,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-    return view('category.create');
+        return view('category.create');
     }
 
     /**
@@ -71,7 +71,7 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $data =  Category::find($id);
-        return view('category.edit',['data' => $data]);
+        return view('category.edit', ['data' => $data]);
     }
 
     /**
@@ -85,7 +85,7 @@ class CategoryController extends Controller
         $data->category_code = $request['category_code'];
         $data->category_name = $request['category_name'];
         $data->save();
-     return redirect('category-index')->with('message', "บันทึกสำเร็จ");
+        return redirect('category-index')->with('message', "บันทึกสำเร็จ");
     }
 
     /**

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class AddressController extends Controller
 {
-   
+
 
     public function districts(string $id)
     {

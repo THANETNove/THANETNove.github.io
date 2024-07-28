@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use DB;
+use Illuminate\Support\Facades\DB;
 use PDF;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
@@ -26,10 +26,10 @@ class PersonnelController extends Controller
         $search =  $request['search'];
         $statusEmployee = null;
 
-        if( $request['search'] == 'พนักงาน') {
+        if ($request['search'] == 'พนักงาน') {
             $statusEmployee = "on";
         }
-        if( $request['search'] == 'พ้นสภาพพนักงาน') {
+        if ($request['search'] == 'พ้นสภาพพนักงาน') {
             $statusEmployee = "off";
         }
 
@@ -39,26 +39,23 @@ class PersonnelController extends Controller
         if ($search) {
             $data = $data->where(function ($query) use ($search, $statusEmployee) {
                 $query->where('employee_id', 'LIKE', "%$search%")
-                      ->orWhere('first_name', 'LIKE', "%$search%");
+                    ->orWhere('first_name', 'LIKE', "%$search%");
                 if ($statusEmployee) {
                     $query->orWhere('statusEmployee', $statusEmployee);
                 }
             })
-            ->orderBy('id', 'DESC')
-            ->paginate(100);
-
-
-        }else{
+                ->orderBy('id', 'DESC')
+                ->paginate(100);
+        } else {
             $data = $data
-           ->orderBy('id','DESC')->paginate(100);
-
+                ->orderBy('id', 'DESC')->paginate(100);
         }
 
-        return view('personnel.index',['data' => $data]);
-
+        return view('personnel.index', ['data' => $data]);
     }
 
-    public function personnel()  {
+    public function personnel()
+    {
         return view('export.personnel');
     }
 
@@ -67,8 +64,8 @@ class PersonnelController extends Controller
      */
     public function create()
     {
-        $data = DB::table('departments')->where('status', '=', "on") ->orderBy('id', 'DESC')->get();
-        return view('personnel.create',["data" => $data]);
+        $data = DB::table('departments')->where('status', '=', "on")->orderBy('id', 'DESC')->get();
+        return view('personnel.create', ["data" => $data]);
     }
 
     /**
@@ -85,7 +82,7 @@ class PersonnelController extends Controller
 
 
 
-         User::create([
+        User::create([
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
             'employee_id' => $request['employee_id'],
@@ -113,9 +110,9 @@ class PersonnelController extends Controller
     public function show(string $id)
     {
         $data = User::leftJoin('departments', 'users.department_id', '=', 'departments.id')
-        ->select('users.*', 'departments.department_name')
-        ->find($id);
-        return view('personnel.show',['data' => $data]);
+            ->select('users.*', 'departments.department_name')
+            ->find($id);
+        return view('personnel.show', ['data' => $data]);
     }
 
     /**
@@ -124,8 +121,8 @@ class PersonnelController extends Controller
     public function edit(string $id)
     {
         $data =  User::find($id);
-        $depart = DB::table('departments')->where('status', '=', "on") ->orderBy('id', 'DESC')->get();
-        return view('personnel.edit',['data' => $data,'depart' => $depart]);
+        $depart = DB::table('departments')->where('status', '=', "on")->orderBy('id', 'DESC')->get();
+        return view('personnel.edit', ['data' => $data, 'depart' => $depart]);
     }
 
     /**
@@ -196,9 +193,8 @@ class PersonnelController extends Controller
 
 
         $data = DB::table('users')->get();
-        $pdf = PDF::loadView('personnel.exportPDF',['data' =>  $data,'name_export' => $name_export,'date_export' => $date_export]);
+        $pdf = PDF::loadView('personnel.exportPDF', ['data' =>  $data, 'name_export' => $name_export, 'date_export' => $date_export]);
         $pdf->setPaper('a4');
-       return $pdf->stream('exportPDF.pdf');
-
+        return $pdf->stream('exportPDF.pdf');
     }
 }

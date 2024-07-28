@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\StorageLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use DB;
+use Illuminate\Support\Facades\DB;
 use PDF;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
@@ -25,21 +25,19 @@ class StorageLocationController extends Controller
         $data = DB::table('storage_locations');
         if ($search) {
 
-           $data = $data
-           ->where('building_name', 'LIKE', "%$search%")
-           ->orWhere('floor', 'LIKE', "%$search%")
-           ->orWhere('room_name', 'LIKE', "%$search%")
-           ->orderBy('id','DESC')
-           ->paginate(100);
-           return view('storage_location.index',['data' => $data]);
-        }else{
             $data = $data
-           ->orderBy('id','DESC')->paginate(100);
+                ->where('building_name', 'LIKE', "%$search%")
+                ->orWhere('floor', 'LIKE', "%$search%")
+                ->orWhere('room_name', 'LIKE', "%$search%")
+                ->orderBy('id', 'DESC')
+                ->paginate(100);
+            return view('storage_location.index', ['data' => $data]);
+        } else {
+            $data = $data
+                ->orderBy('id', 'DESC')->paginate(100);
 
-            return view('storage_location.index',['data' => $data]);
+            return view('storage_location.index', ['data' => $data]);
         }
-
-
     }
 
     /**
@@ -70,7 +68,6 @@ class StorageLocationController extends Controller
         $data->save();
 
         return redirect('storage-index')->with('message', "บันทึกสำเร็จ");
-
     }
 
     /**
@@ -88,8 +85,7 @@ class StorageLocationController extends Controller
     {
         $data =  StorageLocation::find($id);
 
-        return view('storage_location.edit',['data' => $data]);
-
+        return view('storage_location.edit', ['data' => $data]);
     }
 
     /**
@@ -132,11 +128,11 @@ class StorageLocationController extends Controller
         $date_export = Carbon::parse()->locale('th');
         $date_export = $date_export->addYears(543)->translatedFormat('d F Y');
 
-         $data = DB::table('storage_locations')->get();
-        $pdf = PDF::loadView('storage_location.exportPDF',['data' =>  $data,'name_export' =>$name_export ,'date_export' => $date_export]);
+        $data = DB::table('storage_locations')->get();
+        $pdf = PDF::loadView('storage_location.exportPDF', ['data' =>  $data, 'name_export' => $name_export, 'date_export' => $date_export]);
         $pdf->setPaper('a4');
         return $pdf->stream('exportPDF.pdf');
 
-      /*   return view('storage_location.exportPDF',['data' => $data]); */
+        /*   return view('storage_location.exportPDF',['data' => $data]); */
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MaterialRequisition;
 use App\Models\Material;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use PDF;
 use Carbon\Carbon;
@@ -25,28 +25,37 @@ class MaterialRequisitionController extends Controller
     {
         $search =  $request['search'];
         $data = DB::table('material_requisitions')
-        ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
-       ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
-         ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
-        ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
-        ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
-        'materials.material_name as name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
-       if ($search) {
-        $data
-        ->where('category_name', 'LIKE', "%$search%")
-        ->orWhere('materials.material_name', 'LIKE', "%$search%")
-        ->orWhere('users.first_name', 'LIKE', "%$search%")
-        ->orWhere('users.last_name', 'LIKE', "%$search%");
-       }
-       if (Auth::user()->status == 0) {
-        $data = $data->where('id_user', Auth::user()->id);
-       }
-       $data = $data->orderBy('material_requisitions.id','DESC')->paginate(100);
+            ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
+            ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
+            ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+            ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
+            ->select(
+                'material_requisitions.*',
+                'users.prefix',
+                'users.first_name',
+                'users.last_name',
+                'materials.material_name as name',
+                'categories.category_name',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name'
+            );
+        if ($search) {
+            $data
+                ->where('category_name', 'LIKE', "%$search%")
+                ->orWhere('materials.material_name', 'LIKE', "%$search%")
+                ->orWhere('users.first_name', 'LIKE', "%$search%")
+                ->orWhere('users.last_name', 'LIKE', "%$search%");
+        }
+        if (Auth::user()->status == 0) {
+            $data = $data->where('id_user', Auth::user()->id);
+        }
+        $data = $data->orderBy('material_requisitions.id', 'DESC')->paginate(100);
 
-       $department = DB::table('departments')
-       ->orderBy('department_name','ASC')
-       ->get();
-        return view('material_requisition.index',['data' =>$data, 'department' => $department]);
+        $department = DB::table('departments')
+            ->orderBy('department_name', 'ASC')
+            ->get();
+        return view('material_requisition.index', ['data' => $data, 'department' => $department]);
     }
 
 
@@ -57,17 +66,17 @@ class MaterialRequisitionController extends Controller
     {
         $data = DB::table('materials')->get();
         $group = DB::table('categories')
-        ->where('category_id', '=', 1)->orderBy('id', 'ASC')->get();
+            ->where('category_id', '=', 1)->orderBy('id', 'ASC')->get();
 
 
-        return view('material_requisition.create',['data' =>$data ,'group' => $group]);
+        return view('material_requisition.create', ['data' => $data, 'group' => $group]);
     }
 
 
     public function groupMaterial($id)
     {
 
-       $data = DB::table('materials')->where('group_id',$id)->get();
+        $data = DB::table('materials')->where('group_id', $id)->get();
 
         return response()->json($data);
     }
@@ -97,15 +106,13 @@ class MaterialRequisitionController extends Controller
         $withdraw =  $request['amount_withdraw'];
         $remaining = $request['remaining_amount'];
 
-      $amount =  $remaining - $withdraw;
+        $amount =  $remaining - $withdraw;
 
-      Material::where('id', $request['material_name'])->update([
+        Material::where('id', $request['material_name'])->update([
             'remaining_amount' =>  $amount,
         ]);
 
         return redirect('material-requisition-index')->with('message', "บันทึกสำเร็จ");
-
-
     }
 
     /**
@@ -114,17 +121,25 @@ class MaterialRequisitionController extends Controller
     public function show(string $id)
     {
         $data = DB::table('material_requisitions')
-        ->where('material_requisitions.id', $id)
-        ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
-       ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
-         ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
-        ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
-        ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
-        'materials.material_name as name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name')
-        ->get();
+            ->where('material_requisitions.id', $id)
+            ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
+            ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
+            ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+            ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
+            ->select(
+                'material_requisitions.*',
+                'users.prefix',
+                'users.first_name',
+                'users.last_name',
+                'materials.material_name as name',
+                'categories.category_name',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name'
+            )
+            ->get();
 
-        return view('material_requisition.show',['data' => $data]);
-
+        return view('material_requisition.show', ['data' => $data]);
     }
 
     /**
@@ -133,15 +148,15 @@ class MaterialRequisitionController extends Controller
     public function edit(string $id)
     {
         $data =   DB::table('material_requisitions')
-        ->where('material_requisitions.id', $id)
-        ->join('materials', 'material_requisitions.material_name', '=', 'materials.id')
-        ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
-        ->select('material_requisitions.*', 'materials.remaining_amount' ,'materials.material_name as name','categories.category_name')
-        ->get();
+            ->where('material_requisitions.id', $id)
+            ->join('materials', 'material_requisitions.material_name', '=', 'materials.id')
+            ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
+            ->select('material_requisitions.*', 'materials.remaining_amount', 'materials.material_name as name', 'categories.category_name')
+            ->get();
 
 
 
-        return view('material_requisition.edit',['data' => $data]);
+        return view('material_requisition.edit', ['data' => $data]);
     }
 
     /**
@@ -151,7 +166,7 @@ class MaterialRequisitionController extends Controller
     {
         $data = MaterialRequisition::find($id);
 
-        $amount = ($data["amount_withdraw"] +  $request["remaining_amount"])- $request["amount_withdraw"];
+        $amount = ($data["amount_withdraw"] +  $request["remaining_amount"]) - $request["amount_withdraw"];
 
 
         Material::where('id', $request['id_name'])->update([
@@ -170,7 +185,7 @@ class MaterialRequisitionController extends Controller
      */
     public function destroy(string $id)
     {
-        $matReq= MaterialRequisition::find($id);
+        $matReq = MaterialRequisition::find($id);
         $mat = Material::find($matReq["material_name"]);
 
         $amount = $matReq["amount_withdraw"] +  $mat["remaining_amount"];
@@ -185,7 +200,6 @@ class MaterialRequisitionController extends Controller
         ]);
 
         return redirect('material-requisition-index')->with('message', "ยกเลิกสำเร็จ");
-
     }
 
     public function exportPDF(Request $request)
@@ -199,15 +213,25 @@ class MaterialRequisitionController extends Controller
 
 
         $data = DB::table('material_requisitions')
-        ->whereBetween('material_requisitions.created_at', [$start_date, $end_date]) // Add t
-        ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
-       ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
-       ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
-         ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
-        ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
-        ->where('material_requisitions.status', "on")
-        ->select('material_requisitions.*', 'users.prefix', 'users.first_name','users.last_name',
-        'materials.material_name as name','departments.department_name','categories.category_name','storage_locations.building_name','storage_locations.floor','storage_locations.room_name');
+            ->whereBetween('material_requisitions.created_at', [$start_date, $end_date]) // Add t
+            ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
+            ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+            ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
+            ->where('material_requisitions.status', "on")
+            ->select(
+                'material_requisitions.*',
+                'users.prefix',
+                'users.first_name',
+                'users.last_name',
+                'materials.material_name as name',
+                'departments.department_name',
+                'categories.category_name',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name'
+            );
         if (Auth::user()->status == "0") {
             $data =  $data->where('id_user', Auth::user()->id);
         }
@@ -216,9 +240,8 @@ class MaterialRequisitionController extends Controller
         }
 
 
-        $pdf = PDF::loadView('material_requisition.exportPDF',['data' =>  $data->get(),'currentYear' => $currentYear]);
+        $pdf = PDF::loadView('material_requisition.exportPDF', ['data' =>  $data->get(), 'currentYear' => $currentYear]);
         $pdf->setPaper('a4');
         return $pdf->stream('exportPDF.pdf');
-
     }
 }

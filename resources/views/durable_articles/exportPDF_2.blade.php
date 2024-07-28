@@ -48,10 +48,11 @@
                                                 <th>ค่าเสื่อม</th> <!-- Added Depreciation Column -->
                                             </tr>
                                         </thead>
-                                        @php
-                                            $i = 1;
-                                        @endphp
+
                                         <tbody class="table-border-bottom-0">
+                                            @php
+                                                $i = 1; // Initialize $i before the loops start
+                                            @endphp
                                             @foreach ($data->groupBy('group_class') as $groupedData)
                                                 @foreach ($groupedData->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
                                                     <tr>
@@ -62,9 +63,8 @@
                                                         <td>{{ $da->durableArticles_name }}</td>
                                                         <td class="td-center">{{ $da->name_durableArticles_count }}
                                                         </td>
-                                                        <td>{{ number_format($da->price_per) }} </td>
+                                                        <td>{{ number_format($da->price_per) }}</td>
                                                         <td class="depreciation">
-
                                                             @php
                                                                 $serviceLife = $da->service_life; // อายุการใช้งานในปี
                                                                 $pricePer = $da->price_per; // ราคาต่อหน่วย
@@ -82,10 +82,10 @@
                                                                 }
 
                                                                 // Output the depreciation for each year
-                                                                for ($i = 1; $i <= $serviceLife; $i++) {
+                                                                for ($j = 1; $j <= $serviceLife; $j++) {
                                                                     // Calculate depreciated price for the current year
                                                                     $depreciatedPrice =
-                                                                        $pricePer - $depreciationPerYear * $i;
+                                                                        $pricePer - $depreciationPerYear * $j;
 
                                                                     // Ensure depreciated price does not go below 1
                                                                     $depreciatedPrice = max($depreciatedPrice, 1);
@@ -93,7 +93,7 @@
                                                                     // Output formatted HTML with colored rows
                                                                     echo '<div class="col">';
                                                                     echo '<span>ปี ' .
-                                                                        $i .
+                                                                        $j .
                                                                         ': </span>' .
                                                                         '<span>' .
                                                                         number_format($depreciatedPrice) .
@@ -101,14 +101,12 @@
                                                                     echo '</div>';
                                                                 }
                                                             @endphp
-
-
                                                         </td>
-                                                        <!-- Added Depreciation Cell -->
                                                     </tr>
                                                 @endforeach
                                             @endforeach
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>

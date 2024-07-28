@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\Department;
 
@@ -14,18 +14,18 @@ class DepartmentController extends Controller
      * Display a listing of the resource.
      */
 
-     public function __construct()
-     {
-         $this->middleware('auth');
-     }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
 
 
     public function index()
     {
-        $data = DB::table('departments')->where('status', '=', "on") ->orderBy('id', 'DESC')
-        ->paginate(100);
-        return view('department.index',['data' => $data]);
+        $data = DB::table('departments')->where('status', '=', "on")->orderBy('id', 'DESC')
+            ->paginate(100);
+        return view('department.index', ['data' => $data]);
     }
 
     /**
@@ -50,7 +50,6 @@ class DepartmentController extends Controller
         $data->save();
 
         return redirect('department-index')->with('message', "บันทึกสำเร็จ");
-
     }
 
     /**
@@ -69,7 +68,7 @@ class DepartmentController extends Controller
 
         $data =  Department::find($id);
 
-        return view('department.edit',['data' => $data]);
+        return view('department.edit', ['data' => $data]);
     }
 
     /**

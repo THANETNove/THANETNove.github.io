@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\DurableArticles;
 use App\Models\BetDistribution;
 use App\Models\DurableArticlesDamaged;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use PDF;
 
@@ -21,25 +21,24 @@ class BetDistributionController extends Controller
         $search =  $request['search'];
 
         $data = DB::table('bet_distributions')
-        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
-        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
-        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
+            ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
+            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+            ->select('bet_distributions.*', 'durable_articles.durableArticles_name', 'categories.category_name', 'type_categories.type_name');
 
 
-       if ($search) {
-        $data =  $data
-            ->where('categories.category_name', 'LIKE', "%$search%")
-            ->orWhere('type_categories.type_name', 'LIKE', "%$search%")
-            ->orWhere('durable_articles.durableArticles_name', 'LIKE', "%$search%");
-
+        if ($search) {
+            $data =  $data
+                ->where('categories.category_name', 'LIKE', "%$search%")
+                ->orWhere('type_categories.type_name', 'LIKE', "%$search%")
+                ->orWhere('durable_articles.durableArticles_name', 'LIKE', "%$search%");
         }
 
 
 
-        $data = $data->orderBy('bet_distributions.id','DESC')->paginate(100);
+        $data = $data->orderBy('bet_distributions.id', 'DESC')->paginate(100);
 
-        return view('bet_distribution.index',['data' => $data  ]);
+        return view('bet_distribution.index', ['data' => $data]);
     }
 
 
@@ -48,26 +47,25 @@ class BetDistributionController extends Controller
         $search =  $request['search'];
 
         $data = DB::table('bet_distributions')
-        ->where('bet_distributions.status', '=', "on")
-        ->where('bet_distributions.statusApproval', '=', "0")
-        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
-        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
-        ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
-        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name','type_categories.type_name');
+            ->where('bet_distributions.status', '=', "on")
+            ->where('bet_distributions.statusApproval', '=', "0")
+            ->leftJoin('durable_articles', 'bet_distributions.durable_articles_id', '=', 'durable_articles.id')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+            ->select('bet_distributions.*', 'durable_articles.durableArticles_name', 'categories.category_name', 'type_categories.type_name');
 
 
-       if ($search) {
-        $data =  $data
-            ->where('category_name', 'LIKE', "%$search%")
-            ->orWhere('durableArticles_name', 'LIKE', "%$search%");
-
+        if ($search) {
+            $data =  $data
+                ->where('category_name', 'LIKE', "%$search%")
+                ->orWhere('durableArticles_name', 'LIKE', "%$search%");
         }
 
 
 
-        $data = $data->orderBy('bet_distributions.id','DESC')->paginate(100);
+        $data = $data->orderBy('bet_distributions.id', 'DESC')->paginate(100);
 
-        return view('bet_distribution.indexApproval',['data' => $data  ]);
+        return view('bet_distribution.indexApproval', ['data' => $data]);
     }
 
 
@@ -78,7 +76,7 @@ class BetDistributionController extends Controller
      */
     public function create()
     {
-/*
+        /*
         $group = DB::table('durable_articles')
         ->where('category_id', '=', 2)
         ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
@@ -89,17 +87,17 @@ class BetDistributionController extends Controller
         ->get();
  */
         $group = DB::table('durable_articles_damageds')
-        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.id')
-        ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
-        ->groupBy('categories.id')
-        ->orderBy('categories.id', 'ASC')
-        ->where('category_id', '=', 2)
-        ->where('status_damaged', '=', 1)
-        ->select('durable_articles_damageds.*','categories.category_name','categories.category_code')
-        ->get();
+            ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.id')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+            ->groupBy('categories.id')
+            ->orderBy('categories.id', 'ASC')
+            ->where('category_id', '=', 2)
+            ->where('status_damaged', '=', 1)
+            ->select('durable_articles_damageds.*', 'categories.category_name', 'categories.category_code')
+            ->get();
 
 
-        return view("bet_distribution.create",['group' => $group]);
+        return view("bet_distribution.create", ['group' => $group]);
     }
 
     public function betDistribution($id)
@@ -107,17 +105,17 @@ class BetDistributionController extends Controller
 
 
         $data = DB::table('durable_articles_damageds')
-        ->where('durable_articles_damageds.group_id', $id)
-        ->where('durable_articles_damageds.status', 0)
-        ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
-        ->leftJoin('bet_distributions', function ($join) {
-            $join->on('bet_distributions.code_durable_articles', '=', 'durable_articles_damageds.code_durable_articles')
-                ->where('bet_distributions.status', '<' ,2);
-        })
-        ->select('durable_articles_damageds.*', 'durable_articles.durableArticles_name')
-        ->whereNull('bet_distributions.id') // Check if there is no corresponding record in bet_distributions
-        ->orderBy('durable_articles_damageds.id', 'ASC')
-        ->get();
+            ->where('durable_articles_damageds.group_id', $id)
+            ->where('durable_articles_damageds.status', 0)
+            ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
+            ->leftJoin('bet_distributions', function ($join) {
+                $join->on('bet_distributions.code_durable_articles', '=', 'durable_articles_damageds.code_durable_articles')
+                    ->where('bet_distributions.status', '<', 2);
+            })
+            ->select('durable_articles_damageds.*', 'durable_articles.durableArticles_name')
+            ->whereNull('bet_distributions.id') // Check if there is no corresponding record in bet_distributions
+            ->orderBy('durable_articles_damageds.id', 'ASC')
+            ->get();
 
 
         return response()->json($data);
@@ -145,14 +143,14 @@ class BetDistributionController extends Controller
         $data->statusApproval = "0";
 
 
-        if($request->hasFile('pdf_file')) {
+        if ($request->hasFile('pdf_file')) {
             $pdfFile = $request->file('pdf_file');
             $extension = $pdfFile->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
 
-         $pdfFile->move(public_path().'/pdf', $fileName);
+            $pdfFile->move(public_path() . '/pdf', $fileName);
 
-               $data->url_pdf = $fileName;
+            $data->url_pdf = $fileName;
         }
 
         $data->save();
@@ -162,8 +160,8 @@ class BetDistributionController extends Controller
 
         $amount =  $remaining - $repair;
         $amount_repair = DB::table('durable_articles')
-        ->where('code_DurableArticles', $request['durable_articles_id'])
-        ->get();
+            ->where('code_DurableArticles', $request['durable_articles_id'])
+            ->get();
 
 
 
@@ -200,15 +198,15 @@ class BetDistributionController extends Controller
     public function edit(string $id)
     {
         $data = DB::table('bet_distributions')
-        ->where('bet_distributions.id', '=', $id)
-        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_name', '=', 'durable_articles.id')
-        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
-        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name')
-        ->get();
+            ->where('bet_distributions.id', '=', $id)
+            ->leftJoin('durable_articles', 'bet_distributions.durable_articles_name', '=', 'durable_articles.id')
+            ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
+            ->select('bet_distributions.*', 'durable_articles.durableArticles_name', 'categories.category_name')
+            ->get();
 
 
 
-        return view("bet_distribution.edit",['data' => $data]);
+        return view("bet_distribution.edit", ['data' => $data]);
     }
 
     /**
@@ -234,8 +232,8 @@ class BetDistributionController extends Controller
         $data->save();
 
         $dataArt = DB::table('durable_articles')
-        ->where('code_DurableArticles', $data->durable_articles_id)
-        ->get();
+            ->where('code_DurableArticles', $data->durable_articles_id)
+            ->get();
         DurableArticles::where('id', $data->durable_articles_id)->update([
 
             'damaged_number' => 0,
@@ -254,7 +252,7 @@ class BetDistributionController extends Controller
         $data->statusApproval = "2";
         $data->commentApproval = $request['commentApproval'];;
         $data->status = "off";
-         $data->save();
+        $data->save();
 
         DurableArticlesDamaged::where('durable_articles_id', $data->durable_articles_id)->update([
             'status' => "0", // เเทงจำหน่าย
@@ -282,20 +280,19 @@ class BetDistributionController extends Controller
         $data->save();
 
         return redirect('bet-distribution-index')->with('message', "บันทึกสำเร็จ");
-
     }
 
     public function exportPDF()
     {
         $currentYear = date('Y');
         $data = DB::table('bet_distributions')
-        ->whereYear('bet_distributions.created_at', $currentYear)
-        ->leftJoin('durable_articles', 'bet_distributions.durable_articles_name', '=', 'durable_articles.id')
-        ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
-        ->select('bet_distributions.*','durable_articles.durableArticles_name','categories.category_name')
-        ->get();
-        $pdf = PDF::loadView('bet_distribution.exportPDF',['data' =>  $data, 'currentYear' => $currentYear]);
+            ->whereYear('bet_distributions.created_at', $currentYear)
+            ->leftJoin('durable_articles', 'bet_distributions.durable_articles_name', '=', 'durable_articles.id')
+            ->leftJoin('categories', 'bet_distributions.group_id', '=', 'categories.id')
+            ->select('bet_distributions.*', 'durable_articles.durableArticles_name', 'categories.category_name')
+            ->get();
+        $pdf = PDF::loadView('bet_distribution.exportPDF', ['data' =>  $data, 'currentYear' => $currentYear]);
         $pdf->setPaper('a4');
-       return $pdf->stream('exportPDF.pdf');
+        return $pdf->stream('exportPDF.pdf');
     }
 }
