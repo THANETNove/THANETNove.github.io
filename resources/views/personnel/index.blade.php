@@ -57,9 +57,9 @@
                                                     </td>
                                                     <td>
                                                         @if ($da->statusEmployee == 'on')
-                                                            <span class="badge bg-label-success me-1">พนักงาน</span>
+                                                            <span class="badge bg-label-success me-1">ปกติ</span>
                                                         @else
-                                                            <span class="badge bg-label-warning me-1">พ้นสภาพพนักงาน</span>
+                                                            <span class="badge bg-label-warning me-1">ระงับการใช้งาน</span>
                                                         @endif
 
                                                     </td>
