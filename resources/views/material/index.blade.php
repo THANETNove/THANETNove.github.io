@@ -60,8 +60,12 @@
                                                         @endphp
                                                         <td>
                                                             @if (number_format($da->remaining_amount) < $percent_of_A_int)
-                                                                <span
-                                                                    class="badge bg-label-warning me-1">วัสดุใกล้หมด</span>
+                                                                @if (number_format($da->remaining_amount) == 0)
+                                                                    <span class="badge bg-label-danger me-1">วัสดุหมด</span>
+                                                                @else
+                                                                    <span
+                                                                        class="badge bg-label-warning me-1">วัสดุใกล้หมด</span>
+                                                                @endif
                                                             @endif
                                                         </td>
                                                         {{--  <td>{{ number_format($da->material_number) }}</td> --}}
