@@ -193,9 +193,10 @@ class PersonnelController extends Controller
 
     public function exportPDF()
     {
-        $name_export = "รายงานข้อมูลบุคลากร";
+        $name_export = "รายงานผู้ใช้งานระบบ";
         $date_export = Carbon::parse()->locale('th');
-        $date_export = $date_export->addYears(543)->translatedFormat('d F Y');
+        $date_export = $date_export->addYears(543)->translatedFormat('d F') . ' พ.ศ.' . $date_export->translatedFormat('Y');
+
 
 
         $data = DB::table('users')->get();

@@ -126,7 +126,7 @@ class StorageLocationController extends Controller
     {
         $name_export = "รายงานสถานที่จัดเก็บ";
         $date_export = Carbon::parse()->locale('th');
-        $date_export = $date_export->addYears(543)->translatedFormat('d F Y');
+        $date_export = $date_export->addYears(543)->translatedFormat('d F') . ' พ.ศ.' . $date_export->translatedFormat('Y');
 
         $data = DB::table('storage_locations')->get();
         $pdf = PDF::loadView('storage_location.exportPDF', ['data' =>  $data, 'name_export' => $name_export, 'date_export' => $date_export]);
