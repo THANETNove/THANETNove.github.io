@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
@@ -47,6 +48,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
 
+        $validated = $request->validate([
+            'category_code' => [
+                'required',
+                'string',
+                'max:255',
+                'unique:categories,category_code'
+            ],
+
+        ]);
         $data = new Category;
 
         $data->category_id = $request['category_id'];

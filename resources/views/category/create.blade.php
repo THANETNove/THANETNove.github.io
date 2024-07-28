@@ -45,7 +45,7 @@
                                         name="category_code" placeholder="รหัสหมวดหมู่/ประเภท" autocomplete="category_code"
                                         required>
 
-                                    @error('category_name')
+                                    @error('category_code')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
