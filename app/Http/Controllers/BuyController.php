@@ -175,7 +175,8 @@ class BuyController extends Controller
             $data->remaining_amount = 1;
             $data->name_durableArticles_count = $item_name->name_durableArticles_count;
             $data->code_material_storage = $request['code_material_storage'];
-            $data->warranty_period = $request['warranty_period'];
+            $data->warranty_period_start = $request['warranty_period_start'];
+            $data->warranty_period_end = $request['warranty_period_end'];
             $data->price_per = $request['price_per'];
             $data->total_price = $request['total_price'];
             $data->service_life = $request['service_life'];

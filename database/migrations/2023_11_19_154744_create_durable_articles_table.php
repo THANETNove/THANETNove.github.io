@@ -26,7 +26,8 @@ return new class extends Migration
             $table->string('damaged_number')->nullable()->comment('จำนวนชำรุด');
             $table->string('bet_on_distribution_number')->nullable()->comment('จำนวน แทงจำหน่ายครุภัณฑ์');
             $table->string('repair_number')->nullable()->comment('จำนวนการซ่อม');
-            $table->string('warranty_period')->nullable()->comment('ระยะเวลาประกัน');
+            $table->string('warranty_period_start')->nullable()->comment('ระยะเวลาประกัน');
+            $table->string('warranty_period_end')->nullable()->comment('ระยะเวลาประกัน');
             $table->string('status')->nullable()->comment('สถานะ on/ off');
             $table->string('price_per')->nullable()->comment('สถานะ on/ off');
             $table->string('total_price')->nullable()->comment('สถานะ on/ off');
