@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="durableArticles_number" class="form-label">จำนวนครุภัณฑ์</label>
-                                            <input type="number" oninput="calculateTotalPrice()"
+                                            <input type="number" oninput="calculateTotalPrice(this)"
                                                 class="form-control quantity2 @error('durableArticles_number') is-invalid @enderror"
                                                 name="durableArticles_number" required placeholder="จำนวนครุภัณฑ์"
                                                 autocomplete="durableArticles_number">
@@ -118,7 +118,7 @@
                                         <div class="mb-3 col-md-6">
                                             <label for="price_per" class="form-label">ราคาต่อ
                                                 (ชิ้น,หน่วย,อื่นๆ)</label>
-                                            <input type="number" oninput="calculateTotalPrice()"
+                                            <input type="number" oninput="calculateTotalPrice(this)"
                                                 class="form-control price_per2 @error('price_per') is-invalid @enderror"
                                                 name="price_per" placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" required
                                                 autocomplete="price_per">

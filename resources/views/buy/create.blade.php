@@ -73,7 +73,7 @@
 
         <div class="mb-3 col-md-6">
             <label for="quantity" class="form-label">จำนวน</label>
-            <input type="number" oninput="calculateTotalPrice()"
+            <input type="number" oninput="calculateTotalPrice(this)"
                 class="form-control quantity @error('quantity') is-invalid @enderror" name="quantity"
                 placeholder="จำนวน" autocomplete="quantity" min="0">
 
@@ -98,7 +98,7 @@
         </div>
         <div class="mb-3 col-md-6">
             <label for="price_per" class="form-label">ราคาต่อ (ชิ้น,หน่วย,อื่นๆ)</label>
-            <input oninput="calculateTotalPrice()" type="number"
+            <input oninput="calculateTotalPrice(this)" type="number"
                 class="form-control price_per @error('price_per') is-invalid @enderror" name="price_per"
                 placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" min="1" required autocomplete="price_per">
 

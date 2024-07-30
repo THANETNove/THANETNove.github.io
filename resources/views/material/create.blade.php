@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="material_number" class="form-label">จำนวนวัสดุ (ต่อหน่วยนับ)</label>
-                                            <input id="material_number" type="number" oninput="calculateTotalPrice2()"
+                                            <input id="material_number" type="number" oninput="calculateTotalPrice2(this)"
                                                 class="form-control quantityBuy2 @error('material_number') is-invalid @enderror"
                                                 name="quantity" placeholder="จำนวนวัสดุ ชิ้น"
                                                 autocomplete="material_number">
@@ -96,7 +96,7 @@
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="price_per" class="form-label">ราคาต่อ (ชิ้น,หน่วย,อื่นๆ)</label>
-                                            <input id="price_perBuy" oninput="calculateTotalPrice2()" type="number"
+                                            <input id="price_perBuy" oninput="calculateTotalPrice2(this)" type="number"
                                                 class="form-control price_perBuy2 @error('price_per') is-invalid @enderror"
                                                 name="price_per" placeholder="ราคาต่อ (ชิ้น,อื่นๆ)" min="1" required
                                                 autocomplete="price_per">
