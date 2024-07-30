@@ -151,11 +151,15 @@
                                                 name="service_life" required autocomplete="service_life" placeholder="5">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label for="name_durableArticles_count"
-                                                class="form-label">ระยะเวลาประกัน</label>
-                                            <input id="warranty_period" type="text" class="date form-control "
-                                                name="warranty_period" required placeholder="dd-mm-yyyy"
-                                                autocomplete="warranty_period">
+                                            <label for="name_durableArticles_count" class="form-label">ระยะเวลาประกัน
+                                            </label>
+                                            <div class="d-flex">
+                                                <input class="form-control me-2 " type="text"
+                                                    id="warranty_period_start" name="warranty_period_start"
+                                                    placeholder="dd-mm-yyyy">
+                                                <input class="form-control " type="text" id="warranty_period_end"
+                                                    name="warranty_period_end" placeholder="dd-mm-yyyy">
+                                            </div>
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="code_material_storage" class="form-label">ที่เก็บครุภัณฑ์</label>

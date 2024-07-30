@@ -131,7 +131,12 @@
         <div class="mb-3 col-md-6">
             <label for="warranty_period" class="form-label">ระยะเวลาประกัน</label>
 
-            <input class="date form-control" type="text" name="warranty_period" placeholder="dd-mm-yyyy">
+            <div class="d-flex">
+                <input class="form-control me-2 warranty_period_start" type="text" name="warranty_period_start"
+                    placeholder="dd-mm-yyyy">
+                <input class="form-control warranty_period_end" type="text" name="warranty_period_end"
+                    placeholder="dd-mm-yyyy">
+            </div>
 
             @error('warranty_period')
                 <span class="invalid-feedback" role="alert">

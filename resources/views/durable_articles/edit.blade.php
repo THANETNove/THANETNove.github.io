@@ -120,9 +120,17 @@
                                 <div class="mb-3 col-md-6">
                                     <label for="name_durableArticles_count" class="form-label">ระยะเวลาประกัน
                                     </label>
-                                    <input id="warranty_period" type="text" class="dateMin form-control "
+                                    {{--     <input id="warranty_period" type="text" class="dateMin form-control "
                                         name="warranty_period" required value="{{ $dueArt['warranty_period'] }}"
-                                        placeholder="dd-mm-yyyy" autocomplete="warranty_period">
+                                        placeholder="dd-mm-yyyy" autocomplete="warranty_period"> --}}
+                                    <div class="d-flex">
+                                        <input class="form-control me-2 warranty_period_start" type="text"
+                                            value="{{ $dueArt['warranty_period_start'] }}" name="warranty_period_start"
+                                            placeholder="dd-mm-yyyy">
+                                        <input class="form-control warranty_period_end" type="text"
+                                            value="{{ $dueArt['warranty_period_end'] }}" name="warranty_period_end"
+                                            placeholder="dd-mm-yyyy">
+                                    </div>
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="code_material_storage" class="form-label">ที่เก็บครุภัณฑ์</label>
