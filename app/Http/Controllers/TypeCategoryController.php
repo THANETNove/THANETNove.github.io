@@ -7,7 +7,14 @@ use Illuminate\Support\Facades\DB;
 use App\Models\TypeCategory;
 
 class TypeCategoryController extends Controller
+
+
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
