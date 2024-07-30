@@ -118,7 +118,7 @@
                                         disabled>
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="name_durableArticles_count" class="form-label">ระยะเวลประกัน
+                                    <label for="name_durableArticles_count" class="form-label">ระยะเวลาประกัน
                                     </label>
                                     <input id="warranty_period" type="text" class="dateMin form-control "
                                         name="warranty_period" required value="{{ $dueArt['warranty_period'] }}"

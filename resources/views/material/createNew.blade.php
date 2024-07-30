@@ -114,7 +114,7 @@
 
         </div>
         {{--       <div class="mb-3 col-md-6">
-            <label for="warranty_period" class="form-label">ระยะเวลประกัน</label>
+            <label for="warranty_period" class="form-label">ระยะเวลาประกัน</label>
 
             <input class="date form-control" type="text" name="warranty_period" placeholder="dd-mm-yyyy">
 

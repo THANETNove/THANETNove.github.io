@@ -152,7 +152,7 @@
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="name_durableArticles_count"
-                                                class="form-label">ระยะเวลประกัน</label>
+                                                class="form-label">ระยะเวลาประกัน</label>
                                             <input id="warranty_period" type="text" class="date form-control "
                                                 name="warranty_period" required placeholder="dd-mm-yyyy"
                                                 autocomplete="warranty_period">
