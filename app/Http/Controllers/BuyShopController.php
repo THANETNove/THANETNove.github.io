@@ -72,7 +72,7 @@ class BuyShopController extends Controller
 
 
         if ($request->start_date || $request->end_date) {
-            $data =    $data->whereBetween('material_requisitions.created_at', [$request->start_date, $request->$end_date]);
+            $data =    $data->whereBetween('material_requisitions.created_at', [$request->start_date, $request->end_date]);
         } else {
             $data =   $data->whereYear('buy_shops.updated_at', $currentYear)
                 ->whereMonth('buy_shops.updated_at', $currentMonth);
