@@ -80,6 +80,7 @@ Route::get('getData-approval-update', [DurableArticlesRequisitionController::cla
 Route::post('approved', [DurableArticlesRequisitionController::class, 'approved'])->name('approved');
 Route::post('not-approved', [DurableArticlesRequisitionController::class, 'notApproved'])->name('not-approved');
 Route::get('durable-articles-requisition-show/{id}', [DurableArticlesRequisitionController::class, 'show'])->name('durable-articles-requisition-show');
+Route::get('durable-articles-requisition-showList/{id}', [DurableArticlesRequisitionController::class, 'showList'])->name('durable-articles-requisition-showList');
 Route::post('durable-articles-requisition-export/pdf', [DurableArticlesRequisitionController::class, 'exportPDF'])->name('durable-articles-requisition-export/pdf');
 Route::get('get-articlesRes/{id}', [DurableArticlesRequisitionController::class, 'durableRequisition'])->name('get-articlesRes');
 Route::get('get-typeCategories/{id}', [DurableArticlesRequisitionController::class, 'typeCategories'])->name('get-typeCategories');
