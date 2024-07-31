@@ -84,6 +84,8 @@ Route::post('durable-articles-requisition-export/pdf', [DurableArticlesRequisiti
 Route::get('get-articlesRes/{id}', [DurableArticlesRequisitionController::class, 'durableRequisition'])->name('get-articlesRes');
 Route::get('get-typeCategories/{id}', [DurableArticlesRequisitionController::class, 'typeCategories'])->name('get-typeCategories');
 Route::get('get-articlesRes-damaged/{id}', [DurableArticlesRequisitionController::class, 'articlesResDamaged'])->name('get-articlesRes');
+Route::get('approval-durable-waiting-receive', [DurableArticlesRequisitionController::class, 'approvalDurableWaitingReceive'])->name('approval-durable-waiting-receive');
+Route::get('durable-waiting-receive/{id}', [DurableArticlesRequisitionController::class, 'durableWaitingReceive'])->name('durable-waiting-receive');
 
 
 // is_drawer ผู้เบิก

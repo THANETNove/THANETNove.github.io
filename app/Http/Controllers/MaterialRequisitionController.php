@@ -183,7 +183,7 @@ class MaterialRequisitionController extends Controller
         MaterialRequisition::where('id', $id)->update([
             'starts_waiting_receive' =>  "on",
         ]);
-        return redirect('approval-material-waiting-receive')->with('message', "บันทึกสำเร็จ");
+        return redirect('approval-material-waiting-receive')->with('message', "รับของเเล้ว");
     }
 
 

@@ -20,6 +20,7 @@ class DurableArticlesRequisition extends Model
         'statusApproval', // สถานะการอนุมัติ
         'commentApproval', // รายละเอียดการอนุมัติ
         'status', //สถานะ on/ off
+        'starts_waiting_receive' // รับของเเล้วหรือยัง
 
     ];
 }

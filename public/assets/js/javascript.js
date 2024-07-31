@@ -474,7 +474,7 @@ if (targetUrls === "bet-distribution-indexApproval") {
 if (targetUrls === "approval-durable-waiting-receive") {
     setActiveClass("approval", "approval-durable-waiting-receive");
 }
-if (targetUrls === "approval-durable-waiting-receive") {
+if (targetUrls === "approval-material-waiting-receive") {
     setActiveClass("approval", "approval-material-waiting-receive");
 }
 //คืนครุภัณฑ์

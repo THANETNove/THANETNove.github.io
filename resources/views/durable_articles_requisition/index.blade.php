@@ -27,8 +27,8 @@
                                                 <th>ชื่อครุภัณฑ์</th>
                                                 <th>รายละเอียดครุภัณฑ์</th>
                                                 <th>จำนวน</th>
-
                                                 <th>สถานะ </th>
+                                                <th>รอรับของ </th>
                                                 <th>วันที่เบิก </th>
                                                 <th>Actions</th>
 
@@ -65,6 +65,17 @@
                                                                 class="badge bg-label-info me-1">รอการอนุมัติคึนครุภัณฑ์</span>
                                                         @elseif ($da->status == '3')
                                                             <span class="badge bg-label-primary me-1">คึนครุภัณฑ์</span>
+                                                        @endif
+
+                                                    </td>
+
+                                                    <td>
+                                                        @if ($da->statusApproval == '1' && $da->status == '0')
+                                                            @if ($da->starts_waiting_receive == 'on')
+                                                                <span class="badge bg-label-success me-1">รับของเเล้ว</span>
+                                                            @else
+                                                                <span class="badge bg-label-warning me-1">รอรับของ</span>
+                                                            @endif
                                                         @endif
 
                                                     </td>

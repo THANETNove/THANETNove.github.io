@@ -337,7 +337,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="menu-item" id="approval-durable-waiting-receive">
+                        <li class="menu-item" id="approval-material-waiting-receive">
                             <a href="{{ url('approval-material-waiting-receive') }}" class="menu-link">
                                 <div data-i18n="Notifications">รอรับวัสดุ
                                 </div>

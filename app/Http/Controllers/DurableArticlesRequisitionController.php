@@ -154,6 +154,112 @@ class DurableArticlesRequisitionController extends Controller
         return response()->json($data);
     }
 
+
+    public function approvalDurableWaitingReceive()
+    {
+
+
+        $data = DB::table('durable_articles_requisitions')
+            ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->leftJoin('durable_articles', 'durable_articles_requisitions.group_id', '=', 'durable_articles.id')
+            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+            ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+            ->select(
+                'durable_articles_requisitions.*',
+                'type_categories.type_name',
+                'type_categories.type_code',
+                'users.prefix',
+                'users.first_name',
+                'users.last_name',
+                'departments.department_name',
+                'durable_articles.durableArticles_name',
+                'durable_articles.description',
+                'durable_articles.group_count',
+                'durable_articles.warranty_period_start',
+                'durable_articles.warranty_period_end',
+                'categories.category_name',
+                'categories.category_code',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name'
+            );
+
+
+
+
+        if (Auth::user()->status == "0") {
+            $data = $data->where('durable_articles_requisitions.id_user', Auth::user()->id);
+        }
+
+
+        $data = $data->orderBy('durable_articles_requisitions.id', 'DESC')
+            ->groupBy('durable_articles_requisitions.group_withdraw')
+            ->selectRaw('count(durable_articles_requisitions.group_withdraw) as groupWithdrawCount')
+            ->where('durable_articles_requisitions.status', 0)
+            ->where('durable_articles_requisitions.statusApproval', 1)
+            ->where('durable_articles_requisitions.starts_waiting_receive', 'off')
+            ->paginate(100);
+
+
+
+        return  view('waiting_receive.durable', ['data' => $data]);
+    }
+    public function durableWaitingReceive($id)
+    {
+
+
+
+        $data = DurableArticlesRequisition::find($id);
+
+
+
+
+        $dataRequisitions = DB::table('durable_articles_requisitions')
+            ->where('durable_articles_requisitions.group_withdraw', $data->group_withdraw)
+            ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->leftJoin('durable_articles', 'durable_articles_requisitions.group_id', '=', 'durable_articles.id')
+            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+            ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+            ->select(
+                'durable_articles_requisitions.*',
+                'type_categories.type_name',
+                'type_categories.type_code',
+                'users.prefix',
+                'users.first_name',
+                'users.last_name',
+                'departments.department_name',
+                'durable_articles.durableArticles_name',
+                'durable_articles.warranty_period_start',
+                'durable_articles.warranty_period_end',
+                'durable_articles.description',
+                'durable_articles.group_count',
+                'durable_articles.durableArticles_number',
+                'categories.category_name',
+                'categories.category_code',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name'
+            )
+            ->orderBy('durable_articles_requisitions.id', 'DESC');
+
+        $requisitions = $dataRequisitions->get();
+
+        $number = $dataRequisitions->count();
+
+        for ($i = 0; $i < $number; $i++) {
+
+            DurableArticlesRequisition::where('id', $requisitions[$i]->id)->update([
+                'starts_waiting_receive' =>  'on',
+            ]);
+        }
+
+        return redirect('approval-durable-waiting-receive')->with('message', "รับของเเล้ว");
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -182,6 +288,7 @@ class DurableArticlesRequisitionController extends Controller
                 $data->name_durable_articles_count = $request['name_durable_articles_count'];
                 $data->statusApproval = "0";
                 $data->status = "0";
+                $data->starts_waiting_receive = "off";
                 $data->save();
 
                 DurableArticles::where('id', $dur_array[$i]->id)->update([

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('statusApproval')->nullable()->comment('สถานะการอนุมัติ');
             $table->string('commentApproval')->nullable()->comment('รายละเอียด');
             $table->string('status')->nullable()->comment('สถานะ on/ off');
+            $table->string('starts_waiting_receive')->nullable()->comment('รับของเเล้วหรือยัง');
             $table->timestamps();
         });
     }
