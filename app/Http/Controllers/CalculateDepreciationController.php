@@ -60,7 +60,7 @@ class CalculateDepreciationController extends Controller
             )
             ->orderBy('durable_articles.id', 'ASC')
             ->get();
-
+        /*   dd($data); */
 
         return response()->json($data);
     }
@@ -87,6 +87,7 @@ class CalculateDepreciationController extends Controller
 
         // Encode the updated array back into a JSON string
         $data->depreciation_price = json_encode($depreciationData);
+        $data->depreciation_date = $date;
 
         // Save the updated data
         $data->save();
