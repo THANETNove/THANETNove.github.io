@@ -331,6 +331,18 @@
                                 </div>
                             </a>
                         </li>
+                        <li class="menu-item" id="approval-durable-waiting-receive">
+                            <a href="{{ url('approval-durable-waiting-receive') }}" class="menu-link">
+                                <div data-i18n="Notifications">รอรับครุภัณฑ์
+                                </div>
+                            </a>
+                        </li>
+                        <li class="menu-item" id="approval-durable-waiting-receive">
+                            <a href="{{ url('approval-material-waiting-receive') }}" class="menu-link">
+                                <div data-i18n="Notifications">รอรับวัสดุ
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             @endif

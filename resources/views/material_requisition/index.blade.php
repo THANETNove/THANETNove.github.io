@@ -81,7 +81,7 @@
                                                                 <a class="dropdown-item"
                                                                     href="{{ url('material-requisition-show', $da->id) }}"><i
                                                                         class='bx bxs-show'></i>View</a>
-                                                                @if ($da->status == 'on')
+                                                                @if ($da->status == 'on' && $da->status_approve == '0')
                                                                     <a class="dropdown-item"
                                                                         href="{{ url('material-requisition-edit', $da->id) }}"><i
                                                                             class="bx bx-edit-alt me-1"></i> Edit</a>

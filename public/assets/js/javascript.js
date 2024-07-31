@@ -471,6 +471,12 @@ if (targetUrls === "calculator-create") {
 if (targetUrls === "bet-distribution-indexApproval") {
     setActiveClass("approval", "bet-distribution-indexApproval");
 }
+if (targetUrls === "approval-durable-waiting-receive") {
+    setActiveClass("approval", "approval-durable-waiting-receive");
+}
+if (targetUrls === "approval-durable-waiting-receive") {
+    setActiveClass("approval", "approval-material-waiting-receive");
+}
 //คืนครุภัณฑ์
 
 if (targetUrls === "return-item-index") {
