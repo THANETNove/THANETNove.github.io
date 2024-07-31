@@ -29,7 +29,40 @@ class ReturnItemController extends Controller
         $data = DB::table('durable_articles_requisitions')
             ->where('durable_articles_requisitions.status',  2)
             ->where('durable_articles_requisitions.statusApproval',  1)
-            ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+            ->leftJoin('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->leftJoin('durable_articles', 'durable_articles_requisitions.group_id', '=', 'durable_articles.id')
+            ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+            ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+            ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
+            ->select(
+                'durable_articles_requisitions.*',
+                'type_categories.type_name',
+                'type_categories.type_code',
+                'users.prefix',
+                'users.first_name',
+                'users.last_name',
+                'departments.department_name',
+                'durable_articles.durableArticles_name',
+                'durable_articles.warranty_period_start',
+                'durable_articles.warranty_period_end',
+                'durable_articles.description',
+                'durable_articles.group_count',
+                'durable_articles.durableArticles_number',
+                'categories.category_name',
+                'categories.category_code',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name',
+                DB::raw('SUM(durable_articles_requisitions.amount_withdraw) as total_amount_withdraw')
+            )
+            ->groupBy('durable_articles_requisitions.id_user', 'durable_articles_requisitions.durable_articles_id');
+      
+
+        $data2 = DB::table('durable_articles_requisitions')
+            ->where('durable_articles_requisitions.status',  2)
+            ->where('durable_articles_requisitions.statusApproval',  1)
+            ->leftJoin('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
             ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
             ->leftJoin('durable_articles', 'durable_articles_requisitions.group_id', '=', 'durable_articles.id')
             ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
@@ -54,11 +87,18 @@ class ReturnItemController extends Controller
                 'storage_locations.building_name',
                 'storage_locations.floor',
                 'storage_locations.room_name'
-            )
-            ->selectRaw('count(durable_articles_requisitions.group_withdraw) as groupWithdrawCount');
+            );
+
 
         if ($search) {
             $data =  $data
+                ->where(function ($query) use ($search) {
+                    $query->where('category_name', 'LIKE', "%$search%")
+                        ->orWhere('durableArticles_name', 'LIKE', "%$search%")
+                        ->orWhere('first_name', 'LIKE', "%$search%")
+                        ->orWhere('last_name', 'LIKE', "%$search%");
+                });
+            $data2 =  $data2
                 ->where(function ($query) use ($search) {
                     $query->where('category_name', 'LIKE', "%$search%")
                         ->orWhere('durableArticles_name', 'LIKE', "%$search%")
@@ -69,12 +109,14 @@ class ReturnItemController extends Controller
 
         if (Auth::user()->status == "0") {
             $data = $data->where('durable_articles_requisitions.id_user', Auth::user()->id);
+            $data2 = $data2->where('durable_articles_requisitions.id_user', Auth::user()->id);
         }
 
 
         $data = $data->orderBy('durable_articles_requisitions.id', 'DESC')->paginate(100)->appends(['search' => $search]);
+        $data2 = $data2->orderBy('durable_articles_requisitions.id', 'DESC')->paginate(100)->appends(['search' => $search]);
 
-        return view("return_item.index", ['data' => $data]);
+        return view("return_item.index", ['data' => $data, 'data2' => $data2]);
     }
 
 
