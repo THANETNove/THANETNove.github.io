@@ -73,7 +73,7 @@ class DurableArticlesRequisitionController extends Controller
         $data = $data->orderBy('durable_articles_requisitions.id', 'DESC')
             ->groupBy('durable_articles_requisitions.group_withdraw')
             ->selectRaw('count(durable_articles_requisitions.group_withdraw) as groupWithdrawCount')
-            ->paginate(100);
+            ->paginate(100)->appends(['search' => $search]);
 
         $department = DB::table('departments')
             ->orderBy('department_name', 'ASC')

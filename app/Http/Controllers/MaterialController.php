@@ -42,7 +42,7 @@ class MaterialController extends Controller
                 // Add additional conditions for other cases if needed
             })
                 ->orderBy('materials.id', 'DESC')
-                ->paginate(100);
+                ->paginate(1)->appends(['search' => $search]);
         } else {
 
             $data = $data

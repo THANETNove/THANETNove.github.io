@@ -23,6 +23,7 @@ class MaterialRequisitionController extends Controller
      */
     public function index(Request $request)
     {
+
         $search =  $request['search'];
         $data = DB::table('material_requisitions')
             ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
@@ -51,7 +52,7 @@ class MaterialRequisitionController extends Controller
         if (Auth::user()->status == 0) {
             $data = $data->where('id_user', Auth::user()->id);
         }
-        $data = $data->orderBy('material_requisitions.id', 'DESC')->paginate(100);
+        $data = $data->orderBy('material_requisitions.id', 'DESC')->paginate(100)->appends(['search' => $search]);
 
         $department = DB::table('departments')
             ->orderBy('department_name', 'ASC')

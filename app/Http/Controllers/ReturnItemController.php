@@ -72,7 +72,7 @@ class ReturnItemController extends Controller
         }
 
 
-        $data = $data->orderBy('durable_articles_requisitions.id', 'DESC')->paginate(100);
+        $data = $data->orderBy('durable_articles_requisitions.id', 'DESC')->paginate(100)->appends(['search' => $search]);
 
         return view("return_item.index", ['data' => $data]);
     }
