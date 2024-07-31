@@ -123,11 +123,17 @@ class MaterialRequisitionController extends Controller
     }
     public function notApproved(Request $request)
     {
+        $matReq = MaterialRequisition::find($request->id);
+        $mat = Material::find($matReq->material_name);
+
 
 
         MaterialRequisition::where('id', $request->id)->update([
             'status_approve' =>  2,
             'commentApproval' =>  $request->commentApproval,
+        ]);
+        Material::where('id', $matReq->material_name)->update([
+            'remaining_amount' =>  $matReq->amount_withdraw + $mat->remaining_amount
         ]);
 
         return redirect('approval-material-requisition')->with('message', "ไม่อนุมัติ สำเร็จ");
