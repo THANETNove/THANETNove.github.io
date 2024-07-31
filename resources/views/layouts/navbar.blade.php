@@ -90,7 +90,32 @@
                     ->orderBy('durable_articles_requisitions.id', 'DESC')
                     ->get();
 
-                $countData = $dataDuAc->count() + $dataBet->count() + $dataReq->count();
+                $dataMatReq = DB::table('material_requisitions')
+                    ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
+                    ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
+                    ->leftJoin(
+                        'storage_locations',
+                        'materials.code_material_storage',
+                        '=',
+                        'storage_locations.code_storage',
+                    )
+                    ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
+                    ->select(
+                        'material_requisitions.*',
+                        'users.prefix',
+                        'users.first_name',
+                        'users.last_name',
+                        'materials.material_name as name',
+                        'categories.category_name',
+                        'storage_locations.building_name',
+                        'storage_locations.floor',
+                        'storage_locations.room_name',
+                    )
+                    ->where('material_requisitions.status', '=', 'on')
+                    ->where('material_requisitions.status_approve', '0')
+                    ->get();
+
+                $countData = $dataDuAc->count() + $dataBet->count() + $dataReq->count() + $dataMatReq->count();
 
             @endphp
             <!-- Place this tag where you want the button to render. -->
@@ -120,6 +145,18 @@
                                 </a>
                             </li>
                         @endif
+                        @if ($dataMatReq->count() > 0)
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('approval-material-requisition') }}">
+                                    <i class='bx warn-2'>{{ $dataMatReq->count() }}</i>
+                                    <span class="align-middle col-8">อนุมัติครุภัณฑ์</span>
+                                </a>
+                            </li>
+                        @endif
+
                         @if ($dataBet->count() > 0)
                             <li>
                                 <div class="dropdown-divider"></div>
