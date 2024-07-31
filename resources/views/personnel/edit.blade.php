@@ -186,16 +186,16 @@
                                                 aria-label="Default select example">
                                                 <option selected disabled>สถานะพนักงาน</option>
                                                 @if ($data['statusEmployee'] == 'on')
-                                                    <option value="{{ $data['statusEmployee'] }}" selected>พนักงาน
+                                                    <option value="{{ $data['statusEmployee'] }}" selected>ปกติ
                                                     </option>
                                                     @if ($data['statusEmployee'] == 'on')
-                                                        <option value="off">พ้นสภาพพนักงาน</option>
+                                                        <option value="off">ระงันการใช้งาน</option>
                                                     @endif
                                                 @else
-                                                    <option value="{{ $data['statusEmployee'] }}" selected>พ้นสภาพพนักงาน
+                                                    <option value="{{ $data['statusEmployee'] }}" selected>ระงันการใช้งาน
                                                     </option>
                                                     @if ($data['statusEmployee'] == 'on')
-                                                        <option value="on">พนักงาน</option>
+                                                        <option value="on">ปกติ</option>
                                                     @endif
                                                 @endif
                                             </select>

@@ -74,10 +74,10 @@
             @foreach ($dataProvinces as $provinces)
                 @if ($data['provinces'] == $provinces->id)
                     <option value="{{ $provinces->id }}" selected>{{ $provinces->name_th }}</option>
-                @else
+                    {{--  @else
                     @if (Auth::user()->status == '2')
                         <option value="{{ $provinces->id }}">{{ $provinces->name_th }}</option>
-                    @endif
+                    @endif --}}
                 @endif
             @endforeach
         </select>
@@ -90,10 +90,10 @@
             @foreach ($dataSubdistrict as $subdistrict)
                 @if ($data['subdistrict'] == $subdistrict->id)
                     <option value="{{ $subdistrict->id }}" selected>{{ $subdistrict->name_th }}</option>
-                @else
+                    {{--         @else
                     @if (Auth::user()->status == '2')
                         <option value="{{ $subdistrict->id }}">{{ $subdistrict->name_th }}</option>
-                    @endif
+                    @endif --}}
                 @endif
             @endforeach
         </select>
@@ -106,10 +106,10 @@
             @foreach ($dataDistricts as $districts)
                 @if ($data['districts'] == $districts->id)
                     <option value="{{ $districts->id }}" selected>{{ $districts->name_th }}</option>
-                @else
+                    {{-- @else
                     @if (Auth::user()->status == '2')
                         <option value="{{ $districts->id }}">{{ $districts->name_th }}</option>
-                    @endif
+                    @endif --}}
                 @endif
             @endforeach
         </select>
@@ -128,25 +128,24 @@
             <option selected disabled>สถานะ</option>
             @if ($data['status'] == '0')
                 <option value="{{ $data['status'] }}" selected>ผู้เบิก</option>
-                @if ($data['statusEmployee'] == 'on')
+                {{--  @if ($data['statusEmployee'] == 'on')
                     <option value="1">เจ้าหน้าที่วัสดุ</option>
                     <option value="2">หัวหน้าวัสดุ</option>
-                @endif
+                @endif --}}
             @elseif ($data['status'] == '1')
-                @if ($data['statusEmployee'] == 'on')
+                {{--    @if ($data['statusEmployee'] == 'on')
                     <option value="0">ผู้เบิก</option>
-                @endif
+                @endif --}}
                 <option value="{{ $data['status'] }}"selected>เจ้าหน้าที่วัสดุ</option>
-                @if ($data['statusEmployee'] == 'on')
+                {{-- @if ($data['statusEmployee'] == 'on')
                     <option value="2">หัวหน้าวัสดุ</option>
-                @endif
+                @endif --}}
             @else
-                @if ($data['statusEmployee'] == 'on')
+                {{--   @if ($data['statusEmployee'] == 'on')
                     <option value="0">ผู้เบิก</option>
                     <option value="1">เจ้าหน้าที่วัสดุ</option>
-                @endif
+                @endif --}}
                 <option value="{{ $data['status'] }}" selected>หัวหน้าวัสดุ</option>
-
             @endif
         </select>
     </div>
@@ -157,14 +156,14 @@
             <option selected disabled>สถานะพนักงาน</option>
             @if ($data['statusEmployee'] == 'on')
                 <option value="{{ $data['statusEmployee'] }}" selected>พนักงาน</option>
-                @if ($data['statusEmployee'] == 'on')
+                {{--  @if ($data['statusEmployee'] == 'on')
                     <option value="off">พ้นสภาพพนักงาน</option>
-                @endif
+                @endif --}}
             @else
                 <option value="{{ $data['statusEmployee'] }}" selected>พ้นสภาพพนักงาน</option>
-                @if ($data['statusEmployee'] == 'on')
+                {{--   @if ($data['statusEmployee'] == 'on')
                     <option value="on">พนักงาน</option>
-                @endif
+                @endif --}}
             @endif
         </select>
 
