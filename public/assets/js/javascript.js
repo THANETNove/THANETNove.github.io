@@ -2107,3 +2107,9 @@ function durableArticlesCode() {
     console.log("5555");
 }
 
+
+function inputCount(input) {
+    if (input.value < 1) {
+        input.value = 1;
+    }
+}

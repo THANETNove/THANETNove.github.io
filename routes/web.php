@@ -74,7 +74,8 @@ Route::get('durable-articles-requisition-edit/{id}', [DurableArticlesRequisition
 Route::put('durable-articles-requisition-update/{id}', [DurableArticlesRequisitionController::class, 'update'])->name('durable-articles-requisition-update');
 Route::get('durable-articles-requisition-destroy/{id}', [DurableArticlesRequisitionController::class, 'destroy'])->name('durable-articles-requisition-destroy');
 Route::get('approval-update', [DurableArticlesRequisitionController::class, 'approvalUpdate'])->name('approval-update');
-Route::get('approved/{id}', [DurableArticlesRequisitionController::class, 'approved'])->name('approved');
+Route::get('getData-approval-update', [DurableArticlesRequisitionController::class, 'dataApprovalUpdate'])->name('getData-approval-update');
+Route::post('approved', [DurableArticlesRequisitionController::class, 'approved'])->name('approved');
 Route::post('not-approved', [DurableArticlesRequisitionController::class, 'notApproved'])->name('not-approved');
 Route::get('durable-articles-requisition-show/{id}', [DurableArticlesRequisitionController::class, 'show'])->name('durable-articles-requisition-show');
 Route::post('durable-articles-requisition-export/pdf', [DurableArticlesRequisitionController::class, 'exportPDF'])->name('durable-articles-requisition-export/pdf');

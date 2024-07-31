@@ -462,11 +462,17 @@ class DurableArticlesRequisitionController extends Controller
         return view("durable_articles_requisition.updateApproval", ['data' => $data]);
     }
 
-    public function approved($id)
+
+
+    public function approved(Request $request)
     {
 
 
-        $data = DurableArticlesRequisition::find($id);
+
+
+        $data = DurableArticlesRequisition::find($request->id);
+
+
 
 
         $dataRequisitions = DB::table('durable_articles_requisitions')
@@ -500,7 +506,8 @@ class DurableArticlesRequisitionController extends Controller
             ->orderBy('durable_articles_requisitions.id', 'DESC');
 
         $requisitions = $dataRequisitions->get();
-        $number = $dataRequisitions->count();
+
+        $number = $request->withdrawCount; /* $dataRequisitions->count() */;
 
         for ($i = 0; $i < $number; $i++) {
 
@@ -550,7 +557,7 @@ class DurableArticlesRequisitionController extends Controller
 
         $requisitions = $dataRequisitions->get();
 
-        $number = $dataRequisitions->count();
+        $number =   $dataRequisitions->count();
 
 
 
