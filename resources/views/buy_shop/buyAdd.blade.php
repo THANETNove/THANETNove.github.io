@@ -71,7 +71,7 @@
                                                         <th scope="row">{{ $i++ }}</th>
                                                         <td>{{ $da->category_name }}</td>
                                                         <td>{{ $da->material_name }}</td>
-                                                        <td>{{ number_format($da->required_quantity) }}</td>
+                                                        <td>{{ number_format($da->total_amount_received) }}</td>
                                                         <td>{{ $da->name_material_count }}</td>
                                                         <td>{{ (new Carbon\Carbon($da->created_at))->format('d-m-Y') }}
                                                         </td>

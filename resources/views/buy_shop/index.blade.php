@@ -48,7 +48,7 @@
                                                         <th scope="row">{{ $i++ }}</th>
                                                         <td>{{ $da->category_name }}</td>
                                                         <td>{{ $da->material_name }}</td>
-                                                        <td>{{ number_format($da->required_quantity) }}</td>
+                                                        <td>{{ number_format($da->total_required_quantity) }}</td>
                                                         <td>{{ $da->name_material_count }}</td>
                                                         <td>{{ (new Carbon\Carbon($da->created_at))->format('d-m-Y') }}</td>
 
@@ -63,12 +63,12 @@
                                                                 <div class="dropdown-menu">
                                                                     <a class="dropdown-item" href="#"
                                                                         data-bs-toggle="modal"
-                                                                        onclick="setId('{{ $da->buy_id }}','{{ $da->required_quantity }}')"
+                                                                        onclick="setId('{{ $da->id }}','{{ $da->total_required_quantity }}')"
                                                                         data-bs-target="#modalCenter">
                                                                         <i class='bx bx-check-square'></i> ซื้อเเล้ว
                                                                     </a>
                                                                     <a class="dropdown-item"
-                                                                        href="{{ url('buy-shop-destroy', $da->buy_id) }}">
+                                                                        href="{{ url('buy-shop-destroy', $da->id) }}">
                                                                         <i class='bx bx-trash'></i> ยกเลิกการสั่งซื้อ
                                                                     </a>
                                                                 </div>
@@ -106,7 +106,7 @@
                     <form class="user" id="myForm" method="POST" action="{{ route('buy-shop-update') }}">
                         @csrf
 
-                        <input type="text" name="buy_id" id="rejectedId" value="" style="display: none;">
+                        <input type="text" name="id" id="rejectedId" value="" style="display: none;">
                         <div class="row">
                             <div class="col-6 mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">จำนวนที่ซื้อ</label>
