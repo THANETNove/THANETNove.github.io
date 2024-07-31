@@ -39,6 +39,7 @@ class BuyShopController extends Controller
                 'storage_locations.floor',
                 'storage_locations.room_name',
                 'buy_shops.status_buy',
+                'buy_shops.id AS id_shop',
                 'buy_shops.created_at AS created_at_shop',
                 DB::raw('SUM(buy_shops.required_quantity) as total_required_quantity'),
                 DB::raw('SUM(buy_shops.amount_received) as total_amount_received')

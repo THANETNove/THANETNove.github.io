@@ -68,7 +68,7 @@
                                                                         <i class='bx bx-check-square'></i> ซื้อเเล้ว
                                                                     </a>
                                                                     <a class="dropdown-item"
-                                                                        href="{{ url('buy-shop-destroy', $da->id) }}">
+                                                                        href="{{ url('buy-shop-destroy', $da->id_shop) }}">
                                                                         <i class='bx bx-trash'></i> ยกเลิกการสั่งซื้อ
                                                                     </a>
                                                                 </div>
