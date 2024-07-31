@@ -39,8 +39,11 @@ class MaterialRequisitionController extends Controller
                 'categories.category_name',
                 'storage_locations.building_name',
                 'storage_locations.floor',
-                'storage_locations.room_name'
-            );
+                'storage_locations.room_name',
+                DB::raw('SUM(material_requisitions.amount_withdraw) as total_amount_withdraw')
+            )
+            ->groupBy('material_requisitions.id_user', 'material_requisitions.code_requisition', 'material_requisitions.status_approve');
+
 
         if ($search) {
             $data

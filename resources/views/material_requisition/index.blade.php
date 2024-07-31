@@ -47,7 +47,7 @@
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->code_requisition }}</td>
                                                     <td>{{ $da->name }}</td>
-                                                    <td>{{ number_format($da->amount_withdraw) }}</td>
+                                                    <td>{{ number_format($da->total_amount_withdraw) }}</td>
                                                     <td>{{ $da->name_material_count }}</td>
                                                     @if (Auth::user()->status != '0')
                                                         <td>{{ $da->prefix }} {{ $da->first_name }} {{ $da->last_name }}
