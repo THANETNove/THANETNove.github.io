@@ -57,7 +57,13 @@
                                                         {{ $da->room_name }}</td> --}}
                                                     <td>
                                                         @if ($da->status == 'on')
-                                                            <span class="badge bg-label-success me-1">เบิกวัสดุ</span>
+                                                            @if ($da->status_approve == '0')
+                                                                <span class="badge bg-label-primary me-1">รออนุมัติ</span>
+                                                            @elseif ($da->status_approve == '1')
+                                                                <span class="badge bg-label-success me-1">อนุมัติ</span>
+                                                            @elseif ($da->status_approve == '2')
+                                                                <span class="badge bg-label-danger me-1">ไม่อนุมัติ</span>
+                                                            @endif
                                                         @else
                                                             <span class="badge bg-label-warning me-1">ยกเลิกเบิกวัสดุ</span>
                                                         @endif
