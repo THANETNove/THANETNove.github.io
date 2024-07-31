@@ -157,9 +157,10 @@
                                     <tbody class="table-border-bottom-0">
                                         @foreach ($data as $da)
                                             @php
-                                                $originalDate = $da->warranty_period;
-                                                $newDate = (new DateTime($originalDate))->format('d/m/Y');
-                                                $newDate2 = new DateTime($originalDate);
+                                                $originalDate = $da->warranty_period_start;
+                                                $originalDate2 = $da->warranty_period_end;
+                                                $newDate = (new DateTime($originalDate))->format('d-m-Y');
+                                                $newDate2 = new DateTime($originalDate2);
                                                 $targetDate = $newDate2;
                                                 $now = new DateTime();
 
@@ -175,7 +176,8 @@
                                                 <td>{{ number_format($da->durableArticles_number) }}</td>
                                                 <td>
                                                     <div>
-                                                        {{ $newDate }}
+                                                        {{ $newDate }} &nbsp; ถึง &nbsp;
+                                                        {{ $newDate2->format('d-m-Y') }}
                                                         @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
                                                             <span
                                                                 class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>

@@ -56,11 +56,10 @@
                                                         </td>
                                                     @endif
                                                     @php
-                                                        $originalDate = $da->created_at;
-                                                        $newDate = (new DateTime($originalDate))
-                                                            ->modify('+7 days')
-                                                            ->format('d/m/Y');
-                                                        $newDate2 = (new DateTime($originalDate))->modify('+7 days');
+                                                        $originalDate = $da->warranty_period_start;
+                                                        $originalDate2 = $da->warranty_period_end;
+                                                        $newDate = (new DateTime($originalDate))->format('d-m-Y');
+                                                        $newDate2 = new DateTime($originalDate2);
                                                         $targetDate = $newDate2;
                                                         $now = new DateTime();
 
@@ -69,33 +68,31 @@
                                                                 ? 0
                                                                 : $now->diff($targetDate)->format('%a') + 1;
                                                     @endphp
-                                                    <td>{{ $newDate }}
-                                                        @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
-                                                            <span
-                                                                class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
-                                                        @else
-                                                            @if ($daysRemaining > 0)
-                                                                <span class="badge bg-label-primary me-1">เหลือเวลา
-                                                                    {{ $daysRemaining }} วัน</span>
-                                                            @else
-                                                                <span class="badge bg-label-warning me-1">หมดประกัน</span>
-                                                            @endif
-                                                        @endif
-
-                                                    </td>
-                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
 
                                                     <td>
-
+                                                        <div>
+                                                            {{ $newDate }} &nbsp; ถึง &nbsp;
+                                                            {{ $newDate2->format('d-m-Y') }}
+                                                            @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
+                                                                <span
+                                                                    class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
+                                                            @else
+                                                                @if ($daysRemaining > 0)
+                                                                    <span class="badge bg-label-primary me-1">เหลือเวลา
+                                                                        {{ $daysRemaining }} วัน</span>
+                                                                @else
+                                                                    <span
+                                                                        class="badge bg-label-warning me-1">หมดประกัน</span>
+                                                                @endif
+                                                            @endif
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+                                                    <td>
                                                         <span
                                                             class="badge bg-label-info me-1">รอการอนุมัติคืนครุภัณฑ์</span>
                                                     </td>
-
-
-
-
                                                     <td>
-
                                                         <div class="dropdown">
                                                             <button type="button"
                                                                 class="btn p-0 dropdown-toggle hide-arrow"
@@ -106,35 +103,25 @@
                                                                 <a class="dropdown-item"
                                                                     href="{{ url('return-item-show', $da->id) }}">
                                                                     <i class='bx bxs-show'></i> View</a>
-
                                                                 <a class="dropdown-item alert-destroy"
                                                                     href="{{ url('return-item-approval', $da->id) }}">
                                                                     <i class='bx bxs-send'></i> อนุมัติคืนครุภัณฑ์</a>
-
-
                                                             </div>
                                                         </div>
-
                                                     </td>
                                                 </tr>
                                             @endforeach
-
-
                                         </tbody>
                                     </table>
                                     <div class="mt-5">
                                         {!! $data->links() !!}
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- / Layout wrapper -->
 @endsection
