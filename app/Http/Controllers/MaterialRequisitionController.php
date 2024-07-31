@@ -105,8 +105,6 @@ class MaterialRequisitionController extends Controller
             )
             ->where('material_requisitions.status', '=', "on")
             ->where('material_requisitions.status_approve', "0")
-
-
             ->get();
 
         $department = DB::table('departments')
