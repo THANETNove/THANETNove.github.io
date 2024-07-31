@@ -7,6 +7,8 @@ use App\Models\BuyShop;
 use App\Models\Material;
 use App\Models\Buy;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 
 class BuyShopController extends Controller
@@ -39,6 +41,47 @@ class BuyShopController extends Controller
             ->where('status_buy', '=', 0)
             ->paginate(100);
         return view('buy_shop.index', ['data' => $data, 'group' => $group]);
+    }
+
+    public function indexAdd(Request $request)
+    {
+
+
+        $group = DB::table('categories')
+            ->where('category_id', '=', 1)->orderBy('id', 'DESC')->get();
+
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        $data = DB::table('materials')->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+            ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
+            ->join('buy_shops', 'materials.id', '=', 'buy_shops.buy_id')
+            ->select(
+                'materials.*',
+                'categories.category_name',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name',
+                'buy_shops.status_buy',
+                'buy_shops.required_quantity',
+                'buy_shops.id as buy_id',
+                'buy_shops.updated_at AS updated_buy'
+            );
+
+
+
+
+        if ($request->start_date || $request->end_date) {
+            $data =    $data->whereBetween('material_requisitions.created_at', [$request->start_date, $request->$end_date]);
+        } else {
+            $data =   $data->whereYear('buy_shops.updated_at', $currentYear)
+                ->whereMonth('buy_shops.updated_at', $currentMonth);
+        }
+
+        $data =   $data->where('status_buy', '>', 0)
+            ->paginate(500);
+
+        return view('buy_shop.buyAdd', ['data' => $data, 'group' => $group]);
     }
 
     /**

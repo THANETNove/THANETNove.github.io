@@ -219,6 +219,11 @@
                             <div data-i18n="Basic">รายการวัสดุรอสั่งซื้อ</div>
                         </a>
                     </li>
+                    <li class="menu-item" id="buy-shop-add">
+                        <a href="{{ url('buy-shop-add') }}" class="menu-link">
+                            <div data-i18n="Basic">รายการวัสดุซื้อเเล้ว</div>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

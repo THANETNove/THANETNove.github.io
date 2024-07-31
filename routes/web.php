@@ -234,6 +234,8 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('buy-shop-store', [BuyShopController::class, 'store'])->name('buy-shop-store');
     Route::post('buy-shop-update', [BuyShopController::class, 'update'])->name('buy-shop-update');
     Route::get('buy-shop-destroy/{id}', [BuyShopController::class, 'destroy'])->name('buy-shop-destroy');
+    Route::get('buy-shop-add', [BuyShopController::class, 'indexAdd'])->name('buy-shop-add');
+    Route::post('buy-shop-add', [BuyShopController::class, 'indexAdd'])->name('buy-shop-add');
 });
 
 //  หัวหน้าวัสดุ  is_headAdmin

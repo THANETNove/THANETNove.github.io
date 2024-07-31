@@ -37,18 +37,22 @@
                                             $i = 1;
                                         @endphp
                                         <tbody class="table-border-bottom-0">
+
+
+                                            @php
+                                                $previousStatus = -1;
+                                            @endphp
                                             @foreach ($data->groupBy('group_class') as $groupedData)
-                                                @foreach ($groupedData->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
+                                                @foreach ($groupedData->sortBy([['type_durableArticles', 'asc'], ['description', 'asc'], ['durableArticles_number', 'asc']]) as $da)
                                                     <tr>
                                                         <th scope="row">{{ $i++ }}</th>
-
                                                         <td>{{ $da->category_name }}</td>
                                                         <td>{{ $da->material_name }}</td>
-
                                                         <td>{{ number_format($da->required_quantity) }}</td>
                                                         <td>{{ $da->name_material_count }}</td>
-                                                        <td>{{ (new Carbon\Carbon($da->created_at))->format('d-m-Y') }}
-                                                        </td>
+                                                        <td>{{ (new Carbon\Carbon($da->created_at))->format('d-m-Y') }}</td>
+
+
                                                         <td>
                                                             <div class="dropdown">
                                                                 <button type="button"
@@ -61,12 +65,12 @@
                                                                         data-bs-toggle="modal"
                                                                         onclick="setId('{{ $da->buy_id }}','{{ $da->required_quantity }}')"
                                                                         data-bs-target="#modalCenter">
-                                                                        <i class='bx bx-check-square '></i> ซื้อเเล้ว</a>
+                                                                        <i class='bx bx-check-square'></i> ซื้อเเล้ว
+                                                                    </a>
                                                                     <a class="dropdown-item"
-                                                                        href="{{ url('buy-shop-destroy', $da->buy_id) }}"><i
-                                                                            class='bx bx-trash'></i> ยกเลิกการสั่งซื้อ</a>
-
-
+                                                                        href="{{ url('buy-shop-destroy', $da->buy_id) }}">
+                                                                        <i class='bx bx-trash'></i> ยกเลิกการสั่งซื้อ
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                         </td>

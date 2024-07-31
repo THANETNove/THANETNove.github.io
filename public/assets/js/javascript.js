@@ -506,6 +506,9 @@ if (targetUrls === "approval-material-requisition") {
 if (targetUrls === "buy-shop") {
     setActiveClass("buy-shop", "buy-shop-index");
 }
+if (targetUrls === "buy-shop") {
+    setActiveClass("buy-shop", "buy-shop-add");
+}
 console.log("targetUrls", targetUrls);
 
 function myFunction(selectedValue) {
