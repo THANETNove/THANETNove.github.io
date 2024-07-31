@@ -227,6 +227,7 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('return-item-show-list/{id}', [ReturnItemController::class, 'showList'])->name('return-item-show-list');
     Route::post('return-item-index', [ReturnItemController::class, 'index'])->name('return-item-index');
     Route::get('durable-articles-requisition-return/{id}', [ReturnItemController::class, 'durableRequisitionReturn'])->name('durable-articles-requisition-return');
+    Route::get('durable-articles-requisition-return-list/{id}', [ReturnItemController::class, 'durableRequisitionReturnList'])->name('durable-articles-requisition-return-list');
     Route::get('return-item-approval/{id}', [ReturnItemController::class, 'durableRequisitionReturnApproval'])->name('return-item-approval');
     Route::get('return-item-approval-list/{id}', [ReturnItemController::class, 'durableRequisitionReturnApprovalList'])->name('return-item-approval-list');
 
