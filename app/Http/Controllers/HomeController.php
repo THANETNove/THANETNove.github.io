@@ -229,7 +229,7 @@ class HomeController extends Controller
                 $type = 6;
             }
             if ($search == 7) {
-                $name_export = "รายงานการซื้อ";
+                $name_export = "รายงานการรอซื้อ";
                 $type = 7;
 
                 $data = DB::table('materials')

@@ -500,6 +500,9 @@ console.log("targetUrls", targetUrls);
 if (targetUrls === "approval-update") {
     setActiveClass("approval", "approval-update");
 }
+if (targetUrls === "approval-material-requisition") {
+    setActiveClass("approval", "approval-material-requisition");
+}
 if (targetUrls === "buy-shop") {
     setActiveClass("buy-shop", "buy-shop-index");
 }

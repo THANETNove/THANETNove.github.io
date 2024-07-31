@@ -310,6 +310,11 @@
                     </a>
 
                     <ul class="menu-sub">
+                        <li class="menu-item" id="approval-material-requisition">
+                            <a href="{{ url('approval-material-requisition') }}" class="menu-link">
+                                <div data-i18n="Notifications">อนุมัติวัสดุอุปกรณ์</div>
+                            </a>
+                        </li>
                         <li class="menu-item" id="approval-update">
                             <a href="{{ url('approval-update') }}" class="menu-link">
                                 <div data-i18n="Notifications">อนุมัติครุภัณฑ์</div>

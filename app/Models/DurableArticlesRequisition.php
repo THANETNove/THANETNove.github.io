@@ -11,7 +11,7 @@ class DurableArticlesRequisition extends Model
     protected $fillable = [
         'id_user',
         'group_id',
-        'durable_articles_id',//รหัสครุภัณฑ์
+        'durable_articles_id', //รหัสครุภัณฑ์
         'code_durable_articles', // กลุ่ม/ประเภท type
         'group_withdraw', // group การเบิก
         'amount_withdraw', // จำนวนที่เบิก
@@ -20,5 +20,6 @@ class DurableArticlesRequisition extends Model
         'statusApproval', // สถานะการอนุมัติ
         'commentApproval', // รายละเอียดการอนุมัติ
         'status', //สถานะ on/ off
+
     ];
 }

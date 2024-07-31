@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MaterialRequisition;
 use App\Models\Material;
 use Illuminate\Support\Facades\DB;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 use Carbon\Carbon;
 
@@ -39,7 +39,8 @@ class MaterialRequisitionController extends Controller
                 'storage_locations.building_name',
                 'storage_locations.floor',
                 'storage_locations.room_name'
-            );
+            )
+            ->where('status_approve', "1");
         if ($search) {
             $data
                 ->where('category_name', 'LIKE', "%$search%")
@@ -81,6 +82,36 @@ class MaterialRequisitionController extends Controller
         return response()->json($data);
     }
 
+    public function approvalMaterial()
+    {
+
+        $data = DB::table('material_requisitions')
+            ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
+            ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
+            ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+            ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
+            ->select(
+                'material_requisitions.*',
+                'users.prefix',
+                'users.first_name',
+                'users.last_name',
+                'materials.material_name as name',
+                'categories.category_name',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name'
+            )
+            ->where('material_requisitions.status', '=', "on")
+            ->where('material_requisitions.status_approve', "0")
+            ->get();
+
+        $department = DB::table('departments')
+            ->orderBy('department_name', 'ASC')
+            ->get();
+
+        return view('material_requisition.approve', ['data' => $data, 'department' => $department]);
+    }
+
 
 
 
@@ -100,6 +131,7 @@ class MaterialRequisitionController extends Controller
             'amount_withdraw' => $request['amount_withdraw'],
             'name_material_count' => $request['name_material_count'],
             'status' => "on",
+            'status_approve' => "0",
 
         ]);
 

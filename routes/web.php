@@ -60,6 +60,7 @@ Route::put('material-requisition-update/{id}', [MaterialRequisitionController::c
 Route::get('material-requisition-destroy/{id}', [MaterialRequisitionController::class, 'destroy'])->name('material-requisition-destroy');
 Route::post('material-requisition-export/pdf', [MaterialRequisitionController::class, 'exportPDF'])->name('material-requisition-export/pdf');
 Route::get('material-requisition-show/{id}', [MaterialRequisitionController::class, 'show'])->name('material-requisition-show');
+Route::get('approval-material-requisition', [MaterialRequisitionController::class, 'approvalMaterial'])->name('approval-material-requisition');
 
 //ระบบเบิกครุภัณฑ์
 Route::get('durable-articles-requisition-index', [DurableArticlesRequisitionController::class, 'index'])->name('durable-articles-requisition-index');

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('amount_withdraw')->nullable()->comment('จำนวนที่ต้องเบิก');
             $table->string('name_material_count')->nullable()->comment('ชื่อเรียกจำนวนนับวัสดุ');
             $table->string('status')->nullable()->comment('สถานะ on/ off');
+            $table->string('status_approve')->nullable()->comment('สถานะ อนุมัติ , 0 = รออนุมัติ,1 = รออนุมัติ ,2 = ไม่อนุมัติ');
             $table->timestamps();
         });
     }
@@ -33,5 +34,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('material_requisitions');
     }
-
 };
