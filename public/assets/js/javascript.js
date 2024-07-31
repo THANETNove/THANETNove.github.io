@@ -1595,6 +1595,8 @@ $("#durable_articles_repair_name").on("change", function () {
             );
 
             $.each(res, function (index, data) {
+
+
                 groupName.append(
                     $("<option>", {
                         value: data.durable_articles_id,
@@ -1703,6 +1705,8 @@ function calculateGroup(selectedValue) {
             );
 
             $.each(res, function (index, data) {
+
+                console.log('data', data);
                 groupName.append(
                     $("<option>", {
                         value: data.id,
@@ -1768,22 +1772,30 @@ $("#calculate-id").on("change", function () {
         $("#service_life").val(Number(foundItem.service_life));
         $("#period_use").val(ageInYears + 1);
 
-        if (foundItem.salvage_price == 0) {
-            // คำนวณค่าเสื่อม (ราคา * ค่าเสื่อม/100) / ปี (กรณีที่ยังไม่ได้จำหน่าย)
-            let price = (foundItem.price_per * 20) / 100 / ageMultiplier;
-            let priceDepreciation = Number(foundItem.price_per) - Number(price);
-            $("#calulate-depreciation").val(
-                Math.ceil(priceDepreciation.toLocaleString())
-            );
-        } else {
+
+
+        if (foundItem.salvage_price > 0) {
+            /* console.log("priceDepreciation 5555", priceDepreciation); */
             // คำนวณค่าเสื่อม (ราคา - ราคาซาก) / ปี (กรณีที่จำหน่าย)
             let price =
                 (foundItem.price_per - foundItem.salvage_price) / ageMultiplier;
             let priceDepreciation = Number(foundItem.price_per) - Number(price);
 
             $("#calulate-depreciation").val(
-                Math.ceil(priceDepreciation.toLocaleString())
+                Math.ceil(priceDepreciation).toLocaleString()
             );
+
+        } else {
+            // คำนวณค่าเสื่อม (ราคา * ค่าเสื่อม/100) / ปี (กรณีที่ยังไม่ได้จำหน่าย)
+
+
+            let price = (foundItem.price_per * 20) / 100 / ageMultiplier;
+            let priceDepreciation = Number(foundItem.price_per) - Number(price);
+            let priceDepreciation2 = priceDepreciation < 1 ? 1 : priceDepreciation;
+            $("#calulate-depreciation").val(
+                Math.ceil(priceDepreciation2).toLocaleString()
+            );
+
         }
     }
 });

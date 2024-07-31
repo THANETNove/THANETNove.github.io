@@ -49,7 +49,7 @@ class CalculateDepreciationController extends Controller
             ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
             ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
 
-            ->leftJoin('bet_distributions', 'durable_articles.id', '=', 'bet_distributions.durable_articles_name')
+            ->leftJoin('bet_distributions', 'durable_articles.id', '=', 'bet_distributions.durable_articles_id')
 
             ->select(
                 'durable_articles.*',
@@ -60,6 +60,8 @@ class CalculateDepreciationController extends Controller
             )
             ->orderBy('durable_articles.id', 'ASC')
             ->get();
+
+
         return response()->json($data);
     }
 

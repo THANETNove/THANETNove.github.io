@@ -41,7 +41,7 @@ class BetDistributionController extends Controller
 
 
         $data = $data->orderBy('bet_distributions.id', 'DESC')->paginate(100);
-
+        dd($data);
         return view('bet_distribution.index', ['data' => $data]);
     }
 
