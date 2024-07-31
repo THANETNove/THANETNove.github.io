@@ -137,13 +137,11 @@ class PersonnelController extends Controller
     public function update(Request $request, string $id)
     {
 
+
+
         $validated = $request->validate([
             'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore($id),
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[\w\.\-]+@[\w\-]+\.[\w\-]+(\.[\w\-]+)*$/'],
             ],
             'phone_number' => ['required', 'string', 'regex:/^[0-9]+$/'],
         ]);

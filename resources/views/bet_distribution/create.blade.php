@@ -72,7 +72,7 @@
                                     <label for="prefix" class="form-label">รายละเอียดเเทงจำหน่าย</label>
                                     <textarea class="form-control" id="exampleFormControlTextarea1" name="repair_detail" rows="3"></textarea>
                                 </div>
-                                <div class="mb-3 col-md-6">
+                               {{--  <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">เเทงจำหน่ายเเบบกลุ่ม</label>
                                     <div class="form-check">
 
@@ -82,7 +82,7 @@
                                             Default checkbox
                                         </label>
 
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="mb-5 col-md-6">
                                     <label for="pdf_file">Choose PDF file:</label>
