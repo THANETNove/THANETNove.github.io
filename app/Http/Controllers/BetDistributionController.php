@@ -41,7 +41,7 @@ class BetDistributionController extends Controller
 
 
         $data = $data->orderBy('bet_distributions.id', 'DESC')->paginate(100);
-        dd($data);
+
         return view('bet_distribution.index', ['data' => $data]);
     }
 
@@ -111,7 +111,7 @@ class BetDistributionController extends Controller
         $data = DB::table('durable_articles_damageds')
             ->where('durable_articles_damageds.group_id', $id)
             ->where('durable_articles_damageds.status', 0)
-            ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_name', '=', 'durable_articles.id')
+            ->leftJoin('durable_articles', 'durable_articles_damageds.durable_articles_id', '=', 'durable_articles.id')
             ->leftJoin('bet_distributions', function ($join) {
                 $join->on('bet_distributions.code_durable_articles', '=', 'durable_articles_damageds.code_durable_articles')
                     ->where('bet_distributions.status', '<', 2);
@@ -129,59 +129,127 @@ class BetDistributionController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'pdf_file' => ['required', 'file', 'mimes:pdf'],
         ]);
 
-        $data = new BetDistribution;
-        $data->id_user = Auth::user()->id;
-        $data->group_id = $request['group_id'];
-        $data->durable_articles_id = $request['durable_articles_id'];
-        $data->code_durable_articles = $request['code_durable_articles'];
-        $data->durable_articles_name = $request['durable_articles_name'];
-        $data->amount_bet_distribution = $request['amount_repair'];
-        $data->name_durable_articles_count = $request['name_durable_articles_count'];
-        $data->salvage_price = $request['salvage_price'];
-        $data->repair_detail = $request['repair_detail'];
-        $data->status = "on";
-        $data->statusApproval = "0";
+        //  = id
+        /*   dd($request['durable_articles_id']); */
 
-
-        if ($request->hasFile('pdf_file')) {
-            $pdfFile = $request->file('pdf_file');
-            $extension = $pdfFile->getClientOriginalExtension();
-            $fileName = time() . '.' . $extension;
-
-            $pdfFile->move(public_path() . '/pdf', $fileName);
-
-            $data->url_pdf = $fileName;
-        }
-
-        $data->save();
-
-        $repair =  $request['amount_repair'];
-        $remaining = $request['remaining_amount'];
-
-        $amount =  $remaining - $repair;
-        $amount_repair = DB::table('durable_articles')
-            ->where('code_DurableArticles', $request['durable_articles_id'])
+        $groupId = DB::table('durable_articles')
+            ->where('durable_articles.id', $request['durable_articles_id'])
             ->get();
 
 
+        if ($request->group_sales) {
+            $group = DB::table('durable_articles')
+                ->where('durable_articles.code_DurableArticles', $groupId[0]->code_DurableArticles)
+                ->leftJoin('durable_articles_damageds', 'durable_articles.id', 'durable_articles_damageds.durable_articles_id')
+                ->leftJoin('bet_distributions', 'durable_articles.id', '=', 'bet_distributions.durable_articles_id')
+                ->where('durable_articles_damageds.status_damaged', '1')
+                ->whereNull('bet_distributions.durable_articles_id')
+                ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
+                ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
+                ->select('durable_articles.*', 'durable_articles_damageds.status_damaged', 'categories.category_code', 'type_categories.type_code')
+                ->get();
+
+            $pdfFileName = null;
+
+            if ($request->hasFile('pdf_file')) {
+                $pdfFile = $request->file('pdf_file');
+                $extension = $pdfFile->getClientOriginalExtension();
+                $pdfFileName = time() . '.' . $extension;
+                $pdfFile->move(public_path('pdf'), $pdfFileName);
+            }
+            /*  dd($group); */
+            foreach ($group as $value) {
+
+                $data = new BetDistribution;
+                $data->id_user = Auth::user()->id;
+                $data->group_id = $request['group_id'];
+                $data->durable_articles_id = $value->id;
+                $data->code_durable_articles =  $value->category_code . "-" . $value->type_code . "-" . $value->description . "-" . $value->group_count;
+                $data->durable_articles_name = $request['durable_articles_name'];
+                $data->amount_bet_distribution = $request['amount_repair'];
+                $data->name_durable_articles_count = $request['name_durable_articles_count'];
+                $data->salvage_price = $request['salvage_price'];
+                $data->repair_detail = $request['repair_detail'];
+                $data->status = "on";
+                $data->statusApproval = "0";
+
+
+                if ($pdfFileName) {
+                    $data->url_pdf = $pdfFileName;
+                }
+                $data->save();
 
 
 
+                $repair =  $request['amount_repair'];
+                $remaining = $request['remaining_amount'];
+
+                $amount =  $remaining - $repair;
+                $amount_repair = DB::table('durable_articles')
+                    ->where('code_DurableArticles', $value->id)
+                    ->get();
+
+                DurableArticles::where('id', $value->id)->update([
+                    'bet_on_distribution_number' => 1,
+                    'damaged_number' => 0,
+
+                ]);
+                DurableArticlesDamaged::where('durable_articles_id', $value->id)->update([
+                    'status' => "4", // เเทงจำหน่าย
+                ]);
+            }
+        } else {
 
 
+            $data = new BetDistribution;
+            $data->id_user = Auth::user()->id;
+            $data->group_id = $request['group_id'];
+            $data->durable_articles_id = $request['durable_articles_id'];
+            $data->code_durable_articles = $request['code_durable_articles'];
+            $data->durable_articles_name = $request['durable_articles_name'];
+            $data->amount_bet_distribution = $request['amount_repair'];
+            $data->name_durable_articles_count = $request['name_durable_articles_count'];
+            $data->salvage_price = $request['salvage_price'];
+            $data->repair_detail = $request['repair_detail'];
+            $data->status = "on";
+            $data->statusApproval = "0";
 
-        DurableArticles::where('code_DurableArticles', $request['durable_articles_id'])->update([
-            'bet_on_distribution_number' => 1,
-            'damaged_number' => 0,
 
-        ]);
-        DurableArticlesDamaged::where('durable_articles_id', $request['durable_articles_id'])->update([
-            'status' => "4", // เเทงจำหน่าย
-        ]);
+            if ($request->hasFile('pdf_file')) {
+                $pdfFile = $request->file('pdf_file');
+                $extension = $pdfFile->getClientOriginalExtension();
+                $fileName = time() . '.' . $extension;
+
+                $pdfFile->move(public_path() . '/pdf', $fileName);
+
+                $data->url_pdf = $fileName;
+            }
+
+            $data->save();
+
+            $repair =  $request['amount_repair'];
+            $remaining = $request['remaining_amount'];
+
+            $amount =  $remaining - $repair;
+            $amount_repair = DB::table('durable_articles')
+                ->where('code_DurableArticles', $request['durable_articles_id'])
+                ->get();
+
+            DurableArticles::where('id', $request['durable_articles_id'])->update([
+                'bet_on_distribution_number' => 1,
+                'damaged_number' => 0,
+
+            ]);
+            DurableArticlesDamaged::where('durable_articles_id', $request['durable_articles_id'])->update([
+                'status' => "4", // เเทงจำหน่าย
+            ]);
+        }
+
 
 
 
