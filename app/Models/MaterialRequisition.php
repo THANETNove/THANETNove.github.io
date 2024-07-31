@@ -17,6 +17,7 @@ class MaterialRequisition extends Model
         'amount_withdraw', // ที่ต้องเบิก
         'name_material_count', // ชื่อเรียกจำนวนนับวัสดุ
         'status', //สถานะ on/ off
-        'status_approve' // สถานะอนุมัติ
+        'status_approve', // สถานะอนุมัติ
+        'commentApproval' // หมายเหตุ
     ];
 }

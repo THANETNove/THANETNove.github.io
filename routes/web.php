@@ -61,6 +61,8 @@ Route::get('material-requisition-destroy/{id}', [MaterialRequisitionController::
 Route::post('material-requisition-export/pdf', [MaterialRequisitionController::class, 'exportPDF'])->name('material-requisition-export/pdf');
 Route::get('material-requisition-show/{id}', [MaterialRequisitionController::class, 'show'])->name('material-requisition-show');
 Route::get('approval-material-requisition', [MaterialRequisitionController::class, 'approvalMaterial'])->name('approval-material-requisition');
+Route::get('approved-material/{id}', [MaterialRequisitionController::class, 'approved'])->name('approved-material');
+Route::post('not-approved-material', [MaterialRequisitionController::class, 'notApproved'])->name('not-approved-material');
 
 //ระบบเบิกครุภัณฑ์
 Route::get('durable-articles-requisition-index', [DurableArticlesRequisitionController::class, 'index'])->name('durable-articles-requisition-index');
@@ -208,12 +210,12 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::get('get-bet-distribution/{id}', [BetDistributionController::class, 'betDistribution'])->name('get-bet-distribution');
     Route::get('bet-distribution-export/pdf', [BetDistributionController::class, 'exportPDF'])->name('bet-distribution-export/pdf');
 
- //ค่าเสื่อมครุภัณฑ์
+    //ค่าเสื่อมครุภัณฑ์
     Route::get('calculator-create', [CalculateDepreciationController::class, 'create'])->name('calculator-create');
     Route::get('get-calculate/{id}', [CalculateDepreciationController::class, 'calculate'])->name('get-calculate');
     Route::post('calculator-store', [CalculateDepreciationController::class, 'store'])->name('calculator-store');
 
- //ระบบคืน
+    //ระบบคืน
 
     Route::get('return-item-index', [ReturnItemController::class, 'index'])->name('return-item-index');
     Route::get('return-item-show/{id}', [ReturnItemController::class, 'show'])->name('return-item-show');
@@ -232,7 +234,6 @@ Route::group(['middleware' => ['is_admin']], function () {
     Route::post('buy-shop-store', [BuyShopController::class, 'store'])->name('buy-shop-store');
     Route::post('buy-shop-update', [BuyShopController::class, 'update'])->name('buy-shop-update');
     Route::get('buy-shop-destroy/{id}', [BuyShopController::class, 'destroy'])->name('buy-shop-destroy');
-
 });
 
 //  หัวหน้าวัสดุ  is_headAdmin

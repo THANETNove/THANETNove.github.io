@@ -32,7 +32,7 @@
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                 @endif
                                                 {{-- <th>ที่เก็บ </th> --}}
-                                                <th>สถานะ </th>
+
                                                 <th>Actions</th>
 
                                             </tr>
@@ -58,39 +58,18 @@
                                                     @endif
                                                     {{--  <td>{{ $da->building_name }} &nbsp;{{ $da->floor }} &nbsp;
                                                         {{ $da->room_name }}</td> --}}
-                                                    <td>
-                                                        @if ($da->status == 'on')
-                                                            <span class="badge bg-label-success me-1">เบิกวัสดุ</span>
-                                                        @else
-                                                            <span class="badge bg-label-warning me-1">ยกเลิกเบิกวัสดุ</span>
-                                                        @endif
-                                                    </td>
 
                                                     <td>
+                                                        <a href="{{ url('approved-material', $da->id) }}"
+                                                            class="alert-destroy">
+                                                            <button type="button" class="btn btn-info">อนุมัติ</button>
+                                                        </a>
 
-                                                        <div class="dropdown">
-                                                            <button type="button"
-                                                                class="btn p-0 dropdown-toggle hide-arrow"
-                                                                data-bs-toggle="dropdown">
-                                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu">
-                                                                <a class="dropdown-item"
-                                                                    href="{{ url('material-requisition-show', $da->id) }}"><i
-                                                                        class='bx bxs-show'></i>View</a>
-                                                                @if ($da->status == 'on')
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ url('material-requisition-edit', $da->id) }}"><i
-                                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                                    @if (Auth::user()->status != '1')
-                                                                        <a class="dropdown-item alert-destroy"
-                                                                            href="{{ url('material-requisition-destroy', $da->id) }}"><i
-                                                                                class="bx bx-trash me-1"></i> ยกเลิก</a>
-                                                                    @endif
-                                                                @endif
-                                                            </div>
-                                                        </div>
-
+                                                        <button type="button" class="btn btn-danger"
+                                                            style="margin-left: 6px" onclick="setId('{{ $da->id }}')"
+                                                            data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                                            ไม่อนุมัติ
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -109,45 +88,44 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalBuy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">รายการข้อมูลเข้า</h1>
+                    <h5 class="modal-title" id="modalCenterTitle">ไม่อนุมัติ</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('material-requisition-export/pdf') }}" target="_blank">
+                    <form class="user" id="myForm" method="POST" action="{{ route('not-approved-material') }}">
                         @csrf
+
+                        <input type="text" name="id" id="rejectedId" value="" style="display: none;">
                         <div class="row">
-                            <div class="mb-3 col-6">
-                                <label for="exampleFormControlInput1" class="form-label">วันที่เริ่มต้น</label>
-                                <input type="text" class="form-control date-created_at" name="start_date" id="start_date"
-                                    placeholder="yyy-mm-dd" required>
-                            </div>
-                            <div class="mb-3 col-6">
-                                <label for="exampleFormControlTextarea1" class="form-label">วันที่สิ้นสุด</label>
-                                <input type="text" class="form-control date-created_at" name="end_date" id="end_date"
-                                    placeholder="yyyy-mm-dd" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">เเผนก</label>
-                                <select class="form-select" name="dep_name" aria-label="Default select example">
-                                    <option value="all" selected>เลือกทุกเเผนก</option>
-                                    @foreach ($department as $de)
-                                        <option value="{{ $de->id }}">{{ $de->department_name }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col mb-3">
+                                <label for="nameWithTitle" class="form-label">หมายเหตุ</label>
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-message2" class="input-group-text"><i
+                                            class="bx bx-comment"></i></span>
+                                    <textarea id="basic-icon-default-message" name="commentApproval" class="form-control" placeholder="หมายเหตุ "
+                                        aria-label="หมายเหตุ" aria-describedby="basic-icon-default-message2" style="height: 78px;"></textarea>
+                                </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">รายงาน</button>
-                    </form>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- / Layout wrapper -->
+    <script>
+        function setId(id) {
+            $('#rejectedId').val(id);
+        }
+    </script>
 @endsection

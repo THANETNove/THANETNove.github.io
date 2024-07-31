@@ -38,9 +38,11 @@ class MaterialRequisitionController extends Controller
                 'categories.category_name',
                 'storage_locations.building_name',
                 'storage_locations.floor',
-                'storage_locations.room_name'
+                'storage_locations.room_name',
+                DB::raw('SUM(material_requisitions.amount_withdraw) as amount_withdraw')
+
             )
-            ->where('status_approve', "1");
+            ->groupBy('material_requisitions.id_user', 'material_requisitions.code_requisition');
         if ($search) {
             $data
                 ->where('category_name', 'LIKE', "%$search%")
@@ -103,6 +105,8 @@ class MaterialRequisitionController extends Controller
             )
             ->where('material_requisitions.status', '=', "on")
             ->where('material_requisitions.status_approve', "0")
+
+
             ->get();
 
         $department = DB::table('departments')
@@ -110,6 +114,27 @@ class MaterialRequisitionController extends Controller
             ->get();
 
         return view('material_requisition.approve', ['data' => $data, 'department' => $department]);
+    }
+
+    public function approved($id)
+    {
+
+        MaterialRequisition::where('id', $id)->update([
+            'status_approve' =>  1,
+        ]);
+
+        return redirect('approval-material-requisition')->with('message', "อนุมัติสำเร็จ");
+    }
+    public function notApproved(Request $request)
+    {
+
+
+        MaterialRequisition::where('id', $request->id)->update([
+            'status_approve' =>  2,
+            'commentApproval' =>  $request->commentApproval,
+        ]);
+
+        return redirect('approval-material-requisition')->with('message', "ไม่อนุมัติ สำเร็จ");
     }
 
 
