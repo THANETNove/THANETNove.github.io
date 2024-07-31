@@ -147,35 +147,37 @@ class BuyShopController extends Controller
 
         /*  dd($dataId); */
         /*  dd($dataId[0]->code_material, $request->all(), $request['buy_id']); */
-
         $data2 = DB::table('buy_shops')
             ->where('buy_id', $request['id'])
             ->get();
+        $amountReceived = $request['amount_received'];
 
         foreach ($data2 as $var) {
             $data = BuyShop::find($var->id);
 
-            if (!$data) {
-                return response()->json(['error' => 'BuyShop not found'], 404);
+            if ($amountReceived >= $data->required_quantity) {
+                // Subtract the required_quantity from amountReceived and set amount_received
+                $amountReceived -= $data->required_quantity;
+                $data->amount_received = $data->required_quantity;
+                $data->status_buy = "1";
+            } elseif ($amountReceived > 0) {
+                // Set the remaining amountReceived as amount_received
+                $data->amount_received = $amountReceived;
+                $data->status_buy = "1";
+                $amountReceived = 0; // All the amount is allocated
             }
 
-            // Assuming there's a relationship method 'items' in the BuyShop model
-            $items = $data->items; // Adjust this to your actual relationship method
+            $data->save();
 
-            if ($items) {
-                foreach ($items as $item) {
-                    if ($request['amount_received'] > $item->required_quantity) {
-                        $item->amount_received = $item->required_quantity;
-                    } else {
-                        $item->amount_received = $request['amount_received'];
-                    }
-
-                    $item->save();
-                }
+            // Break the loop if all amount is allocated
+            if ($amountReceived <= 0) {
+                break;
             }
+        }
 
-            $data->status_buy = "1";
-            $data->amount_received = $request['amount_received'];
+        // If there's remaining amountReceived after the loop, update the last item with the remaining amount
+        if ($amountReceived > 0 && isset($data)) {
+            $data->amount_received += $amountReceived;
             $data->save();
         }
 
