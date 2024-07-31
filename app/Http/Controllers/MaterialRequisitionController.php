@@ -38,11 +38,9 @@ class MaterialRequisitionController extends Controller
                 'categories.category_name',
                 'storage_locations.building_name',
                 'storage_locations.floor',
-                'storage_locations.room_name',
-                DB::raw('SUM(material_requisitions.amount_withdraw) as amount_withdraw')
+                'storage_locations.room_name'
+            );
 
-            )
-            ->groupBy('material_requisitions.id_user', 'material_requisitions.code_requisition');
         if ($search) {
             $data
                 ->where('category_name', 'LIKE', "%$search%")
