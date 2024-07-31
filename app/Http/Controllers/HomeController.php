@@ -98,16 +98,18 @@ class HomeController extends Controller
     public function exportMaterialPDF(Request $request)
     {
 
-        $start_date = Carbon::parse($request["start_date"]);
-        $end_date = Carbon::parse($request["end_date"])->endOfDay();
+        $start_date = $request["start_date"];
+        $end_date = $request["end_date"];
+        $start_date2 = Carbon::parse($request["start_date"]);
+        $end_date2 = Carbon::parse($request["end_date"])->endOfDay();
 
-        $currentYear = $start_date->year;
+        $currentYear = $start_date2->year;
 
-        $start_date->locale('th');
-        $end_date->locale('th');
+        $start_date2->locale('th');
+        $end_date2->locale('th');
 
-        $start_date_translated = $start_date->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $start_date->year;
-        $end_date_translated = $end_date->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $end_date->year;
+        $start_date_translated = $start_date2->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $start_date2->year;
+        $end_date_translated = $end_date2->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $end_date2->year;
 
         $date_export = $start_date_translated . " ถึง " . $end_date_translated;
 
@@ -130,6 +132,8 @@ class HomeController extends Controller
                 ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
                 ->select('materials.*', 'categories.category_name', 'storage_locations.building_name', 'storage_locations.floor', 'storage_locations.room_name')
                 ->get();
+
+
             $pdf = PDF::loadView('material.exportPDF', ['data' =>  $data, 'date_export' => $date_export, 'name_export' => $name_export]);
             $pdf->setPaper('a4');
             return $pdf->stream('exportPDF.pdf');
@@ -141,6 +145,7 @@ class HomeController extends Controller
                 ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
                 ->select('materials.*', 'categories.category_name', 'storage_locations.building_name', 'storage_locations.floor', 'storage_locations.room_name')
                 ->get();
+
             $pdf = PDF::loadView('material.exportPDF', ['data' =>  $data, 'date_export' => $date_export, 'name_export' => $name_export]);
             $pdf->setPaper('a4');
             return $pdf->stream('exportPDF.pdf');
@@ -163,14 +168,15 @@ class HomeController extends Controller
             return $pdf->stream('exportPDF.pdf');
         } else {
 
+
             $data = DB::table('material_requisitions')
-                ->whereBetween('material_requisitions.created_at', [$start_date, $end_date]) // Add t
+                ->whereBetween('material_requisitions.created_at', [$start_date, $end_date])
                 ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
                 ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
                 ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
                 ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
                 ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
-                ->where('material_requisitions.status', "on")
+                ->where('material_requisitions.status', 'on')
                 ->select(
                     'material_requisitions.*',
                     'users.prefix',
@@ -181,8 +187,12 @@ class HomeController extends Controller
                     'categories.category_name',
                     'storage_locations.building_name',
                     'storage_locations.floor',
-                    'storage_locations.room_name'
-                );
+                    'storage_locations.room_name',
+                    DB::raw('SUM(material_requisitions.amount_withdraw) as amount_withdraw')
+                )
+                ->groupBy('material_requisitions.id_user', 'material_requisitions.code_requisition');
+
+
             if (Auth::user()->status == "0") {
                 $data =  $data->where('id_user', Auth::user()->id);
             }
@@ -238,7 +248,7 @@ class HomeController extends Controller
                 $pdf->setPaper('a4');
                 return $pdf->stream('exportPDF.pdf');
             }
-
+            /*   dd($data->get()); */
 
             $pdf = PDF::loadView('material_requisition.exportPDF', ['data' =>  $data->get(), 'date_export' => $date_export, 'name_export' => $name_export, 'type' => $type]);
             $pdf->setPaper('a4');

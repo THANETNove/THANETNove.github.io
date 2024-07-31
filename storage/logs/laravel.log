@@ -5330,3 +5330,775 @@
 #55 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('/Applications/X...')
 #56 {main}
 "} 
+[2024-07-31 06:49:08] local.ERROR: Too few arguments to function Illuminate\Support\Collection::get(), 0 passed in /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/app/Http/Controllers/HomeController.php on line 273 and at least 1 expected {"userId":1,"exception":"[object] (ArgumentCountError(code: 0): Too few arguments to function Illuminate\\Support\\Collection::get(), 0 passed in /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/app/Http/Controllers/HomeController.php on line 273 and at least 1 expected at /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Collections/Collection.php:453)
+[stacktrace]
+#0 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/app/Http/Controllers/HomeController.php(273): Illuminate\\Support\\Collection->get()
+#1 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\HomeController->exportMaterialPDF(Object(Illuminate\\Http\\Request))
+#2 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('exportMaterialP...', Array)
+#3 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\HomeController), 'exportMaterialP...')
+#4 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#5 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(799): Illuminate\\Routing\\Route->run()
+#6 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#7 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#8 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#9 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#10 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#11 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#12 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#15 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#16 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#17 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#18 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(798): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#24 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(777): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#25 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(741): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#26 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(730): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#27 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#28 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#29 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#32 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#33 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#34 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#42 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#43 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#45 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#46 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#47 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('/Applications/X...')
+#48 {main}
+"} 
+[2024-07-31 06:49:31] local.ERROR: Undefined property: stdClass::$amount_withdraw {"view":{"view":"/Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/resources/views/material_requisition/exportPDF.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-1658621519 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#458</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
+</samp>}
+</pre><script>Sfdump(\"sf-dump-1658621519\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","data":"<pre class=sf-dump id=sf-dump-1292985139 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\Collection</span> {<a class=sf-dump-ref>#1462</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">items</span>: <span class=sf-dump-note>array:7</span> [<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-index>0</span> => {<a class=sf-dump-ref>#1464</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000000</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3648;&#3586;&#3655;&#3617;&#3586;&#3633;&#3604;&#3619;&#3633;&#3604;&#3626;&#3634;&#3618;&#3652;&#3615;&#3615;&#3641;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3652;&#3615;&#3615;&#3657;&#3634;&#3649;&#3621;&#3632;&#3623;&#3636;&#3607;&#3618;&#3640;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">total_amount_withdraw</span>\": <span class=sf-dump-num>20.0</span>
+    </samp>}
+    <span class=sf-dump-index>1</span> => {<a class=sf-dump-ref>#1468</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000025</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3611;&#3634;&#3585;&#3585;&#3634;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"14 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3626;&#3661;&#3634;&#3609;&#3633;&#3585;&#3591;&#3634;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">total_amount_withdraw</span>\": <span class=sf-dump-num>10.0</span>
+    </samp>}
+    <span class=sf-dump-index>2</span> => {<a class=sf-dump-ref>#1466</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000026</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"5 characters\">&#3626;&#3637;&#3586;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3585;&#3656;&#3629;&#3626;&#3657;&#3619;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">total_amount_withdraw</span>\": <span class=sf-dump-num>49.0</span>
+    </samp>}
+    <span class=sf-dump-index>3</span> => {<a class=sf-dump-ref>#1467</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000027</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"4 characters\">&#3626;&#3637;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3585;&#3656;&#3629;&#3626;&#3657;&#3619;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">total_amount_withdraw</span>\": <span class=sf-dump-num>30.0</span>
+    </samp>}
+    <span class=sf-dump-index>4</span> => {<a class=sf-dump-ref>#1469</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str title=\"2 characters\">11</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000025</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3609;&#3634;&#3618;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3633;&#3617;&#3592;&#3640;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3588;&#3636;&#3617;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3611;&#3634;&#3585;&#3585;&#3634;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"14 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3626;&#3661;&#3634;&#3609;&#3633;&#3585;&#3591;&#3634;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">total_amount_withdraw</span>\": <span class=sf-dump-num>5.0</span>
+    </samp>}
+    <span class=sf-dump-index>5</span> => {<a class=sf-dump-ref>#1470</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str title=\"2 characters\">12</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000000</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3609;&#3634;&#3618;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"5 characters\">&#3618;&#3640;&#3609;&#3585;&#3636;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3617;&#3636;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3648;&#3586;&#3655;&#3617;&#3586;&#3633;&#3604;&#3619;&#3633;&#3604;&#3626;&#3634;&#3618;&#3652;&#3615;&#3615;&#3641;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3652;&#3615;&#3615;&#3657;&#3634;&#3649;&#3621;&#3632;&#3623;&#3636;&#3607;&#3618;&#3640;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">total_amount_withdraw</span>\": <span class=sf-dump-num>20.0</span>
+    </samp>}
+    <span class=sf-dump-index>6</span> => {<a class=sf-dump-ref>#1471</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str title=\"2 characters\">12</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000025</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3609;&#3634;&#3618;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"5 characters\">&#3618;&#3640;&#3609;&#3585;&#3636;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3617;&#3636;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3611;&#3634;&#3585;&#3585;&#3634;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"14 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3626;&#3661;&#3634;&#3609;&#3633;&#3585;&#3591;&#3634;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">total_amount_withdraw</span>\": <span class=sf-dump-num>135.0</span>
+    </samp>}
+  </samp>]
+  #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+</samp>}
+</pre><script>Sfdump(\"sf-dump-1292985139\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","date_export":"<pre class=sf-dump id=sf-dump-1482784238 data-indent-pad=\"  \">\"<span class=sf-dump-str title=\"41 characters\">1 &#3648;&#3617;&#3625;&#3634;&#3618;&#3609; &#3614;.&#3624;.2567 &#3606;&#3638;&#3591; 31 &#3585;&#3619;&#3585;&#3598;&#3634;&#3588;&#3617; &#3614;.&#3624;.2567</span>\"
+</pre><script>Sfdump(\"sf-dump-1482784238\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","name_export":"<pre class=sf-dump id=sf-dump-720475745 data-indent-pad=\"  \">\"<span class=sf-dump-str title=\"22 characters\">&#3619;&#3634;&#3618;&#3591;&#3634;&#3609;&#3648;&#3610;&#3636;&#3585;&#3623;&#3633;&#3626;&#3604;&#3640;&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</span>\"
+</pre><script>Sfdump(\"sf-dump-720475745\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","type":"<pre class=sf-dump id=sf-dump-1014960225 data-indent-pad=\"  \"><span class=sf-dump-num>6</span>
+</pre><script>Sfdump(\"sf-dump-1014960225\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+"}},"userId":1,"exception":"[object] (Spatie\\LaravelIgnition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$amount_withdraw at /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/resources/views/material_requisition/exportPDF.blade.php:70)
+[stacktrace]
+#0 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined prope...', '/Applications/X...', 72)
+#1 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/resources/views/material_requisition/exportPDF.blade.php(70): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'Undefined prope...', '/Applications/X...', 72)
+#2 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): require('/Applications/X...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(125): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Applications/X...', Array)
+#5 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Applications/X...', Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Applications/X...', Array)
+#7 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#8 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#9 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/PDF.php(125): Illuminate\\View\\View->render()
+#10 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/Facade/Pdf.php(56): Barryvdh\\DomPDF\\PDF->loadView('material_requis...', Array)
+#11 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/app/Http/Controllers/HomeController.php(273): Barryvdh\\DomPDF\\Facade\\Pdf::__callStatic('loadView', Array)
+#12 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\HomeController->exportMaterialPDF(Object(Illuminate\\Http\\Request))
+#13 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('exportMaterialP...', Array)
+#14 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\HomeController), 'exportMaterialP...')
+#15 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#16 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(799): Illuminate\\Routing\\Route->run()
+#17 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#28 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(798): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#35 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(777): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#36 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(741): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#37 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(730): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#38 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#39 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#43 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#56 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#57 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#58 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('/Applications/X...')
+#59 {main}
+
+[previous exception] [object] (ErrorException(code: 0): Undefined property: stdClass::$amount_withdraw at /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/storage/framework/views/37a82802e394064db0249ea8949382c8.php:72)
+[stacktrace]
+#0 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined prope...', '/Applications/X...', 72)
+#1 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/storage/framework/views/37a82802e394064db0249ea8949382c8.php(72): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'Undefined prope...', '/Applications/X...', 72)
+#2 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): require('/Applications/X...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(125): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Applications/X...', Array)
+#5 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Applications/X...', Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Applications/X...', Array)
+#7 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#8 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#9 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/PDF.php(125): Illuminate\\View\\View->render()
+#10 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/Facade/Pdf.php(56): Barryvdh\\DomPDF\\PDF->loadView('material_requis...', Array)
+#11 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/app/Http/Controllers/HomeController.php(273): Barryvdh\\DomPDF\\Facade\\Pdf::__callStatic('loadView', Array)
+#12 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\HomeController->exportMaterialPDF(Object(Illuminate\\Http\\Request))
+#13 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('exportMaterialP...', Array)
+#14 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\HomeController), 'exportMaterialP...')
+#15 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#16 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(799): Illuminate\\Routing\\Route->run()
+#17 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#28 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(798): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#35 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(777): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#36 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(741): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#37 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(730): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#38 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#39 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#43 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#56 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#57 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#58 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('/Applications/X...')
+#59 {main}
+"} 
+[2024-07-31 06:49:42] local.ERROR: Undefined property: stdClass::$name_material_count {"view":{"view":"/Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/resources/views/material_requisition/exportPDF.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-504153668 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#458</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
+</samp>}
+</pre><script>Sfdump(\"sf-dump-504153668\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","data":"<pre class=sf-dump id=sf-dump-290337729 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\Collection</span> {<a class=sf-dump-ref>#1462</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">items</span>: <span class=sf-dump-note>array:7</span> [<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-index>0</span> => {<a class=sf-dump-ref>#1464</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000000</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3648;&#3586;&#3655;&#3617;&#3586;&#3633;&#3604;&#3619;&#3633;&#3604;&#3626;&#3634;&#3618;&#3652;&#3615;&#3615;&#3641;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3652;&#3615;&#3615;&#3657;&#3634;&#3649;&#3621;&#3632;&#3623;&#3636;&#3607;&#3618;&#3640;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>20.0</span>
+    </samp>}
+    <span class=sf-dump-index>1</span> => {<a class=sf-dump-ref>#1468</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000025</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3611;&#3634;&#3585;&#3585;&#3634;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"14 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3626;&#3661;&#3634;&#3609;&#3633;&#3585;&#3591;&#3634;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>10.0</span>
+    </samp>}
+    <span class=sf-dump-index>2</span> => {<a class=sf-dump-ref>#1466</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000026</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"5 characters\">&#3626;&#3637;&#3586;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3585;&#3656;&#3629;&#3626;&#3657;&#3619;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>49.0</span>
+    </samp>}
+    <span class=sf-dump-index>3</span> => {<a class=sf-dump-ref>#1467</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000027</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"4 characters\">&#3626;&#3637;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3585;&#3656;&#3629;&#3626;&#3657;&#3619;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>30.0</span>
+    </samp>}
+    <span class=sf-dump-index>4</span> => {<a class=sf-dump-ref>#1469</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str title=\"2 characters\">11</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000025</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3609;&#3634;&#3618;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3633;&#3617;&#3592;&#3640;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3588;&#3636;&#3617;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3611;&#3634;&#3585;&#3585;&#3634;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"14 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3626;&#3661;&#3634;&#3609;&#3633;&#3585;&#3591;&#3634;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>5.0</span>
+    </samp>}
+    <span class=sf-dump-index>5</span> => {<a class=sf-dump-ref>#1470</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str title=\"2 characters\">12</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000000</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3609;&#3634;&#3618;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"5 characters\">&#3618;&#3640;&#3609;&#3585;&#3636;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3617;&#3636;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3648;&#3586;&#3655;&#3617;&#3586;&#3633;&#3604;&#3619;&#3633;&#3604;&#3626;&#3634;&#3618;&#3652;&#3615;&#3615;&#3641;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3652;&#3615;&#3615;&#3657;&#3634;&#3649;&#3621;&#3632;&#3623;&#3636;&#3607;&#3618;&#3640;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>20.0</span>
+    </samp>}
+    <span class=sf-dump-index>6</span> => {<a class=sf-dump-ref>#1471</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str title=\"2 characters\">12</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000025</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3609;&#3634;&#3618;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"5 characters\">&#3618;&#3640;&#3609;&#3585;&#3636;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3617;&#3636;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3611;&#3634;&#3585;&#3585;&#3634;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"14 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3626;&#3661;&#3634;&#3609;&#3633;&#3585;&#3591;&#3634;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>135.0</span>
+    </samp>}
+  </samp>]
+  #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+</samp>}
+</pre><script>Sfdump(\"sf-dump-290337729\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","date_export":"<pre class=sf-dump id=sf-dump-617446879 data-indent-pad=\"  \">\"<span class=sf-dump-str title=\"41 characters\">1 &#3648;&#3617;&#3625;&#3634;&#3618;&#3609; &#3614;.&#3624;.2567 &#3606;&#3638;&#3591; 31 &#3585;&#3619;&#3585;&#3598;&#3634;&#3588;&#3617; &#3614;.&#3624;.2567</span>\"
+</pre><script>Sfdump(\"sf-dump-617446879\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","name_export":"<pre class=sf-dump id=sf-dump-739791214 data-indent-pad=\"  \">\"<span class=sf-dump-str title=\"22 characters\">&#3619;&#3634;&#3618;&#3591;&#3634;&#3609;&#3648;&#3610;&#3636;&#3585;&#3623;&#3633;&#3626;&#3604;&#3640;&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</span>\"
+</pre><script>Sfdump(\"sf-dump-739791214\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","type":"<pre class=sf-dump id=sf-dump-757350704 data-indent-pad=\"  \"><span class=sf-dump-num>6</span>
+</pre><script>Sfdump(\"sf-dump-757350704\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+"}},"userId":1,"exception":"[object] (Spatie\\LaravelIgnition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$name_material_count at /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/resources/views/material_requisition/exportPDF.blade.php:71)
+[stacktrace]
+#0 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined prope...', '/Applications/X...', 73)
+#1 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/resources/views/material_requisition/exportPDF.blade.php(71): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'Undefined prope...', '/Applications/X...', 73)
+#2 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): require('/Applications/X...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(125): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Applications/X...', Array)
+#5 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Applications/X...', Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Applications/X...', Array)
+#7 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#8 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#9 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/PDF.php(125): Illuminate\\View\\View->render()
+#10 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/Facade/Pdf.php(56): Barryvdh\\DomPDF\\PDF->loadView('material_requis...', Array)
+#11 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/app/Http/Controllers/HomeController.php(273): Barryvdh\\DomPDF\\Facade\\Pdf::__callStatic('loadView', Array)
+#12 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\HomeController->exportMaterialPDF(Object(Illuminate\\Http\\Request))
+#13 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('exportMaterialP...', Array)
+#14 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\HomeController), 'exportMaterialP...')
+#15 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#16 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(799): Illuminate\\Routing\\Route->run()
+#17 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#28 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(798): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#35 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(777): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#36 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(741): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#37 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(730): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#38 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#39 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#43 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#56 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#57 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#58 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('/Applications/X...')
+#59 {main}
+
+[previous exception] [object] (ErrorException(code: 0): Undefined property: stdClass::$name_material_count at /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/storage/framework/views/37a82802e394064db0249ea8949382c8.php:73)
+[stacktrace]
+#0 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined prope...', '/Applications/X...', 73)
+#1 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/storage/framework/views/37a82802e394064db0249ea8949382c8.php(73): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'Undefined prope...', '/Applications/X...', 73)
+#2 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): require('/Applications/X...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(125): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Applications/X...', Array)
+#5 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Applications/X...', Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Applications/X...', Array)
+#7 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#8 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#9 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/PDF.php(125): Illuminate\\View\\View->render()
+#10 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/Facade/Pdf.php(56): Barryvdh\\DomPDF\\PDF->loadView('material_requis...', Array)
+#11 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/app/Http/Controllers/HomeController.php(273): Barryvdh\\DomPDF\\Facade\\Pdf::__callStatic('loadView', Array)
+#12 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\HomeController->exportMaterialPDF(Object(Illuminate\\Http\\Request))
+#13 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('exportMaterialP...', Array)
+#14 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\HomeController), 'exportMaterialP...')
+#15 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#16 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(799): Illuminate\\Routing\\Route->run()
+#17 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#28 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(798): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#35 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(777): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#36 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(741): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#37 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(730): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#38 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#39 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#43 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#56 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#57 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#58 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('/Applications/X...')
+#59 {main}
+"} 
+[2024-07-31 06:52:43] local.ERROR: Undefined property: stdClass::$name_material_count {"view":{"view":"/Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/resources/views/material_requisition/exportPDF.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-417849851 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#458</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
+</samp>}
+</pre><script>Sfdump(\"sf-dump-417849851\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","data":"<pre class=sf-dump id=sf-dump-1078855618 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\Collection</span> {<a class=sf-dump-ref>#1462</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">items</span>: <span class=sf-dump-note>array:7</span> [<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-index>0</span> => {<a class=sf-dump-ref>#1464</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000000</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3648;&#3586;&#3655;&#3617;&#3586;&#3633;&#3604;&#3619;&#3633;&#3604;&#3626;&#3634;&#3618;&#3652;&#3615;&#3615;&#3641;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3652;&#3615;&#3615;&#3657;&#3634;&#3649;&#3621;&#3632;&#3623;&#3636;&#3607;&#3618;&#3640;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>20.0</span>
+    </samp>}
+    <span class=sf-dump-index>1</span> => {<a class=sf-dump-ref>#1468</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000025</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3611;&#3634;&#3585;&#3585;&#3634;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"14 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3626;&#3661;&#3634;&#3609;&#3633;&#3585;&#3591;&#3634;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>10.0</span>
+    </samp>}
+    <span class=sf-dump-index>2</span> => {<a class=sf-dump-ref>#1466</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000026</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"5 characters\">&#3626;&#3637;&#3586;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3585;&#3656;&#3629;&#3626;&#3657;&#3619;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>49.0</span>
+    </samp>}
+    <span class=sf-dump-index>3</span> => {<a class=sf-dump-ref>#1467</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000027</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3634;&#3591;&#3626;&#3634;&#3623;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"11 characters\">&#3629;&#3609;&#3633;&#3609;&#3605;&#3660;&#3619;&#3633;&#3605;&#3609;&#3660;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3614;&#3638;&#3656;&#3591;&#3611;&#3619;&#3632;&#3594;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"4 characters\">&#3626;&#3637;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3585;&#3656;&#3629;&#3626;&#3657;&#3619;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>30.0</span>
+    </samp>}
+    <span class=sf-dump-index>4</span> => {<a class=sf-dump-ref>#1469</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str title=\"2 characters\">11</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000025</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3609;&#3634;&#3618;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"6 characters\">&#3609;&#3633;&#3617;&#3592;&#3640;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3588;&#3636;&#3617;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3611;&#3634;&#3585;&#3585;&#3634;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"14 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3626;&#3661;&#3634;&#3609;&#3633;&#3585;&#3591;&#3634;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>5.0</span>
+    </samp>}
+    <span class=sf-dump-index>5</span> => {<a class=sf-dump-ref>#1470</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str title=\"2 characters\">12</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000000</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3609;&#3634;&#3618;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"5 characters\">&#3618;&#3640;&#3609;&#3585;&#3636;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3617;&#3636;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3648;&#3586;&#3655;&#3617;&#3586;&#3633;&#3604;&#3619;&#3633;&#3604;&#3626;&#3634;&#3618;&#3652;&#3615;&#3615;&#3641;&#3634;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"18 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3652;&#3615;&#3615;&#3657;&#3634;&#3649;&#3621;&#3632;&#3623;&#3636;&#3607;&#3618;&#3640;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>1</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>20.0</span>
+    </samp>}
+    <span class=sf-dump-index>6</span> => {<a class=sf-dump-ref>#1471</a><samp data-depth=3 class=sf-dump-compact>
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">id_user</span>\": \"<span class=sf-dump-str title=\"2 characters\">12</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">code_requisition</span>\": \"<span class=sf-dump-str title=\"15 characters\">mate-1000000025</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">prefix</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3609;&#3634;&#3618;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">first_name</span>\": \"<span class=sf-dump-str title=\"5 characters\">&#3618;&#3640;&#3609;&#3585;&#3636;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">last_name</span>\": \"<span class=sf-dump-str title=\"3 characters\">&#3617;&#3636;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3611;&#3634;&#3585;&#3585;&#3634;&#3604;&#3635;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">department_name</span>\": \"<span class=sf-dump-str title=\"7 characters\">&#3585;&#3629;&#3591;&#3588;&#3621;&#3633;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">category_name</span>\": \"<span class=sf-dump-str title=\"14 characters\">&#3623;&#3633;&#3626;&#3604;&#3640;&#3626;&#3661;&#3634;&#3609;&#3633;&#3585;&#3591;&#3634;&#3609;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">building_name</span>\": \"<span class=sf-dump-str title=\"13 characters\">&#3629;&#3610;&#3605;.&#3610;&#3634;&#3591;&#3649;&#3617;&#3656;&#3609;&#3634;&#3591;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">floor</span>\": \"<span class=sf-dump-str>2</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">room_name</span>\": \"<span class=sf-dump-str title=\"9 characters\">&#3626;&#3635;&#3609;&#3633;&#3585;&#3611;&#3621;&#3633;&#3604;</span>\"
+      +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">amount_withdraw</span>\": <span class=sf-dump-num>135.0</span>
+    </samp>}
+  </samp>]
+  #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+</samp>}
+</pre><script>Sfdump(\"sf-dump-1078855618\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","date_export":"<pre class=sf-dump id=sf-dump-253048479 data-indent-pad=\"  \">\"<span class=sf-dump-str title=\"41 characters\">1 &#3648;&#3617;&#3625;&#3634;&#3618;&#3609; &#3614;.&#3624;.2567 &#3606;&#3638;&#3591; 31 &#3585;&#3619;&#3585;&#3598;&#3634;&#3588;&#3617; &#3614;.&#3624;.2567</span>\"
+</pre><script>Sfdump(\"sf-dump-253048479\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","name_export":"<pre class=sf-dump id=sf-dump-936473856 data-indent-pad=\"  \">\"<span class=sf-dump-str title=\"22 characters\">&#3619;&#3634;&#3618;&#3591;&#3634;&#3609;&#3648;&#3610;&#3636;&#3585;&#3623;&#3633;&#3626;&#3604;&#3640;&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</span>\"
+</pre><script>Sfdump(\"sf-dump-936473856\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","type":"<pre class=sf-dump id=sf-dump-699408398 data-indent-pad=\"  \"><span class=sf-dump-num>6</span>
+</pre><script>Sfdump(\"sf-dump-699408398\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+"}},"userId":1,"exception":"[object] (Spatie\\LaravelIgnition\\Exceptions\\ViewException(code: 0): Undefined property: stdClass::$name_material_count at /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/resources/views/material_requisition/exportPDF.blade.php:71)
+[stacktrace]
+#0 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined prope...', '/Applications/X...', 73)
+#1 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/resources/views/material_requisition/exportPDF.blade.php(71): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'Undefined prope...', '/Applications/X...', 73)
+#2 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): require('/Applications/X...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(125): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Applications/X...', Array)
+#5 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Applications/X...', Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Applications/X...', Array)
+#7 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#8 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#9 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/PDF.php(125): Illuminate\\View\\View->render()
+#10 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/Facade/Pdf.php(56): Barryvdh\\DomPDF\\PDF->loadView('material_requis...', Array)
+#11 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/app/Http/Controllers/HomeController.php(273): Barryvdh\\DomPDF\\Facade\\Pdf::__callStatic('loadView', Array)
+#12 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\HomeController->exportMaterialPDF(Object(Illuminate\\Http\\Request))
+#13 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('exportMaterialP...', Array)
+#14 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\HomeController), 'exportMaterialP...')
+#15 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#16 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(799): Illuminate\\Routing\\Route->run()
+#17 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#28 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(798): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#35 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(777): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#36 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(741): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#37 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(730): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#38 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#39 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#43 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#56 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#57 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#58 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('/Applications/X...')
+#59 {main}
+
+[previous exception] [object] (ErrorException(code: 0): Undefined property: stdClass::$name_material_count at /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/storage/framework/views/37a82802e394064db0249ea8949382c8.php:73)
+[stacktrace]
+#0 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined prope...', '/Applications/X...', 73)
+#1 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/storage/framework/views/37a82802e394064db0249ea8949382c8.php(73): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'Undefined prope...', '/Applications/X...', 73)
+#2 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): require('/Applications/X...')
+#3 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(125): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Applications/X...', Array)
+#5 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Applications/X...', Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Applications/X...', Array)
+#7 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#8 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#9 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/PDF.php(125): Illuminate\\View\\View->render()
+#10 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/barryvdh/laravel-dompdf/src/Facade/Pdf.php(56): Barryvdh\\DomPDF\\PDF->loadView('material_requis...', Array)
+#11 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/app/Http/Controllers/HomeController.php(273): Barryvdh\\DomPDF\\Facade\\Pdf::__callStatic('loadView', Array)
+#12 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\HomeController->exportMaterialPDF(Object(Illuminate\\Http\\Request))
+#13 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('exportMaterialP...', Array)
+#14 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\HomeController), 'exportMaterialP...')
+#15 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#16 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(799): Illuminate\\Routing\\Route->run()
+#17 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#28 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(798): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#35 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(777): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#36 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(741): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#37 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Routing/Router.php(730): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#38 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#39 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#43 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#56 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#57 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#58 /Applications/XAMPP/xamppfiles/htdocs/project/dpmesystem/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('/Applications/X...')
+#59 {main}
+"} 
