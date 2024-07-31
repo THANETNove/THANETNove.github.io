@@ -163,7 +163,6 @@
                                                     <option value="{{ $data['status'] }}" selected>ผู้เบิก</option>
                                                     @if ($data['statusEmployee'] == 'on')
                                                         <option value="1">เจ้าหน้าที่วัสดุ</option>
-                                                        <option value="2">หัวหน้าวัสดุ</option>
                                                     @endif
                                                 @elseif ($data['status'] == '1')
                                                     @if ($data['statusEmployee'] == 'on')
@@ -171,14 +170,11 @@
                                                     @endif
                                                     <option value="{{ $data['status'] }}"selected>เจ้าหน้าที่วัสดุ
                                                     </option>
-                                                    @if ($data['statusEmployee'] == 'on')
-                                                        <option value="2">หัวหน้าวัสดุ</option>
-                                                    @endif
-                                                @else
-                                                    @if ($data['statusEmployee'] == 'on')
+                                                @elseif ($data['status'] == '2')
+                                                    {{--         @if ($data['statusEmployee'] == 'on')
                                                         <option value="0">ผู้เบิก</option>
                                                         <option value="1">เจ้าหน้าที่วัสดุ</option>
-                                                    @endif
+                                                    @endif --}}
                                                     <option value="{{ $data['status'] }}" selected>หัวหน้าวัสดุ</option>
                                                 @endif
                                             </select>
