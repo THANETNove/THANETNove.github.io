@@ -74,11 +74,24 @@ class CalculateDepreciationController extends Controller
     {
 
         $date = Carbon::now()->format('Y-m-d');
-        $numberWithoutComma = str_replace(',', '', $request['depreciation']);
+        $numberWithoutComma = str_replace(',', '', $request['depreciation_durable']);
+
         $data =  DurableArticles::find($request['articles_id']);
-        $data->depreciation_price = $numberWithoutComma;
-        $data->depreciation_date =  $date;
+        $depreciationData = $data->depreciation_price ? json_decode($data->depreciation_price, true) : [];
+
+        // Add the new depreciation entry with the current date and depreciation amount
+        $depreciationData[] = [
+            'period_use' => $request['period_use'], // Ensure this is the correct field for the period of use
+            'depreciation_value' => $numberWithoutComma,
+        ];
+
+        // Encode the updated array back into a JSON string
+        $data->depreciation_price = json_encode($depreciationData);
+
+        // Save the updated data
         $data->save();
+
+
 
         return redirect('calculator-create')->with('message', "บันทึกสำเร็จ");
     }

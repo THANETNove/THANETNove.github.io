@@ -64,43 +64,18 @@
                                                         <td class="td-center">{{ $da->name_durableArticles_count }}
                                                         </td>
                                                         <td>{{ number_format($da->price_per) }}</td>
-                                                        <td class="depreciation">
+                                                        <td>
                                                             @php
-                                                                $serviceLife = $da->service_life; // อายุการใช้งานในปี
-                                                                $pricePer = $da->price_per; // ราคาต่อหน่วย
-                                                                $salvagePrice = $da->salvage_price; // ราคาซาก (กรณีที่มี)
 
-                                                                // Calculate the total depreciation over the service life
-                                                                if ($salvagePrice === 0 || $salvagePrice === null) {
-                                                                    // กรณีที่ไม่มีราคาซาก ใช้สูตรค่าเสื่อมที่ลดลง 20% ต่อปี
-                                                                    $depreciationPerYear =
-                                                                        ($pricePer - $salvagePrice) / $serviceLife;
-                                                                } else {
-                                                                    // กรณีที่มีราคาซาก ใช้สูตรค่าเสื่อมที่ลดลงจนถึงราคาซาก
-                                                                    $depreciationPerYear =
-                                                                        ($pricePer - $salvagePrice) / $serviceLife;
-                                                                }
-
-                                                                // Output the depreciation for each year
-                                                                for ($j = 1; $j <= $serviceLife; $j++) {
-                                                                    // Calculate depreciated price for the current year
-                                                                    $depreciatedPrice =
-                                                                        $pricePer - $depreciationPerYear * $j;
-
-                                                                    // Ensure depreciated price does not go below 1
-                                                                    $depreciatedPrice = max($depreciatedPrice, 1);
-
-                                                                    // Output formatted HTML with colored rows
-                                                                    echo '<div class="col">';
-                                                                    echo '<span>ปี ' .
-                                                                        $j .
-                                                                        ': </span>' .
-                                                                        '<span>' .
-                                                                        number_format($depreciatedPrice) .
-                                                                        '</span>';
-                                                                    echo '</div>';
-                                                                }
                                                             @endphp
+                                                            @foreach (json_decode($da->depreciation_price) as $depreciation)
+                                                                <div>
+
+                                                                    &nbsp;ปีที่ : {{ $depreciation->period_use }}<br>
+                                                                    &nbsp; ค่าเสื่อม:
+                                                                    {{ number_format($depreciation->depreciation_value, 2) }}
+                                                                </div>
+                                                            @endforeach
                                                         </td>
                                                     </tr>
                                                 @endforeach

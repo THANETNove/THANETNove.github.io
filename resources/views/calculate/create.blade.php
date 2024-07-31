@@ -141,7 +141,7 @@
                                 <div class="mb-3 col-md-6">
                                     <label for="service_life" class="form-label">ค่าเสื่อมครุภัณฑ์</label>
                                     <input class="form-control" id="calulate-depreciation" type="text"
-                                        name="depreciation" placeholder="ค่าเสื่อม" readonly>
+                                        name="depreciation_durable" placeholder="ค่าเสื่อม" readonly>
                                 </div>
 
 

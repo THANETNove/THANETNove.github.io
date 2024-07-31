@@ -259,16 +259,18 @@ class HomeController extends Controller
     public function exportDurablePDF(Request $request)
     {
 
-        $start_date = Carbon::parse($request["start_date"]);
-        $end_date = Carbon::parse($request["end_date"])->endOfDay();
+        $start_date = $request["start_date"];
+        $end_date = $request["end_date"];
+        $start_date2 = Carbon::parse($request["start_date"]);
+        $end_date2 = Carbon::parse($request["end_date"])->endOfDay();
 
-        $currentYear = $start_date->year;
+        $currentYear = $start_date2->year;
 
-        $start_date->locale('th');
-        $end_date->locale('th');
+        $start_date2->locale('th');
+        $end_date2->locale('th');
 
-        $start_date_translated = $start_date->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $start_date->year;
-        $end_date_translated = $end_date->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $end_date->year;
+        $start_date_translated = $start_date2->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $start_date2->year;
+        $end_date_translated = $end_date2->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $end_date2->year;
 
         $date_export = $start_date_translated . " ถึง " . $end_date_translated;
 
@@ -535,8 +537,10 @@ class HomeController extends Controller
         ->groupBy('durable_articles.code_DurableArticles', 'categories.category_name', 'categories.category_code', 'type_categories.type_name', 'type_categories.type_code')
         ->get();
         dd($data); */
+
+
             $data = DB::table('durable_articles')
-                ->whereBetween('durable_articles.created_at', [$start_date, $end_date])
+                ->whereBetween('durable_articles.updated_at', [$start_date, $end_date])
                 ->leftJoin('storage_locations', 'durable_articles.code_material_storage', '=', 'storage_locations.code_storage')
                 ->leftJoin('type_categories', 'durable_articles.type_durableArticles', '=', 'type_categories.id')
                 ->leftJoin('categories', 'durable_articles.group_class', '=', 'categories.id')
@@ -552,12 +556,12 @@ class HomeController extends Controller
                     'storage_locations.room_name',
                     'bet_distributions.salvage_price'
                 )
+                ->whereNotNull('durable_articles.depreciation_price')
                 ->selectRaw('sum(durable_articles.remaining_amount) as numberCount') // Summing remaining_amount
                 ->groupBy(
                     'durable_articles.code_DurableArticles'
                 )
                 ->get();
-
 
 
             $pdf = PDF::loadView('durable_articles.exportPDF_2', ['data' =>  $data, 'name_export' => $name_export, 'date_export' => $date_export]);
