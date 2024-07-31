@@ -72,33 +72,33 @@
                                     <label for="prefix" class="form-label">รายละเอียดเเทงจำหน่าย</label>
                                     <textarea class="form-control" id="exampleFormControlTextarea1" name="repair_detail" rows="3"></textarea>
                                 </div>
-                               {{--  <div class="mb-3 col-md-6">
+                                {{--  <div class="mb-3 col-md-6">
                                     <label for="prefix" class="form-label">เเทงจำหน่ายเเบบกลุ่ม</label>
                                     <div class="form-check">
 
                                         <input class="form-check-input" type="checkbox" value="1" name="group_sales"
                                             id="flexCheckChecked">
                                         <label class="form-check-label" for="flexCheckChecked">
-                                            Default checkbox
+                                           เเทงจำหน่ายเเบบกลุ่ม
                                         </label>
 
                                     </div> --}}
-                                </div>
-                                <div class="mb-5 col-md-6">
-                                    <label for="pdf_file">Choose PDF file:</label>
-                                    <input type="file" class="form-control-file" id="pdf_file" name="pdf_file">
-                                    @error('pdf_file')
-                                        <div style="color: red;font-size: 16px;margin-top: 8px;">{{ $message }}</div>
-                                    @enderror
-                                </div>
                             </div>
-                            <div class="mt-2">
-                                <button type="submit" class="btn btn-primary me-2">บักทึก</button>
+                            <div class="mb-5 col-md-6">
+                                <label for="pdf_file">Choose PDF file:</label>
+                                <input type="file" class="form-control-file" id="pdf_file" name="pdf_file">
+                                @error('pdf_file')
+                                    <div style="color: red;font-size: 16px;margin-top: 8px;">{{ $message }}</div>
+                                @enderror
                             </div>
-                        </form>
                     </div>
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-primary me-2">บักทึก</button>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
