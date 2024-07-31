@@ -142,6 +142,49 @@ class MaterialRequisitionController extends Controller
 
         return redirect('approval-material-requisition')->with('message', "ไม่อนุมัติ สำเร็จ");
     }
+    public function approvalMaterialWaitingReceive(Request $request)
+    {
+        $data = DB::table('material_requisitions')
+            ->leftJoin('users', 'material_requisitions.id_user', '=', 'users.id')
+            ->leftJoin('materials', 'material_requisitions.material_name', '=', 'materials.id')
+            ->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+            ->leftJoin('categories', 'material_requisitions.id_group', '=', 'categories.id')
+            ->select(
+                'material_requisitions.*',
+                'users.prefix',
+                'users.first_name',
+                'users.last_name',
+                'materials.material_name as name',
+                'categories.category_name',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name',
+                DB::raw('SUM(material_requisitions.amount_withdraw) as total_amount_withdraw')
+            )
+            ->where('material_requisitions.status_approve', '1')
+            ->where('material_requisitions.starts_waiting_receive', 'off')
+
+            ->groupBy('material_requisitions.id_user', 'material_requisitions.code_requisition', 'material_requisitions.status_approve');
+
+
+        if (Auth::user()->status == 0) {
+            $data = $data->where('id_user', Auth::user()->id);
+        }
+        $data = $data->orderBy('material_requisitions.id', 'DESC')->paginate(100);
+
+        $department = DB::table('departments')
+            ->orderBy('department_name', 'ASC')
+            ->get();
+        return view('waiting_receive.material', ['data' => $data, 'department' => $department]);
+    }
+    public function materialWaitingReceive($id)
+    {
+
+        MaterialRequisition::where('id', $id)->update([
+            'starts_waiting_receive' =>  "on",
+        ]);
+        return redirect('approval-material-waiting-receive')->with('message', "บันทึกสำเร็จ");
+    }
 
 
 
@@ -163,6 +206,7 @@ class MaterialRequisitionController extends Controller
             'name_material_count' => $request['name_material_count'],
             'status' => "on",
             'status_approve' => "0",
+            'starts_waiting_receive' => "off"
 
         ]);
 

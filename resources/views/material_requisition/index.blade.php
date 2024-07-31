@@ -31,8 +31,8 @@
                                                 @if (Auth::user()->status != '0')
                                                     <th>ชื่อ นามสกุล ผู้เบิก </th>
                                                 @endif
-                                                {{-- <th>ที่เก็บ </th> --}}
                                                 <th>สถานะ </th>
+                                                <th>รอรับของ </th>
                                                 <th>Actions</th>
 
                                             </tr>
@@ -67,6 +67,16 @@
                                                         @else
                                                             <span class="badge bg-label-warning me-1">ยกเลิกเบิกวัสดุ</span>
                                                         @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($da->status_approve == '1')
+                                                            @if ($da->starts_waiting_receive == 'on')
+                                                                <span class="badge bg-label-success me-1">รับของเเล้ว</span>
+                                                            @else
+                                                                <span class="badge bg-label-warning me-1">รอรับของ</span>
+                                                            @endif
+                                                        @endif
+
                                                     </td>
 
                                                     <td>

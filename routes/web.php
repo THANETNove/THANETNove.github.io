@@ -63,6 +63,8 @@ Route::get('material-requisition-show/{id}', [MaterialRequisitionController::cla
 Route::get('approval-material-requisition', [MaterialRequisitionController::class, 'approvalMaterial'])->name('approval-material-requisition');
 Route::get('approved-material/{id}', [MaterialRequisitionController::class, 'approved'])->name('approved-material');
 Route::post('not-approved-material', [MaterialRequisitionController::class, 'notApproved'])->name('not-approved-material');
+Route::get('approval-material-waiting-receive', [MaterialRequisitionController::class, 'approvalMaterialWaitingReceive'])->name('approval-material-waiting-receive');
+Route::get('material-waiting-receive/{id}', [MaterialRequisitionController::class, 'materialWaitingReceive'])->name('material-waiting-receive');
 
 //ระบบเบิกครุภัณฑ์
 Route::get('durable-articles-requisition-index', [DurableArticlesRequisitionController::class, 'index'])->name('durable-articles-requisition-index');

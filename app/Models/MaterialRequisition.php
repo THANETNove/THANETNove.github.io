@@ -18,6 +18,7 @@ class MaterialRequisition extends Model
         'name_material_count', // ชื่อเรียกจำนวนนับวัสดุ
         'status', //สถานะ on/ off
         'status_approve', // สถานะอนุมัติ
-        'commentApproval' // หมายเหตุ
+        'commentApproval', // หมายเหตุ
+        'starts_waiting_receive' // รับของเเล้วหรือไม่
     ];
 }
