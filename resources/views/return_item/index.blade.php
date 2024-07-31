@@ -123,7 +123,7 @@
                                                                         <a class="dropdown-item alert-destroy"
                                                                             href="{{ url('return-item-approval', $da->id) }}">
                                                                             <i class='bx bxs-send'></i>
-                                                                            อนุมัติคืนครุภัณฑ์</a>
+                                                                            อนุมัติคืนครุภัณฑ์ </a>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -213,6 +213,7 @@
                                                                 </div>
                                                             </td>
                                                             <td>{{ date('d-m-Y', strtotime($da2->created_at)) }}</td>
+                                                            {{-- <td>{{ $da2->id }}</td> --}}
                                                             <td>
                                                                 <span
                                                                     class="badge bg-label-info me-1">รอการอนุมัติคืนครุภัณฑ์</span>
@@ -226,10 +227,10 @@
                                                                     </button>
                                                                     <div class="dropdown-menu">
                                                                         <a class="dropdown-item"
-                                                                            href="{{ url('return-item-show', $da2->id) }}">
+                                                                            href="{{ url('return-item-show-list', $da2->id) }}">
                                                                             <i class='bx bxs-show'></i> View</a>
                                                                         <a class="dropdown-item alert-destroy"
-                                                                            href="{{ url('return-item-approval', $da2->id) }}">
+                                                                            href="{{ url('return-item-approval-list', $da2->id) }}">
                                                                             <i class='bx bxs-send'></i>
                                                                             อนุมัติคืนครุภัณฑ์</a>
                                                                     </div>
