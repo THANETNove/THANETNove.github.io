@@ -74,6 +74,8 @@ class CalculateDepreciationController extends Controller
     {
 
         $date = Carbon::now()->format('Y-m-d');
+        $currentYear = Carbon::now()->year; // Get the current year in Gregorian calendar
+        $thaiYear = $currentYear + 543;
         $numberWithoutComma = str_replace(',', '', $request['depreciation_durable']);
 
         $data =  DurableArticles::find($request['articles_id']);
@@ -82,7 +84,7 @@ class CalculateDepreciationController extends Controller
         // Add the new depreciation entry with the current date and depreciation amount
         $depreciationData[] = [
             'period_use' => $request['period_use'], // Ensure this is the correct field for the period of use
-            'depreciation_value' => $numberWithoutComma,
+            'depreciation_value' =>  $thaiYear,
         ];
 
         // Encode the updated array back into a JSON string

@@ -240,8 +240,12 @@ class HomeController extends Controller
                         'materials.*',
                         'buy_shops.required_quantity',
                         'buy_shops.amount_received',
-                        'categories.category_name'
+                        'categories.category_name',
+                        'buy_shops.created_at AS created_at_shop',
+                        DB::raw('SUM(buy_shops.required_quantity) as total_required_quantity'),
+                        DB::raw('SUM(buy_shops.amount_received) as total_remaining_amount')
                     )
+                    ->groupBy('materials.code_material')
                     ->get();
 
                 $pdf = PDF::loadView('material_requisition.exportPDF_shop', ['data' =>  $data, 'date_export' => $date_export, 'name_export' => $name_export, 'type' => $type]);

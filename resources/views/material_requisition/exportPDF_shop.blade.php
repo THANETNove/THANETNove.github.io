@@ -54,13 +54,15 @@
                                                     <th scope="row">{{ $i++ }}</th>
                                                     <td>{{ $da->category_name }}</td>
                                                     <td>{{ $da->material_name }}</td>
-                                                    <td class="td-center">{{ number_format($da->required_quantity) }}
+                                                    <td class="td-center">
+                                                        {{ number_format($da->total_required_quantity) }}
                                                     </td>
-                                                    <td class="td-center">{{ number_format($da->amount_received) }}
+                                                    <td class="td-center">
+                                                        {{ number_format($da->total_remaining_amount) }}
                                                     </td>
                                                     <td>{{ $da->name_material_count }}</td>
 
-                                                    <td>{{ date('d-m-Y', strtotime($da->created_at)) }}</td>
+                                                    <td>{{ date('d-m-Y', strtotime($da->created_at_shop)) }}</td>
 
                                                 </tr>
                                             @endforeach

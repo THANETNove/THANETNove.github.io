@@ -36,10 +36,14 @@ class BuyShopController extends Controller
                 'storage_locations.room_name',
                 'buy_shops.status_buy',
                 'buy_shops.required_quantity',
-                'buy_shops.id as buy_id'
+                'buy_shops.id as buy_id',
+                DB::raw('SUM(buy_shops.required_quantity) as total_required_quantity'),
+                DB::raw('SUM(buy_shops.amount_received) as total_remaining_amount')
             )
-            ->where('status_buy', '=', 0)
+            ->groupBy('buy_shops.buy_id')
+            ->where('buy_shops.status_buy', '=', 0)
             ->paginate(100);
+
         return view('buy_shop.index', ['data' => $data, 'group' => $group]);
     }
 
@@ -132,8 +136,65 @@ class BuyShopController extends Controller
     public function update(Request $request)
     {
 
+        $dataId =  DB::table('buy_shops')
+            ->leftJoin('materials', 'buy_shops.buy_id', '=', 'materials.id')
+            ->where('buy_shops.id', $request['buy_id'])
+            ->select(
+                'materials.*'
+            )
+            ->get();
+        /*  dd($dataId); */
+        /*  dd($dataId[0]->code_material, $request->all(), $request['buy_id']); */
+
+        $data = DB::table('materials')->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+            ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
+            ->join('buy_shops', 'materials.id', '=', 'buy_shops.buy_id')
+            ->select(
+                'materials.*',
+                'categories.category_name',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name',
+                'buy_shops.status_buy',
+                'buy_shops.required_quantity',
+                'buy_shops.id as buy_id',
+                DB::raw('SUM(buy_shops.required_quantity) as total_required_quantity'),
+                DB::raw('SUM(buy_shops.amount_received) as total_remaining_amount')
+            )
+            ->groupBy('materials.code_material')
+            ->where('buy_shops.status_buy', '=', 0)
+            ->where('buy_shops.buy_id', $dataId[0]->id)
+            ->get();
+        dd($data);
+        /* $data = DB::table('materials')
+            ->where('materials.code_material', $data[0]->code_material)
+            ->get(); */
+
+        /*  dd($data); */
+
+        /*    $data2 = DB::table('materials')->leftJoin('storage_locations', 'materials.code_material_storage', '=', 'storage_locations.code_storage')
+            ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
+            ->join('buy_shops', 'materials.id', '=', 'buy_shops.buy_id')
+            ->select(
+                'materials.*',
+                'categories.category_name',
+                'storage_locations.building_name',
+                'storage_locations.floor',
+                'storage_locations.room_name',
+                'buy_shops.status_buy',
+                'buy_shops.required_quantity',
+                'buy_shops.id as buy_id',
+                DB::raw('SUM(buy_shops.required_quantity) as total_required_quantity'),
+                DB::raw('SUM(buy_shops.amount_received) as total_remaining_amount')
+            )
+            ->groupBy('materials.code_material')
+            ->where('materials.code_material', $data[0]->code_material)
+            ->where('buy_shops.status_buy', '=', 0)
+            ->get();
+        dd($data2);
 
         $data =  BuyShop::find($request['buy_id']);
+
 
         $data->status_buy = "1";
         $data->amount_received = $request['amount_received'];
@@ -153,7 +214,7 @@ class BuyShopController extends Controller
         $dataBuy->total_price = $request['total_price'];
         $dataBuy->quantity = $request['amount_received'];
         $dataBuy->save();
-        return redirect('buy-shop')->with('message', "บันทึกสำเร็จ");
+        return redirect('buy-shop')->with('message', "บันทึกสำเร็จ"); */
     }
 
     /**
