@@ -80,7 +80,19 @@
                                                 <td>{{ number_format($da->damaged_number) }}</td>
                                                 <td>{{ number_format($da->bet_on_distribution_number) }}</td>
                                                 <td>{{ number_format($da->repair_number) }}</td>
-                                                <td>{{ number_format($da->depreciation_price) }}</td>
+                                                <td>
+
+
+                                                    @if ($da->depreciation_price)
+                                                        @foreach (json_decode($da->depreciation_price) as $depreciation)
+                                                            &nbsp;ปี พ.ศ : {{ $depreciation->period_use }}<br>
+                                                            &nbsp; ค่าเสื่อม:
+                                                            {{ number_format((float) $depreciation->depreciation_value, 2) }}
+                                                        @endforeach
+                                                    @endif
+
+
+                                                </td>
                                                 <td>
                                                     @if ($da->service_life)
                                                         {{ number_format($da->service_life) }} &nbsp;ปี
