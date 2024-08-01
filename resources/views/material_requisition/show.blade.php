@@ -64,6 +64,27 @@
                                     @endif
                                 </p>
                             </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="prefix" class="form-label">การอนุมัติ</label>
+                                <p>
+                                    @if ($data[0]->status_approve == '0')
+                                        <span class="badge bg-label-primary me-1">รออนุมัติ</span>
+                                    @elseif ($data[0]->status_approve == '1')
+                                        <span class="badge bg-label-warning me-1">อนุมัติ</span>
+                                    @else
+                                        <span class="badge bg-label-danger me-1">ไม่อนุมัติ</span>
+                                    @endif
+                                </p>
+                            </div>
+
+                            @if ($data[0]->status_approve == '2')
+                                <div class="mb-3 col-md-6">
+                                    <label for="prefix" class="form-label">หมายเหตุ</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $data[0]->commentApproval }}</textarea>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>
