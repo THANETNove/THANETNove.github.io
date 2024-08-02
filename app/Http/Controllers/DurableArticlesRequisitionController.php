@@ -641,9 +641,8 @@ class DurableArticlesRequisitionController extends Controller
                 'users.first_name',
                 'users.last_name'
             )
-
-            ->groupBy('durable_articles_requisitions.group_withdraw')
-            ->selectRaw('count(durable_articles_requisitions.group_withdraw) as groupWithdrawCount')
+            ->groupBy('durable_articles_requisitions.durable_articles_id', 'durable_articles_requisitions.id_user')
+            ->selectRaw('count(durable_articles_requisitions.amount_withdraw) as groupWithdrawCount')
             ->orderBy('durable_articles_requisitions.id', 'DESC')->paginate(100);
 
         return view("durable_articles_requisition.updateApproval", ['data' => $data]);
@@ -661,9 +660,10 @@ class DurableArticlesRequisitionController extends Controller
 
 
 
-
         $dataRequisitions = DB::table('durable_articles_requisitions')
-            ->where('durable_articles_requisitions.group_withdraw', $data->group_withdraw)
+            ->where('durable_articles_requisitions.durable_articles_id', $data->durable_articles_id)
+            ->where('durable_articles_requisitions.status', 0)
+            ->where('durable_articles_requisitions.statusApproval', 0)
             ->join('users', 'durable_articles_requisitions.id_user', '=', 'users.id')
             ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
             ->leftJoin('durable_articles', 'durable_articles_requisitions.group_id', '=', 'durable_articles.id')
