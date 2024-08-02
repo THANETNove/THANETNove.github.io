@@ -91,7 +91,7 @@ class PersonnelController extends Controller
             ]
         ]);
 
-  
+
 
 
         User::create([
@@ -154,11 +154,13 @@ class PersonnelController extends Controller
             'phone_number' => ['required', 'string', 'regex:/^[0-9]+$/']
         ]);
 
-        $query = DB::table('users')->where('status', 2)->count();
+        $queryStatus2 = DB::table('users')->where('status', 2)->count();
+        $queryStatus1 = DB::table('users')->where('status', 1)->count();
 
-        if ($query == 1) {
+
+        if ($queryStatus2 == 1 || $queryStatus1 == 1) {
             $validator->after(function ($validator) {
-                $validator->errors()->add('status', 'Already have a boss');
+                $validator->errors()->add('status', 'There must be only one authority or boss.');
             });
         }
 
