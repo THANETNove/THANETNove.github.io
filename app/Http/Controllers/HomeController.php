@@ -233,8 +233,8 @@ class HomeController extends Controller
                 $type = 7;
 
                 $data = DB::table('materials')
-                    ->whereBetween('materials.created_at', [$start_date, $end_date]) // Add t
-                    ->join('buy_shops', 'materials.id', '=', 'buy_shops.buy_id')
+                    ->whereBetween('buy_shops.created_at', [$start_date, $end_date]) // Add t
+                    ->leftJoin('buy_shops', 'materials.id', '=', 'buy_shops.buy_id')
                     ->leftJoin('categories', 'materials.group_id', '=', 'categories.id')
                     ->select(
                         'materials.*',

@@ -50,7 +50,8 @@
                                                         <td>{{ $da->material_name }}</td>
                                                         <td>{{ number_format($da->total_required_quantity) }}</td>
                                                         <td>{{ $da->name_material_count }}</td>
-                                                        <td>{{ (new Carbon\Carbon($da->created_at))->format('d-m-Y') }}</td>
+                                                        <td>{{ (new Carbon\Carbon($da->created_at_shop))->format('d-m-Y') }}
+                                                        </td>
 
 
                                                         <td>
