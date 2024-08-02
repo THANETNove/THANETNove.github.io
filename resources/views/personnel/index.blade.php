@@ -75,7 +75,7 @@
                                                                 <a class="dropdown-item"
                                                                     href="{{ url('personnel-show', $da->id) }}"><i
                                                                         class='bx bxs-show'></i> View</a>
-                                                                @if (Auth::user()->status == '2')
+                                                                @if (Auth::user()->status == '3')
                                                                     @if ($da->statusEmployee == 'on')
                                                                         <a class="dropdown-item"
                                                                             href="{{ url('personnel-edit', $da->id) }}"><i

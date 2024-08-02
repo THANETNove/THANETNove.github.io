@@ -156,7 +156,8 @@
                                         <div class="mb-3 col-md-6">
                                             <label for="first_name" class="form-label">สถานะ
                                             </label>
-                                            <select class="select-address form-select mt-2 font-size-12-black"
+                                            <select
+                                                class="select-address form-select mt-2 font-size-12-black  @error('status') is-invalid @enderror"
                                                 name="status" id="status" aria-label="Default select example">
                                                 <option selected disabled>สถานะ</option>
                                                 @if ($data['status'] == '0')
@@ -178,6 +179,11 @@
                                                     <option value="{{ $data['status'] }}" selected>หัวหน้าวัสดุ</option>
                                                 @endif
                                             </select>
+                                            @error('status')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="first_name" class="form-label">สถานะพนักงาน</label>

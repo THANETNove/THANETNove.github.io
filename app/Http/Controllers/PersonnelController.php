@@ -10,6 +10,10 @@ use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
+
+
 
 class PersonnelController extends Controller
 {
@@ -74,7 +78,8 @@ class PersonnelController extends Controller
     public function store(Request $request)
     {
 
-        $validated = $request->validate(
+
+        $validator = Validator::make($request->all(), [
             [
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[\w\.\-]+@[\w\-]+\.[\w\-]+(\.[\w\-]+)*$/'],
                 'password' => ['required', 'string',  'max:11', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', 'confirmed'],
@@ -84,8 +89,9 @@ class PersonnelController extends Controller
                 'password' => 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 - 11 ตัวอักษร เเละ พิมพ์เล็ก พิมพ์ใหญ่ เเละตัวเลข',
 
             ]
-        );
+        ]);
 
+  
 
 
         User::create([
@@ -137,14 +143,29 @@ class PersonnelController extends Controller
     public function update(Request $request, string $id)
     {
 
+        $user = DB::table('users')->find($id);
 
 
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'email' => [
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[\w\.\-]+@[\w\-]+\.[\w\-]+(\.[\w\-]+)*$/'],
+                'required', 'string', 'email', 'max:255', 'regex:/^[\w\.\-]+@[\w\-]+\.[\w\-]+(\.[\w\-]+)*$/',
+                'unique:users,email,' . $id
             ],
-            'phone_number' => ['required', 'string', 'regex:/^[0-9]+$/'],
+            'phone_number' => ['required', 'string', 'regex:/^[0-9]+$/']
         ]);
+
+        $query = DB::table('users')->where('status', 2)->count();
+
+        if ($query == 1) {
+            $validator->after(function ($validator) {
+                $validator->errors()->add('status', 'Already have a boss');
+            });
+        }
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
 
 
         User::where('id', $id)->update([
