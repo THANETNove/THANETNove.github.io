@@ -17,6 +17,11 @@
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif
+                                @if ($errors->has('remaining_amount_zero'))
+                                    <p style="color: red;font-size: 20px;" class="text-center">
+                                        {{ $errors->first('remaining_amount_zero') }}
+                                    </p>
+                                @endif
 
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
@@ -60,10 +65,15 @@
                                                         {{ $da->room_name }}</td> --}}
 
                                                     <td>
-                                                        <a href="{{ url('approved-material', $da->id) }}"
+                                                        {{-- <a href="{{ url('approved-material', $da->id) }}"
                                                             class="alert-destroy">
                                                             <button type="button" class="btn btn-info">อนุมัติ</button>
-                                                        </a>
+                                                        </a> --}}
+                                                        <button type="button" class="btn btn-info" style="margin-left: 6px"
+                                                            onclick="setId2('{{ $da->id }}','{{ $da->amount_withdraw }}')"
+                                                            data-bs-toggle="modal" data-bs-target="#modalCenter2">
+                                                            อนุมัติ
+                                                        </button>
 
                                                         <button type="button" class="btn btn-danger"
                                                             style="margin-left: 6px" onclick="setId('{{ $da->id }}')"
@@ -123,9 +133,51 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modalCenter2" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">อนุมัติ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="user" id="myForm" method="POST" action="{{ route('approved-material') }}">
+                        @csrf
+
+                        <input type="text" name="id" id="rejectedId2" value="" style="display: none;">
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="nameWithTitle" class="form-label">จำนวนที่อนุมัติ</label>
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-message2" class="input-group-text"><i
+                                            class="bx bx-comment"></i></span>
+                                    <input type="number" class="form-control" name="withdrawCount"
+                                        oninput="inputCount(this)" id="withdraw-count">
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         function setId(id) {
             $('#rejectedId').val(id);
+        }
+
+        function setId2(id, withdrawCount) {
+
+            $('#rejectedId2').val(id);
+            $('#withdraw-count').val(withdrawCount);
+
         }
     </script>
 @endsection

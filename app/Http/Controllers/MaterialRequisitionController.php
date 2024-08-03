@@ -116,11 +116,33 @@ class MaterialRequisitionController extends Controller
         return view('material_requisition.approve', ['data' => $data, 'department' => $department]);
     }
 
-    public function approved($id)
+    public function approved(Request $request)
     {
 
-        MaterialRequisition::where('id', $id)->update([
+        $data = MaterialRequisition::find($request->id);
+        $data2 = Material::find($data->material_name);
+
+        if ($data2->remaining_amount == 0) {
+            // return back()->with('remaining_amount_zero', 'วัสดุทั้งหมดเหลือ 0');
+            return back()->withErrors(['remaining_amount_zero' => 'วัสดุทั้งหมดเหลือ 0']);
+        }
+
+
+        if ($request->withdrawCount > $data2->remaining_amount) {
+            $amount = $data2->remaining_amount;
+            $approvedNumber = $data2->remaining_amount;
+        } else {
+            $amount =  $data2->remaining_amount - $request->withdrawCount;
+            $approvedNumber = $request->withdrawCount;
+        }
+
+        MaterialRequisition::where('id', $request->id)->update([
             'status_approve' =>  1,
+            'amount_withdraw' =>  $approvedNumber,
+        ]);
+
+        Material::where('id', $data->material_name)->update([
+            'remaining_amount' =>  $amount,
         ]);
 
         return redirect('approval-material-requisition')->with('message', "อนุมัติสำเร็จ");
@@ -210,14 +232,14 @@ class MaterialRequisitionController extends Controller
 
         ]);
 
-        $withdraw =  $request['amount_withdraw'];
+        /*   $withdraw =  $request['amount_withdraw'];
         $remaining = $request['remaining_amount'];
 
         $amount =  $remaining - $withdraw;
 
         Material::where('id', $request['material_name'])->update([
             'remaining_amount' =>  $amount,
-        ]);
+        ]); */
 
         return redirect('material-requisition-index')->with('message', "บันทึกสำเร็จ");
     }
@@ -275,11 +297,11 @@ class MaterialRequisitionController extends Controller
 
         $amount = ($data["amount_withdraw"] +  $request["remaining_amount"]) - $request["amount_withdraw"];
 
-
+        /* 
         Material::where('id', $request['id_name'])->update([
             'remaining_amount' =>  $amount,
         ]);
-
+ */
         MaterialRequisition::where('id', $id)->update([
             'amount_withdraw' =>  $request["amount_withdraw"],
         ]);

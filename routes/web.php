@@ -61,7 +61,7 @@ Route::get('material-requisition-destroy/{id}', [MaterialRequisitionController::
 Route::post('material-requisition-export/pdf', [MaterialRequisitionController::class, 'exportPDF'])->name('material-requisition-export/pdf');
 Route::get('material-requisition-show/{id}', [MaterialRequisitionController::class, 'show'])->name('material-requisition-show');
 Route::get('approval-material-requisition', [MaterialRequisitionController::class, 'approvalMaterial'])->name('approval-material-requisition');
-Route::get('approved-material/{id}', [MaterialRequisitionController::class, 'approved'])->name('approved-material');
+Route::post('approved-material', [MaterialRequisitionController::class, 'approved'])->name('approved-material');
 Route::post('not-approved-material', [MaterialRequisitionController::class, 'notApproved'])->name('not-approved-material');
 Route::get('approval-material-waiting-receive', [MaterialRequisitionController::class, 'approvalMaterialWaitingReceive'])->name('approval-material-waiting-receive');
 Route::get('material-waiting-receive/{id}', [MaterialRequisitionController::class, 'materialWaitingReceive'])->name('material-waiting-receive');

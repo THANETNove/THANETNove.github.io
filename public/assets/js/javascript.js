@@ -2039,7 +2039,7 @@ $("#exportFrom").submit(function (event) {
 
 function calculateTotalPrice(input) {
     if (input.value < 1) {
-        input.value = 1;
+        input.value = input;
     }
     const quantity = document.querySelector(".quantity").value;
     const price_per = document.querySelector(".price_per").value; // ราคาต่อชิ้น
@@ -2067,7 +2067,7 @@ function calculateTotalPrice(input) {
 
 function calculateTotalPrice2(input) {
     if (input.value < 1) {
-        input.value = 1;
+        input.value = input;
     }
     const quantityBuy = document.querySelector(".quantityBuy").value; // ราคาต่อชิ้น
     const price_perBuy = document.querySelector(".price_perBuy").value;
@@ -2132,6 +2132,6 @@ function durableArticlesCode() {
 
 function inputCount(input) {
     if (input.value < 1) {
-        input.value = 1;
+        input.value = input;
     }
 }

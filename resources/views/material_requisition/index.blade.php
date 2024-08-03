@@ -17,7 +17,7 @@
                                 @if (session('message'))
                                     <p class="message-text text-center mt-4"> {{ session('message') }}</p>
                                 @endif
-
+                             
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
