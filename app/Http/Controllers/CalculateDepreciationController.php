@@ -83,7 +83,7 @@ class CalculateDepreciationController extends Controller
 
         // Add the new depreciation entry with the current date and depreciation amount
         $depreciationData[] = [
-            'period_use' => $request['period_use'], // Ensure this is the correct field for the period of use
+            'period_use' => $numberWithoutComma, // Ensure this is the correct field for the period of use
             'depreciation_value' =>  $thaiYear,
         ];
 
