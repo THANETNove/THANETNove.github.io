@@ -154,11 +154,21 @@ class PersonnelController extends Controller
             'phone_number' => ['required', 'string', 'regex:/^[0-9]+$/']
         ]);
 
-        $queryStatus2 = DB::table('users')->where('status', 2)->count();
-        $queryStatus1 = DB::table('users')->where('status', 1)->count();
+        $status = $request['status'];
+
+        // ตรวจสอบว่า status เป็น 1 หรือ 2 แล้วทำการ Query
+        if ($status == 1) {
+
+            $queryStatus = DB::table('users')->where('status', 1)->count();
+        } elseif ($status == 2) {
+            $queryStatus = DB::table('users')->where('status', 2)->count();
+        } else {
+            // กรณี status ไม่ใช่ 1 หรือ 2 ให้กำหนดค่าเริ่มต้นเป็น 0
+            $queryStatus = 0;
+        }
 
 
-        if ($queryStatus2 == 1 || $queryStatus1 == 1) {
+        if ($queryStatus > 0) {
             $validator->after(function ($validator) {
                 $validator->errors()->add('status', 'There must be only one authority or boss.');
             });
