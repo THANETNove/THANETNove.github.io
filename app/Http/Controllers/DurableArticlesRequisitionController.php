@@ -7,7 +7,7 @@ use App\Models\DurableArticlesRequisition;
 use App\Models\DurableArticles;
 use App\Models\Buy;
 use Illuminate\Support\Facades\DB;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -98,10 +98,10 @@ class DurableArticlesRequisitionController extends Controller
                 });
         }
 
-        if (Auth::user()->status == "0") {
-            $data = $data->where('durable_articles_requisitions.id_user', Auth::user()->id);
-            $data2 = $data2->where('durable_articles_requisitions.id_user', Auth::user()->id);
-        }
+        /*  if (Auth::user()->status == "0") { */
+        $data = $data->where('durable_articles_requisitions.id_user', Auth::user()->id);
+        $data2 = $data2->where('durable_articles_requisitions.id_user', Auth::user()->id);
+        /* } */
 
 
         $data = $data->orderBy('durable_articles_requisitions.id', 'DESC')

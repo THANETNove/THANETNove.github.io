@@ -152,7 +152,7 @@
                 </ul>
             </li>
         @endif
-        @if (Auth::user()->status > 0 && Auth::user()->status < 3)
+        @if (Auth::user()->status >= 0 && Auth::user()->status < 3)
             <li class="menu-item" id="material-requisition">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
 
