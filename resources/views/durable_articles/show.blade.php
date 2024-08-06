@@ -85,9 +85,9 @@
 
                                                     @if ($da->depreciation_price)
                                                         @foreach (json_decode($da->depreciation_price) as $depreciation)
-                                                            &nbsp;ปี พ.ศ : {{ $depreciation->period_use }}<br>
+                                                            &nbsp;ปี พ.ศ : {{ $depreciation->depreciation_value }}<br>
                                                             &nbsp; ค่าเสื่อม:
-                                                            {{ number_format((float) $depreciation->depreciation_value, 2) }}
+                                                            {{ number_format((float) $depreciation->period_use, 2) }}
                                                         @endforeach
                                                     @endif
 
