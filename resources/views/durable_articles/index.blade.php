@@ -30,6 +30,7 @@
                                                 <th>ชำรุด</th>
                                                 <th>แทงจำหน่าย</th>
                                                 <th>ซ่อม</th>
+                                                <th>ระยะเวลาประกัน</th>
                                                 <th>Actions</th>
 
                                             </tr>
@@ -39,6 +40,19 @@
                                         @endphp
                                         <tbody class="table-border-bottom-0">
                                             @foreach ($data as $da)
+                                                @php
+                                                    $originalDate = $da->warranty_period_start;
+                                                    $originalDate2 = $da->warranty_period_end;
+                                                    $newDate = (new DateTime($originalDate))->format('d-m-Y');
+                                                    $newDate2 = new DateTime($originalDate2);
+                                                    $targetDate = $newDate2;
+                                                    $now = new DateTime();
+
+                                                    $daysRemaining =
+                                                        $now > $targetDate
+                                                            ? 0
+                                                            : $now->diff($targetDate)->format('%a') + 1;
+                                                @endphp
                                                 <tr>
                                                     <th scope="row">{{ $i++ }}</th>
 
@@ -49,6 +63,24 @@
                                                     <td>{{ number_format($da->damagedNumberCount) }}</td>
                                                     <td>{{ number_format($da->betDistributionNumberCount) }}</td>
                                                     <td>{{ number_format($da->repairNumberCount) }}</td>
+                                                    <td>
+                                                        <div>
+                                                            {{ $newDate }} &nbsp; - &nbsp;
+                                                            {{ $newDate2->format('d-m-Y') }}
+                                                            @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
+                                                                <span
+                                                                    class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
+                                                            @else
+                                                                @if ($daysRemaining > 0)
+                                                                    <span class="badge bg-label-primary me-1">เหลือเวลา
+                                                                        {{ $daysRemaining }} วัน</span>
+                                                                @else
+                                                                    <span
+                                                                        class="badge bg-label-warning me-1">หมดประกัน</span>
+                                                                @endif
+                                                            @endif
+                                                        </div>
+                                                    </td>
                                                     <td>
                                                         <div class="dropdown">
                                                             <button type="button"

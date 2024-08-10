@@ -24,8 +24,8 @@
                                         <thead>
                                             <tr>
                                                 <th>ลำดับ</th>
-                                                <th>รหัส</th>
-                                                <th>ประเภทวัสดุ</th>
+                                                {{--   <th>รหัส</th>
+                                                <th>ประเภทวัสดุ</th> --}}
                                                 <th>ชื่อ</th>
                                                 <th></th>
                                                 {{--  <th>จำนวนวัสดุ</th> --}}
@@ -47,9 +47,9 @@
                                                 @foreach ($groupedData->sortBy(['type_durableArticles', 'description', 'durableArticles_number']) as $da)
                                                     <tr>
                                                         <th scope="row">{{ $i++ }}</th>
-                                                        <td>{{ $da->code_material }}
+                                                        {{--    <td>{{ $da->code_material }}
                                                         </td>
-                                                        <td>{{ $da->category_name }}</td>
+                                                        <td>{{ $da->category_name }}</td> --}}
                                                         <td>{{ $da->material_name }}</td>
                                                         @php
 

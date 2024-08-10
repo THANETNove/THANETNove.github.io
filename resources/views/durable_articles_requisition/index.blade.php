@@ -38,10 +38,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th>ลำดับ</th>
-                                                        <th>รหัสครุภัณฑ์</th>
-                                                        <th>หมวดหมู่ครุภัณฑ์</th>
+                                                        {{--  <th>รหัสครุภัณฑ์</th>
+                                                        <th>หมวดหมู่ครุภัณฑ์</th> --}}
                                                         <th>ชื่อครุภัณฑ์</th>
-                                                        <th>รายละเอียดครุภัณฑ์</th>
+                                                        {{--  <th>รายละเอียดครุภัณฑ์</th> --}}
                                                         <th>จำนวน</th>
                                                         <th>สถานะ </th>
                                                         <th>รอรับของ </th>
@@ -57,10 +57,10 @@
                                                     @foreach ($data as $da)
                                                         <tr>
                                                             <th scope="row">{{ $i++ }}</th>
-                                                            <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}
+                                                            {{--    <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}
                                                             </td>
                                                             <td>{{ $da->category_name }}</td>
-                                                            <td>{{ $da->type_name }}</td>
+                                                            <td>{{ $da->type_name }}</td> --}}
                                                             <td>{{ $da->durableArticles_name }}</td>
                                                             <td>{{ $da->groupWithdrawCount }}</td>
 
@@ -159,10 +159,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th>ลำดับ</th>
-                                                        <th>รหัสครุภัณฑ์</th>
+                                                        {{--         <th>รหัสครุภัณฑ์</th>
                                                         <th>หมวดหมู่ครุภัณฑ์</th>
+                                                        <th>ชื่อครุภัณฑ์</th> --}}
                                                         <th>ชื่อครุภัณฑ์</th>
-                                                        <th>รายละเอียดครุภัณฑ์</th>
                                                         <th>จำนวน</th>
                                                         <th>สถานะ </th>
                                                         <th>รอรับของ </th>
@@ -178,10 +178,10 @@
                                                     @foreach ($data2 as $da2)
                                                         <tr>
                                                             <th scope="row">{{ $i++ }}</th>
-                                                            <td>{{ $da2->category_code }}-{{ $da2->type_code }}-{{ $da2->description }}
+                                                            {{--     <td>{{ $da2->category_code }}-{{ $da2->type_code }}-{{ $da2->description }}
                                                             </td>
                                                             <td>{{ $da2->category_name }}</td>
-                                                            <td>{{ $da2->type_name }}</td>
+                                                            <td>{{ $da2->type_name }}</td> --}}
                                                             <td>{{ $da2->durableArticles_name }}</td>
                                                             <td>{{ $da2->amount_withdraw }}</td>
 
