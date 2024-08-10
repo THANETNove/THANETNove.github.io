@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 
 
+
 class PersonnelController extends Controller
 {
     public function __construct()
@@ -79,16 +80,29 @@ class PersonnelController extends Controller
     {
 
 
-        $validator = Validator::make($request->all(), [
-            [
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[\w\.\-]+@[\w\-]+\.[\w\-]+(\.[\w\-]+)*$/'],
-                'password' => ['required', 'string',  'max:11', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', 'confirmed'],
-                'phone_number' => ['required', 'string', 'regex:/^[0-9]+$/'],
+        $validatedData = $request->validate([
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+                'regex:/^[\w\.\-]+@[\w\-]+\.[\w\-]+(\.[\w\-]+)*$/'
             ],
-            [
-                'password' => 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 - 11 ตัวอักษร เเละ พิมพ์เล็ก พิมพ์ใหญ่ เเละตัวเลข',
-
-            ]
+            'password' => [
+                'required',
+                'string',
+                'max:11',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
+                'confirmed'
+            ],
+            'phone_number' => [
+                'required',
+                'string',
+                'regex:/^[0-9]+$/'
+            ],
+        ], [
+            'password.regex' => 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 - 11 ตัวอักษร และต้องประกอบด้วยพิมพ์เล็ก พิมพ์ใหญ่ และตัวเลข',
         ]);
 
 
@@ -148,7 +162,11 @@ class PersonnelController extends Controller
 
         $validator = Validator::make($request->all(), [
             'email' => [
-                'required', 'string', 'email', 'max:255', 'regex:/^[\w\.\-]+@[\w\-]+\.[\w\-]+(\.[\w\-]+)*$/',
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'regex:/^[\w\.\-]+@[\w\-]+\.[\w\-]+(\.[\w\-]+)*$/',
                 'unique:users,email,' . $id
             ],
             'phone_number' => ['required', 'string', 'regex:/^[0-9]+$/']
