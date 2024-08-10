@@ -100,6 +100,7 @@ class MaterialRequisitionController extends Controller
                 'users.first_name',
                 'users.last_name',
                 'materials.material_name as name',
+                'materials.remaining_amount',
                 'categories.category_name',
                 'storage_locations.building_name',
                 'storage_locations.floor',

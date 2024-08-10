@@ -70,13 +70,14 @@
                                                             <button type="button" class="btn btn-info">อนุมัติ</button>
                                                         </a> --}}
                                                         <button type="button" class="btn btn-info" style="margin-left: 6px"
-                                                            onclick="setId2('{{ $da->id }}','{{ $da->amount_withdraw }}')"
+                                                            onclick="setId2('{{ $da->id }}','{{ $da->amount_withdraw }}',{{ $da->remaining_amount }})"
                                                             data-bs-toggle="modal" data-bs-target="#modalCenter2">
                                                             อนุมัติ
                                                         </button>
 
                                                         <button type="button" class="btn btn-danger"
-                                                            style="margin-left: 6px" onclick="setId('{{ $da->id }}')"
+                                                            style="margin-left: 6px"
+                                                            onclick="setId('{{ $da->id }}',{{ $da->remaining_amount }})"
                                                             data-bs-toggle="modal" data-bs-target="#modalCenter">
                                                             ไม่อนุมัติ
                                                         </button>
@@ -106,6 +107,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <h5 id="amount-ithdraw-count2"></h5>
                     <form class="user" id="myForm" method="POST" action="{{ route('not-approved-material') }}">
                         @csrf
 
@@ -141,6 +143,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <h5 id="amount-ithdraw-count"></h5>
                     <form class="user" id="myForm" method="POST" action="{{ route('approved-material') }}">
                         @csrf
 
@@ -169,14 +172,19 @@
     </div>
 
     <script>
-        function setId(id) {
+        function setId(id, amount_withdraw) {
+            $('#amount-ithdraw-count2').empty();
+
             $('#rejectedId').val(id);
+            $('#amount-ithdraw-count2').html("จำนวนคงเหลือ  " + amount_withdraw.toLocaleString());
         }
 
-        function setId2(id, withdrawCount) {
+        function setId2(id, withdrawCount, amount_withdraw) {
+            $('#amount-ithdraw-count').empty();
 
             $('#rejectedId2').val(id);
             $('#withdraw-count').val(withdrawCount);
+            $('#amount-ithdraw-count').html("จำนวนคงเหลือ  " + amount_withdraw.toLocaleString());
 
         }
     </script>
