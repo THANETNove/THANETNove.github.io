@@ -117,7 +117,7 @@
 
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="period_use" class="form-label">ระยะการใช้</label>
+                                    <label for="period_use" class="form-label">ระยะการใช้ /ปี</label>
 
                                     <input class="form-control" id="period_use" type="text" name="period_use"
                                         placeholder="ปี" readonly>
@@ -125,7 +125,7 @@
 
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="service_life" class="form-label">อายุการใช้</label>
+                                    <label for="service_life" class="form-label">อายุการใช้ /ปี</label>
 
                                     <input class="form-control" id="service_life" type="text" name="service_life"
                                         placeholder="ปี" readonly>

@@ -129,13 +129,13 @@
                                                                                     class="bx bx-trash me-1"></i> ยกเลิก</a>
                                                                         @endif
                                                                         @if ($da->statusApproval == '1' && $da->status == '0')
-                                                                            {{--   @if (Auth::user()->status > '1') --}}
-                                                                            <a class="dropdown-item alert-destroy"
-                                                                                href="{{ url('durable-articles-requisition-return', $da->id) }}">
+                                                                            @if ($da->starts_waiting_receive == 'on')
+                                                                                <a class="dropdown-item alert-destroy"
+                                                                                    href="{{ url('durable-articles-requisition-return', $da->id) }}">
 
-                                                                                <i class='bx bxs-send'></i>
-                                                                                คึนครุภัณฑ์</a>
-                                                                            {{--  @endif --}}
+                                                                                    <i class='bx bxs-send'></i>
+                                                                                    คึนครุภัณฑ์</a>
+                                                                            @endif
                                                                         @endif
                                                                     </div>
                                                                 </div>
@@ -251,7 +251,7 @@
                                                                                 ยกเลิก</a>
                                                                         @endif
                                                                         @if ($da2->statusApproval == '1' && $da2->status == '0')
-                                                                            @if (Auth::user()->status > '1')
+                                                                            @if ($da2->starts_waiting_receive == 'on')
                                                                                 <a class="dropdown-item alert-destroy"
                                                                                     href="{{ url('durable-articles-requisition-return-list', $da2->id) }}">
 
