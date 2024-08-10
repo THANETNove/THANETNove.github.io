@@ -360,7 +360,7 @@ if (targetUrls === "material-create") {
 // ข้อมูลครุภัณฑ์
 if (
     targetUrls === "durable-articles-index" ||
-    targetUrls === "durable-articles-edit"
+    targetUrls === "durable-articles-edit" || targetUrls === "durable-articles-show"
 ) {
     setActiveClass("material", "durable-articles-index");
 }
