@@ -8,6 +8,7 @@
                 <div class="card ">
                     <div class="card-body">
                         <h1 class="card-title text-primary mb-5 ">รายละเอียดระบบลงทะเบียนครุภัณฑ์</h1>
+
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="material_name" class="form-label">รหัส </label>
@@ -75,11 +76,48 @@
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $da->category_code }}-{{ $da->type_code }}-{{ $da->description }}-{{ $da->group_count }}
                                                 </td>
-                                                <td>{{ number_format($da->durableArticles_number) }}</td>
-                                                <td>{{ number_format($da->remaining_amount) }}</td>
-                                                <td>{{ number_format($da->damaged_number) }}</td>
-                                                <td>{{ number_format($da->bet_on_distribution_number) }}</td>
-                                                <td>{{ number_format($da->repair_number) }}</td>
+                                                <td>
+                                                    @if ($da->durableArticles_number == 1)
+                                                        <i class='bx bxs-check-circle' style="color: green;"></i>
+                                                    @elseif($da->durableArticles_number == 0)
+                                                        <i class='bx bx-x-circle' style="color: red;"></i>
+                                                    @endif
+                                                </td>
+
+                                                <td>
+                                                    @if ($da->remaining_amount == 1)
+                                                        <i class='bx bxs-check-circle' style="color: green;"></i>
+                                                    @elseif($da->remaining_amount == 0)
+                                                        <i class='bx bx-x-circle' style="color: red;"></i>
+                                                    @endif
+                                                </td>
+
+                                                <td>
+                                                    @if ($da->damaged_number == 1)
+                                                        <i class='bx bxs-check-circle' style="color: green;"></i>
+                                                    @elseif($da->damaged_number == 0)
+                                                        <i class='bx bx-x-circle' style="color: red;"></i>
+                                                    @endif
+                                                </td>
+
+                                                <td>
+                                                    @if ($da->bet_on_distribution_number == 1)
+                                                        <i class='bx bxs-check-circle' style="color: green;"></i>
+                                                    @elseif($da->bet_on_distribution_number == 0)
+                                                        <i class='bx bx-x-circle' style="color: red;"></i>
+                                                    @endif
+                                                </td>
+
+                                                <td>
+                                                    @if ($da->repair_number == 1)
+                                                        <i class='bx bxs-check-circle' style="color: green;"></i>
+                                                    @elseif($da->repair_number == 0)
+                                                        <i class='bx bx-x-circle' style="color: red;"></i>
+                                                    @else
+                                                        {{ number_format($da->repair_number) }}
+                                                    @endif
+                                                </td>
+
                                                 <td>
 
 
@@ -100,6 +138,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
