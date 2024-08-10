@@ -57,9 +57,8 @@
                                         </span>
                                     @enderror
                                 </div>
-
                                 <div class="mb-3 col-md-6">
-                                    <label for="prefix" class="form-label">รหัสพนักงาน</label>
+                                    <label for="employee_id" class="form-label">รหัสพนักงาน</label>
                                     <input type="text" class="form-control @error('employee_id') is-invalid @enderror"
                                         id="employee_id" name="employee_id" placeholder="รหัสพนักงาน" required />
                                     @error('employee_id')
@@ -68,6 +67,7 @@
                                         </span>
                                     @enderror
                                 </div>
+
                                 <div class="mb-3 col-md-6">
                                     <label for="first_name" class="form-label">ชื่อ</label>
                                     <input type="text" class="form-control @error('first_name') is-invalid @enderror"
@@ -123,4 +123,19 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('employee_id').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '-' + value.slice(2);
+            }
+            if (value.length > 5) {
+                value = value.slice(0, 5) + '-' + value.slice(5);
+            }
+            if (value.length > 9) {
+                value = value.slice(0, 9) + '-' + value.slice(9, 13);
+            }
+            e.target.value = value;
+        });
+    </script>
 @endsection

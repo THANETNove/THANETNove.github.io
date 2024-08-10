@@ -222,4 +222,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('employee_id').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '-' + value.slice(2);
+            }
+            if (value.length > 5) {
+                value = value.slice(0, 5) + '-' + value.slice(5);
+            }
+            if (value.length > 9) {
+                value = value.slice(0, 9) + '-' + value.slice(9, 13);
+            }
+            e.target.value = value;
+        });
+    </script>
 @endsection
