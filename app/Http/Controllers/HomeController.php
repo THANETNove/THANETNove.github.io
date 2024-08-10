@@ -277,7 +277,7 @@ class HomeController extends Controller
         $start_date_translated = $start_date2->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $start_date2->year;
         $end_date_translated = $end_date2->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $end_date2->year;
 
-        $date_export = $start_date_translated . " ถึง " . $end_date_translated;
+        $date_export = $start_date_translated;
 
         if (Auth::user()->status == "0") {
             $search = 6;
@@ -561,7 +561,7 @@ class HomeController extends Controller
                     'storage_locations.room_name',
                     'bet_distributions.salvage_price'
                 )
-                ->whereNotNull('durable_articles.depreciation_price')
+                // ->whereNotNull('durable_articles.depreciation_price')
                 ->selectRaw('sum(durable_articles.remaining_amount) as numberCount') // Summing remaining_amount
                 ->groupBy(
                     'durable_articles.code_DurableArticles'

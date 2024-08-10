@@ -136,24 +136,14 @@
 
                                                 @endphp
                                                 <td>
-
-
                                                     @if ($calPriceY < 1)
                                                         1
                                                     @else
                                                         {{ number_format($calPriceY, 2) }}
                                                     @endif
-
                                                 </td>
                                                 <td>
                                                     {{ number_format($calPriceD, 2) }}
-                                                    {{--  @if ($calPriceD < 1)
-                                                        1
-                                                    @else
-                                                        {{ $calPriceD }}
-                                                    @endif
- --}}
-
                                                 </td>
                                                 <td>
                                                     @if ($da->service_life)
