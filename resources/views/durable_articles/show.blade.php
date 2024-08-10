@@ -120,6 +120,8 @@
                                                 </td>
                                                 @php
                                                     $perYear = $da->price_per / $da->service_life; // ค่าเสื่อต่อปี
+                                                    $currentYear = \Carbon\Carbon::now()->year;
+                                                    $createdYear = \Carbon\Carbon::parse($da->created_at)->year;
                                                     $yearsPassed =
                                                         \Carbon\Carbon::parse($da->created_at)->diffInYears(
                                                             \Carbon\Carbon::now(),
@@ -136,12 +138,35 @@
 
                                                 @endphp
                                                 <td>
+                                                    @for ($year = 1; $year <= $da->service_life; $year++)
+                                                        @php
+                                                            $calPriceY2 = $da->price_per - $perYear * $year; // คำนวณราคาหลังจากแต่ละปี
+                                                            $loopYear = $createdYear + $year - 1; // คำนวณปีที่อยู่ในลูป
+
+                                                        @endphp
+                                                        <div
+                                                            style="{{ $loopYear == $currentYear
+                                                                ? '    padding-left: 8px;background-color: #09ab3a;padding-right: 8px;color: #FFFF;'
+                                                                : '' }}">
+                                                            <span>ปีที่ {{ $year }}</span> &nbsp;
+                                                            <span>
+                                                                @if ($calPriceY2 < 1)
+                                                                    1 <!-- กรณีที่ราคาต่ำกว่า 1 -->
+                                                                @else
+                                                                    {{ number_format($calPriceY2, 2) }}
+                                                                    <!-- แสดงราคาหลังจากหักค่าเสื่อม -->
+                                                                @endif
+                                                            </span>
+                                                        </div>
+                                                    @endfor
+                                                </td>
+                                                {{--  <td>
                                                     @if ($calPriceY < 1)
                                                         1
                                                     @else
                                                         {{ number_format($calPriceY, 2) }}
                                                     @endif
-                                                </td>
+                                                </td> --}}
                                                 <td>
                                                     {{ number_format($calPriceD, 2) }}
                                                 </td>
