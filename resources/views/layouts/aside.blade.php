@@ -291,7 +291,7 @@
 
                 </ul>
             </li>
-            <li class="menu-item  " id="calculator">
+           {{--  <li class="menu-item  " id="calculator">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bxs-calculator'></i>
                     <div data-i18n="Authentications">ระบบการคำนวณค่าเสื่อม</div>
@@ -304,7 +304,7 @@
                     </li>
                 </ul>
             </li>
-
+ --}}
 
             @if (Auth::user()->status == 2 && Auth::user()->status < 3)
                 <li class="menu-item" id="approval">

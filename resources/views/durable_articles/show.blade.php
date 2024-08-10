@@ -63,7 +63,8 @@
                                             <th>ชำรุด</th>
                                             <th>แทงจำหน่าย</th>
                                             <th>ซ่อม</th>
-                                            <th>ค่าเสื่อม</th>
+                                            <th>ค่าเสื่อม /ปี</th>
+                                            <th>ค่าเสื่อม /วัน</th>
                                             <th>อายุการใช้งาน</th>
                                         </tr>
                                     </thead>
@@ -117,18 +118,41 @@
                                                         {{ number_format($da->repair_number) }}
                                                     @endif
                                                 </td>
+                                                @php
+                                                    $perYear = $da->price_per / $da->service_life; // ค่าเสื่อต่อปี
+                                                    $yearsPassed =
+                                                        \Carbon\Carbon::parse($da->created_at)->diffInYears(
+                                                            \Carbon\Carbon::now(),
+                                                        ) + 1; // อายุการใช้งานปี
+                                                    $calPriceY = $da->price_per - $perYear * $yearsPassed;
 
+                                                    $daysPassed = \Carbon\Carbon::parse($da->created_at)->diffInDays(
+                                                        \Carbon\Carbon::now(),
+                                                    ); // อายุการใช้งานวัน
+
+                                                    $perDays = $perYear / 365; // ค่าเสื่อต่อวัน
+                                                    $calPerDays = $perDays * $daysPassed;
+                                                    $calPriceD = $da->price_per - $calPerDays;
+
+                                                @endphp
                                                 <td>
 
 
-                                                    @if ($da->depreciation_price)
-                                                        @foreach (json_decode($da->depreciation_price) as $depreciation)
-                                                            &nbsp;ปี พ.ศ : {{ $depreciation->depreciation_value }}<br>
-                                                            &nbsp; ค่าเสื่อม:
-                                                            {{ number_format((float) $depreciation->period_use, 2) }}
-                                                        @endforeach
+                                                    @if ($calPriceY < 1)
+                                                        1
+                                                    @else
+                                                        {{ number_format($calPriceY, 2) }}
                                                     @endif
 
+                                                </td>
+                                                <td>
+                                                    {{ number_format($calPriceD, 2) }}
+                                                    {{--  @if ($calPriceD < 1)
+                                                        1
+                                                    @else
+                                                        {{ $calPriceD }}
+                                                    @endif
+ --}}
 
                                                 </td>
                                                 <td>
