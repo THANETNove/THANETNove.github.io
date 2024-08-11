@@ -225,7 +225,11 @@
 
     <script>
         document.getElementById('employee_id').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, ''); // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+            let value = e.target.value; // เก็บค่าที่ผู้ใช้กรอกเข้ามา
+
+            // ลบขีดกลางออกก่อน เพื่อลดปัญหาเมื่อผู้ใช้ลบตัวอักษร
+            value = value.replace(/-/g, '');
+
             if (value.length > 2) {
                 value = value.slice(0, 2) + '-' + value.slice(2);
             }
