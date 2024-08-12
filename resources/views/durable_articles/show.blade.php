@@ -184,16 +184,29 @@
 
                                                         // สร้าง DateTime objects
                                                         if ($originalDate2) {
-                                                            $thaiYear = intval(substr($originalDate2, -4)); // ดึงปี พ.ศ. จากท้ายของวันที่
-                                                            $gregorianYear = $thaiYear - 543; // แปลงเป็นปี ค.ศ.
-                                                            $formattedDate =
-                                                                substr($originalDate2, 0, -4) . $gregorianYear; // รวมวันที่กับปี ค.ศ.
+                                                            $day = substr($originalDate2, 0, 2); // 31
+                                                            $month = substr($originalDate2, 3, 2); // 08
+                                                            $thaiYear = substr($originalDate2, 6, 4); // 2024
 
-                                                            // สร้าง DateTime objects
-                                                            $targetDate = new DateTime($formattedDate); // วันที่สิ้นสุดการรับประกันในปี ค.ศ.
+                                                            // แปลงปี พ.ศ. เป็นปี ค.ศ. (ลบ 543 ปี)
+                                                            $gregorianYear = $thaiYear;
+
+                                                            // ตรวจสอบค่าของปี ค.ศ.
+                                                            /*   echo 'ปี ค.ศ. ที่แปลงได้: ' . $gregorianYear . "\n"; */
+
+                                                            // สร้างวันที่ในรูปแบบ ค.ศ. โดยใช้ปี ค.ศ., เดือน และวัน
+                                                            $formattedDate = sprintf(
+                                                                '%04d-%02d-%02d',
+                                                                $gregorianYear,
+                                                                intval($month),
+                                                                intval($day),
+                                                            );
+
+                                                            $targetDate = new DateTime($formattedDate); // วันที่เป้าหมายในปี ค.ศ.
+
+                                                            // วันที่ปัจจุบัน
                                                             $now = new DateTime(); // วันที่ปัจจุบันในปี ค.ศ.
 
-                                                            // คำนวณจำนวนวันที่เหลือ
                                                             if ($now > $targetDate) {
                                                                 $daysRemaining = 0; // หากวันที่ปัจจุบันผ่านวันที่สิ้นสุดการรับประกันแล้ว
                                                             } else {
@@ -205,19 +218,18 @@
 
                                                     @endphp
                                                     <div>
-                                                        @if ($originalDate && $originalDate2)
-                                                            {{ $originalDate }} &nbsp; - &nbsp;
-                                                            {{ $originalDate2 }}
-                                                            @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
+
+                                                        @if ($originalDate2)
+                                                            @if ($now == $targetDate)
                                                                 <span
                                                                     class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
                                                             @else
                                                                 @if ($daysRemaining > 0)
                                                                     <span class="badge bg-label-primary me-1">เหลือเวลา
                                                                         {{ $daysRemaining }} วัน</span>
-                                                                @else
-                                                                    <span
-                                                                        class="badge bg-label-warning me-1">หมดประกัน</span>
+                                                                    {{--  @else
+                                                                <span
+                                                                    class="badge bg-label-warning me-1">หมดประกัน</span> --}}
                                                                 @endif
                                                             @endif
                                                         @endif
