@@ -70,25 +70,7 @@
 
                                                             // สร้าง DateTime objects
                                                             if ($originalDate2) {
-                                                                $day = substr($originalDate2, 0, 2); // 31
-                                                                $month = substr($originalDate2, 3, 2); // 08
-                                                                $thaiYear = substr($originalDate2, 6, 4); // 2024
-
-                                                                // แปลงปี พ.ศ. เป็นปี ค.ศ. (ลบ 543 ปี)
-                                                                $gregorianYear = $thaiYear;
-
-                                                                // ตรวจสอบค่าของปี ค.ศ.
-                                                                /*   echo 'ปี ค.ศ. ที่แปลงได้: ' . $gregorianYear . "\n"; */
-
-                                                                // สร้างวันที่ในรูปแบบ ค.ศ. โดยใช้ปี ค.ศ., เดือน และวัน
-                                                                $formattedDate = sprintf(
-                                                                    '%04d-%02d-%02d',
-                                                                    $gregorianYear,
-                                                                    intval($month),
-                                                                    intval($day),
-                                                                );
-
-                                                                $targetDate = new DateTime($formattedDate); // วันที่เป้าหมายในปี ค.ศ.
+                                                                $targetDate = new DateTime($originalDate2); // วันที่เป้าหมายในปี ค.ศ.
 
                                                                 // วันที่ปัจจุบัน
                                                                 $now = new DateTime(); // วันที่ปัจจุบันในปี ค.ศ.

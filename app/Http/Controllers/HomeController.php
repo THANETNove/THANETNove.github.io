@@ -112,7 +112,7 @@ class HomeController extends Controller
         $start_date_translated = $start_date2->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $start_date2->year;
         $end_date_translated = $end_date2->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $end_date2->year;
 
-        $date_export = $start_date_translated;
+        $date_export = $start_date_translated . " ถึง " . $end_date_translated;
 
 
         if (Auth::user()->status == "0") {
@@ -277,7 +277,8 @@ class HomeController extends Controller
         $start_date_translated = $start_date2->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $start_date2->year;
         $end_date_translated = $end_date2->addYears(543)->translatedFormat('j F') . ' พ.ศ.' . $end_date2->year;
 
-        $date_export = $start_date_translated;
+        $date_export = $start_date_translated . " ถึง " . $end_date_translated;
+        $date_export2 = $start_date_translated;
 
         if (Auth::user()->status == "0") {
             $search = 6;
@@ -569,7 +570,7 @@ class HomeController extends Controller
                 ->get();
 
 
-            $pdf = PDF::loadView('durable_articles.exportPDF_2', ['data' =>  $data, 'name_export' => $name_export, 'date_export' => $date_export]);
+            $pdf = PDF::loadView('durable_articles.exportPDF_2', ['data' =>  $data, 'name_export' => $name_export, 'date_export' => $date_export2]);
 
             $pdf->setPaper('a4');
             return $pdf->stream('exportPDF.pdf');
