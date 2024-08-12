@@ -66,6 +66,7 @@
                                             <th>ค่าเสื่อม /ปี</th>
                                             <th>ค่าเสื่อม /วัน</th>
                                             <th>อายุการใช้งาน</th>
+                                            <th>ระยะประกัน</th>
                                         </tr>
                                     </thead>
                                     @php
@@ -175,6 +176,55 @@
                                                         {{ number_format($da->service_life) }} &nbsp;ปี
                                                     @endif
                                                 </td>
+
+                                                <td>
+                                                    @php
+                                                        $originalDate = $da->warranty_period_start;
+                                                        $originalDate2 = $da->warranty_period_end;
+
+                                                        // สร้าง DateTime objects
+                                                        if ($originalDate2) {
+                                                            $thaiYear = intval(substr($originalDate2, -4)); // ดึงปี พ.ศ. จากท้ายของวันที่
+                                                            $gregorianYear = $thaiYear - 543; // แปลงเป็นปี ค.ศ.
+                                                            $formattedDate =
+                                                                substr($originalDate2, 0, -4) . $gregorianYear; // รวมวันที่กับปี ค.ศ.
+
+                                                            // สร้าง DateTime objects
+                                                            $targetDate = new DateTime($formattedDate); // วันที่สิ้นสุดการรับประกันในปี ค.ศ.
+                                                            $now = new DateTime(); // วันที่ปัจจุบันในปี ค.ศ.
+
+                                                            // คำนวณจำนวนวันที่เหลือ
+                                                            if ($now > $targetDate) {
+                                                                $daysRemaining = 0; // หากวันที่ปัจจุบันผ่านวันที่สิ้นสุดการรับประกันแล้ว
+                                                            } else {
+                                                                $daysRemaining = $now->diff($targetDate)->format('%a'); // คำนวณจำนวนวันที่เหลือ
+                                                            }
+                                                        }
+
+                                                        // Debug output
+
+                                                    @endphp
+                                                    <div>
+                                                        @if ($originalDate && $originalDate2)
+                                                            {{ $originalDate }} &nbsp; - &nbsp;
+                                                            {{ $originalDate2 }}
+                                                            @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
+                                                                <span
+                                                                    class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
+                                                            @else
+                                                                @if ($daysRemaining > 0)
+                                                                    <span class="badge bg-label-primary me-1">เหลือเวลา
+                                                                        {{ $daysRemaining }} วัน</span>
+                                                                @else
+                                                                    <span
+                                                                        class="badge bg-label-warning me-1">หมดประกัน</span>
+                                                                @endif
+                                                            @endif
+                                                        @endif
+
+                                                    </div>
+                                                </td>
+
                                             </tr>
                                         @endforeach
 

@@ -30,8 +30,8 @@
                                                 <th>ชำรุด</th>
                                                 <th>แทงจำหน่าย</th>
                                                 <th>ซ่อม</th>
-                                                <th>ระยะเวลาประกัน</th>
                                                 <th>Actions</th>
+                                                <th>ระยะประกัน</th>
 
                                             </tr>
                                         </thead>
@@ -63,24 +63,51 @@
                                                     <td>{{ number_format($da->damagedNumberCount) }}</td>
                                                     <td>{{ number_format($da->betDistributionNumberCount) }}</td>
                                                     <td>{{ number_format($da->repairNumberCount) }}</td>
-                                                    <td>
+                                                    <td> @php
+                                                        $originalDate = $da->warranty_period_start;
+                                                        $originalDate2 = $da->warranty_period_end;
+
+                                                        // สร้าง DateTime objects
+                                                        if ($originalDate2) {
+                                                            $thaiYear = intval(substr($originalDate2, -4)); // ดึงปี พ.ศ. จากท้ายของวันที่
+                                                            $gregorianYear = $thaiYear - 543; // แปลงเป็นปี ค.ศ.
+                                                            $formattedDate =
+                                                                substr($originalDate2, 0, -4) . $gregorianYear; // รวมวันที่กับปี ค.ศ.
+
+                                                            // สร้าง DateTime objects
+                                                            $targetDate = new DateTime($formattedDate); // วันที่สิ้นสุดการรับประกันในปี ค.ศ.
+                                                            $now = new DateTime(); // วันที่ปัจจุบันในปี ค.ศ.
+
+                                                            // คำนวณจำนวนวันที่เหลือ
+                                                            if ($now > $targetDate) {
+                                                                $daysRemaining = 0; // หากวันที่ปัจจุบันผ่านวันที่สิ้นสุดการรับประกันแล้ว
+                                                            } else {
+                                                                $daysRemaining = $now->diff($targetDate)->format('%a'); // คำนวณจำนวนวันที่เหลือ
+                                                            }
+                                                        }
+
+                                                        // Debug output
+
+                                                    @endphp
                                                         <div>
-                                                            {{ $newDate }} &nbsp; - &nbsp;
-                                                            {{ $newDate2->format('d-m-Y') }}
-                                                            @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
-                                                                <span
-                                                                    class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
-                                                            @else
-                                                                @if ($daysRemaining > 0)
-                                                                    <span class="badge bg-label-primary me-1">เหลือเวลา
-                                                                        {{ $daysRemaining }} วัน</span>
-                                                                @else
+                                                            @if ($originalDate2)
+                                                                @if ($now->format('Y-m-d') == $targetDate->format('Y-m-d'))
                                                                     <span
-                                                                        class="badge bg-label-warning me-1">หมดประกัน</span>
+                                                                        class="badge bg-label-primary me-1">วันสุดท้ายของประกัน</span>
+                                                                @else
+                                                                    @if ($daysRemaining > 0)
+                                                                        <span class="badge bg-label-primary me-1">เหลือเวลา
+                                                                            {{ $daysRemaining }} วัน</span>
+                                                                    @else
+                                                                        <span
+                                                                            class="badge bg-label-warning me-1">หมดประกัน</span>
+                                                                    @endif
                                                                 @endif
                                                             @endif
+
                                                         </div>
                                                     </td>
+
                                                     <td>
                                                         <div class="dropdown">
                                                             <button type="button"
