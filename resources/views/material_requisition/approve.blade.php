@@ -155,16 +155,15 @@
                                     <span id="basic-icon-default-message2" class="input-group-text"><i
                                             class="bx bx-comment"></i></span>
                                     <input type="number" class="form-control" name="withdrawCount"
-                                        oninput="inputCount(this)" id="withdraw-count">
+                                        oninput="inputCountApprovve(this)" id="withdraw-count">
                                 </div>
+                                <p id="overfilled" style="margin-top: 8px;color: red;"></p>
                             </div>
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="submit" class="btn btn-primary">บันทึก</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="submitButton">บันทึก</button>
                 </div>
                 </form>
             </div>
@@ -172,6 +171,8 @@
     </div>
 
     <script>
+        let number = 0;
+
         function setId(id, amount_withdraw) {
             $('#amount-ithdraw-count2').empty();
 
@@ -180,12 +181,53 @@
         }
 
         function setId2(id, withdrawCount, amount_withdraw) {
+            number = amount_withdraw;
             $('#amount-ithdraw-count').empty();
 
             $('#rejectedId2').val(id);
             $('#withdraw-count').val(withdrawCount);
             $('#amount-ithdraw-count').html("จำนวนคงเหลือ  " + amount_withdraw.toLocaleString());
+            console.log("444");
+            const submitButton = document.getElementById('submitButton');
+            const overfilledMessage = document.getElementById('overfilled');
 
+            // แปลงค่า input เป็นตัวเลข
+            if (!isNaN(withdrawCount) && parseFloat(withdrawCount) > parseFloat(amount_withdraw)) {
+                overfilledMessage.textContent = 'จำนวนที่อนุมัติเกินที่มีอยู่';
+                submitButton.disabled = true;
+                submitButton.classList.add('btn-secondary'); // เปลี่ยนสีปุ่มเป็นสีเทา
+                submitButton.classList.remove('btn-primary'); // ลบคลาส btn-primary
+            } else {
+                overfilledMessage.textContent = '';
+                submitButton.disabled = false;
+                submitButton.classList.add('btn-primary'); // เปลี่ยนสีปุ่มเป็นสีหลัก
+                submitButton.classList.remove('btn-secondary'); // ลบคลาส btn-secondary
+            }
+
+        }
+
+        function inputCountApprovve(input) {
+            $('#overfilled').empty();
+            if (input.value < 1) {
+                input.value = input;
+            }
+            const submitButton = document.getElementById('submitButton');
+            const overfilledMessage = document.getElementById('overfilled');
+
+            // แปลงค่า input เป็นตัวเลข
+            const numberValue = parseFloat(input.value);
+
+            if (!isNaN(numberValue) && numberValue > number) {
+                overfilledMessage.textContent = 'จำนวนที่อนุมัติเกินที่มีอยู่';
+                submitButton.disabled = true;
+                submitButton.classList.add('btn-secondary'); // เปลี่ยนสีปุ่มเป็นสีเทา
+                submitButton.classList.remove('btn-primary'); // ลบคลาส btn-primary
+            } else {
+                overfilledMessage.textContent = '';
+                submitButton.disabled = false;
+                submitButton.classList.add('btn-primary'); // เปลี่ยนสีปุ่มเป็นสีหลัก
+                submitButton.classList.remove('btn-secondary'); // ลบคลาส btn-secondary
+            }
         }
     </script>
 @endsection
